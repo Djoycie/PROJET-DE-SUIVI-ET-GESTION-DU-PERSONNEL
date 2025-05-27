@@ -1,7 +1,3 @@
-// loginScript.js
-
-const { ipcRenderer } = require('electron'); // Required to communicate with the main process
-
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const loginMessage = document.getElementById('login-message');
@@ -14,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const role = loginForm.role.value;
 
         // Send credentials to the main process for verification
-        const authResult = await ipcRenderer.invoke('authenticate-user', { username, password, role });
+        const authResult = await window.electronAPI.authenticateUser({ username, password, role });
 
         if (authResult.success) {
             // Store user information in local storage for subsequent pages

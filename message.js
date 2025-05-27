@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Vérifie si l'élément d'affichage existe et si les informations de l'utilisateur sont valides
     if (welcomeMessageElement && loggedInUser && loggedInUser.fullName) {
-        welcomeMessageElement.textContent = `Bienvenue, ${loggedInUser.fullName} !`;
+        welcomeMessageElement.textContent = `Bienvenue sur HRManager, ${loggedInUser.fullName} !`;
     } else {
         console.warn("Impossible d'afficher le message de bienvenue : Élément 'welcome-message' introuvable ou utilisateur non connecté/données incomplètes.");
         // Si l'utilisateur n'est pas connecté, et que vous n'avez pas de redirection globale,
