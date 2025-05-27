@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Security-Policy">
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <!-- Intégration de la police Poppins depuis Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Lien vers la feuille de style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background">
+        <div class="login-container">
+            <div class="logo-container">
+                <img src="assets/images/logogym.jpg" alt="Logo de l'entreprise">
+            </div>
+            <h1>Connexion</h1>
+            <input type="text" id="login" placeholder="Login" aria-label="Login">
+            <input type="password" id="password" placeholder="Mot de passe" aria-label="Mot de passe">
+            <select id="role" aria-label="Rôle">
+                <option value="secretaire">Secrétaire</option>
+                <option value="admin">Admin</option>
+                <option value="directeur">Chargé RH</option>
+            </select>
+            <button id="loginButton">Se connecter</button>
+        </div>
+    </div>
+    <script src="renderer3.js" defer></script>
+</body>
+</html>

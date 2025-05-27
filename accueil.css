@@ -1,0 +1,116 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f7f6;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    font-weight: 600;
+}
+
+.module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    justify-content: center;
+}
+
+.module-block {
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    padding: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.module-block:hover {
+    background-color: #dbe4e6;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.module-block h2 {
+    color: #34495e;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.6em;
+}
+
+.module-block p {
+    color: #555;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* Couleurs spécifiques pour les modules (optionnel) */
+.module-block[data-module="recrutement"] { background-color: #e0f2f7; }
+.module-block[data-module="personnel"] { background-color: #e8f5e9; }
+.module-block[data-module="carriere"] { background-color: #fff3e0; }
+.module-block[data-module="paie"] { background-color: #fbe9e7; }
+.module-block[data-module="plan_activite"] { background-color: #ede7f6; }
+.module-block[data-module="conges"] { background-color: #ffe0b2; }
+.module-block[data-module="archivage_documentation"] { background-color: #e1f5fe; }
+.module-block[data-module="postes"] { background-color: #d1c4e9; }
+.module-block[data-module="utilisateurs"] { background-color: #b3e5fc; }
+.module-block[data-module="stages_formation"] { background-color: #c8e6c9; }
+.module-block[data-module="parametres"] { background-color: #f8bbd0; }
+/* accueil.css */
+
+/* Styles existants pour votre mise en page... */
+
+.header-bar {
+    display: flex;
+    justify-content: space-between; /* Aligne le message à gauche, le bouton à droite */
+    align-items: center; /* Centre verticalement */
+    padding: 10px 20px;
+    background-color: #f0f0f0; /* Couleur d'arrière-plan légère */
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px; /* Espace sous la barre d'en-tête */
+}
+
+.header-bar #welcome-message {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #333;
+}
+
+.logout-button {
+    background-color: #dc3545; /* Couleur rouge pour la déconnexion */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* Rouge plus foncé au survol */
+}
+
+/* ... (le reste de vos styles CSS existants) ... */

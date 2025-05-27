@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord - Gestion du Personnel</title>
+    <link rel="stylesheet" href="accueil.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <style>
+        #welcome-message {
+            color: #34495e;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+       
+        <button id="logout-button" class="logout-button">Déconnexion</button> </div>
+
+    <div class="container">
+        <h1 id="welcome-message"></h1> <div class="module-grid">
+            <div class="module-block" data-module="recrutement">
+                <h2>Recrutement</h2>
+                <p>Gérez les candidatures et les embauches.</p>
+            </div>
+            <div class="module-block" data-module="personnel">
+                <h2>Personnel</h2>
+                <p>Informations complètes sur les employés.</p>
+            </div>
+            <div class="module-block" data-module="carriere">
+                <h2>Carrière</h2>
+                <p>Suivi des parcours professionnels.</p>
+            </div>
+            <div class="module-block" data-module="paie">
+                <h2>Paie</h2>
+                <p>Gestion des salaires et bulletins.</p>
+            </div>
+            <div class="module-block" data-module="plan_activite">
+                <h2>Planning d'Activité</h2>
+                <p>Planification et suivi des tâches.</p>
+            </div>
+            <div class="module-block" data-module="conges">
+                <h2>Congés</h2>
+                <p>Demandes et gestion des absences.</p>
+            </div>
+            <div class="module-block" data-module="archivage_documentation">
+                <h2>Archivage & Documentation</h2>
+                <p>Documents et fichiers RH.</p>
+            </div>
+            <div class="module-block" data-module="postes">
+                <h2>Postes</h2>
+                <p>Définition et gestion des postes.</p>
+            </div>
+            <div class="module-block" data-module="utilisateurs">
+                <h2>Utilisateurs</h2>
+                <p>Gestion des accès et rôles.</p>
+            </div>
+            <div class="module-block" data-module="stages_formation">
+                <h2>Stages / Formation</h2>
+                <p>Programmes de développement.</p>
+            </div>
+             <div class="module-block" data-module="audit">
+                <h2>Journaux d'audit</h2>
+                <p>Consulter l'historique des activites.</p>
+            </div>
+             <div class="module-block" data-module="sauvegarde">
+                <h2>Sauvegarde</h2>
+                <p>Gerer les sauvegardes de donnees</p>
+            </div>
+            <div class="module-block" data-module="parametres">
+                <h2>Paramètres</h2>
+                <p>Configuration de l'application.</p>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+  <script src="message.js"></script>
+    <script>
+    // Le code de déconnexion ci-dessus
+   // <-- NÉCESSAIRE SI CE BLOC EST LE SEUL À L'UTILISER
+    document.addEventListener('DOMContentLoaded', () => {
+        const logoutButton = document.getElementById('logout-button');
+        if (logoutButton) {
+            logoutButton.addEventListener('click', () => {
+                localStorage.removeItem('loggedInUser');
+                console.log("Déconnexion demandée.");
+                ipcRenderer.send('logout');
+            });
+        }
+    });
+    
+</script>
+</body>
+</html>
+   
+
+
+    
+</body>
+</html>

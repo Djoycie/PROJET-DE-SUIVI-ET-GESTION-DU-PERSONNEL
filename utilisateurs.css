@@ -1,0 +1,221 @@
+/* --- Styles généraux pour la page Utilisateurs --- */
+
+/* Appliquez ces styles dans votre fichier accueil.css ou un nouveau utilisateurs.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6; /* Fond léger */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px; /* Augmenter la largeur pour plus d'espace */
+    margin: 20px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.page-content h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 15px;
+}
+
+.page-content p {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #666;
+    font-size: 1.1em;
+}
+
+/* --- Section des formulaires (Ajouter/Modifier) --- */
+.form-section {
+    background-color: #fdfdfd;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.form-section h2 {
+    color: #34495e;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #e9ecef;
+    padding-bottom: 10px;
+}
+
+.form-section form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.form-section form input[type="text"],
+.form-section form input[type="password"],
+.form-section form select {
+    width: calc(100% - 20px); /* Prend presque toute la largeur */
+    padding: 12px 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-section form input[type="text"]:focus,
+.form-section form input[type="password"]:focus,
+.form-section form select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.form-section form button[type="submit"],
+.form-section form button[type="button"] {
+    background-color: #28a745; /* Vert pour ajouter/enregistrer */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-right: 15px; /* Espace entre les boutons */
+}
+
+.form-section form button[type="submit"]:hover,
+.form-section form button[type="button"]:hover {
+    background-color: #218838; /* Vert plus foncé au survol */
+    transform: translateY(-1px);
+}
+
+.form-section form button[type="button"]#cancel-edit-btn {
+    background-color: #6c757d; /* Gris pour annuler */
+}
+
+.form-section form button[type="button"]#cancel-edit-btn:hover {
+    background-color: #5a6268;
+}
+
+#add-user-message, #edit-user-message {
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* --- Section de la liste des utilisateurs --- */
+.list-section {
+    background-color: #fdfdfd;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.list-section h2 {
+    color: #34495e;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #e9ecef;
+    padding-bottom: 10px;
+}
+
+#users-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#users-list thead tr {
+    background-color: #e9ecef;
+    color: #495057;
+    text-align: left;
+}
+
+#users-list th,
+#users-list td {
+    padding: 12px 15px;
+    border: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+#users-list tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Ligne paire légèrement grisée */
+}
+
+#users-list tbody tr:hover {
+    background-color: #e2f0fb; /* Effet de survol sur les lignes */
+    transition: background-color 0.2s ease;
+}
+
+/* Boutons d'action dans le tableau */
+.action-buttons {
+    display: flex;
+    gap: 8px; /* Espace entre les boutons d'action */
+    justify-content: center;
+}
+
+.action-buttons button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+}
+
+.action-buttons .edit-btn {
+    background-color: #007bff; /* Bleu pour modifier */
+    color: white;
+}
+
+.action-buttons .edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.action-buttons .delete-btn {
+    background-color: #dc3545; /* Rouge pour supprimer */
+    color: white;
+}
+
+.action-buttons .delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* --- Bouton Retour au Tableau de Bord --- */
+.back-button {
+    display: inline-block;
+    background-color: #007bff; /* Bleu pour retour */
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-top: 30px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Masquer la section de modification par défaut */
+#edit-user-section {
+    display: none;
+}
