@@ -2,7 +2,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #f4f7f6;
+    background-color: #D5BDAF;
     color: #333;
     display: flex;
     justify-content: center;
@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-    background-color: #ffffff;
+    background-color: #D6CCC2;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     padding: 30px;
@@ -87,7 +87,8 @@ h1 {
     justify-content: space-between; /* Aligne le message à gauche, le bouton à droite */
     align-items: center; /* Centre verticalement */
     padding: 10px 20px;
-    background-color: #f0f0f0; /* Couleur d'arrière-plan légère */
+    border-bottom: 1px solid transparent;
+    background-color: transparent; /* Couleur d'arrière-plan légère */
     border-bottom: 1px solid #ddd;
     margin-bottom: 20px; /* Espace sous la barre d'en-tête */
 }
@@ -112,5 +113,6 @@ h1 {
 .logout-button:hover {
     background-color: #c82333; /* Rouge plus foncé au survol */
 }
-
-/* ... (le reste de vos styles CSS existants) ... */
+button{
+    background-color:#34495e;
+}
