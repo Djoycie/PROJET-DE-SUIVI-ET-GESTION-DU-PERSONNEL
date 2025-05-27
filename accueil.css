@@ -2,7 +2,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color: #D5BDAF;
+    background-color:#ede7f6;
     color: #333;
     display: flex;
     justify-content: center;
@@ -29,15 +29,15 @@ h1 {
 
 .module-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 35px;
     justify-content: center;
 }
 
 .module-block {
     background-color: #ecf0f1;
     border-radius: 10px;
-    padding: 25px;
+    padding: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
@@ -67,17 +67,19 @@ h1 {
 }
 
 /* Couleurs spécifiques pour les modules (optionnel) */
-.module-block[data-module="recrutement"] { background-color: #e0f2f7; }
-.module-block[data-module="personnel"] { background-color: #e8f5e9; }
-.module-block[data-module="carriere"] { background-color: #fff3e0; }
-.module-block[data-module="paie"] { background-color: #fbe9e7; }
+.module-block[data-module="recrutement"] { background-color: #edede9; }
+.module-block[data-module="personnel"] { background-color: #edede9; }
+.module-block[data-module="carriere"] { background-color: #edede9; }
+.module-block[data-module="paie"] { background-color: #edede9; }
 .module-block[data-module="plan_activite"] { background-color: #ede7f6; }
-.module-block[data-module="conges"] { background-color: #ffe0b2; }
-.module-block[data-module="archivage_documentation"] { background-color: #e1f5fe; }
-.module-block[data-module="postes"] { background-color: #d1c4e9; }
-.module-block[data-module="utilisateurs"] { background-color: #b3e5fc; }
-.module-block[data-module="stages_formation"] { background-color: #c8e6c9; }
-.module-block[data-module="parametres"] { background-color: #f8bbd0; }
+.module-block[data-module="conges"] { background-color: #edede9; }
+.module-block[data-module="archivage_documentation"] { background-color: #edede9; }
+.module-block[data-module="postes"] { background-color: #edede9; }
+.module-block[data-module="utilisateurs"] { background-color: #edede9; }
+.module-block[data-module="stages_formation"] { background-color: #edede9; }
+.module-block[data-module="audit"] { background-color: #edede9; }
+.module-block[data-module="sauvegarde"] { background-color: #edede9; }
+.module-block[data-module="parametres"] { background-color: #edede9; }
 /* accueil.css */
 
 /* Styles existants pour votre mise en page... */
@@ -86,11 +88,11 @@ h1 {
     display: flex;
     justify-content: space-between; /* Aligne le message à gauche, le bouton à droite */
     align-items: center; /* Centre verticalement */
-    padding: 10px 20px;
+    padding: 15px 30px;
     border-bottom: 1px solid transparent;
     background-color: transparent; /* Couleur d'arrière-plan légère */
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 20px; /* Espace sous la barre d'en-tête */
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 30px; /* Espace sous la barre d'en-tête */
 }
 
 .header-bar #welcome-message {
@@ -100,6 +102,7 @@ h1 {
 }
 
 .logout-button {
+    position: absolute;
     background-color: #dc3545; /* Couleur rouge pour la déconnexion */
     color: white;
     padding: 8px 15px;
@@ -108,6 +111,7 @@ h1 {
     cursor: pointer;
     font-size: 0.9em;
     transition: background-color 0.2s ease;
+    margin-top: 12rem;
 }
 
 .logout-button:hover {
@@ -115,4 +119,153 @@ h1 {
 }
 button{
     background-color:#34495e;
+}
+.use{
+    width: 40px;
+    height: 40px;
+    margin-top: 0.4rem;
+    margin-left: 0.6rem;
+}
+.circle{
+    position: absolute;
+    border-radius: 50%;
+    background-color: #FFF;
+    width: 60px;
+    height: 60px;
+    border-color: white;
+    margin-top: 0.3rem;
+    margin-left: 0.3rem;
+}
+.contour{
+    border-radius: 50%;
+    background-color: #fff;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+h2{
+    margin-top: 2rem;
+    font-size: 1.2rem;
+}
+p{
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 0.4rem;
+}
+.training{
+    width: 45px;
+    height: 45px;
+    margin-top: 0.4rem;
+    margin-left: 0.5rem;
+}
+.contour1{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour2{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour3{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour4{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour5{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour6{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour7{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour8{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour9{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour10{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour11{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour12{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.contour13{
+    background-color: #edede9;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-top: -2.5rem;
+    margin-left: 5rem;
+}
+.log{
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 0.4rem;
+    margin-left: 0.6rem;
 }
