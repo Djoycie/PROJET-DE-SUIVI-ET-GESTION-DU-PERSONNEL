@@ -2,7 +2,10 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background-color:#ede7f6;
+    background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/fond.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #333;
     display: flex;
     justify-content: center;
@@ -11,7 +14,7 @@ body {
 }
 
 .container {
-    background-color: #D6CCC2;
+    background-color:transparent;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     padding: 30px;
@@ -54,7 +57,7 @@ h1 {
 }
 
 .module-block h2 {
-    color: #34495e;
+    color: white;
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 1.6em;
@@ -67,19 +70,58 @@ h1 {
 }
 
 /* Couleurs spécifiques pour les modules (optionnel) */
-.module-block[data-module="recrutement"] { background-color: #edede9; }
-.module-block[data-module="personnel"] { background-color: #edede9; }
-.module-block[data-module="carriere"] { background-color: #edede9; }
-.module-block[data-module="paie"] { background-color: #edede9; }
-.module-block[data-module="plan_activite"] { background-color: #ede7f6; }
-.module-block[data-module="conges"] { background-color: #edede9; }
-.module-block[data-module="archivage_documentation"] { background-color: #edede9; }
-.module-block[data-module="postes"] { background-color: #edede9; }
-.module-block[data-module="utilisateurs"] { background-color: #edede9; }
-.module-block[data-module="stages_formation"] { background-color: #edede9; }
-.module-block[data-module="audit"] { background-color: #edede9; }
-.module-block[data-module="sauvegarde"] { background-color: #edede9; }
-.module-block[data-module="parametres"] { background-color: #edede9; }
+.module-block[data-module="analyse_cv"] {     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="personnel"] {     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="carriere"] {    background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="paie"] {      background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="plan_activite"] {      background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="conges"] {      background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="archivage_documentation"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="postes"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="utilisateurs"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="stages_formation"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="audit"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="sauvegarde"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
+.module-block[data-module="parametres"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;}
 /* accueil.css */
 
 /* Styles existants pour votre mise en page... */
@@ -92,7 +134,7 @@ h1 {
     border-bottom: 1px solid transparent;
     background-color: transparent; /* Couleur d'arrière-plan légère */
     border-bottom: 2px solid #ddd;
-    margin-bottom: 30px; /* Espace sous la barre d'en-tête */
+    margin-bottom: 50px; /* Espace sous la barre d'en-tête */
 }
 
 .header-bar #welcome-message {
@@ -111,14 +153,18 @@ h1 {
     cursor: pointer;
     font-size: 0.9em;
     transition: background-color 0.2s ease;
-    margin-top: 12rem;
+    margin-top: 20rem;
+    margin-left: 1rem;
 }
 
 .logout-button:hover {
-    background-color: #c82333; /* Rouge plus foncé au survol */
+    background-color: #f50820; /* Rouge plus foncé au survol */
+    color: white;
+    transition: background-color 0.2s ease-in;
 }
 button{
     background-color:#34495e;
+    
 }
 .use{
     width: 40px;
@@ -135,14 +181,6 @@ button{
     border-color: white;
     margin-top: 0.3rem;
     margin-left: 0.3rem;
-}
-.contour{
-    border-radius: 50%;
-    background-color: #fff;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 h2{
     margin-top: 2rem;
@@ -165,7 +203,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour2{
     background-color: #edede9;
@@ -173,7 +210,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour3{
     background-color: #edede9;
@@ -181,7 +217,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour4{
     background-color: #edede9;
@@ -189,7 +224,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour5{
     background-color: #edede9;
@@ -197,7 +231,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour6{
     background-color: #edede9;
@@ -205,7 +238,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour7{
     background-color: #edede9;
@@ -213,7 +245,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour8{
     background-color: #edede9;
@@ -221,7 +252,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour9{
     background-color: #edede9;
@@ -229,7 +259,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour10{
     background-color: #edede9;
@@ -237,7 +266,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour11{
     background-color: #edede9;
@@ -245,7 +273,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour12{
     background-color: #edede9;
@@ -253,7 +280,6 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
 }
 .contour13{
     background-color: #edede9;
@@ -261,11 +287,19 @@ p{
     width: 70px;
     height: 70px;
     margin-top: -2.5rem;
-    margin-left: 5rem;
+}
+.logo-container{
+    position: relative;
+    
+    border-radius: 50%;
+    
 }
 .log{
+    background-color: #b8aeec;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 0.4rem;
     margin-left: 0.6rem;
+    width: 150px;
+    height: 150px;
 }
