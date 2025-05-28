@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse de CV - Gestion du Personnel</title>
+    <link rel="stylesheet" href="accueil.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline';">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .cv-analysis-section textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <span id="welcome-message"></span>
+    </div>
+
+    <div class="container">
+        <div class="page-content">
+            <h1>Analyse de CV</h1>
+            <p>Téléchargez un CV et analysez sa correspondance avec les qualifications requises pour un poste.</p>
+
+            <div class="cv-analysis-section">
+                <h2>Outil d'Analyse</h2>
+                <form id="cv-analysis-form">
+                    <label for="candidate-name-input">Nom du Candidat (Optionnel) :</label>
+                    <input type="text" id="candidate-name-input" placeholder="Ex: Jean Dupont">
+
+                    <label for="cv-file">Fichier CV (PDF ou DOCX) :</label>
+                    <input type="file" id="cv-file" accept=".pdf,.docx" required>
+
+                    <label for="qualifications-input">Qualifications requises (séparées par des virgules, format "compétence:poids". Ex: "JavaScript:3,React:2,SQL:1") :</label>
+                    <textarea id="qualifications-input" placeholder="Ex: JavaScript:3,React:2,SQL:1,Gestion de projet:2,Leadership:1" required></textarea>
+
+                    <button type="submit">Analyser le CV</button>
+                    <p id="analysis-status-message" style="margin-top: 15px;" aria-live="polite"></p>
+                </form>
+
+                <div id="analysis-results" style="display: none;">
+                    <h3>Résultats de l'Analyse</h3>
+                    <div id="analysis-chart-container">
+                        <canvas id="analysisChart"></canvas>
+                    </div>
+                    <p id="analysis-percentage" style="font-size: 1.5em; font-weight: bold;"></p>
+                    <p id="analysis-message"></p>
+
+                    <div id="analysis-qualifications-details">
+                        <ul id="found-qualifications-list"></ul>
+                        <ul id="missing-qualifications-list"></ul>
+                    </div>
+                </div>
+            </div>
+<div class="module-block" data-module="cv_analyses_historique" id="cv-history-block">
+       <h2>Voir CV deja analysés</h2>
+               
+    </div>
+
+            <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+        </div>
+    </div>
+
+    <script>
+        console.log('electronAPI:', window.electronAPI);
+        let chartInstance = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const cvAnalysisForm = document.getElementById('cv-analysis-form');
+            const candidateNameInput = document.getElementById('candidate-name-input');
+            const analysisStatusMessage = document.getElementById('analysis-status-message');
+            const analysisResultsDiv = document.getElementById('analysis-results');
+            const analysisPercentageP = document.getElementById('analysis-percentage');
+            const analysisMessageP = document.getElementById('analysis-message');
+            const foundQualificationsList = document.getElementById('found-qualifications-list');
+            const missingQualificationsList = document.getElementById('missing-qualifications-list');
+            const logoutButton = document.getElementById('logout-button');
+
+            if (logoutButton) {
+                logoutButton.addEventListener('click', () => {
+                    localStorage.removeItem('currentUser');
+                    window.electronAPI.logout();
+                });
+            }
+
+            cvAnalysisForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const cvFile = document.getElementById('cv-file').files[0];
+                const qualificationsInput = document.getElementById('qualifications-input').value;
+                const candidateName = candidateNameInput.value.trim();
+
+                if (!cvFile) {
+                    analysisStatusMessage.textContent = 'Veuillez sélectionner un fichier CV.';
+                    analysisStatusMessage.style.color = 'red';
+                    return;
+                }
+                if (!qualificationsInput.trim()) {
+                    analysisStatusMessage.textContent = 'Veuillez saisir les qualifications requises.';
+                    analysisStatusMessage.style.color = 'red';
+                    return;
+                }
+
+                // Validation simple du format qualifications
+                const validFormat = qualificationsInput.split(',').every(q => /^\s*[\w\s]+:\d+\s*$/.test(q));
+                if (!validFormat) {
+                    analysisStatusMessage.textContent = 'Format des qualifications invalide. Utilisez "compétence:poids" séparés par des virgules.';
+                    analysisStatusMessage.style.color = 'red';
+                    return;
+                }
+
+                // Désactive le bouton pendant l'analyse
+                const submitButton = cvAnalysisForm.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                analysisStatusMessage.textContent = 'Analyse en cours...';
+                analysisStatusMessage.style.color = 'blue';
+                analysisResultsDiv.style.display = 'none';
+
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    try {
+                        const fileBuffer = e.target.result;
+                        const result = await window.electronAPI.analyzeCv({
+                            fileBuffer: fileBuffer,
+                            fileName: cvFile.name,
+                            qualifications: qualificationsInput,
+                            candidateName: candidateName
+                        });
+
+                        if (result.success) {
+                            const analysis = result.analysis;
+                            analysisStatusMessage.textContent = 'Analyse terminée.';
+                            analysisStatusMessage.style.color = 'green';
+                            analysisResultsDiv.style.display = 'block';
+
+                            analysisPercentageP.textContent = `${analysis.percentage}% de correspondance`;
+                            analysisMessageP.textContent = analysis.message;
+
+                            if (chartInstance) { chartInstance.destroy(); }
+                            const ctx = document.getElementById('analysisChart').getContext('2d');
+                            const data = {
+                                labels: ['Correspondance', 'Manquant'],
+                                datasets: [{
+                                    data: [analysis.percentage, 100 - analysis.percentage],
+                                    backgroundColor: ['#4CAF50', '#FF6384'],
+                                    hoverBackgroundColor: ['#45a049', '#FF4B70']
+                                }]
+                            };
+                            const options = {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                cutout: '70%',
+                                plugins: {
+                                    legend: { display: false },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                return `${context.label}:${context.raw.toFixed(2)}%`;
+                                            }
+                                        }
+                                    }
+                                }
+                            };
+                            chartInstance = new Chart(ctx, { type: 'doughnut', data: data, options: options });
+
+                            foundQualificationsList.innerHTML = '';
+                            missingQualificationsList.innerHTML = '';
+
+                            // Affichage des qualifs trouvées
+                            if (analysis.foundQualifications && analysis.foundQualifications.length > 0) {
+                                analysis.foundQualifications.forEach(q => {
+                                    const li = document.createElement('li');
+                                    li.textContent = q;
+                                    li.classList.add('found');
+                                    foundQualificationsList.appendChild(li);
+                                });
+                            } else {
+                                const li = document.createElement('li');
+                                li.textContent = "Aucune qualification trouvée.";
+                                foundQualificationsList.appendChild(li);
+                            }
+
+                            // Affichage des qualifs manquantes
+                            if (analysis.missingQualifications && analysis.missingQualifications.length > 0) {
+                                analysis.missingQualifications.forEach(q => {
+                                    const li = document.createElement('li');
+                                    li.textContent = q;
+                                    li.classList.add('missing');
+                                    missingQualificationsList.appendChild(li);
+                                });
+                            } else {
+                                const li = document.createElement('li');
+                                li.textContent = "Toutes les qualifications requises ont été trouvées.";
+                                missingQualificationsList.appendChild(li);
+                            }
+                        } else {
+                            throw new Error(result.message);
+                        }
+                    } catch (error) {
+                        analysisStatusMessage.textContent =` Erreur lors de l'analyse : ${error.message}`;
+                        analysisStatusMessage.style.color = 'red';
+                        analysisResultsDiv.style.display = 'none';
+                    } finally {
+                        submitButton.disabled = false;
+                    }
+                };
+                reader.readAsArrayBuffer(cvFile);
+            });
+            
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const historyBlock = document.getElementById('cv-history-block');
+    if (historyBlock) {
+        historyBlock.addEventListener('click', () => {
+            // Redirige vers la page d'historique (cv_analyses.html)
+            window.location.href = 'cv_analyses_historique.html';
+            // Ou, si tu utilises la navigation via Electron (exposée par le preload) :
+            // window.electronAPI.loadModule('cv_analyses.html');
+        });
+        // Optionnel : ajoute un effet visuel au survol
+        historyBlock.style.cursor = 'pointer';
+    }
+});
+        
+    </script>
+</body>
+</html>

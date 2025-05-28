@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des Analyses de CV - Gestion du Personnel</title>
+    <link rel="stylesheet" href="accueil.css">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+    <style>
+        .filter-section {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+        }
+        .filter-section label {
+            font-weight: bold;
+            color: #555;
+        }
+        .filter-section input[type="date"] {
+            padding: 8px 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+        #cv-analyses-list {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #cv-analyses-list thead tr {
+            background-color: #e9ecef;
+            color: #495057;
+            text-align: left;
+        }
+
+        #cv-analyses-list th,
+        #cv-analyses-list td {
+            padding: 12px 15px;
+            border: 1px solid #dee2e6;
+            vertical-align: middle;
+        }
+
+        #cv-analyses-list tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        #cv-analyses-list tbody tr:hover {
+            background-color: #e2f0fb;
+            transition: background-color 0.2s ease;
+        }
+        .analysis-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .analysis-actions button {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background-color 0.2s ease;
+        }
+        .analysis-actions .view-details-btn {
+            background-color: #17a2b8; /* Bleu ciel */
+            color: white;
+        }
+        .analysis-actions .view-details-btn:hover {
+            background-color: #138496;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <span id="welcome-message"></span>
+        
+    </div>
+
+    <div class="container">
+        <div class="page-content">
+            <h1>Historique des Analyses de CV</h1>
+            <p>Retrouvez toutes les analyses de CV effectuées.</p>
+
+            <div class="filter-section">
+                <label for="filter-date-start">Date début :</label>
+                <input type="date" id="filter-date-start">
+                <label for="filter-date-end">Date fin :</label>
+                <input type="date" id="filter-date-end">
+            </div>
+
+            <div class="list-section">
+                <h2>Analyses Enregistrées</h2>
+                <table id="cv-analyses-list">
+                    <thead>
+                        <tr>
+                            <th>Candidat</th>
+                            <th>Date Analyse</th>
+                            <th>Poste Qualif.</th>
+                            <th>% Correspondance</th>
+                            <th>Message</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+
+            <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+        </div>
+    </div>
+
+    <div id="details-modal" style="display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 600px; border-radius: 10px; position: relative;">
+            <span class="close-button" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+            <h2 id="modal-candidate-name"></h2>
+            <p><strong>Date d'analyse :</strong> <span id="modal-analysis-date"></span></p>
+            <p><strong>Qualifications requises :</strong> <span id="modal-qualifications-required"></span></p>
+            <p><strong>Pourcentage :</strong> <span id="modal-percentage"></span></p>
+            <p><strong>Message :</strong> <span id="modal-message"></span></p>
+            <h3>Qualifications trouvées :</h3>
+            <ul id="modal-found-qualifications"></ul>
+            <h3>Qualifications manquantes :</h3>
+            <ul id="modal-missing-qualifications"></ul>
+            <p><a id="modal-view-cv-link" href="#" target="_blank">Voir le CV original</a></p>
+        </div>
+    </div>
+
+
+    
+    <script>
+        // const { ipcRenderer } = require('electron'); // Supprimé
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const cvAnalysesListBody = document.querySelector('#cv-analyses-list tbody');
+            const filterDateStart = document.getElementById('filter-date-start');
+            const filterDateEnd = document.getElementById('filter-date-end');
+            const logoutButton = document.getElementById('logout-button');
+
+            const detailsModal = document.getElementById('details-modal');
+            const closeButton = document.querySelector('.close-button');
+
+            let allAnalyses = []; // Pour stocker toutes les analyses et les filtrer côté client
+
+            // Gestion du bouton de déconnexion
+            if (logoutButton) {
+                logoutButton.addEventListener('click', () => {
+                    localStorage.removeItem('currentUser');
+                    window.electronAPI.logout();
+                });
+            }
+
+            // Fonction pour charger et afficher la liste des analyses de CV
+            async function loadCvAnalyses() {
+                cvAnalysesListBody.innerHTML = ''; // Nettoyer la liste actuelle
+                allAnalyses = await window.electronAPI.getAllCvAnalyses(); // Récupérer toutes les analyses
+
+                displayAnalyses(allAnalyses); // Afficher toutes les analyses initialement
+            }
+
+            function displayAnalyses(analysesToDisplay) {
+                cvAnalysesListBody.innerHTML = ''; // Nettoyer la liste avant d'afficher
+                analysesToDisplay.forEach(analysis => {
+                    const row = cvAnalysesListBody.insertRow();
+                    row.insertCell().textContent = analysis.candidateName;
+                    row.insertCell().textContent = new Date(analysis.analysisDate).toLocaleDateString('fr-FR');
+                    // Affiche les 3 premières qualifications pour la concision
+                    row.insertCell().textContent = analysis.qualificationsRequired.split(',').slice(0, 3).map(q => q.split(':')[0]).join(', ') + (analysis.qualificationsRequired.split(',').length > 3 ? '...' : '');
+                    row.insertCell().textContent = `${analysis.percentage}%`;
+                    row.insertCell().textContent = analysis.message;
+
+                    const actionsCell = row.insertCell();
+                    actionsCell.className = 'analysis-actions';
+
+                    const viewDetailsBtn = document.createElement('button');
+                    viewDetailsBtn.textContent = 'Détails';
+                    viewDetailsBtn.className = 'view-details-btn';
+                    viewDetailsBtn.addEventListener('click', () => showAnalysisDetails(analysis));
+                    actionsCell.appendChild(viewDetailsBtn);
+                });
+            }
+
+            // Fonction de filtrage
+            function filterAndDisplayAnalyses() {
+                const startDateStr = filterDateStart.value;
+                const endDateStr = filterDateEnd.value;
+
+                let filtered = allAnalyses;
+
+                if (startDateStr) {
+                    const startDate = new Date(startDateStr);
+                    // S'assurer que la date de début inclut tout le jour
+                    startDate.setHours(0, 0, 0, 0);
+                    filtered = filtered.filter(analysis => new Date(analysis.analysisDate) >= startDate);
+                }
+
+                if (endDateStr) {
+                    const endDate = new Date(endDateStr);
+                    // S'assurer que la date de fin inclut tout le jour
+                    endDate.setHours(23, 59, 59, 999);
+                    filtered = filtered.filter(analysis => new Date(analysis.analysisDate) <= endDate);
+                }
+
+                displayAnalyses(filtered);
+            }
+
+            // Écouteurs pour les filtres de date
+            filterDateStart.addEventListener('change', filterAndDisplayAnalyses);
+            filterDateEnd.addEventListener('change', filterAndDisplayAnalyses);
+
+            // Fonction pour afficher les détails dans un modal
+            function showAnalysisDetails(analysis) {
+                document.getElementById('modal-candidate-name').textContent = analysis.candidateName;
+                document.getElementById('modal-analysis-date').textContent = new Date(analysis.analysisDate).toLocaleDateString('fr-FR') + ' ' + new Date(analysis.analysisDate).toLocaleTimeString('fr-FR');
+                document.getElementById('modal-qualifications-required').textContent = analysis.qualificationsRequired;
+                document.getElementById('modal-percentage').textContent = `${analysis.percentage}%`;
+                document.getElementById('modal-message').textContent = analysis.message;
+
+                const modalFoundList = document.getElementById('modal-found-qualifications');
+                const modalMissingList = document.getElementById('modal-missing-qualifications');
+                modalFoundList.innerHTML = '';
+                modalMissingList.innerHTML = '';
+
+                if (analysis.foundQualifications && analysis.foundQualifications.length > 0) {
+                    analysis.foundQualifications.forEach(q => {
+                        const li = document.createElement('li');
+                        li.textContent = q;
+                        modalFoundList.appendChild(li);
+                    });
+                } else {
+                    const li = document.createElement('li');
+                    li.textContent = "Aucune qualification trouvée.";
+                    modalFoundList.appendChild(li);
+                }
+
+                if (analysis.missingQualifications && analysis.missingQualifications.length > 0) {
+                    analysis.missingQualifications.forEach(q => {
+                        const li = document.createElement('li');
+                        li.textContent = q;
+                        modalMissingList.appendChild(li);
+                    });
+                } else {
+                    const li = document.createElement('li');
+                    li.textContent = "Toutes les qualifications requises ont été trouvées.";
+                    modalMissingList.appendChild(li);
+                }
+
+                // Pour "Voir le CV original", Electron ne peut pas ouvrir des chemins directs
+                // pour des raisons de sécurité. Vous devrez utiliser Shell.openExternal
+                // si le chemin est accessible. Pour un usage interne, vous pourriez
+                // créer un IPC qui ouvre le fichier avec l'application par défaut.
+                const viewCvLink = document.getElementById('modal-view-cv-link');
+                if (analysis.filePath) {
+                    viewCvLink.style.display = 'block';
+                    viewCvLink.onclick = (e) => {
+                        e.preventDefault();
+                        // Demander au processus principal d'ouvrir le fichier
+                        window.electronAPI.openFile(analysis.filePath);
+                    };
+                } else {
+                    viewCvLink.style.display = 'none';
+                }
+
+
+                detailsModal.style.display = 'block'; // Afficher le modal
+            }
+
+            // Fermer le modal
+            closeButton.addEventListener('click', () => {
+                detailsModal.style.display = 'none';
+            });
+            window.addEventListener('click', (event) => {
+                if (event.target == detailsModal) {
+                    detailsModal.style.display = 'none';
+                }
+            });
+
+
+            // Charger les analyses au chargement de la page
+            loadCvAnalyses();
+        });
+    </script>
+</body>
+</html>
