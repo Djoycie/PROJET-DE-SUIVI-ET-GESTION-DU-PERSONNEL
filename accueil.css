@@ -2,7 +2,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/fond.jpg);
+    background: linear-gradient(to bottom,#e3f3ee,#214137);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -70,55 +70,55 @@ h1 {
 }
 
 /* Couleurs spécifiques pour les modules (optionnel) */
-.module-block[data-module="analyse_cv"] {     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="analyse_cv"] {     background-color:#b8aeec;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="personnel"] {     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="personnel"] {     background-color:#b8aeec;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="carriere"] {    background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="carriere"] {    background-color:#aca1df;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="paie"] {      background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="paie"] {      background-color:#aca1df;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="plan_activite"] {      background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="plan_activite"] {      background-color:#aca1df;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="conges"] {      background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="conges"] {      background-color:#aca1df;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="archivage_documentation"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="archivage_documentation"] {   background-color:#aca1df;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="postes"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="postes"] {   background-color:#aca1df;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="utilisateurs"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="utilisateurs"] {   background-color:#aca1df;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="stages_formation"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="stages_formation"] {  background-color:#aca1df;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="audit"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="audit"] {  background-color:#aca1df;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="sauvegarde"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="sauvegarde"] {     background-color:#aca1df;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
-.module-block[data-module="parametres"] { background-color: #edede9;     background-image: url(../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/new.png);
+.module-block[data-module="parametres"] { background-color:#aca1df;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;}
@@ -135,6 +135,7 @@ h1 {
     background-color: transparent; /* Couleur d'arrière-plan légère */
     border-bottom: 2px solid #ddd;
     margin-bottom: 50px; /* Espace sous la barre d'en-tête */
+    width: 214px;
 }
 
 .header-bar #welcome-message {
@@ -145,20 +146,20 @@ h1 {
 
 .logout-button {
     position: absolute;
-    background-color: #dc3545; /* Couleur rouge pour la déconnexion */
+    background-color: #b8aeec; /* Couleur rouge pour la déconnexion */
     color: white;
     padding: 8px 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     cursor: pointer;
     font-size: 0.9em;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.4s ease;
     margin-top: 20rem;
-    margin-left: 1rem;
+    margin-left: 1.8rem;
 }
 
 .logout-button:hover {
-    background-color: #f50820; /* Rouge plus foncé au survol */
+    background-color: #dc3545; /* Rouge plus foncé au survol */
     color: white;
     transition: background-color 0.2s ease-in;
 }
@@ -197,91 +198,7 @@ p{
     margin-top: 0.4rem;
     margin-left: 0.5rem;
 }
-.contour1{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour2{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour3{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour4{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour5{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour6{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour7{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour8{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour9{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour10{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour11{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour12{
-    background-color: #edede9;
-    border-radius: 50%;
-    width: 70px;
-    height: 70px;
-    margin-top: -2.5rem;
-}
-.contour13{
+.contour{
     background-color: #edede9;
     border-radius: 50%;
     width: 70px;
@@ -290,7 +207,6 @@ p{
 }
 .logo-container{
     position: relative;
-    
     border-radius: 50%;
     
 }
@@ -299,7 +215,24 @@ p{
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 0.4rem;
-    margin-left: 0.6rem;
+    margin-left: -0.4rem;
     width: 150px;
     height: 150px;
+}
+.voir{
+     position: absolute;
+    background-color: #568376; /* Couleur rouge pour la déconnexion */
+    color: white;
+    padding: 2px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 20rem;
+    margin-left: -2.2rem;
+}
+.voir:hover {
+    background-color: #42695e; /* Rouge plus foncé au survol */
+    color: white;
+    transition: background-color 0.2s ease-in;
 }
