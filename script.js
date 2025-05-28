@@ -1,17 +1,13 @@
-// script.js
-
-const { ipcRenderer } = require('electron');
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log("[Renderer - script.js] Chargé et DOM prêt.");
 
-    // --- PARTIE GESTION DE LA DÉCONNEXION (laissez-la pour l'instant) ---
+    // --- PARTIE GESTION DE LA DÉCONNEXION ---
     const logoutButton = document.getElementById('logout-button');
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
             localStorage.removeItem('currentUser');
             console.log("[Renderer - script.js] Déconnexion demandée.");
-            ipcRenderer.send('logout');
+            window.electronAPI.logout();
         });
     } else {
         console.warn("[Renderer - script.js] Bouton de déconnexion (#logout-button) non trouvé.");
@@ -36,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!currentUser || !currentUser.role) {
         console.warn("[Renderer - script.js] Utilisateur non connecté ou rôle manquant. Redirection vers la page de connexion.");
-        ipcRenderer.send('logout');
+        window.electronAPI.logout();
         return;
     }
 
@@ -44,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log(`[Renderer - script.js] ${moduleBlocks.length} blocs de module trouvés.`);
 
     const adminOnlyModules = [
+        'analyse_cv',
         'audit',
         'sauvegarde',
         'parametres',
@@ -64,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(`[Renderer - script.js] Affichage du module ${moduleName} pour l'admin.`);
             }
         } else {
-            console.log(`[Renderer - script.js] Module ${moduleName} visible pour tous.`);
+            console.log(`[Renderer - script.js] Module ${moduleName} visible pour tous.` );
         }
 
         if (block) {
@@ -74,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
                 const targetFileName = `${moduleName}.html`;
-                ipcRenderer.send('load-module', targetFileName);
+                window.electronAPI.loadModule(targetFileName);
             });
         }
     });

@@ -83,135 +83,133 @@
 
     <script>
         // Script specific to the users.html page
-        const { ipcRenderer } = require('electron'); // Required for IPC
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            const addUserForm = document.getElementById('add-user-form');
-            const usersListBody = document.querySelector('#users-list tbody');
-            const addUserMessage = document.getElementById('add-user-message');
+document.addEventListener('DOMContentLoaded', async () => {
+    const addUserForm = document.getElementById('add-user-form');
+    const usersListBody = document.querySelector('#users-list tbody');
+    const addUserMessage = document.getElementById('add-user-message');
 
-            // NEW ELEMENTS FOR EDITING
-            const editUserSection = document.getElementById('edit-user-section');
-            const editUserForm = document.getElementById('edit-user-form');
-            const editOriginalUsername = document.getElementById('edit-original-username'); // Hidden field
-            const editUsernameInput = document.getElementById('edit-username');
-            const editPasswordInput = document.getElementById('edit-password');
-            const editFullnameInput = document.getElementById('edit-fullname');
-            const editRoleSelect = document.getElementById('edit-role');
-            const editUserMessage = document.getElementById('edit-user-message');
-            const cancelEditBtn = document.getElementById('cancel-edit-btn');
+    // NEW ELEMENTS FOR EDITING
+    const editUserSection = document.getElementById('edit-user-section');
+    const editUserForm = document.getElementById('edit-user-form');
+    const editOriginalUsername = document.getElementById('edit-original-username'); // Hidden field
+    const editUsernameInput = document.getElementById('edit-username');
+    const editPasswordInput = document.getElementById('edit-password');
+    const editFullnameInput = document.getElementById('edit-fullname');
+    const editRoleSelect = document.getElementById('edit-role');
+    const editUserMessage = document.getElementById('edit-user-message');
+    const cancelEditBtn = document.getElementById('cancel-edit-btn');
 
+    // Function to load and display the list of users
+    async function loadUsers() {
+        usersListBody.innerHTML = ''; // Clear the current list
+        const allUsers = await window.electronAPI.getAllUsers(); // Use the exposed API
 
-            // Function to load and display the list of users
-            async function loadUsers() {
-                usersListBody.innerHTML = ''; // Clear the current list
-                const allUsers = await ipcRenderer.invoke('get-all-users'); // Request the list from the main process
+        allUsers.forEach(user => {
+            const row = usersListBody.insertRow();
+            row.insertCell().textContent = user.username;
+            row.insertCell().textContent = user.fullName;
+            row.insertCell().textContent = user.role;
 
-                allUsers.forEach(user => {
-                    const row = usersListBody.insertRow();
-                    row.insertCell().textContent = user.username;
-                    row.insertCell().textContent = user.fullName;
-                    row.insertCell().textContent = user.role;
+            const actionsCell = row.insertCell();
+            actionsCell.className = 'action-buttons';
 
-                    const actionsCell = row.insertCell();
-                    actionsCell.className = 'action-buttons';
+            // Edit Button
+            const editBtn = document.createElement('button');
+            editBtn.textContent = 'Modifier';
+            editBtn.className = 'edit-btn';
+            editBtn.addEventListener('click', () => {
+                showEditForm(user); // Call the function to display the edit form
+            });
+            actionsCell.appendChild(editBtn);
 
-                    // Edit Button
-                    const editBtn = document.createElement('button');
-                    editBtn.textContent = 'Modifier';
-                    editBtn.className = 'edit-btn';
-                    editBtn.addEventListener('click', () => {
-                        showEditForm(user); // Call the function to display the edit form
-                    });
-                    actionsCell.appendChild(editBtn);
-
-                    // Delete Button
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.textContent = 'Supprimer';
-                    deleteBtn.className = 'delete-btn';
-                    deleteBtn.addEventListener('click', async () => {
-                        if (confirm(`Are you sure you want to delete user ${user.username}?`)) {
-                            const result = await ipcRenderer.invoke('delete-user', user.username);
-                            if (result.success) {
-                                alert(`User ${user.username} deleted successfully!`);
-                                loadUsers(); // Reload the list
-                            } else {
-                                alert(`Error during deletion: ${result.message}`);
-                            }
-                        }
-                    });
-                    actionsCell.appendChild(deleteBtn);
-                });
-            }
-
-            // Function to display the edit form with user data
-            function showEditForm(user) {
-                editUserSection.style.display = 'block'; // Show the edit section
-                editOriginalUsername.value = user.username; // Store the original username (key)
-                editUsernameInput.value = user.username;
-                editFullnameInput.value = user.fullName;
-                editRoleSelect.value = user.role;
-                editPasswordInput.value = ''; // Reset password field for editing
-                editUserMessage.textContent = ''; // Clear previous messages
-                editUserSection.scrollIntoView({ behavior: 'smooth' }); // Scroll to the form
-            }
-
-            // Handles submission of the add user form
-            addUserForm.addEventListener('submit', async (event) => {
-                event.preventDefault();
-                const newUser = {
-                    username: addUserForm['new-username'].value,
-                    password: addUserForm['new-password'].value,
-                    fullName: addUserForm['new-fullname'].value,
-                    role: addUserForm['new-role'].value
-                };
-
-                const result = await ipcRenderer.invoke('add-new-user', newUser);
-
-                if (result.success) {
-                    addUserMessage.textContent = 'User added successfully!';
-                    addUserMessage.style.color = 'green';
-                    addUserForm.reset();
-                    loadUsers();
-                } else {
-                    addUserMessage.textContent = 'Error: ' + result.message;
-                    addUserMessage.style.color = 'red';
+            // Delete Button
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Supprimer';
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.addEventListener('click', async () => {
+                if (confirm(`Voulez vous vraiment supprimer l'utilisateur ${user.username}?`)) {
+                    const result = await window.electronAPI.deleteUser(user.username);
+                    if (result.success) {
+                        alert(`User ${user.username} Suppression reussie!`);
+                        loadUsers(); // Reload the list
+                    } else {
+                        alert(`Erreur pendant la suppression: ${result.message}`);
+                    }
                 }
             });
-
-            // Handles submission of the edit user form
-            editUserForm.addEventListener('submit', async (event) => {
-                event.preventDefault();
-                const updatedUser = {
-                    originalUsername: editOriginalUsername.value, // The username identifying the user to be modified
-                    username: editUsernameInput.value,
-                    password: editPasswordInput.value, // Can be empty if not changed
-                    fullName: editFullnameInput.value,
-                    role: editRoleSelect.value
-                };
-
-                const result = await ipcRenderer.invoke('update-user', updatedUser);
-
-                if (result.success) {
-                    editUserMessage.textContent = 'User updated successfully!';
-                    editUserMessage.style.color = 'green';
-                    editUserSection.style.display = 'none'; // Hide the edit form
-                    loadUsers(); // Reload the list
-                } else {
-                    editUserMessage.textContent = 'Error updating: ' + result.message;
-                    editUserMessage.style.color = 'red';
-                }
-            });
-
-            // Handles cancellation of editing
-            cancelEditBtn.addEventListener('click', () => {
-                editUserSection.style.display = 'none'; // Hide the form
-                editUserMessage.textContent = ''; // Clear messages
-            });
-
-            // Load the list of users when the page loads
-            loadUsers();
+            actionsCell.appendChild(deleteBtn);
         });
+    }
+
+    // Function to display the edit form with user data
+    function showEditForm(user) {
+        editUserSection.style.display = 'block'; // Show the edit section
+        editOriginalUsername.value = user.username; // Store the original username (key)
+        editUsernameInput.value = user.username;
+        editFullnameInput.value = user.fullName;
+        editRoleSelect.value = user.role;
+        editPasswordInput.value = ''; // Reset password field for editing
+        editUserMessage.textContent = ''; // Clear previous messages
+        editUserSection.scrollIntoView({ behavior: 'smooth' }); // Scroll to the form
+    }
+
+    // Handles submission of the add user form
+    addUserForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const newUser = {
+            username: addUserForm['new-username'].value,
+            password: addUserForm['new-password'].value,
+            fullName: addUserForm['new-fullname'].value,
+            role: addUserForm['new-role'].value
+        };
+
+        const result = await window.electronAPI.addNewUser(newUser);
+
+        if (result.success) {
+            addUserMessage.textContent = 'User added successfully!';
+            addUserMessage.style.color = 'green';
+            addUserForm.reset();
+            loadUsers();
+        } else {
+            addUserMessage.textContent = 'Error: ' + result.message;
+            addUserMessage.style.color = 'red';
+        }
+    });
+
+    // Handles submission of the edit user form
+    editUserForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const updatedUser = {
+            originalUsername: editOriginalUsername.value, // The username identifying the user to be modified
+            username: editUsernameInput.value,
+            password: editPasswordInput.value, // Can be empty if not changed
+            fullName: editFullnameInput.value,
+            role: editRoleSelect.value
+        };
+
+        const result = await window.electronAPI.updateUser(updatedUser);
+
+        if (result.success) {
+            editUserMessage.textContent = 'User updated successfully!';
+            editUserMessage.style.color = 'green';
+            editUserSection.style.display = 'none'; // Hide the edit form
+            loadUsers(); // Reload the list
+        } else {
+            editUserMessage.textContent = 'Error updating: ' + result.message;
+            editUserMessage.style.color = 'red';
+        }
+    });
+
+    // Handles cancellation of editing
+    cancelEditBtn.addEventListener('click', () => {
+        editUserSection.style.display = 'none'; // Hide the form
+        editUserMessage.textContent = ''; // Clear messages
+    });
+
+    // Load the list of users when the page loads
+    loadUsers();
+});
     </script>
 </body>
 </html>
