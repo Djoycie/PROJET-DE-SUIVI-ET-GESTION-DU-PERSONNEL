@@ -13,6 +13,35 @@
           margin-bottom: 35px;
             font-weight: 500;
         }
+        /* Classe pour flouter les modules non accessibles */
+.blurred-module {
+    filter: blur(1px);
+    opacity: 0.5;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+
+/* Effet de survol pour les modules floutés (optionnel) */
+.blurred-module:hover {
+    transform: none;
+    cursor: not-allowed;
+}
+
+/* Si vous voulez ajouter une icône de cadenas */
+.blurred-module::after {
+    content: '🔒';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    z-index: 2;
+    opacity: 0.8;
+}
+
+        
+
     </style>
 </head>
 <body>
@@ -48,8 +77,8 @@
             </div>
             <div class="module-block" data-module="plan_activite">
                 <div class="contour"><div class="circle"><img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/project-management.png" alt="" class="training"></div></div>
-                <h2 align="center">Planning d'Activité</h2>
-                <p align="center">Planification et suivi des tâches.</p>
+                <h2 align="center">Statistiques</h2>
+                <p align="center">Les Statistiques generaux de l'entreprise</p>
             </div>
             <div class="module-block" data-module="conges">
                 <div class="contour"><div class="circle"><img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/vacancy (2).png" alt="" class="training"></div></div>
@@ -58,8 +87,8 @@
             </div>
             <div class="module-block" data-module="archivage_documentation">
                 <div class="contour"><div class="circle"><img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/inbox.png" alt="" class="training"></div></div>
-                <h2 align="center">Archivage & Documentation</h2>
-                <p align="center">Documents et fichiers RH.</p>
+                <h2 align="center">documentation</h2>
+                <p align="center">document archive</p>
             </div>
             <div class="module-block" data-module="postes">
                 <div class="contour"><div class="circle"><img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/self-employed.png" alt="" class="training"></div></div>
@@ -91,6 +120,12 @@
                 <h2 align="center">Paramètres</h2>
                 <p align="center">Configuration de l'application.</p>
             </div>
+
+             <div class="module-block" data-module="alerte">
+                <div class="contour"><div class="circle"><img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/settings.png" alt="" class="training"></div></div>
+                <h2 align="center">alertes</h2>
+                <p align="center">toutes les notifications et alertes de l'application</p>
+            </div>
             
         </div>
     </div>
@@ -118,5 +153,3 @@
 
 
     
-</body>
-</html>

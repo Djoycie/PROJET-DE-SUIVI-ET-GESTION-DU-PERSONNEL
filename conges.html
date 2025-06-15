@@ -2,41 +2,144 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recrutement - Gestion du Personnel</title>
-    <link rel="stylesheet" href="accueil.css">
-    <style>
-        /* Styles spécifiques pour cette page */
-        .page-content {
-            padding: 20px;
-            text-align: center;
-        }
-        .page-content h1 {
-            color: #28a745;
-            margin-bottom: 20px;
-        }
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .back-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Gestion des Congés</title>
+    <link rel="stylesheet" href="conge.css">
 </head>
 <body>
     <div class="container">
-        <div class="page-content">
-            <h1>Module des conges</h1>
-           <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+        <div class="header">
+            <h1>📋 Gestion des Congés</h1>
+            <p>Système de demande et gestion des congés du personnel</p>
         </div>
+
+        <div class="form-container">
+            <div id="successMessage" class="success-message" style="display: none;"></div>
+            <div id="errorMessage" class="error-message"></div>
+
+            <form id="congesForm">
+                <div class="form-group">
+                    <label for="matricule">Matricule</label>
+                    <input type="text" id="matricule" name="matricule" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="nom">Nom</label>
+                        <input type="text" id="nom" name="nom" class="readonly" readonly>
+                    </div>
+                    <div class="form-group half">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" id="prenom" name="prenom" class="readonly" readonly>
+                    </div>
+                    <div class="form-group half">
+                        <label for="poste">Poste</label>
+                        <input type="text" id="poste" name="poste" class="readonly" readonly>
+                    </div>
+                    <div class="form-group half">
+                        <label for="departement">departement</label>
+                        <input type="text" id="departement" name="departement" class="readonly" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="typeConge">Type de Congé</label>
+                    <select id="typeConge" name="typeConge" required>
+                        <option value="">Sélectionner un type de congé</option>
+                        <option value="conge_paye">Congé Payé</option>
+                        <option value="conge_maladie">Congé Maladie</option>
+                        <option value="conge_maternite">Congé Maternité</option>
+                        <option value="conge_paternite">Congé Paternité</option>
+                        <option value="conge_sans_solde">Congé Sans Solde</option>
+                        <option value="conge_formation">Congé Formation</option>
+                        <option value="conge_exceptionnel">Congé Exceptionnel</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="dateDebut">Date de Début</label>
+                        <input type="date" id="dateDebut" name="dateDebut" required>
+                    </div>
+                    <div class="form-group half">
+                        <label for="dateFin">Date de Fin</label>
+                        <input type="date" id="dateFin" name="dateFin" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dureeConge">Durée du Congé</label>
+                    <input type="text" id="dureeConge" name="dureeConge" class="readonly" readonly>
+                    <div id="durationDisplay" class="duration-display" style="display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="commentaires">Commentaires</label>
+                    <textarea id="commentaires" name="commentaires" placeholder="Commentaires ou remarques supplémentaires..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">📝 Enregistrer la Demande de Congé</button>
+            </form>
+        </div>
+        <h2>Filtrer les congés</h2>
+  <div>
+    <label for="filterPoste">Poste :
+      <select id="filterPoste">
+        <option value="">Tous</option>
+      </select>
+    </label>
+    <label for="filterType">Type de congé :
+      <select id="filterTypeConge">
+        <option value="">Tous</option>
+        <option value="conge_paye">Congé Payé</option>
+                        <option value="conge_maladie">Congé Maladie</option>
+                        <option value="conge_maternite">Congé Maternité</option>
+                        <option value="conge_paternite">Congé Paternité</option>
+                        <option value="conge_sans_solde">Congé Sans Solde</option>
+                        <option value="conge_formation">Congé Formation</option>
+                        <option value="conge_exceptionnel">Congé Exceptionnel</option>
+      </select>
+    </label>
+    <label for="filterDepartement">Département :
+      <select id="filterDepartement">
+        <option value="">Tous</option>
+      </select>
+    </label>
+  </div>
+
+  <h2>Liste des congés</h2>
+  <table border="1" id="congesTable">
+    <thead>
+      <tr>
+        <th>Matricule</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Poste</th>
+        <th>Département</th>
+        <th>Type</th>
+        <th>Statut</th>
+        <th>Début</th>
+        <th>Fin</th>
+        <th>Alertes</th>
+        <th>Durée</th>
+        <th>Commentaires</th>
+        
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div id="pagination"></div>
+
+
     </div>
+    <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+    <script src="conge.js"></script>
 </body>
 </html>
