@@ -3,39 +3,707 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recrutement - Gestion du Personnel</title>
-    <link rel="stylesheet" href="accueil.css">
+    <title>Statistiques du Personnel - RH Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
-        /* Styles spécifiques pour cette page */
-        .page-content {
-            padding: 20px;
-            text-align: center;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .page-content h1 {
-            color: #28a745;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .stat-card.gender-male {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+        }
+
+        .stat-card.gender-female {
+            background: linear-gradient(135deg, #ed64a6, #d53f8c);
+        }
+
+        .stat-card.contract-cdi {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+
+        .stat-card.contract-cdd {
+            background: linear-gradient(135deg, #ed8936, #dd6b20);
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .chart-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
             margin-bottom: 20px;
         }
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+
+        .chart-wrapper.large {
+            height: 400px;
         }
-        .back-button:hover {
-            background-color: #0056b3;
+
+        .legend-custom {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            margin-right: 8px;
+        }
+
+        .refresh-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        .spinner {
+            border: 3px solid #e2e8f0;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin-right: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-wrapper {
+                height: 250px;
+            }
+
+            .chart-wrapper.large {
+                height: 300px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="page-content">
-            <h1>Module des planning d'activite</h1>
-           <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+        <div class="header">
+            <h1>📊 Statistiques du Personnel</h1>
+            <p>Tableau de bord analytique des ressources humaines</p>
+        </div>
+
+        <div class="stats-overview">
+            <div class="stat-card">
+                <h3 id="total-employees">-</h3>
+                <p>Total Employés</p>
+            </div>
+            <div class="stat-card gender-male">
+                <h3 id="total-men">-</h3>
+                <p>Hommes</p>
+            </div>
+            <div class="stat-card gender-female">
+                <h3 id="total-women">-</h3>
+                <p>Femmes</p>
+            </div>
+            <div class="stat-card contract-cdi">
+                <h3 id="total-cdi">-</h3>
+                <p>CDI</p>
+            </div>
+            <div class="stat-card contract-cdd">
+                <h3 id="total-cdd">-</h3>
+                <p>CDD</p>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container">
+                <div class="chart-title">Répartition par Sexe</div>
+                <div class="chart-wrapper">
+                    <canvas id="genderChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Types de Contrat</div>
+                <div class="chart-wrapper">
+                    <canvas id="contractChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Répartition par Département</div>
+                <div class="chart-wrapper">
+                    <canvas id="departmentChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Pyramide des Âges</div>
+                <div class="chart-wrapper large">
+                    <canvas id="ageChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Ancienneté</div>
+                <div class="chart-wrapper">
+                    <canvas id="seniorityChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Évolution des Embauches</div>
+                <div class="chart-wrapper large">
+                    <canvas id="hiringChart"></canvas>
+                </div>
+            </div>
         </div>
     </div>
+
+    <button class="refresh-btn" onclick="loadAllStatistics()">
+        🔄 Actualiser
+    </button>
+<a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+    <script>
+        let charts = {};
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadAllStatistics();
+        });
+
+        async function loadAllStatistics() {
+            try {
+                // Simuler le chargement des données
+                showLoading();
+                
+                // En attendant l'API réelle, on utilise des données simulées
+                const employees = await getEmployeesData();
+                
+                updateOverviewStats(employees);
+                createGenderChart(employees);
+                createContractChart(employees);
+                createDepartmentChart(employees);
+                createAgeChart(employees);
+                createSeniorityChart(employees);
+                createHiringChart(employees);
+                
+                hideLoading();
+            } catch (error) {
+                console.error('Erreur lors du chargement des statistiques:', error);
+                alert('Erreur lors du chargement des données');
+            }
+        }
+
+        async function getEmployeesData() {
+            // Remplacez cette fonction par l'appel à votre API
+            if (window.electronAPI && window.electronAPI.getAllEmployees) {
+                return await window.electronAPI.getAllEmployees();
+            }
+            
+            // Données de démonstration
+            return generateMockData();
+        }
+
+        function generateMockData() {
+            const mockData = [];
+            const departments = ['IT', 'RH', 'Finance', 'Marketing', 'Production'];
+            const firstNames = ['Marie', 'Pierre', 'Sophie', 'Jean', 'Anne', 'Paul', 'Lucie', 'Marc'];
+            const lastNames = ['Martin', 'Durand', 'Moreau', 'Simon', 'Michel', 'Leroy', 'Roux'];
+            
+            for (let i = 0; i < 150; i++) {
+                const birthYear = 1970 + Math.floor(Math.random() * 35);
+                const hireYear = 2010 + Math.floor(Math.random() * 14);
+                
+                mockData.push({
+                    matricule: `UFC${1000 + i}`,
+                    nom: lastNames[Math.floor(Math.random() * lastNames.length)],
+                    prenom: firstNames[Math.floor(Math.random() * firstNames.length)],
+                    age: 2024 - birthYear,
+                    sexe: Math.random() > 0.5 ? 'M' : 'F',
+                    departement: departments[Math.floor(Math.random() * departments.length)],
+                    type_contrat: Math.random() > 0.3 ? 'CDI' : 'CDD',
+                    date_embauche: `${hireYear}-${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')}`
+                });
+            }
+            
+            return mockData;
+        }
+
+        function updateOverviewStats(employees) {
+            const total = employees.length;
+            const men = employees.filter(e => e.sexe === 'M').length;
+            const women = employees.filter(e => e.sexe === 'F').length;
+            const cdi = employees.filter(e => e.type_contrat === 'CDI').length;
+            const cdd = employees.filter(e => e.type_contrat === 'CDD').length;
+
+            document.getElementById('total-employees').textContent = total;
+            document.getElementById('total-men').textContent = men;
+            document.getElementById('total-women').textContent = women;
+            document.getElementById('total-cdi').textContent = cdi;
+            document.getElementById('total-cdd').textContent = cdd;
+        }
+
+        function createGenderChart(employees) {
+            const men = employees.filter(e => e.sexe === 'M').length;
+            const women = employees.filter(e => e.sexe === 'F').length;
+
+            const ctx = document.getElementById('genderChart').getContext('2d');
+            
+            if (charts.gender) charts.gender.destroy();
+            
+            charts.gender = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Hommes', 'Femmes'],
+                    datasets: [{
+                        data: [men, women],
+                        backgroundColor: ['#4299e1', '#ed64a6'],
+                        borderWidth: 3,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createContractChart(employees) {
+            const cdi = employees.filter(e => e.type_contrat === 'CDI').length;
+            const cdd = employees.filter(e => e.type_contrat === 'CDD').length;
+
+            const ctx = document.getElementById('contractChart').getContext('2d');
+            
+            if (charts.contract) charts.contract.destroy();
+            
+            charts.contract = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['CDI', 'CDD'],
+                    datasets: [{
+                        data: [cdi, cdd],
+                        backgroundColor: ['#48bb78', '#ed8936'],
+                        borderRadius: 8,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createDepartmentChart(employees) {
+            const departments = {};
+            employees.forEach(emp => {
+                departments[emp.departement] = (departments[emp.departement] || 0) + 1;
+            });
+
+            const ctx = document.getElementById('departmentChart').getContext('2d');
+            
+            if (charts.department) charts.department.destroy();
+            
+            charts.department = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(departments),
+                    datasets: [{
+                        data: Object.values(departments),
+                        backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe'],
+                        borderRadius: 8,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createAgeChart(employees) {
+            const ageGroups = {
+                '20-30': 0,
+                '31-40': 0,
+                '41-50': 0,
+                '51-60': 0,
+                '60+': 0
+            };
+
+            employees.forEach(emp => {
+                const age = emp.age;
+                if (age <= 30) ageGroups['20-30']++;
+                else if (age <= 40) ageGroups['31-40']++;
+                else if (age <= 50) ageGroups['41-50']++;
+                else if (age <= 60) ageGroups['51-60']++;
+                else ageGroups['60+']++;
+            });
+
+            const ctx = document.getElementById('ageChart').getContext('2d');
+            
+            if (charts.age) charts.age.destroy();
+            
+            charts.age = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(ageGroups),
+                    datasets: [{
+                        label: 'Nombre d\'employés',
+                        data: Object.values(ageGroups),
+                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                        borderColor: '#667eea',
+                        borderWidth: 2,
+                        borderRadius: 8,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createSeniorityChart(employees) {
+            const currentYear = new Date().getFullYear();
+            const seniorityGroups = {
+                '0-2 ans': 0,
+                '3-5 ans': 0,
+                '6-10 ans': 0,
+                '11-15 ans': 0,
+                '15+ ans': 0
+            };
+
+            employees.forEach(emp => {
+                const hireYear = new Date(emp.date_embauche).getFullYear();
+                const seniority = currentYear - hireYear;
+                
+                if (seniority <= 2) seniorityGroups['0-2 ans']++;
+                else if (seniority <= 5) seniorityGroups['3-5 ans']++;
+                else if (seniority <= 10) seniorityGroups['6-10 ans']++;
+                else if (seniority <= 15) seniorityGroups['11-15 ans']++;
+                else seniorityGroups['15+ ans']++;
+            });
+
+            const ctx = document.getElementById('seniorityChart').getContext('2d');
+            
+           if (charts.seniority) charts.seniority.destroy();
+            
+            charts.seniority = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(seniorityGroups),
+                    datasets: [{
+                        data: Object.values(seniorityGroups),
+                        backgroundColor: [
+                            '#ff6b6b',
+                            '#4ecdc4',
+                            '#45b7d1',
+                            '#96ceb4',
+                            '#ffeaa7'
+                        ],
+                        borderWidth: 3,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                usePointStyle: true
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createHiringChart(employees) {
+            const hiringByYear = {};
+            
+            employees.forEach(emp => {
+                const year = new Date(emp.date_embauche).getFullYear();
+                hiringByYear[year] = (hiringByYear[year] || 0) + 1;
+            });
+
+            const sortedYears = Object.keys(hiringByYear).sort();
+            const ctx = document.getElementById('hiringChart').getContext('2d');
+            
+            if (charts.hiring) charts.hiring.destroy();
+            
+            charts.hiring = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: sortedYears,
+                    datasets: [{
+                        label: 'Embauches par année',
+                        data: sortedYears.map(year => hiringByYear[year]),
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#667eea',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function showLoading() {
+            // Implémentation optionnelle du loading
+        }
+
+        function hideLoading() {
+            // Implémentation optionnelle du loading
+        }
+    </script>
 </body>
 </html>

@@ -55,8 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (adminOnlyModules.includes(moduleName)) {
             console.log(`[Renderer - script.js] Module ${moduleName} est réservé aux admins.`);
             if (currentUser.role !== 'admin') {
-                block.classList.add('hidden-module');
-                console.log(`[Renderer - script.js] Masquage du module ${moduleName} pour l'utilisateur avec rôle '${currentUser.role}'.`);
+                // Ajouter la classe pour flouter au lieu de masquer
+                block.classList.add('blurred-module');
+                // Ajouter un attribut pour indiquer que le module est désactivé
+                block.setAttribute('data-disabled', 'true');
+                console.log(`[Renderer - script.js] Floutage du module ${moduleName} pour l'utilisateur avec rôle '${currentUser.role}'.`);
             } else {
                 console.log(`[Renderer - script.js] Affichage du module ${moduleName} pour l'admin.`);
             }
@@ -66,6 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (block) {
             block.addEventListener('click', () => {
+                // Vérifier si le module est désactivé
+                if (block.getAttribute('data-disabled') === 'true') {
+                    alert("Vous n'avez pas l'autorisation d'accéder à ce module.");
+                    return;
+                }
+                
                 if (adminOnlyModules.includes(moduleName) && currentUser.role !== 'admin') {
                     alert("Vous n'avez pas l'autorisation d'accéder à ce module.");
                     return;

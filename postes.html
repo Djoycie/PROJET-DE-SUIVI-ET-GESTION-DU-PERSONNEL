@@ -1,41 +1,129 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recrutement - Gestion du Personnel</title>
-    <link rel="stylesheet" href="accueil.css">
-    <style>
-        /* Styles spécifiques pour cette page */
-        .page-content {
-            padding: 20px;
-            text-align: center;
-        }
-        .page-content h1 {
-            color: #28a745;
-            margin-bottom: 20px;
-        }
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .back-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Gestion Personnel & Postes</title>
+  <link rel="stylesheet" href="poste.css" />
 </head>
 <body>
-    <div class="container">
-        <div class="page-content">
-            <h1>Module des postes</h1>
-           <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+  <h1>Gestion des Postes</h1>
+
+  <div class="container">
+        <h1>🏢 Gestion des Postes</h1>
+        
+        <!-- Formulaire d'ajout/modification -->
+        <div class="form-section">
+            <div id="form-mode-indicator" class="form-mode-indicator mode-add">
+                Mode: Ajout d'un nouveau poste
+            </div>
+            
+            <h2>📝 Formulaire de Poste</h2>
+            <form id="add-poste-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="poste-id">ID du Poste</label>
+                        <input type="text" id="poste-id" name="poste-id" readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="intitule">Intitulé du Poste *</label>
+                        <input type="text" id="intitule" name="intitule" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="departement">Département *</label>
+                        <input type="text" id="departement" name="departement" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="places_desirees">Places Désirées *</label>
+                        <input type="number" id="places_desirees" name="places_desirees" min="1" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Description détaillée du poste..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Fiche de Poste</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="fiche" name="fiche" accept=".pdf,.doc,.docx,.txt" required>
+                        <label for="fiche" class="file-input-label">
+                            📎 Choisir un fichier
+                        </label>
+    
+      
+                    </div>
+                    <div id="file-info" class="file-info" style="display: none;"></div>
+                    <div id="current-file-info" class="file-info" style="display: none;"></div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary" id="submit-btn">
+                        ➕ Ajouter le Poste
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="cancel-btn" style="display: none;">
+                        ❌ Annuler
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Section de recherche -->
+        <div class="search-section">
+            <input type="text" id="search-postes" class="search-input" placeholder="🔍 Rechercher un poste...">
+        </div>
+        
+        <!-- Tableau des postes -->
+        <div class="table-container">
+            <table id="table-postes">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Intitulé</th>
+                        <th>Département</th>
+                        <th>Places Désirées</th>
+                        <th>Place occupées</th>
+                        <th>Places Restantes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7" class="loading">Chargement des données...</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+<div id="modal-poste-details" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" id="close-modal-poste">&times;</span>
+    <div id="modal-poste-body"></div>
+     <button type="button" id="voir-fiche-poste-modal">Voir la fiche</button>
+  </div>
+</div>
+
+<div id="details-poste"></div>
+  </section>
+
+  <!-- Exemple de formulaire de modification (à afficher lors du clic sur Modifier) -->
+<!-- Formulaire de modification (caché par défaut) -->
+<form id="edit-poste-form" style="display:none;">
+  <input type="hidden" name="id" />
+  <input type="text" name="intitule" placeholder="Intitulé" required />
+  <input type="text" name="departement" placeholder="Département" required />
+  <input type="number" name="places_desirees" placeholder="Places désirées" required />
+  <textarea name="description" placeholder="Description" required></textarea>
+  <button type="submit">Enregistrer</button>
+</form>
+
+   <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+
+  <script src="poste.js"></script>
 </body>
 </html>
+
+ 

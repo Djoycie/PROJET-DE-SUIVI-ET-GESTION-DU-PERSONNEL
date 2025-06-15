@@ -4,38 +4,146 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recrutement - Gestion du Personnel</title>
-    <link rel="stylesheet" href="accueil.css">
-    <style>
-        /* Styles spécifiques pour cette page */
-        .page-content {
-            padding: 20px;
-            text-align: center;
-        }
-        .page-content h1 {
-            color: #28a745;
-            margin-bottom: 20px;
-        }
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .back-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="personnel.css">
+    
 </head>
 <body>
-    <div class="container">
-        <div class="page-content">
-            <h1>Module personnel</h1>
-           <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+    <!-- personnel.html -->
+<div class="module-block" data-module="personnel">
+    <div class="contour2">
+        <div class="circle">
+            <img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/manager.png" alt="manager" class="training">
         </div>
     </div>
+    <section id="personnel-section">
+    <h2>Gestion du Personnel</h2>
+    <form id="add-employee-form">
+      <label for="employee-matricule">Matricule</label>
+      <input type="text" id="employee-matricule" name="matricule" required />
+
+      <label for="employee-nom">Nom</label>
+      <input type="text" id="employee-nom" name="nom" required />
+
+      <label for="employee-prenom">Prénom</label>
+      <input type="text" id="employee-prenom" name="prenom" required />
+
+      <label for="employee-naissance">Date de Naissance</label>
+      <input type="date" id="employee-naissance" name="date_naissance" required />
+
+      <label for="employee-lieu-naissance">Lieu de Naissance</label>
+      <input type="text" id="employee-lieu-naissance" name="lieu_naissance" required />
+
+      <label for="employee-adresse">Adresse</label>
+      <input type="text" id="employee-adresse" name="adresse" required />
+
+      <label for="employee-telephone">telephone</label>
+      <input type="text" id="employee-telephone" name="telephone" placeholder="6xx-xx-xx-xx" required />
+
+      <label for="employee-age">Âge</label>
+      <input type="number" id="employee-age" name="age" required />
+
+      
+
+      <label for="employee-sexe">Sexe</label>
+      <select id="employee-sexe" name="sexe" required>
+        <option value="">Sélectionnez</option>
+        <option value="M">Masculin</option>
+        <option value="F">Féminin</option>
+      </select>
+
+      <label for="employee-type-contrat">Type de Contrat</label>
+      <select id="employee-type-contrat" name="type_contrat" required>
+        <option value="">Sélectionnez</option>
+        <option value="CDD">CDD</option>
+        <option value="CDI">CDI</option>
+        
+      </select>
+
+     <div id="duree-contrat-container" style="display:none;">
+     <label for="duree_contrat">Durée du contrat (en mois) :</label>
+     <input type="number" id="duree_contrat" name="duree_contrat" min="1">
+     </div>
+      
+
+      <label for="employee-poste">Poste</label>
+      <select id="employee-poste" name="poste" required></select>
+      
+      <label for="employee-departement">Département</label>
+      <input type="text" id="employee-departement" name="departement" required />
+
+      <label for="employee-embauche">Date d'Embauche</label>
+      <input type="date" id="employee-embauche" name="date_embauche" required />
+
+      <button type="submit">valider</button>
+    </form>
+
+    <h3>Liste du Personnel</h3>
+    <input id="search-personnel" placeholder="Rechercher un employé..." />
+
+     <select id="filter-departement">
+  <option value="">-- Tous les départements --</option>
+</select>
+<select id="filter-poste">
+  <option value="">-- Tous les postes --</option>
+</select>
+<select id="filter-type-contrat">
+  <option value="">-- type de contrat --</option>
+</select>
+<button id="reset-filters">Réinitialiser</button>
+
+    <table id="table-personnel">
+
+      <button id="download-filtered-pdf">Télécharger en PDF</button>
+      <button id="print-emp2">Imprimer</button>
+  <thead>
+    <tr>
+      <th>Matricule</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>date de Naissance</th>
+      <th>lieu de Naissance</th>
+      <th>adresse</th>
+      <th>telephone</th>
+      <th>sexe</th>
+      <th>age (ans)</th>
+      <th>Poste</th>
+      <th>Département</th>
+      <th>type de contrat</th>
+      <th>duree du contrat</th>
+      <th>date d'embauche</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+
+</div>
+<div id="details-personnel"></div>
+
+<div id="modal-emp-details" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" id="close-modal-emp">&times;</span>
+    <div id="modal-emp-body"></div>
+    <button id="download-emp-pdf">Télécharger en PDF</button>
+    <button id="print-emp">Imprimer</button>
+
+    <div id="modal-emp-body"></div>
+  </div>
+</div>
+
+  </section>
+
+  
+</form>
+
+ <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+<script src="personnel.js"></script>
+<!-- Ajoute ces deux lignes AVANT ton script -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="TelechargerPersonnel.js"></script>
+
 </body>
 </html>

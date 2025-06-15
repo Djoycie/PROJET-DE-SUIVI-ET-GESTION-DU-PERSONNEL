@@ -1,0 +1,297 @@
+/* personnel.css */
+.module-block[data-module="personnel"] {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.contour2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.circle img {
+    max-width: 80%;
+    max-height: 80%;
+}
+h2, p {
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* Style général pour le formulaire */
+#add-employee-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 400px;
+  margin: 0 auto 32px auto;
+  background: #f8f8f8;
+  padding: 24px 32px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #0001;
+}
+
+
+#add-employee-form input, #add-employee-form select, #add-employee-form button {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+#add-employee-form button {
+    grid-column: span 2;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.search-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.search-filter input, .search-filter select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.action-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+/* Fond semi-transparent pour la modale */
+.modal {
+  display: none; /* Par défaut cachée, JS met display:block */
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(44, 44, 44, 0.55);
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+/* Centrage du contenu */
+.modal-content {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 32px #0003;
+  max-width: 480px;
+  width: 92vw;
+  margin: auto;
+  padding: 32px 28px 24px 28px;
+  position: relative;
+  animation: modalIn 0.25s;
+}
+
+@keyframes modalIn {
+  from { transform: translateY(-40px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Bouton de fermeture */
+.close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 2em;
+  color: #6c63ff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.close:hover {
+  color: #d32f2f;
+}
+
+/* Corps de la modale */
+#modal-emp-body {
+  margin-top: 12px;
+  margin-bottom: 18px;
+  font-size: 1.07em;
+  color: #333;
+  line-height: 1.7;
+}
+
+/* Boutons dans la modale */
+.modal-content button {
+  background: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 9px 18px;
+  font-size: 1em;
+  margin-right: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-content button:hover {
+  background: #574fd6;
+}
+
+/* Responsive */
+@media (max-width: 550px) {
+  .modal-content {
+    padding: 18px 6vw 16px 6vw;
+    max-width: 99vw;
+  }
+  .close {
+    top: 9px;
+    right: 14px;
+    font-size: 1.5em;
+  }
+}
+
+.fiche-employe {
+  background: #f8f8fa;
+  border-radius: 14px;
+  padding: 28px 36px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  max-width: 420px;
+  margin: 0 auto;
+}
+.fiche-employe h2 {
+  text-align: center;
+  color: #2d3a4a;
+  margin-bottom: 22px;
+  font-size: 1.6em;
+  letter-spacing: 1px;
+}
+.fiche-employe ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.fiche-employe li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 1.13em;
+  background: #fff;
+  border-radius: 6px;
+  padding: 7px 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.fiche-employe span {
+  color: #444;
+  font-weight: 500;
+}
+.fiche-employe b {
+  color: #1a77d2;
+  font-weight: 600;
+}
+
+.sort-sign {
+  font-size: 0.8em;
+  margin-left: 4px;
+  color: #888;
+  user-select: none;
+}
+th[data-col] {
+  cursor: pointer;
+}
+
+/* Spécifique pour la div durée du contrat */
+#duree-contrat-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+/* Pour que le label et l'input soient bien alignés */
+#duree-contrat-container label {
+  margin-bottom: 3px;
+}
+
+#duree-contrat-container input {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 1em;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+#table-personnel {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 1em;
+  background: #fff;
+  box-shadow: 0 2px 8px #0001;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#table-personnel thead {
+  background: #6c63ff;
+  color: #fff;
+}
+
+#table-personnel th, #table-personnel td {
+  padding: 12px 10px;
+  text-align: left;
+}
+
+#table-personnel th {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  position: relative;
+  user-select: none;
+}
+
+#table-personnel tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s;
+}
+
+#table-personnel tbody tr:hover {
+  background: #f5f5ff;
+}
+
+#table-personnel td button {
+  background: #6c63ff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 12px;
+  margin-right: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.95em;
+}
+
+#table-personnel td button:hover {
+  background: #574fd6;
+}
+
+@media (max-width: 900px) {
+  #table-personnel th, #table-personnel td {
+    padding: 8px 4px;
+    font-size: 0.95em;
+  }
+}
+
+

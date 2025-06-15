@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Stages - Module RH</title>
+    <link rel="stylesheet" href="stage.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="icon">🎓</i> Gestion des Stages</h1>
+            <div class="header-stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="totalStages">0</span>
+                    <span class="stat-label">Total</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="stagesEnCours">0</span>
+                    <span class="stat-label">En cours</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Formulaire d'ajout -->
+            <div class="form-section">
+                <h2>Enregistrer un nouveau stagiaire</h2>
+                <form id="formStage" class="stage-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom">Nom *</label>
+                            <input type="text" id="nom" required placeholder="Nom du stagiaire" />
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prénom *</label>
+                            <input type="text" id="prenom" required placeholder="Prénom du stagiaire" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dateNaissance">Date de naissance *</label>
+                            <input type="date" id="dateNaissance" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="typeStage">Type de stage *</label>
+                            <select id="typeStage" required>
+                                <option value="">-- Sélectionnez --</option>
+                                <option value="académique">Académique</option>
+                                <option value="professionnel">Professionnel</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dateDebut">Date début stage *</label>
+                            <input type="date" id="dateDebut" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="dateFin">Date fin stage *</label>
+                            <input type="date" id="dateFin" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="duree">Durée (jours)</label>
+                            <input type="number" id="duree" readonly class="readonly-field" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departement">Département *</label>
+                            <select id="departement" required>
+                                <option value="">-- Chargement... --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="encadreur">Encadreur *</label>
+                            <select id="encadreur" required>
+                                <option value="">-- Choisissez un département d'abord --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="icon">💾</i> Enregistrer le stagiaire
+                        </button>
+                        <button type="button" id="btnReset" class="btn btn-secondary">
+                            <i class="icon">🔄</i> Réinitialiser
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Section de filtrage et recherche -->
+            <div class="filter-section">
+                <h2>Liste des stagiaires</h2>
+                
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="filterDepartement">Département:</label>
+                        <select id="filterDepartement">
+                            <option value="">Tous les départements</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filterType">Type:</label>
+                        <select id="filterType">
+                            <option value="">Tous types</option>
+                            <option value="académique">Académique</option>
+                            <option value="professionnel">Professionnel</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="filterStatut">Statut:</label>
+                        <select id="filterStatut">
+                            <option value="">Tous statuts</option>
+                            <option value="En cours">En cours</option>
+                            <option value="Terminé">Terminé</option>
+                            <option value="Suspendu">Suspendu</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group search-group">
+                        <label for="searchInput">Rechercher:</label>
+                        <input type="text" id="searchInput" placeholder="Nom ou prénom..." />
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button id="btnSearch" class="btn btn-search">
+                            <i class="icon">🔍</i> Rechercher
+                        </button>
+                        <button id="btnClearFilters" class="btn btn-secondary">
+                            <i class="icon">🗑</i> Effacer
+                        </button>
+                    </div>
+                </div>
+
+                <div class="export-actions">
+                    <button id="btnPrint" class="btn btn-export">
+                        <i class="icon">🖨</i> Imprimer
+                    </button>
+                    <button id="btnExportPDF" class="btn btn-export">
+                        <i class="icon">📄</i> Exporter PDF
+                    </button>
+                </div>
+            </div>
+
+            <!-- Table des résultats -->
+            <div class="table-section">
+                <div class="table-container">
+                    <table id="stagesTable" class="stages-table">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Date naissance</th>
+                                <th>Période de stage</th>
+                                <th>Durée</th>
+                                <th>Département</th>
+                                <th>Encadreur</th>
+                                <th>Type</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="no-data">
+                                <td colspan="10">Aucun stagiaire trouvé</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour modifier le statut -->
+    <div id="statusModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Modifier le statut</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Stagiaire: <span id="stagiaireNom"></span></p>
+                <div class="form-group">
+                    <label for="nouveauStatut">Nouveau statut:</label>
+                    <select id="nouveauStatut">
+                        <option value="En cours">En cours</option>
+                        <option value="Terminé">Terminé</option>
+                        <option value="Suspendu">Suspendu</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="btnConfirmStatus" class="btn btn-primary">Confirmer</button>
+                <button id="btnCancelStatus" class="btn btn-secondary">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notification" class="notification"></div>
+<a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+    <script src="stage.js"></script>
+</body>
+</html>
