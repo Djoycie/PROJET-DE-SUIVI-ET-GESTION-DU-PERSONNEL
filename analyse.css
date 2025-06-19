@@ -1,0 +1,429 @@
+/* Variables pour les couleurs */
+:root {
+    --primary-color: #4CAF50; /* Vert pour les actions principales */
+    --primary-hover-color: #45a049; /* Vert plus foncé au survol */
+    --secondary-color: #007bff; /* Bleu pour les accents ou liens */
+    --secondary-hover-color: #0056b3; /* Bleu plus foncé au survol */
+    --background-light: #f8f9fa; /* Arrière-plan général clair */
+    --background-card: #ffffff; /* Arrière-plan des blocs de contenu */
+    --text-color-dark: #343a40; /* Texte foncé pour la lisibilité */
+    --text-color-light: #6c757d; /* Texte plus clair pour les descriptions */
+    --border-color: #dee2e6; /* Couleur des bordures */
+    --success-color: #28a745; /* Couleur de succès */
+    --info-color: #17a2b8; /* Couleur d'information */
+    --warning-color: #ffc107; /* Couleur d'avertissement */
+    --error-color: #dc3545; /* Couleur d'erreur */
+    --shadow-light: rgba(0, 0, 0, 0.08); /* Ombre légère */
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* Ombre moyenne */
+}
+
+/* --- Base et typographie --- */
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-light);
+    color: var(--text-color-dark);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1, h2, h3 {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-top: 1.5rem;
+    color: var(--secondary-color);
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-top: 1.2rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-color-light);
+}
+
+/* --- Conteneur principal --- */
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: var(--background-card);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px var(--shadow-light);
+    flex-grow: 1; /* Permet au conteneur de prendre l'espace restant */
+}
+
+.page-content {
+    padding: 20px 0;
+}
+
+/* --- Header Bar --- */
+.header-bar {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px var(--shadow-medium);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+#welcome-message {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.log {
+    height: 40px; /* Taille du logo */
+    margin-right: 15px;
+}
+
+.voir {
+    background-color: var(--primary-color);
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espace entre l'icône et le texte si vous en ajoutez une */
+}
+
+.voir:hover {
+    background-color: var(--primary-hover-color);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+}
+
+.voir h2 {
+    color: white;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-bottom: none; /* Supprime la bordure sous le titre */
+    padding-bottom: 0;
+}
+
+/* --- Formulaire d'Analyse de CV --- */
+.cv-analysis-section {
+    background-color: var(--background-card);
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 25px;
+    box-shadow: 0 3px 12px var(--shadow-light);
+}
+
+.cv-analysis-section h2 {
+    margin-top: 0;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: 600;
+    color: var(--text-color-dark);
+    margin-bottom: -8px; /* Rapproche le label de l'input */
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="file"],
+textarea {
+    width: calc(100% - 20px);
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Inclure le padding dans la largeur */
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+input[type="file"] {
+    padding: 10px;
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: background-color 0.3s ease;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: var(--secondary-hover-color);
+}
+
+button[type="submit"] {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-start; /* Aligner le bouton à gauche */
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--primary-hover-color);
+    transform: translateY(-2px);
+}
+
+button[type="submit"]:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* --- Messages de statut --- */
+#analysis-status-message {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-weight: 500;
+    text-align: center;
+}
+
+#analysis-status-message[style*="color: red"] { /* Pour les messages d'erreur */
+    background-color: #f8d7da;
+    color: var(--error-color);
+    border: 1px solid #f5c6cb;
+}
+
+#analysis-status-message[style*="color: green"] { /* Pour les messages de succès */
+    background-color: #d4edda;
+    color: var(--success-color);
+    border: 1px solid #c3e6cb;
+}
+
+#analysis-status-message[style*="color: blue"] { /* Pour les messages d'information/en cours */
+    background-color: #d1ecf1;
+    color: var(--info-color);
+    border: 1px solid #bee5eb;
+}
+
+
+/* --- Résultats de l'Analyse --- */
+#analysis-results {
+    margin-top: 30px;
+    padding: 25px;
+    background-color: var(--background-card);
+    border-radius: 10px;
+    box-shadow: 0 3px 12px var(--shadow-light);
+    border: 1px solid var(--border-color);
+}
+
+#analysis-results h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+#analysis-chart-container {
+    width: 250px; /* Ajustez la taille du graphique si nécessaire */
+    height: 250px;
+    margin: 20px auto;
+}
+
+#analysis-percentage {
+    text-align: center;
+    font-size: 2.2em;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#analysis-message {
+    text-align: center;
+    font-size: 1.1em;
+    color: var(--text-color-dark);
+    margin-bottom: 25px;
+}
+
+#analysis-qualifications-details {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border-color);
+}
+
+#analysis-qualifications-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1; /* Prend l'espace disponible */
+}
+
+#analysis-qualifications-details ul li {
+    padding: 8px 0;
+    border-bottom: 1px dotted #e0e0e0;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+#analysis-qualifications-details ul li:last-child {
+    border-bottom: none;
+}
+
+#analysis-qualifications-details ul.found-qualifications-list {
+    border-right: 1px solid var(--border-color); /* Séparateur visuel */
+    padding-right: 20px;
+}
+
+#analysis-qualifications-details ul li.found {
+    color: var(--success-color);
+    font-weight: 500;
+}
+
+#analysis-qualifications-details ul li.found::before {
+    content: '✔'; /* Icône de coche */
+    color: var(--success-color);
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+#analysis-qualifications-details ul li.missing {
+    color: var(--error-color);
+    font-weight: 500;
+}
+
+#analysis-qualifications-details ul li.missing::before {
+    content: '✖'; /* Icône de croix */
+    color: var(--error-color);
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+/* --- Bouton de retour --- */
+.back-button {
+    display: inline-block;
+    background-color: var(--text-color-light);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .voir {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    #analysis-qualifications-details {
+        flex-direction: column;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px dashed var(--border-color);
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+        text-align: center;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}

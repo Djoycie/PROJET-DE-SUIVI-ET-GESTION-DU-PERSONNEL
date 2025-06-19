@@ -1,42 +1,61 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recrutement - Gestion du Personnel</title>
-    <link rel="stylesheet" href="accueil.css">
-    <style>
-        /* Styles spécifiques pour cette page */
-        .page-content {
-            padding: 20px;
-            text-align: center;
-        }
-        .page-content h1 {
-            color: #28a745;
-            margin-bottom: 20px;
-        }
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .back-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Gestion de Carrière</title>
+    <link rel="stylesheet" href="carriere.css">
 </head>
 <body>
-    <div class="container">
-        <div class="page-content">
-            <h1>Module des carrieres</h1>
-           <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
-        </div>
+    <h1>Module Carrière - Affectations</h1>
+
+    <div class="form-container">
+        <h2>Ajouter/Modifier une Affectation</h2>
+        <form id="affectation-form">
+            <input type="hidden" id="affectation-id">
+
+            <label for="matricule-personnel">Personnel:</label>
+            <select id="matricule-personnel" required>
+                </select><br><br>
+
+            <label for="id-poste">Poste:</label>
+            <select id="id-poste" required>
+                </select><br><br>
+
+            <label for="date-affectation">Date d'Affectation:</label>
+            <input type="date" id="date-affectation" required><br><br>
+
+            <label for="date-fin-affectation">Date de Fin (Optionnel):</label>
+            <input type="date" id="date-fin-affectation"><br><br>
+
+            <label for="description-affectation">Description:</label><br>
+            <textarea id="description-affectation" rows="4"></textarea><br><br>
+
+            <button type="submit" id="save-affectation-btn">Enregistrer Affectation</button>
+            <button type="button" id="cancel-edit-btn" style="display: none;">Annuler</button>
+        </form>
     </div>
+
+    <hr>
+
+    <div class="table-container">
+        <h2>Liste des Affectations</h2>
+        <table id="affectations-table">
+            <thead>
+                <tr>
+                    <th>Personnel</th>
+                    <th>Poste</th>
+                    <th>Date Affectation</th>
+                    <th>Date Fin</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                </tbody>
+        </table>
+    </div>
+     <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+
+    <script src="carriere.js"></script>
 </body>
 </html>

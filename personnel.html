@@ -67,7 +67,10 @@
 
       <label for="employee-poste">Poste</label>
       <select id="employee-poste" name="poste" required></select>
-      
+
+          <label for="employee-agence">Agence</label>
+      <input type="text" id="employee-agence" name="agence" required />
+
       <label for="employee-departement">Département</label>
       <input type="text" id="employee-departement" name="departement" required />
 
@@ -89,6 +92,9 @@
 <select id="filter-type-contrat">
   <option value="">-- type de contrat --</option>
 </select>
+<select id="filter-agence">
+  <option value="">-- type de agence --</option>
+</select>
 <button id="reset-filters">Réinitialiser</button>
 
     <table id="table-personnel">
@@ -100,17 +106,18 @@
       <th>Matricule</th>
       <th>Nom</th>
       <th>Prénom</th>
-      <th>date de Naissance</th>
-      <th>lieu de Naissance</th>
-      <th>adresse</th>
-      <th>telephone</th>
-      <th>sexe</th>
-      <th>age (ans)</th>
+      <th>Date de Naissance</th>
+      <th>Lieu de Naissance</th>
+      <th>Adresse</th>
+      <th>Telephone</th>
+      <th>Sexe</th>
+      <th>Age (ans)</th>
       <th>Poste</th>
-      <th>Département</th>
-      <th>type de contrat</th>
-      <th>duree du contrat</th>
-      <th>date d'embauche</th>
+       <th>Département</th>
+       <th>Agence</th>
+      <th>Type de contrat</th>
+      <th>Duree du contrat</th>
+      <th>Date d'embauche</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -127,7 +134,6 @@
     <div id="modal-emp-body"></div>
     <button id="download-emp-pdf">Télécharger en PDF</button>
     <button id="print-emp">Imprimer</button>
-
     <div id="modal-emp-body"></div>
   </div>
 </div>

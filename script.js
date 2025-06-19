@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("[Renderer - script.js] Rôle de l'utilisateur connecté:", currentUser.role);
         } catch (e) {
             console.error("[Renderer - script.js] Erreur de parsing JSON pour 'currentUser':", e);
-            currentUser = null; // Réinitialise currentUser en cas d'erreur de parsing
+            currentUser = null;
         }
     }
 
@@ -46,36 +46,60 @@ document.addEventListener('DOMContentLoaded', () => {
         'parametres',
         'utilisateurs'
     ];
-    console.log("[Renderer - script.js] Modules réservés aux admins:", adminOnlyModules);
+    const comptableOnlyModule = 'paie';
+    const auditModule = 'journaux_audit'; // Nom exact du module journaux d'audit dans data-module
 
     moduleBlocks.forEach(block => {
         const moduleName = block.getAttribute('data-module');
         console.log(`[Renderer - script.js] Traitement du module: ${moduleName}`);
 
-        if (adminOnlyModules.includes(moduleName)) {
-            console.log(`[Renderer - script.js] Module ${moduleName} est réservé aux admins.`);
-            if (currentUser.role !== 'admin') {
-                // Ajouter la classe pour flouter au lieu de masquer
+        if (currentUser.role === 'admin') {
+            // Admin a accès à tous les modules
+            block.classList.remove('blurred-module');
+            block.removeAttribute('data-disabled');
+            console.log(`[Renderer - script.js] Admin a accès au module ${moduleName}.`);
+        } else if (currentUser.role === 'comptable') {
+            // Comptable accès uniquement à paie
+            if (moduleName !== comptableOnlyModule) {
                 block.classList.add('blurred-module');
-                // Ajouter un attribut pour indiquer que le module est désactivé
                 block.setAttribute('data-disabled', 'true');
-                console.log(`[Renderer - script.js] Floutage du module ${moduleName} pour l'utilisateur avec rôle '${currentUser.role}'.`);
+                console.log(`[Renderer - script.js] Floutage du module ${moduleName} pour comptable.`);
             } else {
-                console.log(`[Renderer - script.js] Affichage du module ${moduleName} pour l'admin.`);
+                block.classList.remove('blurred-module');
+                block.removeAttribute('data-disabled');
+                console.log(`[Renderer - script.js] Module ${moduleName} accessible au comptable.`);
+            }
+        } else if (currentUser.role === 'rh') {
+            // RH : bloque journaux d'audit + modules adminOnly
+            if (moduleName === auditModule) {
+                block.classList.add('blurred-module');
+                block.setAttribute('data-disabled', 'true');
+                console.log(`[Renderer - script.js] Blocage du module journaux d'audit pour RH.`);
+            } else if (adminOnlyModules.includes(moduleName)) {
+                block.classList.add('blurred-module');
+                block.setAttribute('data-disabled', 'true');
+                console.log(`[Renderer - script.js] Blocage du module adminOnly ${moduleName} pour RH.`);
+            } else {
+                block.classList.remove('blurred-module');
+                block.removeAttribute('data-disabled');
+                console.log(`[Renderer - script.js] Module ${moduleName} visible pour RH.`);
             }
         } else {
-            console.log(`[Renderer - script.js] Module ${moduleName} visible pour tous.` );
+            // Autres rôles : bloquer modules adminOnly
+            if (adminOnlyModules.includes(moduleName)) {
+                block.classList.add('blurred-module');
+                block.setAttribute('data-disabled', 'true');
+                console.log(`[Renderer - script.js] Blocage du module adminOnly ${moduleName} pour rôle ${currentUser.role}.`);
+            } else {
+                block.classList.remove('blurred-module');
+                block.removeAttribute('data-disabled');
+                console.log(`[Renderer - script.js] Module ${moduleName} visible pour rôle ${currentUser.role}.`);
+            }
         }
 
         if (block) {
             block.addEventListener('click', () => {
-                // Vérifier si le module est désactivé
                 if (block.getAttribute('data-disabled') === 'true') {
-                    alert("Vous n'avez pas l'autorisation d'accéder à ce module.");
-                    return;
-                }
-                
-                if (adminOnlyModules.includes(moduleName) && currentUser.role !== 'admin') {
                     alert("Vous n'avez pas l'autorisation d'accéder à ce module.");
                     return;
                 }

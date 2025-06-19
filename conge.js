@@ -175,7 +175,15 @@ document.addEventListener('DOMContentLoaded', () => {
           conge.dureeConge = dureeCalculee;
         }
       }
-
+function formatDateFr(dateStr) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    if (isNaN(d)) return '';
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    return `${day}-${month}-${year}`;
+  }
        const statutInfo = calculerStatutConge(conge.dateDebut, conge.dateFin);
 
      
@@ -201,8 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <td>${conge.typeConge || ''}</td>
         ${statutInfo.badgeText ? `<span class="statut-badge ${statutInfo.badge}">${statutInfo.badgeText}</span>` : ''}
 
-        <td>${conge.dateDebut || ''}</td>
-        <td>${conge.dateFin || ''}</td>
+        <td>${formatDateFr(conge.dateDebut) || ''}</td>
+        <td>${formatDateFr(conge.dateFin) || ''}</td>
         ${statutInfo.message ? `<br><small style="color: #666; font-style: italic;">${statutInfo.message}</small>` : ''}
 
         <td>${dureeAffichage}</td>
@@ -533,6 +541,18 @@ setInterval(() => {
   /**
    * Remplit le formulaire avec les données d'un congé
    */
+  function formatDateForInput(dateValue) {
+  if (!dateValue) return '';
+  const d = new Date(dateValue);
+  if (isNaN(d)) return '';
+
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0'); // Mois de 0 à 11, donc +1
+  const day = String(d.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+
   function remplirFormulaire(conge) {
     matriculeInput.value = conge.matricule || '';
     nomInput.value = conge.nom || '';
@@ -540,8 +560,8 @@ setInterval(() => {
     posteInput.value = conge.poste || '';
     departementInput.value = conge.departement || '';
     typeCongeSelect.value = conge.typeConge || '';
-    dateDebutInput.value = conge.dateDebut || '';
-    dateFinInput.value = conge.dateFin || '';
+    dateDebutInput.value = formatDateForInput(conge.dateDebut) || '';
+    dateFinInput.value = formatDateForInput(conge.dateFin) || '';
     dureeInput.value = conge.dureeConge !== undefined ? conge.dureeConge + " jours" : '';
     commentairesInput.value = conge.commentaires || 'aucun commentaire';
     
@@ -1039,3 +1059,5 @@ function genererFicheConge(conge, mode) {
     cancelBtn.style.display = 'inline-block';
   };
 });
+
+
