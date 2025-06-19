@@ -13,9 +13,8 @@
     "chart.js": "^4.4.9",
     "electron": "^36.3.1",
     "fs": "^0.0.1-security",
-    "litesync": "^0.0.1",
-    "mammoth": "^1.9.0",
-    "pdf-parse": "^1.1.1",
-    "sqlite3": "^5.1.7"
+    "mammoth": "^1.9.1",
+    "mysql2": "^3.14.1",
+    "pdf-parse": "^1.1.1"
   }
 }
