@@ -10,16 +10,15 @@ contextBridge.exposeInMainWorld('electronAPI', {
   deleteUser: (username) => ipcRenderer.invoke('delete-user', username),
    logout: () => ipcRenderer.send('logout'),  // Expose la fonction logout
  loadModule: (moduleName) => ipcRenderer.send('load-module', moduleName),
+  // Gestion des postes
   addPoste: (poste, ficheBuffer, ficheName) => ipcRenderer.invoke('add-poste', poste, ficheBuffer, ficheName),
-
-  // Récupérer tous les postes
   getAllPostes: () => ipcRenderer.invoke('get-all-postes'),
-// Mise à jour d'un poste
-  updatePoste: (poste) => ipcRenderer.invoke('update-poste', poste),
-
-  // Suppression d'un poste
+  updatePoste: (poste, ficheBuffer, ficheName) => ipcRenderer.invoke('update-poste', poste, ficheBuffer, ficheName),
   deletePoste: (id) => ipcRenderer.invoke('delete-poste', id),
-countEmployeesByPoste: (posteId) => ipcRenderer.invoke('count-employees-by-poste', posteId),
+  countEmployeesByPoste: (posteId) => ipcRenderer.invoke('count-employees-by-poste', posteId),
+  getPosteById: (id) => ipcRenderer.invoke('get-poste-by-id', id),
+  getFichePoste: (fichePath) => ipcRenderer.invoke('get-fiche-poste', fichePath),
+
 
   addEmployee: (employee) => ipcRenderer.invoke('add-employee', employee),
   getAllEmployees: () => ipcRenderer.invoke('get-all-employees'),
@@ -64,13 +63,22 @@ countEmployeesByPoste: (posteId) => ipcRenderer.invoke('count-employees-by-poste
           throw error;
         }
       },
+
+       openFile1: (filePath) => {
+        try {
+          return ipcRenderer.invoke('open-file', filePath);
+        } catch (error) {
+          console.error('Erreur dans openFile1:', error);
+          throw error;
+        }
+      },
   getAffectations: () => ipcRenderer.invoke('get-affectations'),
     addAffectation: (data) => ipcRenderer.invoke('add-affectation', data),
     updateAffectation: (data) => ipcRenderer.invoke('update-affectation', data),
     deleteAffectation: (id) => ipcRenderer.invoke('delete-affectation', id),
     getAllPersonnel: () => ipcRenderer.invoke('get-all-personnel-for-dropdown'),
-    getAllPostes: () => ipcRenderer.invoke('get-all-postes-for-dropdown')
-
+    getAllPostes3: () => ipcRenderer.invoke('get-all-postes-for-dropdown'),
+getPersonnelCareerHistory: (matricule) => ipcRenderer.invoke('get-personnel-career-history', matricule)
 
 
   // ... autres méthodes exposées

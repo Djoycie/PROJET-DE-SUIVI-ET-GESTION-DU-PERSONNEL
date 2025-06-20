@@ -1,90 +1,231 @@
-/* In style.css */
+/* Variables pour les couleurs et les tailles */
+:root {
+    --primary-color: #007bff;
+    --primary-dark-color: #0056b3;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --light-bg-color: #f8f9fa;
+    --dark-text-color: #343a40;
+    --border-color: #ced4da;
+    --border-radius: 4px;
+    --spacing-unit: 16px; /* Unité de base pour les marges/paddings */
+}
+
 body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: var(--light-bg-color);
+    color: var(--dark-text-color);
+    line-height: 1.6;
 }
 
 h1, h2 {
-    color: #333;
+    color: var(--primary-dark-color);
+    text-align: center;
+    margin-bottom: var(--spacing-unit) * 1.5;
 }
 
-.form-container, .table-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+h1 {
+    font-size: 2.2em;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
 }
 
+h2 {
+    font-size: 1.6em;
+    margin-bottom: var(--spacing-unit);
+}
+
+/* Conteneurs principaux */
+.form-container, .table-container, .career-history-section {
+    background-color: #ffffff;
+    padding: var(--spacing-unit) * 1.5;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: var(--spacing-unit) auto;
+    max-width: 960px; /* Largeur maximale pour une meilleure lisibilité */
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: var(--spacing-unit) * 2 0;
+}
+
+/* Formulaires */
 form label {
-    display: inline-block;
-    width: 150px;
-    margin-bottom: 5px;
-    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
 form input[type="text"],
 form input[type="date"],
 form select,
 form textarea {
-    width: calc(100% - 160px);
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    width: calc(100% - 20px); /* Prend presque toute la largeur avec un peu de padding */
+    padding: 10px;
+    margin-bottom: var(--spacing-unit);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1em;
+    box-sizing: border-box; /* Inclut padding et border dans la largeur */
 }
 
-form button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form select:focus,
+form textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+form textarea {
+    resize: vertical; /* Permet le redimensionnement vertical */
+    min-height: 80px;
+}
+
+/* Boutons */
+button {
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    margin-right: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-form button:hover {
-    background-color: #0056b3;
+#save-affectation-btn {
+    background-color: var(--primary-color);
+    color: white;
 }
 
-table {
+#save-affectation-btn:hover {
+    background-color: var(--primary-dark-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#cancel-edit-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    margin-left: var(--spacing-unit) / 2;
+}
+
+#cancel-edit-btn:hover {
+    background-color: #5a6268;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-view-career { /* Style pour le nouveau bouton "Voir Carrière" */
+    background-color: #20c997; /* Un vert-bleu attrayant */
+    color: white;
+    margin-left: 5px;
+}
+
+.btn-view-career:hover {
+    background-color: #17a2b8;
+}
+
+
+/* Boutons d'action dans les tableaux */
+.table-container button, .career-history-section button {
+    padding: 6px 12px;
+    font-size: 0.9em;
+    margin-right: 5px;
+}
+
+.table-container button:last-child {
+    margin-right: 0;
+}
+
+.table-container button:nth-of-type(1) { /* Modifier */
+    background-color: var(--primary-color);
+    color: white;
+}
+.table-container button:nth-of-type(1):hover {
+    background-color: var(--primary-dark-color);
+}
+
+.table-container button:nth-of-type(2) { /* Supprimer */
+    background-color: var(--danger-color);
+    color: white;
+}
+.table-container button:nth-of-type(2):hover {
+    background-color: #c82333;
+}
+
+/* Tableaux */
+.data-table { /* Appliqué à affectations-table et au tableau d'historique */
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: var(--spacing-unit);
 }
 
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+.data-table th,
+.data-table td {
+    border: 1px solid var(--border-color);
+    padding: 12px;
     text-align: left;
 }
 
-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-table button {
-    padding: 5px 10px;
-    margin-right: 5px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-table button:first-of-type {
-    background-color: #28a745;
+.data-table th {
+    background-color: var(--primary-color);
     color: white;
-    border: none;
+    font-weight: 600;
 }
 
-table button:last-of-type {
-    background-color: #dc3545;
+.data-table tbody tr:nth-child(even) {
+    background-color: var(--light-bg-color); /* Lignes alternées pour la lisibilité */
+}
+
+.data-table tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* Effet de survol sur les lignes */
+}
+
+/* Bouton de retour au tableau de bord */
+.back-button {
+    display: block;
+    width: fit-content;
+    margin: var(--spacing-unit) auto;
+    padding: 10px 25px;
+    background-color: var(--secondary-color);
     color: white;
-    border: none;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Section Historique de Carrière */
+#career-history-display {
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--spacing-unit);
+    margin-top: var(--spacing-unit);
+}
+
+#career-history-display h3 {
+    font-size: 1.2em;
+    color: var(--dark-text-color);
+    margin-bottom: var(--spacing-unit);
+}
+
+#career-history-display table {
+    width: 100%;
+}
+
+/* Styles spécifiques pour le select de l'historique */
+#personnel-history-select {
+    width: auto; /* Ajuste la largeur du select */
+    min-width: 200px;
+    display: inline-block;
+    margin-right: 10px;
 }

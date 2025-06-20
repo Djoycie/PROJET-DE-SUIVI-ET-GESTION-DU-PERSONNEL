@@ -54,7 +54,34 @@
                 </tbody>
         </table>
     </div>
-     <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+
+    ---
+
+    <div class="career-history-section">
+        <h2>Historique de Carrière d'un Employé</h2>
+        <label for="personnel-history-select">Sélectionner un employé :</label>
+        <select id="personnel-history-select"></select>
+        <button id="view-history-btn">Voir l'Historique</button>
+
+        <div id="career-history-display" style="display: none; margin-top: 20px;">
+            <h3>Historique de carrière pour : <span id="history-personnel-name"></span></h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Date Début a Date Fin</th>
+                        <th>Ancien Poste</th>
+                       <th>Poste actuel</th>
+                        
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody id="career-history-table-body">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
 
     <script src="carriere.js"></script>
 </body>
