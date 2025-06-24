@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, shell} = require('electron');
 const path = require('path');
 const pdf = require('pdf-parse');
 const mammoth = require('mammoth');
@@ -207,11 +207,17 @@ ipcMain.handle('add-poste', async (event, poste, ficheBuffer, ficheName) => {
     // Écriture du fichier sur disque
     fs.writeFileSync(fichePath, Buffer.from(ficheBuffer));
 
+<<<<<<< HEAD
     // Insertion en base MySQL
+=======
+    // CORRECTION: L'ordre des colonnes dans la requête SQL doit correspondre à l'ordre des valeurs
+>>>>>>> f3142097a2e60f8a92906919dfebefa7c94ebaeb
     const sql = `INSERT INTO postes (id, intitule, description, fiche_poste, places_desirees, departement)
                  VALUES (?, ?, ?, ?, ?, ?)`;
 
+    // CORRECTION: L'ordre des valeurs doit correspondre exactement à l'ordre des colonnes
     const [result] = await pool.query(sql, [
+<<<<<<< HEAD
       poste.id,
       poste.intitule,
       poste.description,
@@ -219,6 +225,14 @@ ipcMain.handle('add-poste', async (event, poste, ficheBuffer, ficheName) => {
       poste.places_desirees,
       poste.departement,
       
+=======
+      poste.id,           // id
+      poste.intitule,     // intitule  
+      poste.description,  // description
+      fichePath,          // fiche_poste
+      poste.places_desirees, // places_desirees
+      poste.departement   // departement
+>>>>>>> f3142097a2e60f8a92906919dfebefa7c94ebaeb
     ]);
 
     return { success: true, insertId: result.insertId };
@@ -227,11 +241,26 @@ ipcMain.handle('add-poste', async (event, poste, ficheBuffer, ficheName) => {
     return { success: false, message: error.message };
   }
 });
-
-// Handler pour récupérer tous les postes
+// Handler pour récupérer tous les postes - VERSION AVEC DÉBOGAGE
 ipcMain.handle('get-all-postes', async () => {
   try {
     const [rows] = await pool.query('SELECT * FROM postes');
+    
+    // AJOUT DE LOGS POUR DÉBUGGER
+    console.log('Résultats de la requête SQL:', rows);
+    
+    // Vérifier chaque ligne
+    rows.forEach((row, index) => {
+      console.log(`Ligne ${index}:`, {
+        id: row.id,
+        intitule: row.intitule,
+        departement: row.departement,
+        places_desirees: row.places_desirees,
+        description: row.description,
+        fiche_poste: row.fiche_poste
+      });
+    });
+    
     return rows;
   } catch (error) {
     console.error('Erreur récupération postes:', error);
@@ -251,7 +280,8 @@ ipcMain.handle('count-employees-by-poste', async (event, posteId) => {
 });
 
 
-// Handler pour mettre à jour un poste (avec champ agence)
+
+// Handler pour mettre à jour un poste
 ipcMain.handle('update-poste', async (event, poste) => {
   try {
     const sql = `
@@ -259,14 +289,25 @@ ipcMain.handle('update-poste', async (event, poste) => {
       SET intitule = ?, description = ?, places_desirees = ?, departement = ?
       WHERE id = ?
     `;
+    
+    // Vérifiez que l'ordre des valeurs correspond à l'ordre dans la requête SET
     const [result] = await pool.query(sql, [
+<<<<<<< HEAD
       poste.intitule,
       poste.description,
       poste.places_desirees,
       poste.departement,
     
       poste.id
+=======
+      poste.intitule,        // intitule
+      poste.description,     // description  
+      poste.places_desirees, // places_desirees
+      poste.departement,     // departement
+      poste.id              // id (pour la clause WHERE)
+>>>>>>> f3142097a2e60f8a92906919dfebefa7c94ebaeb
     ]);
+    
     if (result.affectedRows === 0) {
       return { success: false, message: "Poste non trouvé ou aucune modification effectuée." };
     }
@@ -763,6 +804,17 @@ ipcMain.handle('open-file', async (event, filePath) => {
   }
 });
 
+// --- Gestionnaire IPC pour ouvrir un fichier ---
+ipcMain.handle('open-file1', async (event, filePath) => {
+  try {
+    await shell.openPath(filePath);
+    return { success: true };
+  } catch (error) {
+    console.error('Erreur lors de l\'ouverture du fichier:', error);
+    return { success: false, message: error.message };
+  }
+});
+
 // --- Gestionnaire IPC pour récupérer toutes les analyses de CV ---
 ipcMain.handle('get-all-cv-analyses', async () => {
   return readCvAnalyses();
@@ -774,50 +826,92 @@ ipcMain.handle('get-all-cv-analyses', async () => {
 
 // --- IPC Handlers for Carrière Module ---
 
-// Get all assignments
-ipcMain.handle('get-affectations', async () => {
-    try {
-        const [rows] = await pool.query(`
-            SELECT
-                a.id,
-                p.nom,
-                p.prenom,
-                ps.intitule AS poste_intitule,
-                a.date_affectation,
-                a.date_fin_affectation,
-                a.description_affectation
-            FROM
-                affectations a
-            JOIN
-                personnel p ON a.matricule_personnel = p.matricule
-            JOIN
-                postes ps ON a.id_poste = ps.id
-            ORDER BY a.date_affectation DESC
-        `);
-        return rows;
-    } catch (err) {
-        console.error('Error fetching affectations:', err);
-        return { error: err.message };
-    }
-});
 
-// Add a new assignment
+// --- Fonction utilitaire pour mettre à jour le poste actuel du personnel ---
+// Cette fonction est appelée après chaque opération (ajout, modification, suppression) sur les affectations.
+async function updatePersonnelCurrentPoste(matricule_personnel) {
+    try {
+        let newPosteId = null;
+
+        // 1. Chercher d'abord l'affectation 'actuelle' (date_fin_affectation est NULL)
+        const [currentAffectations] = await pool.query(
+            `SELECT id_poste FROM affectations
+             WHERE matricule_personnel = ? AND date_fin_affectation IS NULL
+             ORDER BY date_affectation DESC LIMIT 1`, // En cas de multiples "actuels" accidentels, prend le plus récent
+            [matricule_personnel]
+        );
+
+        if (currentAffectations.length > 0) {
+            newPosteId = currentAffectations[0].id_poste;
+        } else {
+            // 2. S'il n'y a pas d'affectation actuelle, trouver l'affectation passée la plus récente
+            const [latestPastAffectation] = await pool.query(
+                `SELECT id_poste FROM affectations
+                 WHERE matricule_personnel = ? AND date_fin_affectation IS NOT NULL
+                 ORDER BY date_fin_affectation DESC, date_affectation DESC LIMIT 1`,
+                [matricule_personnel]
+            );
+
+            if (latestPastAffectation.length > 0) {
+                newPosteId = latestPastAffectation[0].id_poste;
+            } else {
+                // 3. Aucune affectation trouvée du tout pour ce personnel.
+                // Étant donné que personnel.poste est NOT NULL, il doit toujours contenir une valeur.
+                // Dans ce cas, nous n'avons pas d'affectation pour déduire le poste actuel.
+                // Cela signifie que 'personnel.poste' conservera sa valeur existante (initialisée lors de la création du personnel).
+                console.warn(`Aucune affectation trouvée pour le personnel ${matricule_personnel}. Le champ 'poste' du personnel ne sera pas mis à jour par cette logique.`);
+                return; // Ne rien faire si aucune affectation n'existe
+            }
+        }
+
+        // Mettre à jour le poste du personnel dans la table 'personnel'
+        if (newPosteId) {
+            await pool.query(
+                `UPDATE personnel SET poste = ? WHERE matricule = ?`,
+                [newPosteId, matricule_personnel]
+            );
+            console.log(`Poste actuel du personnel ${matricule_personnel} mis à jour : ${newPosteId}`);
+        }
+    } catch (err) {
+        console.error('Erreur lors de la mise à jour du poste actuel du personnel :', err);
+        // Vous pouvez choisir de propager l'erreur ou de la gérer silencieusement
+    }
+}
+
+// --- IPC Handlers existants et améliorés ---
+
+// Ajouter une nouvelle affectation
 ipcMain.handle('add-affectation', async (event, data) => {
     const { matricule_personnel, id_poste, date_affectation, date_fin_affectation, description_affectation } = data;
     try {
+        // Fonctionnalité intelligente : Si la nouvelle affectation est "actuelle" (date_fin_affectation est vide/null),
+        // alors clôturer toute autre affectation "actuelle" pour ce même personnel.
+        if (!date_fin_affectation) {
+            const today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
+            await pool.query(
+                `UPDATE affectations SET date_fin_affectation = ?
+                 WHERE matricule_personnel = ? AND date_fin_affectation IS NULL`,
+                [today, matricule_personnel]
+            );
+        }
+
         const [result] = await pool.query(
             `INSERT INTO affectations (matricule_personnel, id_poste, date_affectation, date_fin_affectation, description_affectation)
              VALUES (?, ?, ?, ?, ?)`,
             [matricule_personnel, id_poste, date_affectation, date_fin_affectation || null, description_affectation || null]
         );
+
+        // Mettre à jour le poste actuel de l'employé après l'ajout réussi
+        await updatePersonnelCurrentPoste(matricule_personnel);
+
         return { success: true, id: result.insertId };
     } catch (err) {
-        console.error('Error adding affectation:', err);
+        console.error('Erreur lors de l\'ajout de l\'affectation :', err);
         return { error: err.message };
     }
 });
 
-// Update an assignment
+// Mettre à jour une affectation
 ipcMain.handle('update-affectation', async (event, data) => {
     const { id, matricule_personnel, id_poste, date_affectation, date_fin_affectation, description_affectation } = data;
     try {
@@ -831,43 +925,125 @@ ipcMain.handle('update-affectation', async (event, data) => {
              WHERE id = ?`,
             [matricule_personnel, id_poste, date_affectation, date_fin_affectation || null, description_affectation || null, id]
         );
+
+        // Mettre à jour le poste actuel de l'employé si l'affectation a été modifiée
+        if (result.affectedRows > 0) {
+            await updatePersonnelCurrentPoste(matricule_personnel);
+        }
+
         return { success: result.affectedRows > 0 };
     } catch (err) {
-        console.error('Error updating affectation:', err);
+        console.error('Erreur lors de la mise à jour de l\'affectation :', err);
         return { error: err.message };
     }
 });
 
-// Delete an assignment
+// Supprimer une affectation
 ipcMain.handle('delete-affectation', async (event, id) => {
     try {
+        // Récupérer le matricule_personnel avant de supprimer l'affectation
+        const [affectationToDelete] = await pool.query(
+            `SELECT matricule_personnel FROM affectations WHERE id = ?`,
+            [id]
+        );
+
+        if (affectationToDelete.length === 0) {
+            return { success: false, error: 'Affectation non trouvée.' };
+        }
+
+        const matricule_personnel = affectationToDelete[0].matricule_personnel;
+
         const [result] = await pool.query('DELETE FROM affectations WHERE id = ?', [id]);
+
+        // Mettre à jour le poste actuel de l'employé après la suppression
+        if (result.affectedRows > 0) {
+            await updatePersonnelCurrentPoste(matricule_personnel);
+        }
+
         return { success: result.affectedRows > 0 };
     } catch (err) {
-        console.error('Error deleting affectation:', err);
+        console.error('Erreur lors de la suppression de l\'affectation :', err);
         return { error: err.message };
     }
 });
 
-// --- IPC Handlers to get lists for dropdowns (Personnel and Postes) ---
+// --- IPC Handlers pour les listes déroulantes (Personnel et Postes) ---
 
+// Ce handler est déjà correct
 ipcMain.handle('get-all-personnel-for-dropdown', async () => {
     try {
         const [rows] = await pool.query('SELECT matricule, nom, prenom FROM personnel ORDER BY nom, prenom');
         return rows;
     } catch (err) {
-        console.error('Error fetching personnel for dropdown:', err);
+        console.error('Erreur lors du chargement du personnel pour la liste déroulante :', err);
         return { error: err.message };
     }
 });
 
+// Ce handler est déjà correct
 ipcMain.handle('get-all-postes-for-dropdown', async () => {
     try {
         const [rows] = await pool.query('SELECT id, intitule FROM postes ORDER BY intitule');
         return rows;
     } catch (err) {
-        console.error('Error fetching postes for dropdown:', err);
+        console.error('Erreur lors du chargement des postes pour la liste déroulante :', err);
         return { error: err.message };
     }
 });
 
+// --- Nouveau IPC Handler : Obtenir toutes les affectations avec les détails du personnel et du poste ---
+// Ce handler est utilisé pour peupler le tableau principal des affectations
+ipcMain.handle('get-affectations', async () => {
+    try {
+        const [rows] = await pool.query(`
+            SELECT
+                a.id,
+                a.matricule_personnel,
+                p.nom,
+                p.prenom,
+                a.id_poste,
+                po.intitule AS poste_intitule,
+                a.date_affectation,
+                a.date_fin_affectation,
+                a.description_affectation
+            FROM
+                affectations a
+            JOIN
+                personnel p ON a.matricule_personnel = p.matricule
+            JOIN
+                postes po ON a.id_poste = po.id
+            ORDER BY
+                a.date_affectation DESC
+        `);
+        return rows;
+    } catch (err) {
+        console.error('Erreur lors de la récupération des affectations :', err);
+        return { error: err.message };
+    }
+});
+
+// --- Nouveau IPC Handler : Obtenir l'historique de carrière d'un personnel spécifique ---
+ipcMain.handle('get-personnel-career-history', async (event, matricule_personnel) => {
+    try {
+        const [rows] = await pool.query(`
+            SELECT
+                a.id,
+                a.date_affectation,
+                a.date_fin_affectation,
+                po.intitule AS poste_intitule,
+                a.description_affectation
+            FROM
+                affectations a
+            JOIN
+                postes po ON a.id_poste = po.id
+            WHERE
+                a.matricule_personnel = ?
+            ORDER BY
+                a.date_affectation ASC
+        `, [matricule_personnel]);
+        return rows;
+    } catch (err) {
+        console.error('Erreur lors de la récupération de l\'historique de carrière du personnel :', err);
+        return { error: err.message };
+    }
+});
