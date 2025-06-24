@@ -69,7 +69,7 @@ countEmployeesByPoste: (posteId) => ipcRenderer.invoke('count-employees-by-poste
     updateAffectation: (data) => ipcRenderer.invoke('update-affectation', data),
     deleteAffectation: (id) => ipcRenderer.invoke('delete-affectation', id),
     getAllPersonnel: () => ipcRenderer.invoke('get-all-personnel-for-dropdown'),
-    getAllPostes: () => ipcRenderer.invoke('get-all-postes-for-dropdown')
+    getAllPostes3: () => ipcRenderer.invoke('get-all-postes-for-dropdown')
 
 
 

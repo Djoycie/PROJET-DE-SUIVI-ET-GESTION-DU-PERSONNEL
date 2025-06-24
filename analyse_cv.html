@@ -21,13 +21,23 @@
         <span id="welcome-message"></span>
          <div class="logo-container">
             <img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/HR-etoile2.png" alt="Logo" class="log">
-        </div>
-    <div class="voir" data-module="cv_analyses_historique" id="cv-history-block">
-       <b><h3>Voir CV deja analysés</h3></b>
-       <div class="retour">
-        <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+         </div>
     </div>
-    </div>
+    
+    <div class="gauche">
+       <b class="button-la" onclick="location.href='analyse_cv.html'">Recrutement</b>
+       <b class="button-nav" onclick="location.href='postes.html'">Postes</b>
+       <b class="button-nav" onclick="location.href='personnel.html'">Personnel</b>
+       <b class="button-nav" onclick="location.href='carriere.html'">Carrière</b>
+       <b class="button-nav" onclick="location.href='conges.html'">Congés</b>
+       <b class="button-nav" onclick="location.href='paie.html'">Paie</b>
+       <b class="button-nav" onclick="location.href='stages_formation.html'">Stage/formation</b>
+       <b class="button-nav" onclick="location.href='plan_activite.html'">Statistiques</b>
+       <b class="button-nav" onclick="location.href='utilisateurs.html'">Utilisateurs</b>
+       <b class="button-nav" onclick="location.href='audit.html'">Audit</b>
+       <b class="button-nav" onclick="location.href='sauvegarde.html'">Sauvegardes</b>
+       <b class="button-nav" onclick="location.href='parametres.html'">Paramètres</b>
+        <a href="accueil.html" class="button-nav"><b>Retour</B></a>
     </div>
 
     <div class="container">
@@ -50,6 +60,9 @@
                     <textarea id="qualifications-input" placeholder="Ex: JavaScript:3,React:2,SQL:1,Gestion de projet:2,Leadership:1" required></textarea>
 
                     <button type="submit">Analyser le CV</button>
+                    <div  data-module="cv_analyses_historique" id="cv-history-block">
+                     <h3 class="button-dec">Voir CV deja analysés</h3>
+                    </div>
                     <p id="analysis-status-message" style="margin-top: 15px;" aria-live="polite"></p>
                 </form>
 

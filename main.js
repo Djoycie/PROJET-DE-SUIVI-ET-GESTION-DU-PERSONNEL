@@ -208,8 +208,8 @@ ipcMain.handle('add-poste', async (event, poste, ficheBuffer, ficheName) => {
     fs.writeFileSync(fichePath, Buffer.from(ficheBuffer));
 
     // Insertion en base MySQL
-    const sql = `INSERT INTO postes (id, intitule, description, fiche_poste, places_desirees, departement, agence)
-                 VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    const sql = `INSERT INTO postes (id, intitule, description, fiche_poste, places_desirees, departement)
+                 VALUES (?, ?, ?, ?, ?, ?)`;
 
     const [result] = await pool.query(sql, [
       poste.id,
@@ -218,7 +218,7 @@ ipcMain.handle('add-poste', async (event, poste, ficheBuffer, ficheName) => {
       fichePath,
       poste.places_desirees,
       poste.departement,
-      poste.agence  // Nouveau champ agence
+      
     ]);
 
     return { success: true, insertId: result.insertId };
@@ -256,7 +256,7 @@ ipcMain.handle('update-poste', async (event, poste) => {
   try {
     const sql = `
       UPDATE postes
-      SET intitule = ?, description = ?, places_desirees = ?, departement = ?, agence = ?
+      SET intitule = ?, description = ?, places_desirees = ?, departement = ?
       WHERE id = ?
     `;
     const [result] = await pool.query(sql, [
@@ -264,7 +264,7 @@ ipcMain.handle('update-poste', async (event, poste) => {
       poste.description,
       poste.places_desirees,
       poste.departement,
-      poste.agence, // nouveau champ agence
+    
       poste.id
     ]);
     if (result.affectedRows === 0) {

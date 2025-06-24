@@ -4,247 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistiques du Personnel - RH Dashboard</title>
+    <link rel="stylesheet" href="activite.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .header h1 {
-            color: #2d3748;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .header p {
-            color: #718096;
-            font-size: 1.1rem;
-        }
-
-        .stats-overview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-            transform: translateY(0);
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
-        }
-
-        .stat-card h3 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .stat-card p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .stat-card.gender-male {
-            background: linear-gradient(135deg, #4299e1, #3182ce);
-        }
-
-        .stat-card.gender-female {
-            background: linear-gradient(135deg, #ed64a6, #d53f8c);
-        }
-
-        .stat-card.contract-cdi {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-        }
-
-        .stat-card.contract-cdd {
-            background: linear-gradient(135deg, #ed8936, #dd6b20);
-        }
-
-        .charts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .chart-container {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .chart-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .chart-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        .chart-wrapper {
-            position: relative;
-            height: 300px;
-            margin-bottom: 20px;
-        }
-
-        .chart-wrapper.large {
-            height: 400px;
-        }
-
-        .legend-custom {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
-            color: #4a5568;
-        }
-
-        .legend-color {
-            width: 16px;
-            height: 16px;
-            border-radius: 3px;
-            margin-right: 8px;
-        }
-
-        .refresh-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 15px 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .refresh-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
-        }
-
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 200px;
-            color: #718096;
-            font-size: 1.1rem;
-        }
-
-        .spinner {
-            border: 3px solid #e2e8f0;
-            border-top: 3px solid #667eea;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin-right: 15px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-                margin: 10px;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .chart-wrapper {
-                height: 250px;
-            }
-
-            .chart-wrapper.large {
-                height: 300px;
-            }
-        }
-    </style>
+    
 </head>
 <body>
+    <div class="header-bar">
+        <span id="welcome-message"></span>
+         <div class="logo-container">
+            <img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/HR-etoile2.png" alt="Logo" class="log">
+         </div>
+    </div>
+    
+    <div class="gauche">
+       <b class="button-nav" onclick="location.href='analyse_cv.html'">Recrutement</b>
+       <b class="button-nav" onclick="location.href='postes.html'">Postes</b>
+       <b class="button-nav" onclick="location.href='personnel.html'">Personnel</b>
+       <b class="button-nav" onclick="location.href='carriere.html'">Carrière</b>
+       <b class="button-nav" onclick="location.href='conges.html'">Congés</b>
+       <b class="button-nav" onclick="location.href='paie.html'">Paie</b>
+       <b class="button-nav" onclick="location.href='stages_formation.html'">Stage/formation</b>
+       <b class="button-la" onclick="location.href='plan_activite.html'">Statistiques</b>
+       <b class="button-nav" onclick="location.href='utilisateurs.html'">Utilisateurs</b>
+       <b class="button-nav" onclick="location.href='audit.html'">Audit</b>
+       <b class="button-nav" onclick="location.href='sauvegarde.html'">Sauvegardes</b>
+       <b class="button-nav" onclick="location.href='parametres.html'">Paramètres</b>
+        <a href="accueil.html" class="button-nav"><b>Retour</B></a>
+    </div>
+
     <div class="container">
         <div class="header">
-            <h1>📊 Statistiques du Personnel</h1>
+            <h1>Statistiques du Personnel</h1>
             <p>Tableau de bord analytique des ressources humaines</p>
         </div>
 
+        <div class="container_s">
         <div class="stats-overview">
             <div class="stat-card">
                 <h3 id="total-employees">-</h3>
@@ -313,10 +107,10 @@
         </div>
     </div>
 
+    </div>
     <button class="refresh-btn" onclick="loadAllStatistics()">
         🔄 Actualiser
     </button>
-<a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
     <script>
         let charts = {};
 

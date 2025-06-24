@@ -7,12 +7,37 @@
     <link rel="stylesheet" href="conge.css">
 </head>
 <body>
+
+  <div class="header-bar">
+        <span id="welcome-message"></span>
+         <div class="logo-container">
+            <img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/HR-etoile2.png" alt="Logo" class="log">
+         </div>
+    </div>
+    
+    <div class="gauche">
+       <b class="button-nav" onclick="location.href='analyse_cv.html'">Recrutement</b>
+       <b class="button-nav" onclick="location.href='postes.html'">Postes</b>
+       <b class="button-nav" onclick="location.href='personnel.html'">Personnel</b>
+       <b class="button-nav" onclick="location.href='carriere.html'">Carrière</b>
+       <b class="button-la" onclick="location.href='conges.html'">Congés</b>
+       <b class="button-nav" onclick="location.href='paie.html'">Paie</b>
+       <b class="button-nav" onclick="location.href='stages_formation.html'">Stage/formation</b>
+       <b class="button-nav" onclick="location.href='plan_activite.html'">Statistiques</b>
+       <b class="button-nav" onclick="location.href='utilisateurs.html'">Utilisateurs</b>
+       <b class="button-nav" onclick="location.href='audit.html'">Audit</b>
+       <b class="button-nav" onclick="location.href='sauvegarde.html'">Sauvegardes</b>
+       <b class="button-nav" onclick="location.href='parametres.html'">Paramètres</b>
+        <a href="accueil.html" class="button-nav"><b>Retour</B></a>
+    </div>
+
     <div class="container">
         <div class="header">
-            <h1>📋 Gestion des Congés</h1>
+            <h1><b>📋Gestion des Congés</b></h1>
             <p>Système de demande et gestion des congés du personnel</p>
         </div>
 
+        <div class="container_s">
         <div class="form-container">
             <div id="successMessage" class="success-message" style="display: none;"></div>
             <div id="errorMessage" class="error-message"></div>
@@ -108,7 +133,7 @@
   </div>
 
   <h2>Liste des congés</h2>
-  <table border="1" id="congesTable">
+  <table  id="congesTable">
     <thead>
       <tr>
         <th>Matricule</th>
@@ -131,10 +156,8 @@
   </table>
 
   <div id="pagination"></div>
-
-
-    </div>
-    <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+  </div>
+  </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>

@@ -4,52 +4,63 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f7f6; /* Fond léger */
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(to bottom,#e3f3ee,#214137);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #333;
-    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
 }
 
-.container {
-    max-width: 1200px; /* Augmenter la largeur pour plus d'espace */
-    margin: 20px auto;
-    background-color: #ffffff;
+.container{
+    background-color:transparent;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-height: 580px;
+    max-width: 1200px;
+    text-align: center;
+    margin-left: 2px;
+    margin-top: 5px;
+}
+.container_s{
+    height: 525px;
+    overflow-y: auto;  /*active le scroll vertical */
 }
 
 .page-content h1 {
     color: #2c3e50;
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.5em;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 15px;
+    font-size: 2.4em;
+    margin-top: -20px;
 }
 
 .page-content p {
     text-align: center;
-    margin-bottom: 40px;
-    color: #666;
-    font-size: 1.1em;
+    color: black;
+    font-size: 0.8em;
+    margin-top: -23px;
 }
 
 /* --- Section des formulaires (Ajouter/Modifier) --- */
 .form-section {
     background-color: #fdfdfd;
-    border: 1px solid #e0e0e0;
     border-radius: 8px;
-    padding: 25px;
-    margin-bottom: 30px;
+    padding: 2px;
+    margin-bottom: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .form-section h2 {
-    color: #34495e;
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    border-bottom: 1px dashed #e9ecef;
-    padding-bottom: 10px;
+    color: black;
+    font-size: 1.6em;
+    padding-bottom: 5px;
 }
 
 .form-section form label {
@@ -122,17 +133,15 @@ body {
     background-color: #fdfdfd;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    padding: 25px;
-    margin-bottom: 30px;
+    padding: 15px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .list-section h2 {
     color: #34495e;
     font-size: 1.8em;
-    margin-bottom: 20px;
     border-bottom: 1px dashed #e9ecef;
-    padding-bottom: 10px;
+    margin-bottom: -23px;
 }
 
 #users-list {
@@ -180,21 +189,21 @@ body {
 }
 
 .action-buttons .edit-btn {
-    background-color: #007bff; /* Bleu pour modifier */
+    background-color: #faa404; /* Bleu pour modifier */
     color: white;
 }
 
 .action-buttons .edit-btn:hover {
-    background-color: #0056b3;
+    background-color: #f0e007;
 }
 
 .action-buttons .delete-btn {
-    background-color: #dc3545; /* Rouge pour supprimer */
+    background-color: #f1402d; /* Rouge pour supprimer */
     color: white;
 }
 
 .action-buttons .delete-btn:hover {
-    background-color: #c82333;
+    background-color: #ff0909;
 }
 
 /* --- Bouton Retour au Tableau de Bord --- */
@@ -218,4 +227,71 @@ body {
 /* Masquer la section de modification par défaut */
 #edit-user-section {
     display: none;
+}
+.button-la{
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    color: rgb(7, 0, 0);
+    margin-top: -5px;
+}
+.header-bar {
+    background-color: transparent;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    top: 0;
+    z-index: 1000;
+    gap: 8px;
+}
+.logo-container{
+    position:  relative;
+    border-radius: 50%;
+    margin-left: -15px;
+    margin-right: 15px;
+}
+.log{
+    background-color: #b8aeec;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 0.2rem;
+    margin-left: -0.7rem;
+    width: 150px;
+    height: 150px;
+}
+:root {
+      --primary-color: #b8aeec; /* Vert pour les actions principales */
+    --primary-hover-color: #e3f3ee; /* Vert plus foncé au survol */
+    --secondary-color: #007bff; /* Bleu pour les accents ou liens */
+    --secondary-hover-color: #0056b3; /* Bleu plus foncé au survol */
+ 
+  }
+.button-nav{
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-top: -5px;
+}
+.button-nav:hover {
+    background-color: var(--primary-hover-color);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    color: black;
+}
+.gauche{
+    display: flex;
+    margin-left:  -210px;
+    margin-top: 180px;
+    margin-right: 15px;
+    flex-direction: column;
+    align-items: center;
 }
