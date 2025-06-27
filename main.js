@@ -207,32 +207,20 @@ ipcMain.handle('add-poste', async (event, poste, ficheBuffer, ficheName) => {
     // Écriture du fichier sur disque
     fs.writeFileSync(fichePath, Buffer.from(ficheBuffer));
 
-<<<<<<< HEAD
     // Insertion en base MySQL
-=======
-    // CORRECTION: L'ordre des colonnes dans la requête SQL doit correspondre à l'ordre des valeurs
->>>>>>> f3142097a2e60f8a92906919dfebefa7c94ebaeb
+
     const sql = `INSERT INTO postes (id, intitule, description, fiche_poste, places_desirees, departement)
                  VALUES (?, ?, ?, ?, ?, ?)`;
 
     // CORRECTION: L'ordre des valeurs doit correspondre exactement à l'ordre des colonnes
     const [result] = await pool.query(sql, [
-<<<<<<< HEAD
-      poste.id,
-      poste.intitule,
-      poste.description,
-      fichePath,
-      poste.places_desirees,
-      poste.departement,
-      
-=======
       poste.id,           // id
       poste.intitule,     // intitule  
       poste.description,  // description
       fichePath,          // fiche_poste
       poste.places_desirees, // places_desirees
       poste.departement   // departement
->>>>>>> f3142097a2e60f8a92906919dfebefa7c94ebaeb
+
     ]);
 
     return { success: true, insertId: result.insertId };
@@ -292,20 +280,13 @@ ipcMain.handle('update-poste', async (event, poste) => {
     
     // Vérifiez que l'ordre des valeurs correspond à l'ordre dans la requête SET
     const [result] = await pool.query(sql, [
-<<<<<<< HEAD
       poste.intitule,
       poste.description,
       poste.places_desirees,
       poste.departement,
     
       poste.id
-=======
-      poste.intitule,        // intitule
-      poste.description,     // description  
-      poste.places_desirees, // places_desirees
-      poste.departement,     // departement
-      poste.id              // id (pour la clause WHERE)
->>>>>>> f3142097a2e60f8a92906919dfebefa7c94ebaeb
+
     ]);
     
     if (result.affectedRows === 0) {
