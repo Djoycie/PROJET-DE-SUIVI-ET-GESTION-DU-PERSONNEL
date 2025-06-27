@@ -1,37 +1,162 @@
-/* --- Styles généraux pour la page Utilisateurs --- */
+/* ------------------------------------------------------------- */
+/* Variables et Styles de Base (Combinés) */
+/* ------------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* Appliquez ces styles dans votre fichier accueil.css ou un nouveau utilisateurs.css */
+:root {
+    --primary-color: #b8aeec; /* Vert pour les actions principales */
+    --primary-hover-color: #e3f3ee; /* Vert plus foncé au survol */
+    --secondary-color: #007bff; /* Bleu pour les accents ou liens */
+    --secondary-hover-color: #0056b3; /* Bleu plus foncé au survol */
+    --background-light: #f8f9fa; /* Arrière-plan général clair */
+    --background-card: #ffffff; /* Arrière-plan des blocs de contenu */
+    --text-color-dark: #343a40; /* Texte foncé pour la lisibilité */
+    --text-color-light: #6c757d; /* Texte plus clair pour les descriptions */
+    --border-color: #dee2e6; /* Couleur des bordures */
+    --success-color: #28a745; /* Couleur de succès */
+    --info-color: #17a2b8; /* Couleur d'information */
+    --warning-color: #ffc107; /* Couleur d'avertissement */
+    --error-color: #dc3545; /* Couleur d'erreur */
+    --shadow-light: rgba(0, 0, 0, 0.08); /* Ombre légère */
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* Ombre moyenne */
+    --primary-dark-color: #9b91d2;
+    --danger-color: var(--error-color);
+    --light-bg-color: #f2f2f2;
+    --border-radius-base: 8px;
+    --spacing-unit: 16px;
+}
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background: linear-gradient(to bottom,#e3f3ee,#214137);
+    background: linear-gradient(to bottom, #e3f3ee, #214137);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    display: flex; /* Utilisation de flexbox pour le layout principal */
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: flex-start; /* Aligne le contenu en haut */
     min-height: 100vh;
+    overflow-x: hidden; /* Empêche le défilement horizontal */
 }
 
-.container{
-    background-color:transparent;
+/* Styles du conteneur principal */
+.container {
+    background-color: transparent; /* Conserve le fond transparent */
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+    padding: 30px; /* Padding défini par les styles utilisateurs */
     width: 100%;
-    max-height: 580px;
-    max-width: 1200px;
+    max-width: 1200px; /* Max-width défini par les styles utilisateurs */
+    max-height: 625px; /* Max-height défini par les styles utilisateurs */
     text-align: center;
-    margin-left: 2px;
+    margin-left: 20px; /* Conserve cette marge si intentionnelle, mais à reconsidérer */
     margin-top: 5px;
+    box-sizing: border-box; /* Assure que padding est inclus dans la largeur */
+    display: flex; /* Utilisation de flexbox pour structurer l'intérieur */
+    flex-direction: column; /* Les sections s'empilent verticalement */
 }
-.container_s{
-    height: 525px;
-    overflow-y: auto;  /*active le scroll vertical */
+
+.container_s {
+    height: 515px; /* Hauteur définie par les styles utilisateurs */
+    overflow-y: auto; /* Active le scroll vertical pour les listes/contenu */
+    background-color: #fdfdfd; /* Fond blanc pour le contenu scrollable */
+    border-radius: 8px; /* Bordure arrondie */
+    padding: 15px; /* Padding interne */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Ombre subtile */
+    margin-top: 10px; /* Espace après le h1/p */
+}
+
+/* Header de l'application (Barre supérieure) */
+.header-bar {
+    background-color: transparent;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    top: 0;
+    width: 100%; /* S'assure qu'il prend toute la largeur */
+    z-index: 1000;
+    gap: 8px;
+    /* Marges négatives supprimées ou corrigées car potentiellement problématiques */
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.logo-container {
+    position: relative;
+    border-radius: 50%;
+    margin-left: 0; /* Réinitialisé */
+    margin-right: 15px; /* Gardé pour espacement */
+}
+
+.log {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 0.2rem;
+    margin-left: 0; /* Réinitialisé */
+    width: 150px;
+    height: 130px;
+}
+
+/* Menu latéral (gauche) */
+.gauche {
+    display: flex;
+    flex-direction: column; /* Les boutons sont empilés verticalement */
+    align-items: center; /* Centre les éléments */
+    /* Marges négatives ajustées ou supprimées */
+    margin-left: 0;
+    margin-top: 180px; /* Espace pour le logo/header */
+    margin-right: 15px; /* Espace à droite du menu */
+    position: sticky; /* Rendre sticky si le layout le permet */
+    top: 20px; /* Positionnement sticky */
+    flex-shrink: 0; /* Empêche le rétrécissement */
+    gap: 8px;
+}
+
+.button-nav, .button-la {
+    padding: 6px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centre le texte */
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: -2px; /* Ajustement vertical */
+    margin-bottom: -3px; /* Espace entre les boutons */
+}
+
+.button-nav {
+    color: white;
+    background-color: transparent;
+}
+
+.button-la { /* Bouton actif */
+    color: rgb(7, 0, 0);
+    background-color: var(--primary-hover-color);
+}
+
+.button-nav:hover {
+    background-color: var(--primary-hover-color);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    color: black;
+}
+
+/* --- Page Content specific styles for "Utilisateurs" --- */
+.page-content {
+    flex-grow: 1; /* Permet au contenu de prendre l'espace restant */
+    padding: 20px; /* Ajouter un peu de padding */
 }
 
 .page-content h1 {
@@ -39,28 +164,37 @@ body {
     text-align: center;
     font-size: 2.4em;
     margin-top: -20px;
+    margin-bottom: 15px; /* Ensure space below title */
 }
 
 .page-content p {
     text-align: center;
-    color: black;
+    color: black; /* Changed to black for visibility */
     font-size: 0.8em;
-    margin-top: -23px;
+    margin-top: -23px; /* Conserve la marge négative pour aligner */
+    margin-bottom: 20px;
 }
 
 /* --- Section des formulaires (Ajouter/Modifier) --- */
 .form-section {
     background-color: #fdfdfd;
     border-radius: 8px;
-    padding: 2px;
-    margin-bottom: 10px;
+    padding: 20px; /* Augmenter le padding pour une meilleure apparence */
+    margin-bottom: 20px; /* Espacement cohérent */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .form-section h2 {
     color: black;
     font-size: 1.6em;
-    padding-bottom: 5px;
+    padding-bottom: 10px; /* Plus d'espace sous le titre */
+    margin-bottom: 20px; /* Plus d'espace avant les champs */
+    border-bottom: 1px solid #eee; /* Ligne de séparation légère */
+}
+
+.form-group { /* Added for better control of form elements */
+    margin-bottom: 15px;
+    text-align: left; /* Align labels and inputs to the left */
 }
 
 .form-section form label {
@@ -69,18 +203,19 @@ body {
     color: #555;
     font-weight: bold;
     font-size: 0.95em;
+    text-align: left;
 }
 
 .form-section form input[type="text"],
 .form-section form input[type="password"],
 .form-section form select {
-    width: calc(100% - 20px); /* Prend presque toute la largeur */
+    width: 100%; /* Prend toute la largeur disponible du parent */
     padding: 12px 10px;
-    margin-bottom: 20px;
+    margin-bottom: 0; /* Géré par .form-group */
     border: 1px solid #ced4da;
     border-radius: 6px;
     font-size: 1em;
-    box-sizing: border-box; /* Inclut le padding dans la largeur */
+    box-sizing: border-box;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -90,6 +225,14 @@ body {
     border-color: #007bff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     outline: none;
+    
+}
+
+.form-buttons { /* Container for form action buttons */
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .form-section form button[type="submit"],
@@ -103,7 +246,8 @@ body {
     font-size: 1.05em;
     font-weight: bold;
     transition: background-color 0.2s ease, transform 0.1s ease;
-    margin-right: 15px; /* Espace entre les boutons */
+    margin-right: 0; /* Géré par .form-buttons gap */
+    margin-top: 10px;
 }
 
 .form-section form button[type="submit"]:hover,
@@ -135,19 +279,22 @@ body {
     border-radius: 8px;
     padding: 15px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    flex-grow: 1; /* Permet à cette section de prendre l'espace restant dans .container_s */
 }
 
 .list-section h2 {
     color: #34495e;
     font-size: 1.8em;
     border-bottom: 1px dashed #e9ecef;
-    margin-bottom: -23px;
+    margin-bottom: 20px; /* Ajusté pour cohérence */
+    padding-bottom: 10px;
+    margin-top: 0;
 }
 
 #users-list {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 0; /* Géré par le padding de .list-section */
 }
 
 #users-list thead tr {
@@ -228,70 +375,425 @@ body {
 #edit-user-section {
     display: none;
 }
-.button-la{
-    padding: 8px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    color: rgb(7, 0, 0);
-    margin-top: -5px;
+
+/* ------------------------------------------------------------- */
+/* MEDIA QUERIES POUR LE RESPONSIVE DESIGN */
+/* ------------------------------------------------------------- */
+
+/* Large devices (desktops, 1350px and down) */
+@media (max-width: 1550px) {
+    body {
+        padding: 15px;
+    }
+    .container {
+        width: 1100px; /* Ajuster la largeur max pour ce breakpoint */
+        padding: 25px;
+    }
+    .header-bar {
+        padding: 10px 20px;
+    }
+    .gauche {
+        margin-left: 0; /* Assure que la marge est à 0 */
+        margin-top: 160px;
+        margin-right: 10px;
+        margin-left: -1300px;
+    }
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -1240px;
+    }
+    .page-content h1 {
+        font-size: 2.2em;
+    }
+    .form-section {
+        padding: 15px;
+    }
+    .list-section {
+        padding: 10px;
+    }
+    #users-list th, #users-list td {
+        padding: 10px 12px;
+    }
 }
-.header-bar {
-    background-color: transparent;
-    color: white;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    top: 0;
-    z-index: 1000;
-    gap: 8px;
+@media (max-width: 1350px) {
+    body {
+        padding: 15px;
+    }
+    .container {
+        width: 1000px; /* Ajuster la largeur max pour ce breakpoint */
+        padding: 25px;
+    }
+    .header-bar {
+        padding: 10px 20px;
+    }
+    .gauche {
+        margin-left: 0; /* Assure que la marge est à 0 */
+        margin-top: 160px;
+        margin-right: 10px;
+        margin-left: -1300px;
+    }
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -1240px;
+    }
+    .page-content h1 {
+        font-size: 2.2em;
+    }
+    .form-section {
+        padding: 15px;
+    }
+    .list-section {
+        padding: 10px;
+    }
+    #users-list th, #users-list td {
+        padding: 10px 12px;
+    }
 }
-.logo-container{
-    position:  relative;
-    border-radius: 50%;
-    margin-left: -15px;
-    margin-right: 15px;
+
+
+/* Medium devices (large tablets, smaller laptops, 1250px and down) */
+@media (max-width: 1250px) {
+    body {
+        flex-direction: column; /* Le body passe en colonne */
+        align-items: center; /* Centre le contenu horizontalement */
+        padding: 10px;
+    }
+    .header-bar {
+        flex-direction: column; /* Les éléments du header s'empilent */
+        align-items: center; /* Centrer les éléments du header */
+        width: 100%;
+        padding: 10px;
+    }
+    .logo-container {
+        margin: 0; /* Réinitialiser les marges du logo */
+    }
+    .log {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto; /* Centrer le logo */
+        display: block;
+    }
+    .gauche {
+        flex-direction: row; /* Le menu passe en ligne (horizontal) */
+        flex-wrap: wrap; /* Les boutons peuvent s'enrouler */
+        justify-content: center; /* Centrer les boutons */
+        width: 100%; /* Prend toute la largeur */
+        margin: 15px 0; /* Marge au-dessus et en-dessous du menu */
+        padding: 10px;
+        position: relative; /* Ne plus être sticky/fixed */
+        top: unset;
+        height: unset; /* Hauteur adaptative */
+        overflow-y: visible;
+        gap: 8px; /* Espacement entre les boutons */
+    }
+    .button-nav, .button-la {
+        width: calc(50% - 10px); /* Deux boutons par ligne */
+        max-width: 180px;
+        font-size: 0.9em;
+        margin-top: 0;
+        margin-bottom: 5px; /* Espacement vertical ajusté */
+    }
+    .container {
+        padding: 15px;
+        width: 100%; /* Permet au conteneur de prendre toute la largeur disponible */
+        margin-left: 0;
+        margin-top: 5px;
+        height: auto; /* La hauteur doit être auto pour s'adapter */
+        max-height: unset; /* Enlever la max-height fixe */
+        margin-right: -20px;
+    }
+    .container_s {
+        height: auto; /* Laisser le contenu définir la hauteur */
+        max-height: 400px; /* Ajouter une max-height si nécessaire pour le scroll */
+        overflow-y: auto; /* Conserver le scroll si le contenu dépasse */
+    }
+    .page-content h1 {
+        font-size: 2em;
+    }
+    .form-section form input,
+    .form-section form select {
+        width: 100%; /* S'assurer qu'ils prennent 100% de la largeur disponible */
+    }
+    #users-list th, #users-list td {
+        font-size: 0.9em;
+    }
 }
-.log{
-    background-color: #b8aeec;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 0.2rem;
-    margin-left: -0.7rem;
-    width: 150px;
-    height: 150px;
+
+@media (max-width: 950px) {
+    body {
+        padding: 10px;
+    }
+    .header-bar {
+        padding: 8px 15px;
+    }
+    .log {
+        width: 80px;
+        height: 80px;
+    }
+    .gauche {
+        gap: 5px;
+        padding: 8px;
+    }
+    .button-nav, .button-la {
+        width: calc(100% - 10px); /* Chaque bouton sur sa propre ligne */
+        max-width: unset; /* Retire la limite de largeur */
+        font-size: 0.85em;
+        padding: 10px 15px;
+    }
+    .container {
+        padding: 10px;
+        margin: 5px auto;
+        border-radius: 8px;
+    }
+    .container_s {
+        max-height: 350px; /* Réduire la hauteur max pour le scroll */
+    }
+    .page-content h1 {
+        font-size: 1.8em;
+        margin-top: -15px;
+        margin-bottom: 10px;
+    }
+    .page-content p {
+        font-size: 0.75em;
+        margin-top: -18px;
+        margin-bottom: 15px;
+    }
+    .form-section {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    .form-section h2 {
+        font-size: 1.4em;
+        margin-bottom: 15px;
+    }
+    .form-section form input,
+    .form-section form select {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    .form-section form button {
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+    .list-section {
+        padding: 10px;
+    }
+    .list-section h2 {
+        font-size: 1.6em;
+        margin-bottom: 15px;
+    }
+    #users-list th, #users-list td {
+        padding: 8px 10px;
+        font-size: 0.8em;
+    }
+    .action-buttons button {
+        padding: 6px 8px;
+        font-size: 0.8em;
+        gap: 5px;
+    }
+    .back-button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+        margin-top: 20px;
+    }
 }
-:root {
-      --primary-color: #b8aeec; /* Vert pour les actions principales */
-    --primary-hover-color: #e3f3ee; /* Vert plus foncé au survol */
-    --secondary-color: #007bff; /* Bleu pour les accents ou liens */
-    --secondary-hover-color: #0056b3; /* Bleu plus foncé au survol */
- 
-  }
-.button-nav{
-    padding: 8px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    color: white;
-    margin-top: -5px;
+
+/* Tablets (800px and down) */
+@media (max-width: 800px) {
+    body {
+        padding: 10px;
+    }
+    .header-bar {
+        padding: 8px 15px;
+    }
+    .log {
+        width: 80px;
+        height: 80px;
+    }
+    .gauche {
+        gap: 5px;
+        padding: 8px;
+    }
+    .button-nav, .button-la {
+        width: calc(100% - 10px); /* Chaque bouton sur sa propre ligne */
+        max-width: unset; /* Retire la limite de largeur */
+        font-size: 0.85em;
+        padding: 10px 15px;
+    }
+    .container {
+        padding: 10px;
+        margin: 5px auto;
+        border-radius: 8px;
+    }
+    .container_s {
+        max-height: 350px; /* Réduire la hauteur max pour le scroll */
+    }
+    .page-content h1 {
+        font-size: 1.8em;
+        margin-top: -15px;
+        margin-bottom: 10px;
+    }
+    .page-content p {
+        font-size: 0.75em;
+        margin-top: -18px;
+        margin-bottom: 15px;
+    }
+    .form-section {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    .form-section h2 {
+        font-size: 1.4em;
+        margin-bottom: 15px;
+    }
+    .form-section form input,
+    .form-section form select {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    .form-section form button {
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+    .list-section {
+        padding: 10px;
+    }
+    .list-section h2 {
+        font-size: 1.6em;
+        margin-bottom: 15px;
+    }
+    #users-list th, #users-list td {
+        padding: 8px 10px;
+        font-size: 0.8em;
+    }
+    .action-buttons button {
+        padding: 6px 8px;
+        font-size: 0.8em;
+        gap: 5px;
+    }
+    .back-button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+        margin-top: 20px;
+    }
 }
-.button-nav:hover {
-    background-color: var(--primary-hover-color);
-    box-shadow: 0 4px 10px var(--shadow-medium);
-    color: black;
-}
-.gauche{
-    display: flex;
-    margin-left:  -210px;
-    margin-top: 180px;
-    margin-right: 15px;
-    flex-direction: column;
-    align-items: center;
+
+/* Small devices (smartphones, 400px and down) */
+@media (max-width: 400px) {
+    body {
+        padding: 5px;
+    }
+    .header-bar {
+        padding: 5px;
+    }
+    .log {
+        width: 60px;
+        height: 60px;
+    }
+    .gauche {
+        gap: 5px;
+        padding: 5px;
+    }
+    .button-nav, .button-la {
+        padding: 8px 10px;
+        font-size: 0.8em;
+    }
+    .container {
+        padding: 8px;
+        margin: 5px auto;
+    }
+    .container_s {
+        max-height: 300px; /* Encore plus petit pour mobile */
+    }
+    .page-content h1 {
+        font-size: 1.6em;
+        margin-top: -10px;
+        margin-bottom: 5px;
+    }
+    .page-content p {
+        font-size: 0.7em;
+        margin-top: -15px;
+        margin-bottom: 10px;
+    }
+    .form-section {
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+    .form-section h2 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+    .form-section form label {
+        font-size: 0.9em;
+        margin-bottom: 5px;
+    }
+    .form-section form input,
+    .form-section form select {
+        padding: 8px;
+        font-size: 0.8em;
+        margin-bottom: 10px;
+    }
+    .form-buttons {
+        flex-direction: column; /* Les boutons de formulaire s'empilent */
+        gap: 10px;
+        margin-top: 15px;
+    }
+    .form-section form button {
+        width: 100%; /* Les boutons de formulaire prennent toute la largeur */
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+    .list-section {
+        padding: 8px;
+    }
+    .list-section h2 {
+        font-size: 1.4em;
+        margin-bottom: 10px;
+    }
+    #users-list {
+        display: block; /* Permet le défilement horizontal du tableau */
+        overflow-x: auto; /* Active le défilement horizontal */
+        white-space: nowrap; /* Empêche le texte de s'enrouler */
+    }
+    #users-list thead, #users-list tbody, #users-list th, #users-list td, #users-list tr {
+        display: block; /* Rend les éléments du tableau des blocs */
+    }
+    #users-list thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px; /* Cache le thead original */
+    }
+    #users-list td {
+        border: none; /* Supprime les bordures entre cellules */
+        border-bottom: 1px solid #eee; /* Remplace avec une bordure du bas */
+        position: relative;
+        padding-left: 50%; /* Espace pour le label */
+        text-align: right;
+        font-size: 0.85em;
+    }
+    #users-list td::before {
+        content: attr(data-label); /* Utilise l'attribut data-label pour afficher le titre */
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+    }
+    .action-buttons {
+        flex-direction: column; /* Empile les boutons d'action */
+        gap: 5px;
+        align-items: flex-end; /* Aligne à droite */
+    }
+    .action-buttons button {
+        width: 100%; /* Boutons d'action prennent toute la largeur disponible */
+    }
+    .back-button {
+        padding: 8px 15px;
+        font-size: 0.8em;
+        margin-top: 15px;
+    }
 }
