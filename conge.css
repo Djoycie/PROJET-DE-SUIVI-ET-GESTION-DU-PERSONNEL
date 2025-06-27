@@ -1,173 +1,106 @@
+/* Variables pour les couleurs */
+:root {
+    --primary-color: #b8aeec; /* Vert pour les actions principales */
+    --primary-hover-color: #e3f3ee; /* Vert plus foncé au survol */
+    --secondary-color: #007bff; /* Bleu pour les accents ou liens */
+    --secondary-hover-color: #0056b3; /* Bleu plus foncé au survol */
+    --background-light: #f8f9fa; /* Arrière-plan général clair */
+    --background-card: #ffffff; /* Arrière-plan des blocs de contenu */
+    --text-color-dark: #343a40; /* Texte foncé pour la lisibilité */
+    --text-color-light: #6c757d; /* Texte plus clair pour les descriptions */
+    --border-color: #dee2e6; /* Couleur des bordures */
+    --success-color: #28a745; /* Couleur de succès */
+    --info-color: #17a2b8; /* Couleur d'information */
+    --warning-color: #ffc107; /* Couleur d'avertissement */
+    --error-color: #dc3545; /* Couleur d'erreur */
+    --shadow-light: rgba(0, 0, 0, 0.08); /* Ombre légère */
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* Ombre moyenne */
+
+    /* Variables pour les nouvelles valeurs manquantes, basées sur des standards ou vos couleurs existantes */
+    --primary-dark-color: #9b91d2; /* Un peu plus foncé que primary-color */
+    --danger-color: var(--error-color); /* Utilise la variable error-color existante */
+    --light-bg-color: #f2f2f2; /* Pour les lignes alternées des tableaux */
+    --border-radius-base: 8px; /* Rayon de bordure standard */
+    --spacing-unit: 16px; /* Unité d'espacement de base */
+}
+
+/* --- Base et typographie --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-:root {
-    --primary-color: #b8aeec; /* Vert pour les actions principales */
-    --primary-hover-color: #e3f3ee; /* Vert plus foncé au survol */
-    --shadow-medium: rgba(0, 0, 0, 0.15); /* Ombre moyenne */
+
+h1, h2, h3 {
+    color: var(--text-color-dark); /* Utilisation de la variable pour 'black' */
+    margin-bottom: 1rem;
+    font-weight: 600;
 }
 
+h1 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--text-color-dark);
+}
+
+h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-top: 1.5rem;
+    color: var(--secondary-color);
+    text-align: center; /* Ajouté pour centrer les titres h2 */
+}
+
+h3 {
+    font-size: 1rem;
+    margin-top: 1.2rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-color-light);
+    text-align: center; /* Ajouté pour centrer les paragraphes si désiré */
+}
+
+/* --- Conteneur principal --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background: linear-gradient(to bottom,#e3f3ee,#214137);
+    background: linear-gradient(to bottom, #e3f3ee, #214137);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: #333;
-    display: flex;
+    display: flex; /* Utilisation de flexbox pour aligner la navigation et le contenu principal */
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-start; /* Aligner les éléments en haut */
     min-height: 100vh;
 }
 
 .container {
-    background-color:transparent;
+    background-color: transparent; /* Utilisation de la variable pour le fond */
     border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Utilisation de la variable */
     padding: 20px;
     width: 100%;
-    height: 632px;
-    max-width: 1100px;
+    min-height: 632px; /* FIXE LA HAUTEUR DU CONTENEUR À 632px */
+    max-width: 1100px; /* Largeur maximale pour une bonne lisibilité sur grand écran */
     text-align: center;
     margin-left: 2px;
-    margin-top: 10px;
+    margin-top: 30px;
     margin-right: 2px;
-    /*overflow-y: auto;  active le scroll vertical */
+    /*overflow-y: auto;  active le scroll vertical */ /* Re-enable if scrolling content is needed */
 }
 
-.header {
-    background: transparent;
-    color: white;
-    padding: 30px;
-    text-align: center;
+.page-content {
+    margin-top: 0; /* Réinitialisé pour ne pas perturber le container */
+    width: 100%; /* S'assure que le contenu remplit le container */
 }
 
-.header h1 {
-    margin-top: -45px;
-    font-size: 2.5em;
-    margin-bottom: 10px;
-    font-weight: 300;
-    color: black;
-}
-p{
-    color: black;
-    font-size: 0.9em;
-    margin-top: -9px;
-}
-
-.form-container {
-    padding: 10px;
-}
-
-.form-group {
-    margin-bottom: 10px;
-}
-
-.form-row {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 25px;
-}
-
-.form-group.half {
-    flex: 1;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #333;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid #e1e5e9;
-    border-radius: 10px;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    background: #f8f9fa;
-}
-
-input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: #667eea;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    transform: translateY(-2px);
-}
-
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-.btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-}
-
-.btn:active {
-    transform: translateY(-1px);
-}
-
-.success-message {
-    background: #d4edda;
-    color: #155724;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    border-left: 5px solid #28a745;
-    display: none;
-}
-
-.error-message {
-    background: #f8d7da;
-    color: #721c24;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    border-left: 5px solid #dc3545;
-    display: none;
-}
-
-.readonly {
-    background: #e9ecef !important;
-    cursor: not-allowed;
-}
-
-.duration-display {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    color: white;
-    padding: 15px;
-    border-radius: 10px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 10px;
-}
+/* --- Header Bar --- */
 .header-bar {
     background-color: transparent;
     color: white;
@@ -179,23 +112,35 @@ textarea {
     top: 0;
     z-index: 1000;
     gap: 8px;
-    margin-right: -45px;
 }
 .logo-container{
     position:  relative;
     border-radius: 50%;
     margin-left: -10px;
-    margin-right: 10px;
+    margin-right: 40px;
 }
 .log{
     background-color: #b8aeec;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 0.2rem;
-    margin-left: -0.7rem;
-    width: 150px;
-    height: 150px;
+    margin-top: -1rem;
+    margin-left: -0.8rem;
+    width: 120px;
+    height: 120px;
+    margin-right: -105px;
 }
+
+/* Navigation latérale (Menu .gauche) */
+.gauche{
+    display: flex;
+    margin-left:  -240px;
+    margin-top: 160px;
+    margin-right: 5px;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
 .button-nav{
     padding: 8px 20px;
     border-radius: 25px;
@@ -211,80 +156,242 @@ textarea {
     box-shadow: 0 4px 10px var(--shadow-medium);
     color: black;
 }
-.gauche{
+.button-la {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    color: rgb(7, 0, 0); /* Couleur de texte différente pour le bouton actif/sélectionné */
+    background-color: var(--primary-hover-color); /* Couleur de fond pour le bouton actif */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 15px;
+}
+
+
+a {
+    color: white; /* Couleur par défaut pour les liens */
+    text-decoration: none;
+}
+
+/* Styles pour les boutons "Voir" et "Déconnexion" (s'ils sont dans le menu gauche) */
+.voir, .button-dec {
+    padding: 10px 20px;
+    border-radius: 25px; /* Uniformiser le border-radius avec button-nav */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
     display: flex;
-    margin-left:  -150px;
-    margin-top: 180px;
-    margin-right: 5px;
-    flex-direction: column;
     align-items: center;
-}
-.container_s{
-    background-color: white;
-    margin-top: -10px;
-    height: 510px;
-    overflow-y: auto;
-    border-radius: 5px;
-    padding: 3px;
-}
-table {
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-table th, table td {
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-table th {
-    background-color: #ada0ec;
+    justify-content: center;
+    color: white;
+    margin-bottom: 10px;
+    width: 100%; /* S'aligner avec les autres boutons du menu */
+    text-decoration: none;
     font-weight: bold;
     text-align: center;
+    background-color: var(--primary-color); /* Couleur uniforme */
+    box-shadow: none; /* Pas d'ombre par défaut */
+    margin-left: 0; /* Réinitialiser les marges spécifiques */
+    margin-top: 0; /* Réinitialiser les marges spécifiques */
 }
 
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+.voir:hover, .button-dec:hover {
+    background-color: var(--primary-hover-color);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    color: black;
+    transform: none; /* Enlever le translateY(-2px) si non désiré ici */
 }
 
-table button {
-    padding: 5px 10px;
-    margin-right: 5px;
+/* Votre bloc de h1, h2 avec padding et border-bottom: */
+.header h1 { /* Targeted for the header block's h1 */
+    margin-top: -45px;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 300;
+    color: black;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color); /* Added from previous h1 style */
+}
+p { /* Targeted from your new code */
+    color: black;
+    font-size: 0.9em;
+    margin-top: -9px;
+    margin-bottom: 1rem; /* Kept original p margin */
+    text-align: center; /* Kept original p text-align */
+}
+
+/* Conteneurs principaux de contenu (Formulaires, Tableaux, Historique de Carrière) */
+.form-container, .table-container, .career-history-section {
+    background-color: var(--background-card); /* Utilisation de la variable */
+    padding: calc(var(--spacing-unit) * 1.5); /* Utilisation de la variable */
+    border-radius: var(--border-radius-base); /* Utilisation de la variable */
+    box-shadow: 0 4px 8px var(--shadow-light); /* Utilisation de la variable */
+    margin: var(--spacing-unit) auto; /* Utilisation de la variable */
+    max-width: 960px; /* Largeur maximale pour une meilleure lisibilité */
+    width: 100%; /* S'assurer qu'ils prennent la largeur disponible */
+    box-sizing: border-box; /* Important pour les paddings */
+}
+
+.form-container { /* Specific padding from your new code */
+    padding: 10px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: calc(var(--spacing-unit) * 2) 0; /* Utilisation de la variable */
+}
+
+/* Formulaires */
+.form-group { /* From new code */
+    margin-bottom: 10px;
+}
+
+.form-row { /* From new code */
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.form-group.half { /* From new code */
+    flex: 1;
+}
+
+label { /* Combined with previous label styles */
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333; /* Specific color from your new code */
+    font-size: 14px; /* Specific font-size from your new code */
+    text-transform: uppercase; /* Specific text-transform from your new code */
+    letter-spacing: 0.5px; /* Specific letter-spacing from your new code */
+    text-align: left; /* Keep consistency */
+}
+
+input, select, textarea { /* Combined with previous input styles */
+    width: 100%;
+    padding: 15px; /* Specific padding from your new code */
+    border: 2px solid #e1e5e9; /* Specific border from your new code */
+    border-radius: 10px; /* Specific border-radius from your new code */
+    font-size: 16px; /* Specific font-size from your new code */
+    transition: all 0.3s ease;
+    background: #f8f9fa; /* Specific background from your new code */
+    box-sizing: border-box; /* Ensures padding/border included in width */
+}
+
+input:focus, select:focus, textarea:focus { /* Combined with previous focus styles */
+    outline: none;
+    border-color: #667eea; /* Specific border-color from your new code */
+    background: white; /* Specific background from your new code */
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); /* Specific box-shadow from your new code */
+    transform: translateY(-2px); /* Specific transform from your new code */
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px; /* Adjusted from 80px to 100px based on new code */
+}
+
+/* Boutons */
+.btn { /* Combined with previous button styles */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Specific background from your new code */
+    color: white;
+    padding: 15px 30px; /* Specific padding from your new code */
+    border: none;
+    border-radius: 10px; /* Specific border-radius from your new code */
+    font-size: 16px; /* Specific font-size from your new code */
+    font-weight: 600;
     cursor: pointer;
-    border-radius: 4px;
+    transition: all 0.3s ease;
+    text-transform: uppercase; /* Specific text-transform from your new code */
+    letter-spacing: 1px; /* Specific letter-spacing from your new code */
 }
 
-.modifier-btn {
-  background-color: #faa404; /* orange */
-  color: white;
-  border: none;
-  padding: 3px 9px;;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 8px;
-  width: 79.5px;
-  margin-left:4px;
+.btn:hover { /* Combined with previous button hover styles */
+    transform: translateY(-3px); /* Specific transform from your new code */
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3); /* Specific box-shadow from your new code */
+}
+
+.btn:active { /* From new code */
+    transform: translateY(-1px);
+}
+
+.success-message { /* From new code */
+    background: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 5px solid #28a745;
+    display: none;
+}
+
+.error-message { /* From new code */
+    background: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 5px solid #dc3545;
+    display: none;
+}
+
+.readonly { /* From new code */
+    background: #e9ecef !important;
+    cursor: not-allowed;
+}
+
+.duration-display { /* From new code */
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* Boutons d'action dans les tableaux (from previous code) */
+.data-table button { /* Appliqué à tous les boutons dans .data-table */
+    padding: 6px 12px;
+    font-size: 0.9em;
+    margin-right: 5px;
+    border-radius: 5px; /* Pour un look plus doux */
+}
+
+.data-table button:last-child {
+    margin-right: 0;
+}
+
+/* Spécifiques pour les boutons Modifier et Supprimer dans les tableaux */
+.modifier-btn { /* Combined with .edit-btn styles */
+    background-color: #faa404; /* orange */
+    color: white;
+    border: none;
+    padding: 3px 9px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 8px;
+    width: 79.5px;
+    margin-left:4px;
 }
 .modifier-btn:hover {
-  background-color: #f0e007;
+    background-color: #f0e007;
 }
 
-.supprimer-btn {
-  background-color: #f1402d; /* Rouge */
-  color: white;
-  border: none;
-  padding: 3px 9px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 5px;
-  margin-left: 4px;
+.supprimer-btn { /* Combined with .delete-btn styles */
+    background-color: #f1402d; /* Rouge */
+    color: white;
+    border: none;
+    padding: 3px 9px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-left: 4px;
 }
-
-
 .supprimer-btn:hover {
-  background-color: #ff0909;
+    background-color: #ff0909;
 }
-.imprimer-btn{
+
+.imprimer-btn { /* New button style */
     background-color: #28a745; /* Vert */
     color: white;
     border: none;
@@ -295,7 +402,7 @@ table button {
     width: 79.5px;
     margin-left: 4px;
 }
-.pdf-btn{
+.pdf-btn { /* New button style */
     background-color: #007bff; /* Bleu */
     color: white;
     border: none;
@@ -306,13 +413,294 @@ table button {
     width: 79.5px;
     margin-left: 4px;
 }
-.button-la{
-    padding: 8px 20px;
-    border-radius: 25px;
+
+/* Tableaux (from new code, updated to be more generic) */
+.container_s { /* Renamed from your new code's .container_s */
+    background-color: white;
+    margin-top: -10px;
+    height: 510px;
+    overflow-y: auto;
+    border-radius: 5px;
+    padding: 3px;
+    /* This will be the main content area if you have a separate section for it */
+    /* If this is meant to be a scrollable table container, consider renaming to .table-scroll-container */
+}
+
+table {
+    width: 100%; /* Ensure table takes full width of its container */
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px; /* Added padding for readability */
+}
+
+table th {
+    background-color: #ada0ec; /* From your new code */
+    font-weight: bold;
+    text-align: center;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* From your new code */
+}
+
+table button { /* Generic table button style from your new code */
+    padding: 5px 10px;
+    margin-right: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    color: rgb(7, 0, 0);
-    margin-top: -5px;
+    border-radius: 4px;
+}
+
+/* ------------------------------------------------------------- */
+/* MEDIA QUERIES POUR LE RESPONSIVE DESIGN */
+/* ------------------------------------------------------------- */
+
+/* Large devices (desktops, 1350px and down) */
+@media (max-width: 1550px) {
+    body{
+        padding: 30px;
+    }
+    .container {
+        max-width: 1050px; /* Adjust container width */
+        margin-right: 6rem;
+        margin-left: 2rem;
+    }
+    .header-bar {
+        margin-right: -20px; /* Reduce negative margin */
+    }
+    .gauche {
+        margin-left: -90px; /* Adjust left menu position */
+        width: 180px; /* Slightly reduce width */
+    }
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: 7rem;
+    }
+
+}
+
+/* Large devices (desktops, 1290px and down) */
+@media (max-width: 1290px) {
+   body{
+        padding: 30px;
+    }
+    .container {
+        max-width: 1050px; /* Adjust container width */
+        margin-right: 6rem;
+        margin-left: 2rem;
+    }
+    .header-bar {
+        margin-right: -20px; /* Reduce negative margin */
+    }
+    .gauche {
+        margin-left: -90px; /* Adjust left menu position */
+        width: 180px; /* Slightly reduce width */
+    }
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: 7rem;
+    }
+}
+
+
+/* Medium devices (tablets, 750px and down) */
+@media (max-width: 1250px) {
+    body {
+        flex-direction: column; /* Stack header, menu, and content */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        position: relative; /* Less need for absolute as body is column */
+        top: unset;
+        left: unset;
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 90px;
+        height: 90px;
+        margin-top: 0;
+        margin-left: 0px;
+        margin-right: 0;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .gauche {
+        flex-direction: row; /* Make menu horizontal */
+        flex-wrap: wrap; /* Allow buttons to wrap */
+        justify-content: center;
+        width: 100%; /* Take full width */
+        margin: 15px 0; /* Top and bottom margin */
+        padding: 10px;
+        position: relative;
+        top: unset;
+        height: unset;
+        overflow-y: visible;
+        gap: 8px; /* Spacing between buttons */
+        margin-left: 0; /* Resetting specific negative margin */
+        margin-right: 0;
+    }
+
+    .button-nav, .button-la, .voir, .button-dec {
+        width: calc(50% - 10px); /* Two buttons per line */
+        max-width: 180px;
+        margin-bottom: 0;
+        font-size: 0.85em;
+        padding: 8px 10px;
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    .container {
+        width: 100%;
+        margin: 10px auto;
+        padding: 15px;
+        max-width: unset; /* No max-width for this size */
+        height: auto; /* Adapt to content on mobile */
+        overflow-y: visible; /* Let body handle scrolling */
+        box-shadow: none; /* Less shadow for small screens */
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    .form-container, .table-container, .career-history-section, .container_s {
+        padding: 15px;
+    }
+
+    form input[type="text"],
+    form input[type="date"],
+    form select,
+    form textarea {
+        width: 100%;
+        padding: 8px;
+    }
+
+    form textarea {
+        min-height: 60px;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        width: 100%; /* Buttons take full width on mobile */
+        margin-bottom: 10px;
+    }
+    /* Permettre le défilement horizontal du tableau sur les petits écrans */
+    table {
+        min-width: 600px; /* Minimum width to prevent content overlap */
+        display: block; /* Allows overflow-x to work */
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+    }
+
+    table th, table td {
+        padding: 8px;
+        font-size: 0.85em;
+    }
+}
+
+/* Styles for very small screens (smartphones, 400px and down) */
+@media (max-width: 400px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 60px;
+        height: 60px;
+    }
+
+    #welcome-message {
+        font-size: 0.8rem;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la, .voir, .button-dec {
+        width: 100%; /* All buttons on their own line */
+        font-size: 0.8em;
+        padding: 6px 8px;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+    h2 {
+        font-size: 1em;
+    }
+
+    .form-container, .table-container, .career-history-section, .container_s {
+        padding: 10px;
+    }
+
+    form input[type="text"],
+    form input[type="date"],
+    form select,
+    form textarea {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    form textarea {
+        min-height: 50px;
+    }
+
+    .btn {
+        padding: 6px 10px;
+        font-size: 0.85em;
+        margin-bottom: 8px;
+    }
+
+    table {
+        min-width: 350px; /* Further reduce min-width for very small screens */
+    }
+    table th, table td {
+        padding: 6px;
+        font-size: 0.75em;
+    }
+    .modifier-btn, .supprimer-btn, .imprimer-btn, .pdf-btn {
+        padding: 3px 5px; /* Smaller padding for actions buttons */
+        font-size: 0.7em;
+    }
 }
