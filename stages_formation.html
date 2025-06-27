@@ -3,39 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Stages - Module RH</title>
+    <title>Gestion Intégrale des Stages - Module RH</title>
     <link rel="stylesheet" href="stage.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
 </head>
 <body>
     <div class="header-bar">
         <span id="welcome-message"></span>
-         <div class="logo-container">
+        <div class="logo-container">
             <img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/HR-etoile2.png" alt="Logo" class="log">
-         </div>
-    </div>
-    
-    <div class="gauche">
-       <b class="button-nav" onclick="location.href='analyse_cv.html'">Recrutement</b>
-       <b class="button-nav" onclick="location.href='postes.html'">Postes</b>
-       <b class="button-nav" onclick="location.href='personnel.html'">Personnel</b>
-       <b class="button-nav" onclick="location.href='carriere.html'">Carrière</b>
-       <b class="button-nav" onclick="location.href='conges.html'">Congés</b>
-       <b class="button-nav" onclick="location.href='paie.html'">Paie</b>
-       <b class="button-nav" onclick="location.href='stages_formation.html'">Stage/formation</b>
-       <b class="button-nav" onclick="location.href='plan_activite.html'">Statistiques</b>
-       <b class="button-nav" onclick="location.href='utilisateurs.html'">Utilisateurs</b>
-       <b class="button-nav" onclick="location.href='audit.html'">Audit</b>
-       <b class="button-nav" onclick="location.href='sauvegarde.html'">Sauvegardes</b>
-       <b class="button-nav" onclick="location.href='parametres.html'">Paramètres</b>
-        <a href="accueil.html" class="button-nav"><b>Retour</B></a>
+        </div>
     </div>
 
-    
+    <div class="gauche">
+        <b class="button-nav" onclick="location.href='analyse_cv.html'">Recrutement</b>
+        <b class="button-nav" onclick="location.href='postes.html'">Postes</b>
+        <b class="button-nav" onclick="location.href='personnel.html'">Personnel</b>
+        <b class="button-nav" onclick="location.href='carriere.html'">Carrière</b>
+        <b class="button-nav" onclick="location.href='conges.html'">Congés</b>
+        <b class="button-nav" onclick="location.href='paie.html'">Paie</b>
+        <b class="button-nav" onclick="location.href='stages_formation.html'">Stage/formation</b>
+        <b class="button-nav" onclick="location.href='plan_activite.html'">Statistiques</b>
+        <b class="button-nav" onclick="location.href='utilisateurs.html'">Utilisateurs</b>
+        <b class="button-nav" onclick="location.href='audit.html'">Audit</b>
+        <b class="button-nav" onclick="location.href='sauvegarde.html'">Sauvegardes</b>
+        <b class="button-nav" onclick="location.href='parametres.html'">Paramètres</b>
+        <a href="accueil.html" class="button-nav"><b>Retour</b></a>
+    </div>
+
+
     <div class="container">
         <header class="header">
-            <h1><i class="icon">🎓</i> Gestion des Stages</h1>
+            <h1>🎓 Gestion Intégrale des Stages</h1>
             <div class="header-stats">
                 <div class="stat-card">
                     <span class="stat-number" id="totalStages">0</span>
@@ -45,105 +47,162 @@
                     <span class="stat-number" id="stagesEnCours">0</span>
                     <span class="stat-label">En cours</span>
                 </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="stagesTermines">0</span>
+                    <span class="stat-label">Terminés</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="dureemoyenne">0</span>
+                    <span class="stat-label">Durée moy. (j)</span>
+                </div>
             </div>
         </header>
 
 
         <div class="container_s">
-        <div class="main-content">
-            <!-- Formulaire d'ajout -->
-            <div class="form-section">
-                <h2>Enregistrer un nouveau stagiaire</h2>
-                <form id="formStage" class="stage-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nom">Nom *</label>
-                            <input type="text" id="nom" required placeholder="Nom du stagiaire" />
+            <div class="main-content">
+                <!-- Formulaire d'ajout -->
+                <div class="form-section">
+                    <h2>📝 Enregistrer un nouveau stagiaire</h2>
+                    <form id="formStage" class="stage-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nom">Nom *</label>
+                                <input type="text" id="nom" required placeholder="Nom du stagiaire" />
+                            </div>
+                            <div class="form-group">
+                                <label for="prenom">Prénom *</label>
+                                <input type="text" id="prenom" required placeholder="Prénom du stagiaire" />
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="prenom">Prénom *</label>
-                            <input type="text" id="prenom" required placeholder="Prénom du stagiaire" />
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dateNaissance">Date de naissance *</label>
+                                <input type="date" id="dateNaissance" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="typeStage">Type de stage *</label>
+                                <select id="typeStage" required>
+                                    <option value="">-- Sélectionnez --</option>
+                                    <option value="académique">Académique</option>
+                                    <option value="professionnel">Professionnel</option>
+                                    <option value="observation">Observation</option>
+                                    <option value="technique">Technique</option>
+                                </select>
+                            </div>
                         </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dateDebut">Date début stage *</label>
+                                <input type="date" id="dateDebut" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="dateFin">Date fin stage *</label>
+                                <input type="date" id="dateFin" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="duree">Durée (jours)</label>
+                                <input type="number" id="duree" readonly class="readonly-field" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="agence">Agence *</label>
+                                <select id="agence" required>
+                                    <option value="">-- Chargement des agences... --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="departement">Département *</label>
+                                <select id="departement" required>
+                                    <option value="">-- Choisissez une agence d'abord --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="encadreur">Encadreur *</label>
+                                <select id="encadreur" required>
+                                    <option value="">-- Sélection automatique --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="smart-suggestions" id="smartSuggestions" style="display: none;">
+                            <h4>💡 Suggestions intelligentes:</h4>
+                            <div id="suggestionsContent"></div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                💾 Enregistrer le stagiaire
+                            </button>
+                            <button type="button" id="btnReset" class="btn btn-secondary">
+                                🔄 Réinitialiser
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Section Analytics -->
+                <div class="analytics-section">
+                    <h2>📊 Analyses Intelligentes</h2>
+
+                    <div class="chart-container">
+                        <canvas id="stagesChart"></canvas>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="dateNaissance">Date de naissance *</label>
-                            <input type="date" id="dateNaissance" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="typeStage">Type de stage *</label>
-                            <select id="typeStage" required>
-                                <option value="">-- Sélectionnez --</option>
-                                <option value="académique">Académique</option>
-                                <option value="professionnel">Professionnel</option>
-                            </select>
-                        </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="completionRate" style="width: 0%"></div>
                     </div>
+                    <small id="completionText">Taux de complétion: 0%</small>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="dateDebut">Date début stage *</label>
-                            <input type="date" id="dateDebut" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="dateFin">Date fin stage *</label>
-                            <input type="date" id="dateFin" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="duree">Durée (jours)</label>
-                            <input type="number" id="duree" readonly class="readonly-field" />
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="departement">Département *</label>
-                            <select id="departement" required>
-                                <option value="">-- Chargement... --</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="encadreur">Encadreur *</label>
-                            <select id="encadreur" required>
-                                <option value="">-- Choisissez un département d'abord --</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="icon">💾</i> Enregistrer le stagiaire
+                    <div class="btn-group" style="margin-top: 15px;">
+                        <button id="btnGenerateReport" class="btn btn-success">
+                            📈 Rapport Automatique
                         </button>
-                        <button type="button" id="btnReset" class="btn btn-secondary">
-                            <i class="icon">🔄</i> Réinitialiser
+                        <button id="btnPredictiveAnalysis" class="btn btn-warning">
+                            🔮 Analyse Prédictive
                         </button>
                     </div>
-                </form>
+                </div>
             </div>
 
             <!-- Section de filtrage et recherche -->
             <div class="filter-section">
-                <h2>Liste des stagiaires</h2>
-                
+                <h2>🔍 Recherche et Filtres Avancés</h2>
+
                 <div class="filters">
-                    <div class="filter-group">
+                    <div class="form-group">
+                        <label for="filterAgence">Agence:</label>
+                        <select id="filterAgence">
+                            <option value="">Toutes les agences</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="filterDepartement">Département:</label>
                         <select id="filterDepartement">
                             <option value="">Tous les départements</option>
                         </select>
                     </div>
-                    
-                    <div class="filter-group">
+
+                    <div class="form-group">
                         <label for="filterType">Type:</label>
                         <select id="filterType">
                             <option value="">Tous types</option>
                             <option value="académique">Académique</option>
                             <option value="professionnel">Professionnel</option>
+                            <option value="observation">Observation</option>
+                            <option value="technique">Technique</option>
                         </select>
                     </div>
-                    
-                    <div class="filter-group">
+
+                    <div class="form-group">
                         <label for="filterStatut">Statut:</label>
                         <select id="filterStatut">
                             <option value="">Tous statuts</option>
@@ -152,34 +211,46 @@
                             <option value="Suspendu">Suspendu</option>
                         </select>
                     </div>
-                    
-                    <div class="filter-group search-group">
+
+                    <div class="form-group">
                         <label for="searchInput">Rechercher:</label>
-                        <input type="text" id="searchInput" placeholder="Nom ou prénom..." />
+                        <input type="text" id="searchInput" placeholder="Nom, prénom, encadreur..." />
                     </div>
-                    
-                    <div class="filter-actions">
-                        <button id="btnSearch" class="btn btn-search">
-                            <i class="icon">🔍</i> Rechercher
-                        </button>
-                        <button id="btnClearFilters" class="btn btn-secondary">
-                            <i class="icon">🗑</i> Effacer
-                        </button>
+
+                    <div class="form-group">
+                        <label for="filterPeriode">Période:</label>
+                        <select id="filterPeriode">
+                            <option value="">Toutes périodes</option>
+                            <option value="current_month">Mois actuel</option>
+                            <option value="last_month">Mois dernier</option>
+                            <option value="current_year">Année actuelle</option>
+                            <option value="custom">Personnalisée</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="export-actions">
+                    <button id="btnSearch" class="btn btn-primary">
+                        🔍 Rechercher
+                    </button>
+                    <button id="btnClearFilters" class="btn btn-secondary">
+                        🗑 Effacer
+                    </button>
                     <button id="btnPrint" class="btn btn-export">
-                        <i class="icon">🖨</i> Imprimer
+                        🖨 Imprimer
                     </button>
                     <button id="btnExportPDF" class="btn btn-export">
-                        <i class="icon">📄</i> Exporter PDF
+                        📄 Export PDF
+                    </button>
+                    <button id="btnExportExcel" class="btn btn-export">
+                        📊 Export Excel
                     </button>
                 </div>
             </div>
 
             <!-- Table des résultats -->
             <div class="table-section">
+                <h2>📋 Liste des Stagiaires</h2>
                 <div class="table-container">
                     <table id="stagesTable" class="stages-table">
                         <thead>
@@ -189,51 +260,92 @@
                                 <th>Date naissance</th>
                                 <th>Période de stage</th>
                                 <th>Durée</th>
+                                <th>Agence</th>
                                 <th>Département</th>
                                 <th>Encadreur</th>
                                 <th>Type</th>
                                 <th>Statut</th>
+                                <th>Progression</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="no-data">
-                                <td colspan="10">Aucun stagiaire trouvé</td>
+                                <td colspan="12">Aucun stagiaire trouvé</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Modal pour modifier le statut -->
-    <div id="statusModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Modifier le statut</h3>
-                <span class="close">&times;</span>
-            </div>
-            <div class="modal-body">
-                <p>Stagiaire: <span id="stagiaireNom"></span></p>
-                <div class="form-group">
-                    <label for="nouveauStatut">Nouveau statut:</label>
-                    <select id="nouveauStatut">
-                        <option value="En cours">En cours</option>
-                        <option value="Terminé">Terminé</option>
-                        <option value="Suspendu">Suspendu</option>
-                    </select>
+        <!-- Modal pour modifier le statut -->
+        <div id="statusModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Modifier le statut</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>Stagiaire: <span id="stagiaireNom"></span></p>
+                    <div class="form-group">
+                        <label for="nouveauStatut">Nouveau statut:</label>
+                        <select id="nouveauStatut">
+                            <option value="En cours">En cours</option>
+                            <option value="Terminé">Terminé</option>
+                            <option value="Suspendu">Suspendu</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="commentaireStatut">Commentaire (optionnel):</label>
+                        <textarea id="commentaireStatut" rows="3" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnConfirmStatus" class="btn btn-primary">Confirmer</button>
+                    <button id="btnCancelStatus" class="btn btn-secondary">Annuler</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button id="btnConfirmStatus" class="btn btn-primary">Confirmer</button>
-                <button id="btnCancelStatus" class="btn btn-secondary">Annuler</button>
+        </div>
+
+        <!-- Modal d'évaluation -->
+        <div id="evaluationModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Évaluation du Stage</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p>Stagiaire: <span id="evaluationStagiaire"></span></p>
+                    <div class="form-group">
+                        <label for="noteGlobale">Note Globale (sur 20):</label>
+                        <input type="number" id="noteGlobale" min="0" max="20" step="0.5" />
+                    </div>
+                    <div class="form-group">
+                        <label for="competencesTechniques">Compétences Techniques:</label>
+                        <select id="competencesTechniques">
+                            <option value="Excellent">Excellent</option>
+                            <option value="Très bien">Très bien</option>
+                            <option value="Bien">Bien</option>
+                            <option value="Satisfaisant">Satisfaisant</option>
+                            <option value="Insuffisant">Insuffisant</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="commentaireEvaluation">Commentaire d'évaluation:</label>
+                        <textarea id="commentaireEvaluation" rows="4" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnConfirmEvaluation" class="btn btn-primary">Enregistrer</button>
+                    <button id="btnCancelEvaluation" class="btn btn-secondary">Annuler</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-    <!-- Notifications -->
-    <div id="notification" class="notification"></div>
-    <script src="stage.js"></script>
-</body>
-</html>
+
+        <!-- Notifications -->
+        <div id="notification" class="notification"></div>
+
+        <a href="accueil.html" class="back-button">← Retour au Tableau de Bord</a>
+
+        <script src="stage.js"></script>
