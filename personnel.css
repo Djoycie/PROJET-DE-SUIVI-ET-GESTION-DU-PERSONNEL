@@ -1,28 +1,45 @@
+/* Variables pour les couleurs */
+:root {
+    --primary-color: #b8aeec; /* Vert pour les actions principales */
+    --primary-hover-color: #e3f3ee; /* Vert plus foncé au survol */
+    --secondary-color: #007bff; /* Bleu pour les accents ou liens */
+    --secondary-hover-color: #0056b3; /* Bleu plus foncé au survol */
+    --background-light: #f8f9fa; /* Arrière-plan général clair */
+    --background-card: transparent; /* Arrière-plan des blocs de contenu */
+    --text-color-dark: #343a40; /* Texte foncé pour la lisibilité */
+    --text-color-light: #6c757d; /* Texte plus clair pour les descriptions */
+    --border-color: #dee2e6; /* Couleur des bordures */
+    --success-color: #28a745; /* Couleur de succès */
+    --info-color: #17a2b8; /* Couleur d'information */
+    --warning-color: #ffc107; /* Couleur d'avertissement */
+    --error-color: #dc3545; /* Couleur d'erreur */
+    --shadow-light: rgba(0, 0, 0, 0.08); /* Ombre légère */
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* Ombre moyenne */
+}
+
+/* Base et réinitialisation */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background: linear-gradient(to bottom,#e3f3ee,#214137);
+    background: linear-gradient(to bottom, #e3f3ee, #214137);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: #333;
-    display: flex;
+    display: flex; /* Utilisation de flexbox pour aligner la navigation et le contenu principal */
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-start; /* Aligner les éléments en haut */
+    min-height: 100vh;
 }
-#personnel-section{
-  background-color:transparent;
-    border-radius: 12px;
-    width: 98%;
-    text-align: center;
-    margin-top: -15px;
-}
-.section-personnel {
-  margin-top: -10px;
-  max-height: 510px;         /* Limite la hauteur visible */
-  overflow-y: auto;          /* Active le scroll vertical */
-}
+
+/* En-tête */
 .header-bar {
     background-color: transparent;
     color: white;
@@ -38,25 +55,33 @@ body {
 .logo-container{
     position:  relative;
     border-radius: 50%;
-    margin-left: -15px;
-    margin-right: 15px;
+    margin-left: -42px;
+    margin-right: 45px;
 }
 .log{
     background-color: #b8aeec;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 0.2rem;
-    margin-left: -0.7rem;
-    width: 150px;
-    height: 150px;
+    margin-top: -1rem;
+    margin-left: -3px;
+    width: 120px;
+    height: 120px;
+    display: flex;
 }
-:root {
-      --primary-color: #b8aeec; /* Vert pour les actions principales */
-    --primary-hover-color: #e3f3ee; /* Vert plus foncé au survol */
-    --secondary-color: #007bff; /* Bleu pour les accents ou liens */
-    --secondary-hover-color: #0056b3; /* Bleu plus foncé au survol */
- 
-  }
+
+
+
+/* Navigation latérale (Menu .gauche) */
+.gauche{
+    display: flex;
+    margin-left:  -220px;
+    margin-top: 140px;
+    margin-right: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
 .button-nav{
     padding: 8px 20px;
     border-radius: 25px;
@@ -72,376 +97,887 @@ body {
     box-shadow: 0 4px 10px var(--shadow-medium);
     color: black;
 }
-.gauche{
+.button-la {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    color: rgb(7, 0, 0); /* Couleur de texte différente pour le bouton actif/sélectionné */
+    background-color: var(--primary-hover-color); /* Couleur de fond pour le bouton actif */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 15px;
+}
+
+/* Conteneur principal et sections de module */
+.module-block[data-module="personnel"] {
+    background-color: var(--background-card); /* Utiliser la variable pour le fond blanc */
+    max-width: 1100px; /* Largeur optimale pour 1200px d'écran, peut être ajustée */
+    width: 100%; /* Prend toute la largeur disponible jusqu'à max-width */
+    margin: 10px 0 20px 0; /* Marge supérieure pour laisser de la place à l'en-tête */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    height: 600px; /* FIXE LA HAUTEUR DU BLOC GLOBAL DU PERSONNEL */
+    overflow-y: auto; /* Permet le défilement de tout le contenu si la hauteur est dépassée */
     display: flex;
-    margin-left:  -210px;
-    margin-top: 180px;
-    margin-right: 15px;
     flex-direction: column;
     align-items: center;
-}
-.training{
-  display: flex;
-  margin-top: -25px;
-  margin-bottom: -10px;
+    position: relative;
+    margin-left: 10px; /* Décalage pour laisser de la place à la navigation latérale */
 
 }
 
-/* personnel.css */
-/*background du container*/
-.module-block[data-module="personnel"] {
-  background-color:transparent;
-    max-width: 870px;
-    margin: 20px auto;
-    background: transparent;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    margin-left: 9px;
-    height: 610px;
+#personnel-section {
+    background-color: transparent;
+    border-radius: 12px;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px 20px;
 }
+
+.section-personnel {
+    max-height: unset; /* Enlever les contraintes de hauteur si le parent gère le défilement */
+    overflow-y: visible; /* Laisser le parent (module-block) gérer le défilement */
+    width: 100%;
+}
+
 .contour2 {
     display: flex;
     justify-content: center;
     margin-bottom: 15px;
 }
+
 .circle {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background: #f0f0f0;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    margin-top: 12px;
-    margin-left: -23px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    padding: 10px;
 }
-.circle img {
-    max-width: 80%;
-    max-height: 80%;
+
+.circle img.training {
+    max-width: 70%;
+    max-height: 70%;
 }
+
 h2 {
     text-align: center;
-    margin-bottom: 0px;
-    color: black;
-}
-.droite{
-  margin-left: 18px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
+    margin-bottom: 20px;
+    color: var(--text-color-dark);
+    font-size: 2em;
 }
 
-/* Style général pour le formulaire */
-/*container des inputs*/
+/* Formulaire */
 #add-employee-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 700px;
-  margin: 2px auto;
-  background: #fff;
-  padding: 24px 32px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px #0001;
-  margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    margin: 0 auto;
+    /* Pas de max-height ici, le formulaire s'adaptera au contenu. */
+    /* Si le formulaire seul devient trop grand pour la hauteur de 600px du module-block,
+       alors le module-block entier défilera. */
 }
-/*inputs*/
-#add-employee-form input {
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 190px;
+.mini{
+    background-color: white;
+    border-radius: 15px;
 }
-#add-employee-form select{
-  padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 210px;
+
+.droite {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px 30px;
+    padding: 0 10px;
 }
-#add-employee-form button {
-    grid-column: span 2;
-    background: #4CAF50;
+
+label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-weight: 500;
+    color: var(--text-color-dark);
+    font-size: 0.95em;
+}
+
+#add-employee-form input,
+#add-employee-form select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    margin-top: 5px;
+    font-size: 1em;
+    background-color: var(--background-light);
+}
+
+#add-employee-form button[type="submit"] {
+    background: var(--success-color);
     color: white;
     border: none;
     cursor: pointer;
-    display: flex;
-    margin-left: 254px;
-    padding: 12px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    width: 208px;
-    display: flex;
-    justify-content: center;
+    padding: 12px 25px;
+    border-radius: 6px;
+    width: auto;
+    margin: 20px auto 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
 }
-.search-filter {
-    display: flex;
-    gap: 10px;
+
+#add-employee-form button[type="submit"]:hover {
+    background-color: #36a459;
+}
+
+/* Section de liste du personnel (recherche, filtres, tableau) */
+h3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: var(--text-color-dark);
+    font-size: 1.7em;
+}
+
+#search-personnel,
+#filter-departement,
+#filter-poste,
+#filter-type-contrat,
+#filter-agence {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
     margin-bottom: 15px;
-}
-.search-filter input, .search-filter select {
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    width: 200px;
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 0.95em;
+    background-color: var(--background-light);
 }
 
-.action-btn {
-    background: #4CAF50;
-    color: white;
+#reset-filters,
+#download-filtered-pdf,
+#print-emp2 {
+    padding: 10px 20px;
     border: none;
-    padding: 5px 10px;
-    margin: 2px;
-    border-radius: 3px;
+    border-radius: 6px;
     cursor: pointer;
-}
-/* Fond semi-transparent pour la modale */
-.modal {
-  display: none; /* Par défaut cachée, JS met display:block */
-  position: fixed;
-  z-index: 1000;
-  left: 0; top: 0; right: 0; bottom: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(44, 44, 44, 0.55);
-  justify-content: center;
-  align-items: center;
+    background-color: var(--info-color);
+    color: white;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+    font-size: 0.95em;
 }
 
-/* Centrage du contenu */
-.modal-content {
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 6px 32px #0003;
-  max-width: 480px;
-  width: 92vw;
-  margin: auto;
-  padding: 32px 28px 24px 28px;
-  position: relative;
-  animation: modalIn 0.25s;
+#reset-filters:hover,
+#download-filtered-pdf:hover,
+#print-emp2:hover {
+    background-color: var(--secondary-hover-color);
 }
 
-.texte{
-  display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 35px;
-    justify-content: center;
-}
-
-@keyframes modalIn {
-  from { transform: translateY(-40px) scale(0.97); opacity: 0; }
-  to   { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-/* Bouton de fermeture */
-.close {
-  position: absolute;
-  top: 14px;
-  right: 18px;
-  font-size: 2em;
-  color: #6c63ff;
-  cursor: pointer;
-  font-weight: bold;
-  transition: color 0.2s;
-}
-.close:hover {
-  color: #d32f2f;
-}
-
-/* Corps de la modale */
-#modal-emp-body {
-  margin-top: 12px;
-  font-size: 1.07em;
-  color: #333;
-  line-height: 1.7;
-}
-
-/* Boutons dans la modale */
-.modal-content button {
-  background: #6c63ff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  padding: 9px 18px;
-  font-size: 1em;
-  margin-right: 8px;
-  margin-top: 8px;
-  cursor: pointer;
-}
-.modal-content button:hover {
-  background: #574fd6;
-}
-
-/* Responsive */
-@media (max-width: 550px) {
-  .modal-content {
-    padding: 18px 6vw 16px 6vw;
-    max-width: 99vw;
-  }
-  .close {
-    top: 9px;
-    right: 14px;
-    font-size: 1.5em;
-  }
-}
-
-.fiche-employe {
-  background: #f8f8fa;
-  border-radius: 14px;
-  padding: 28px 36px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.10);
-  font-family: 'Segoe UI', Arial, sans-serif;
-  max-width: 420px;
-  margin: 0 auto;
-}
-.fiche-employe h2 {
-  text-align: center;
-  color: #2d3a4a;
-  margin-bottom: 22px;
-  font-size: 1.6em;
-  letter-spacing: 1px;
-}
-.fiche-employe ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.fiche-employe li {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  font-size: 1.13em;
-  background: #fff;
-  border-radius: 6px;
-  padding: 7px 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-}
-.fiche-employe span {
-  color: #444;
-  font-weight: 500;
-}
-.fiche-employe b {
-  color: #1a77d2;
-  font-weight: 600;
-}
-
-.sort-sign {
-  font-size: 0.8em;
-  margin-left: 4px;
-  color: #888;
-}
-th[data-col] {
-  cursor: pointer;
-}
-
-/* Spécifique pour la div durée du contrat */
-#duree-contrat-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 12px;
-}
-
-/* Pour que le label et l'input soient bien alignés */
-#duree-contrat-container label {
-  margin-bottom: 3px;
-}
-
-#duree-contrat-container input {
-  width: 100%;
-  padding: 7px 10px;
-  border: 1px solid #bbb;
-  border-radius: 4px;
-  font-size: 1em;
-  background: #fff;
-  box-sizing: border-box;
+/* Tableau */
+.table-container-scroll {
+    overflow-x: auto; /* Permet le défilement horizontal */
+    max-width: 100%;
+    margin: 20px auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    /* Hauteur maximale pour le tableau et activation du défilement vertical */
+    max-height: 250px; /* Ajustez cette valeur pour contrôler la hauteur du tableau */
+    overflow-y: auto; /* Permet le défilement vertical du tableau */
 }
 
 #table-personnel {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 24px 0;
-  font-size: 1em;
-  background: #fff;
-  box-shadow: 0 2px 8px #0001;
-  border-radius: 8px;
-  overflow: hidden;
-
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    background: var(--background-card);
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 1200px;
 }
 
 #table-personnel thead {
-  background: #ada0ec;
-  color: #fff;
+    background: var(--primary-color);
+    color: #fff;
+    position: sticky; /* Rend l'en-tête du tableau collant */
+    top: 0;
+    z-index: 1; /* Assure que l'en-tête reste au-dessus du contenu défilant */
 }
 
-#table-personnel th, #table-personnel td {
-  padding: 12px 10px;
-  text-align: left;
+#table-personnel th,
+#table-personnel td {
+    padding: 12px 15px;
+    text-align: left;
+    white-space: nowrap;
 }
 
 #table-personnel th {
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  position: relative;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    position: relative;
+    cursor: pointer;
 }
 
 #table-personnel tbody tr {
-  border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#table-personnel tbody tr:last-child {
+    border-bottom: none;
 }
 
 #table-personnel tbody tr:hover {
-  background: #f5f5ff;
+    background: var(--background-light);
 }
 
-
-@media (max-width: 900px) {
-  #table-personnel th, #table-personnel td {
-    padding: 8px 4px;
-    font-size: 0.95em;
-  }
-}
-.table-container-scroll {
-  overflow-x: auto;
-  max-width: 100%;
-  margin: 20px;
+.edit-emp, .delete-emp {
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 8px;
+    width: auto;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
 }
 
-.table-container-scroll table {
-  min-width: 1200px; /* Ajuste selon tes colonnes */
-  border-collapse: collapse;
-}
 .edit-emp {
-  background-color: #faa404; /* orange */
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 8px;
-  width: 85px;
+    background-color: var(--warning-color);
+    color: var(--text-color-dark);
 }
 
 .delete-emp {
-  background-color: #f1402d; /* Rouge */
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 9px;
+    background-color: var(--error-color);
+    color: white;
 }
 
 .edit-emp:hover {
-  background-color: #f0e007;
+    background-color: #e6b300;
 }
 
 .delete-emp:hover {
-  background-color: #ff0909;
+    background-color: #c82333;
 }
-.button-la{
-    padding: 8px 20px;
-    border-radius: 25px;
+
+/* Modale */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(44, 44, 44, 0.55);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--background-card);
+    border-radius: 14px;
+    box-shadow: 0 6px 32px var(--shadow-medium);
+    max-width: 500px;
+    width: 90vw;
+    margin: auto;
+    padding: 30px;
+    position: relative;
+    animation: modalIn 0.25s;
+}
+
+@keyframes modalIn {
+    from {
+        transform: translateY(-40px) scale(0.97);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2.2em;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: var(--error-color);
+}
+
+#modal-emp-body {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: var(--text-color-dark);
+    line-height: 1.8;
+    text-align: left;
+}
+
+.modal-content button {
+    background: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-right: 10px;
+    margin-top: 15px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background: var(--secondary-hover-color);
+}
+
+.fiche-employe {
+    background: var(--background-light);
+    border-radius: 14px;
+    padding: 25px 30px;
+    box-shadow: 0 4px 18px var(--shadow-medium);
+    max-width: 450px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.fiche-employe h2 {
+    text-align: center;
+    color: var(--text-color-dark);
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.fiche-employe ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fiche-employe li {
     display: flex;
-    align-items: center;
-    color: rgb(7, 0, 0);
-    margin-top: -5px;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+    font-size: 1em;
+    background: var(--background-card);
+    border-radius: 6px;
+    padding: 8px 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.fiche-employe span {
+    color: var(--text-color-light);
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.fiche-employe b {
+    color: var(--secondary-color);
+    font-weight: 600;
+    text-align: right;
+}
+
+.sort-sign {
+    font-size: 0.8em;
+    margin-left: 4px;
+    color: #888;
+}
+
+th[data-col] {
+    cursor: pointer;
+}
+
+#duree-contrat-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+#duree-contrat-container label {
+    margin-bottom: 3px;
+}
+
+#duree-contrat-container input {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 1em;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------- */
+/* MEDIA QUERIES POUR LE RESPONSIVE DESIGN */
+/* ------------------------------------------------------------- */
+
+/* Styles pour les écrans jusqu'à 1190px (grands ordinateurs portables, moniteurs) */
+@media (min-width: 1390px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 10px;
+    }
+    .log {
+        width: 100px;
+        height: 100px;
+        margin: 0px;
+    }
+
+    .gauche {
+        width: 180px;
+        margin-right:-5px;
+        margin-top: 150px;
+    }
+
+    .button-nav, .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .module-block[data-module="personnel"] {
+        max-width: 970px;
+        margin-top: 20px;
+        padding: 5px;
+        height: 580px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+    }
+
+    .circle {
+        width: 90px;
+        height: 90px;
+        margin-top: 5px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    #add-employee-form {
+        padding: 20px 25px;
+    }
+
+    .droite {
+        grid-template-columns: repeat(2, 1fr); /* Passe à 2 colonnes */
+        gap: 20px;
+    }
+
+    #add-employee-form button[type="submit"] {
+        width: 200px;
+        padding: 10px 20px;
+    }
+
+    #search-personnel,
+    #filter-departement,
+    #filter-poste,
+    #filter-type-contrat,
+    #filter-agence {
+        width: 180px;
+        margin-right: 10px;
+    }
+
+    #reset-filters,
+    #download-filtered-pdf,
+    #print-emp2 {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .table-container-scroll {
+        max-height: 200px; /* Ajuster la hauteur du tableau défilant */
+        min-width: 900px;
+    }
+
+    #table-personnel th,
+    #table-personnel td {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+}
+
+/*styles pour ordinateurs et tablettes jusqu'à 1050px */
+@media (max-width: 1150px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        position: relative;
+        top: unset;
+        left: unset;
+        width: 100%;
+    }
+
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-left: -3px;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .gauche {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        margin: 15px 0;
+        padding: 10px;
+        position: relative;
+        top: unset;
+        height: unset;
+        overflow-y: visible;
+        gap: 8px;
+        margin-left: 23px;
+    }
+
+    .button-nav, .button-la {
+        width: calc(50% - 10px);
+        max-width: 180px;
+        margin-bottom: 0;
+        font-size: 0.85em;
+        padding: 8px 10px;
+    }
+
+    .module-block[data-module="personnel"] {
+        width: 100%;
+        margin: 10px auto;
+        padding: 10px;
+        max-width: unset;
+        height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
+        overflow-y: visible; /* Laisser le body gérer le défilement */
+    }
+
+    .circle {
+        width: 80px;
+        height: 80px;
+        margin-top: -30px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    #add-employee-form {
+        padding: 15px 20px;
+    }
+
+    .droite {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0;
+    }
+
+    #add-employee-form button[type="submit"] {
+        width: 100%;
+        margin: 20px 0 0;
+    }
+
+    #search-personnel,
+    #filter-departement,
+    #filter-poste,
+    #filter-type-contrat,
+    #filter-agence {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 8px;
+        width: 100%;
+        max-width: unset;
+    }
+
+    #reset-filters,
+    #download-filtered-pdf,
+    #print-emp2 {
+        width: 100%;
+        margin-bottom: 8px;
+        margin-right: 0;
+    }
+
+    .table-container-scroll {
+        margin: 15px auto;
+        max-height: 200px; /* Maintenir la hauteur de défilement pour le tableau */
+        min-width: 800px;
+    }
+
+    #table-personnel th,
+    #table-personnel td {
+        padding: 8px 6px;
+        font-size: 0.85em;
+    }
+
+    .edit-emp, .delete-emp {
+        padding: 5px 8px;
+        width: 70px;
+        font-size: 0.8em;
+        margin-right: 5px;
+    }
+
+    .modal-content {
+        padding: 20px 25px;
+        width: 95vw;
+        max-width: 400px;
+    }
+}
+
+/* Styles pour les écrans jusqu'à 750px (tablettes en mode paysage, petits laptops) */
+@media (max-width: 750px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        position: relative;
+        top: unset;
+        left: unset;
+        width: 100%;
+    }
+
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-left: -3px;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+
+    .gauche {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        margin: 15px 0;
+        padding: 10px;
+        position: relative;
+        top: unset;
+        height: unset;
+        overflow-y: visible;
+        gap: 8px;
+    }
+
+    .button-nav, .button-la {
+        width: calc(50% - 10px);
+        max-width: 180px;
+        margin-bottom: 0;
+        font-size: 0.85em;
+        padding: 8px 10px;
+    }
+
+    .module-block[data-module="personnel"] {
+        width: 100%;
+        margin: 10px auto;
+        padding: 10px;
+        max-width: unset;
+        height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
+        overflow-y: visible; /* Laisser le body gérer le défilement */
+    }
+
+    .circle {
+        width: 80px;
+        height: 80px;
+        margin-top: -30px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    #add-employee-form {
+        padding: 15px 20px;
+    }
+
+    .droite {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 0;
+    }
+
+    #add-employee-form button[type="submit"] {
+        width: 100%;
+        margin: 20px 0 0;
+    }
+
+    #search-personnel,
+    #filter-departement,
+    #filter-poste,
+    #filter-type-contrat,
+    #filter-agence {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 8px;
+        width: 100%;
+        max-width: unset;
+    }
+
+    #reset-filters,
+    #download-filtered-pdf,
+    #print-emp2 {
+        width: 100%;
+        margin-bottom: 8px;
+        margin-right: 0;
+    }
+
+    .table-container-scroll {
+        margin: 15px auto;
+        max-height: 200px; /* Maintenir la hauteur de défilement pour le tableau */
+        min-width: 800px;
+    }
+
+    #table-personnel th,
+    #table-personnel td {
+        padding: 8px 6px;
+        font-size: 0.85em;
+    }
+
+    .edit-emp, .delete-emp {
+        padding: 5px 8px;
+        width: 70px;
+        font-size: 0.8em;
+        margin-right: 5px;
+    }
+
+    .modal-content {
+        padding: 20px 25px;
+        width: 95vw;
+        max-width: 400px;
+    }
+}
+
+/* Styles pour les écrans jusqu'à 400px (petits smartphones) */
+@media (max-width: 400px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px;
+        height: 70px;
+    }
+
+    #welcome-message {
+        font-size: 0.85rem;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la {
+        width: 100%;
+        font-size: 0.8em;
+        padding: 6px 8px;
+    }
+
+    .module-block[data-module="personnel"] {
+        margin: 5px auto;
+        padding: 5px;
+        box-shadow: none;
+        height: auto; /* Supprimer la hauteur fixe pour les petits écrans */
+        overflow-y: visible;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .circle {
+        width: 60px;
+        height: 60px;
+        margin-top: -25px;
+    }
+
+    #add-employee-form {
+        padding: 10px 15px;
+        gap: 10px;
+        box-shadow: none;
+    }
+
+    .droite {
+        gap: 8px;
+    }
+
+    label {
+        font-size: 0.85em;
+    }
+
+    #add-employee-form input,
+    #add-employee-form select {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    .table-container-scroll {
+        max-height: 150px; /* Réduire la hauteur de défilement du tableau */
+        max-width: 800px;
+    }
+
+    #table-personnel th,
+    #table-personnel td {
+        padding: 6px 4px;
+        font-size: 0.7em;
+    }
+
+    .edit-emp, .delete-emp {
+        padding: 3px 5px;
+        width: 55px;
+        font-size: 0.65em;
+        margin-right: 3px;
+    }
+
+    .modal-content {
+        padding: 15px;
+        max-width: 98vw;
+    }
+
+    .modal-content button {
+        padding: 8px 12px;
+        font-size: 0.85em;
+        margin-right: 5px;
+    }
 }
