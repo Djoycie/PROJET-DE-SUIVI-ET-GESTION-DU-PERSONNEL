@@ -14,33 +14,33 @@
             font-weight: 500;
         }
         /* Classe pour flouter les modules non accessibles */
-.blurred-module {
-    filter: blur(1px);
-    opacity: 0.5;
-    position: relative;
-    transition: all 0.3s ease;
-}
+        .blurred-module {
+            filter: blur(1px);
+            opacity: 0.5;
+            position: relative;
+            transition: all 0.3s ease;
+        }
 
 
-/* Effet de survol pour les modules floutés (optionnel) */
-.blurred-module:hover {
-    transform: none;
-    cursor: not-allowed;
-}
+        /* Effet de survol pour les modules floutés (optionnel) */
+        .blurred-module:hover {
+            transform: none;
+            cursor: not-allowed;
+        }
 
-/* Si vous voulez ajouter une icône de cadenas */
-.blurred-module::after {
-    content: '🔒';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    z-index: 2;
-    opacity: 0.8;
-}
+        /* Si vous voulez ajouter une icône de cadenas */
+        .blurred-module::after {
+            content: '🔒';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            z-index: 2;
+            opacity: 0.8;
+        }
 
-        
+                
 
     </style>
 </head>
