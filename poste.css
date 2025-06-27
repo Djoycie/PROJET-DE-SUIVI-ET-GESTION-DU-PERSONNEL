@@ -395,17 +395,18 @@ body {
 .logo-container{
     position:  relative;
     border-radius: 50%;
-    margin-left: -15px;
+    margin-left: -20px;
     margin-right: 15px;
 }
 .log{
     background-color: #b8aeec;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 0.2rem;
-    margin-left: -0.7rem;
-    width: 150px;
-    height: 150px;
+    margin-top: -1rem;
+    margin-left: -0.2rem;
+    width: 120px;
+    height: 120px;
+    margin-right: 10px;
 }
 
 #welcome-message {
@@ -452,7 +453,14 @@ a{
     box-shadow: 0 4px 10px var(--shadow-medium);
     color: black;
 }
-
+.button-la {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    color: rgb(7, 0, 0); /* Couleur de texte différente pour le bouton actif/sélectionné */
+    background-color: var(--primary-hover-color); /* Couleur de fond pour le bouton actif */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 15px;
+}
 .button-dec{
     background-color: var(--primary-color);
     padding: 8px 20px;
@@ -474,7 +482,6 @@ a{
     box-shadow: 0 4px 10px var(--shadow-medium);
     color: rgb(8, 8, 8);
 }
-
 
 button[type="submit"] {
     background-color: #667eea;
@@ -524,14 +531,88 @@ button[type="submit"]:disabled {
 
 .gauche{
     display: flex;
-    margin-left:  -210px;
-    margin-top: 180px;
+    margin-left:  -200px;
+    margin-top: 140px;
     margin-right: 15px;
     flex-direction: column;
     align-items: center;
+    gap: 4px;
 }
 
 /* --- Responsive Design --- */
+@media (max-width: 1100px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .container {
+        width: 100%;
+        margin: 10px auto;
+        padding: 10px;
+        max-width: unset;
+        height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
+        overflow-y: visible; /* Laisser le body gérer le défilement */
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+     .header-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        position: relative;
+        top: unset;
+        left: unset;
+        width: 100%;
+    }
+
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-left: -3px;
+    }
+    .gauche {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        margin: 15px 0;
+        padding: 10px;
+        position: relative;
+        top: unset;
+        height: unset;
+        overflow-y: visible;
+        gap: 8px;
+        margin-left: 23px;
+    }
+
+    .button-nav, .button-la {
+        width: calc(50% - 10px);
+        max-width: 180px;
+        margin-bottom: 0;
+        font-size: 0.85em;
+        padding: 8px 10px;
+    }
+    
+    .voir {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    
+}
 @media (max-width: 768px) {
     .container {
         margin: 20px;
@@ -578,15 +659,21 @@ button[type="submit"]:disabled {
     align-items: center;
     color: white;
     margin-top: -5px;
-}
-.button-nav:hover {
-    background-color: var(--primary-hover-color);
-    box-shadow: 0 4px 10px var(--shadow-medium);
-    color: black;
-}
-}
+    }
+    .button-nav:hover {
+        background-color: var(--primary-hover-color);
+        box-shadow: 0 4px 10px var(--shadow-medium);
+        color: black;
+    }
+    table [class="table-postes"] {
+        margin: 15px auto;
+        max-height: 200px; /* Maintenir la hauteur de défilement pour le tableau */
+        max-width: 500px;
+        overflow-y: auto;
+    }
+    }
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
     h1 {
         font-size: 1.5rem;
     }
@@ -601,31 +688,14 @@ button[type="submit"]:disabled {
         margin-right: 0;
         margin-bottom: 10px;
     }
+    table [class="table-postes"] {
+        margin: 15px auto;
+        max-height: 200px; /* Maintenir la hauteur de défilement pour le tableau */
+        max-width: 800px;
+        overflow-y: auto;
+    }
 }
 
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-                margin: 10px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .btn-group {
-                flex-direction: column;
-            }
-
-            table {
-                font-size: 0.9rem;
-            }
-
-            th, td {
-                padding: 10px;
-            }
-        }
 .edit-poste{
   background-color: #faa404; /* orange */
   color: white;
@@ -654,13 +724,188 @@ button[type="submit"]:disabled {
 .delete-poste:hover {
   background-color: #ff0909;
 }
-.button-la{
-    padding: 8px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    color: rgb(7, 0, 0);
-    margin-top: -5px;
+
+#modal-poste-details {
+  display: none; /* Caché par défaut */
+  position: fixed;
+  z-index: 1000; /* Au-dessus de tout */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Scroll si contenu trop grand */
+  background-color: rgba(0, 0, 0, 0.5); /* Fond noir semi-transparent */
+  animation: fadeInBackground 0.3s ease forwards;
+}
+
+/* Contenu de la modale */
+#modal-poste-details .modal-content {
+  background-color: #fff;
+  margin: 5% auto; /* Centré verticalement avec marge */
+  padding: 20px 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  animation: slideDown 0.3s ease forwards;
+  position: relative;
+}
+
+/* Bouton de fermeture (croix) */
+#close-modal-poste {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  color: #888;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+#close-modal-poste:hover {
+  color: #f44336; /* Rouge au survol */
+}
+
+/* Bouton "Voir la fiche de poste" */
+#voir-fiche-poste-modal {
+  margin-top: 20px;
+  padding: 10px 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+#voir-fiche-poste-modal:hover {
+  background-color: #0056b3;
+}
+
+/* Animation d'apparition du fond */
+@keyframes fadeInBackground {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(0, 0, 0, 0.5); }
+}
+
+/* Animation d'apparition du contenu */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive : réduire la taille sur petits écrans */
+@media (max-width: 480px) {
+  #modal-poste-details .modal-content {
+    width: 95%;
+    padding: 15px 20px;
+  }
+}
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 10px;
+    }
+}
+#modal-poste-details {
+  display: none; /* Caché par défaut */
+  position: fixed;
+  z-index: 1000; /* Au-dessus de tout */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Scroll si contenu trop grand */
+  background-color: rgba(0, 0, 0, 0.5); /* Fond noir semi-transparent */
+  animation: fadeInBackground 0.3s ease forwards;
+}
+
+/* Contenu de la modale */
+#modal-poste-details .modal-content {
+  background-color: #fff;
+  margin: 5% auto; /* Centré verticalement avec marge */
+  padding: 20px 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  animation: slideDown 0.3s ease forwards;
+  position: relative;
+}
+
+/* Bouton de fermeture (croix) */
+#close-modal-poste {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  color: #888;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+#close-modal-poste:hover {
+  color: #f44336; /* Rouge au survol */
+}
+
+/* Bouton "Voir la fiche de poste" */
+#voir-fiche-poste-modal {
+  margin-top: 20px;
+  padding: 10px 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+#voir-fiche-poste-modal:hover {
+  background-color: #0056b3;
+}
+
+/* Animation d'apparition du fond */
+@keyframes fadeInBackground {
+  from { background-color: rgba(0, 0, 0, 0); }
+  to { background-color: rgba(0, 0, 0, 0.5); }
+}
+
+/* Animation d'apparition du contenu */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
