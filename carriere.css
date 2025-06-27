@@ -16,11 +16,44 @@
     --shadow-medium: rgba(0, 0, 0, 0.15); /* Ombre moyenne */
 }
 
-/* In style.css */
+/* --- Base et typographie --- */
+
+
+h1, h2, h3 {
+    color: black;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: black;
+}
+
+h2 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-top: 1.5rem;
+    color: var(--secondary-color);
+}
+
+h3 {
+    font-size: 1rem;
+    margin-top: 1.2rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-color-light);
+}
+
+/* --- Conteneur principal --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 20px;
     background: linear-gradient(to bottom,#e3f3ee,#214137);
     background-size: cover;
     background-position: center;
@@ -36,206 +69,25 @@ body {
     background-color:transparent;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+    padding: 10px;
     width: 100%;
-    height: 592px;
+    height: 600px;
     max-width: 1200px;
     text-align: center;
     margin-left: 2px;
-    margin-top: 10px;
-    /*overflow-y: auto;  active le scroll vertical */
-}
-
-h1, h2 {
-    color: #333;
-    margin-top: 2px;
-}
-
-.form-container, .table-container {
-    background-color: #fff;
-    padding: 18px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin-top: -25px;
+    overflow-y: auto;  /*active le scroll vertical */
 }
 .container_s{
-    margin-top: -10px;
-    height: 525px;
+    height: 500px;
     overflow-y: auto;
+    border-radius: 15px;
+}
+.page-content {
+    margin-top: -40px;
 }
 
-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-form input[type="text"],
-form select{
-    width: calc(100% - 210px);
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-form input[type="date"]{
-    width: calc(100% - 225px);
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-top: -6px;
-}
-form select[id="matricule-personnel"]{
-    margin-left: 32px;
-}
-form select[id="id-poste"]{
-    margin-left: 48px;
-}
-form input[id="date-fin-affectation"]{
-    margin-left: 30px;
-}
-form label[for="date-fin-affectation"]{
-    width: 150px;
-    margin-left: -29px;
-}
-form label[for="matricule-personnel"]{
-    width: 150px;
-    margin-left: -37px;
-}
-form label[for="id-poste"]{
-    width: 150px;
-    margin-left: -54px;
-}
-
-form textarea{
-    width: calc(100% - 225px);
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-left: 152px;
-    margin-top: -15px;
-}
-label[for="description-affectation"] {
-    width: 150px;
-    margin-left: -18px;
-}
-
-form button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-#save-affectation-btn {
-    background-color: #faa404; /* orange */;
-    color: white;
-}
-
-#save-affectation-btn:hover {
-    background-color: #f0e007;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-#cancel-edit-btn {
-    background-color: var(--secondary-color);
-    color: white;
-    margin-left: var(--spacing-unit) / 2;
-}
-
-#cancel-edit-btn:hover {
-    background-color: #5a6268;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.btn-view-career { /* Style pour le nouveau bouton "Voir Carrière" */
-    background-color: #20c997; /* Un vert-bleu attrayant */
-    color: white;
-    margin-left: 5px;
-}
-
-.btn-view-career:hover {
-    background-color: #17a2b8;
-}
-
-
-/* Boutons d'action dans les tableaux */
-.table-container button, .career-history-section button {
-    padding: 6px 12px;
-    font-size: 0.9em;
-    margin-right: 5px;
-}
-
-.table-container button:last-child {
-    margin-right: 0;
-}
-
-.table-container button:nth-of-type(1) { /* Modifier */
-    background-color: var(--primary-color);
-    color: white;
-}
-.table-container button:nth-of-type(1):hover {
-    background-color: var(--primary-dark-color);
-}
-
-.table-container button:nth-of-type(2) { /* Supprimer */
-    background-color: var(--danger-color);
-    color: white;
-}
-.table-container button:nth-of-type(2):hover {
-    background-color: #c82333;
-}
-
-/* Tableaux */
-.data-table { /* Appliqué à affectations-table et au tableau d'historique */
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: var(--spacing-unit);
-}
-
-.data-table th,
-.data-table td {
-    border: 1px solid var(--border-color);
-    padding: 12px;
-    text-align: left;
-    width: 100px;
-}
-
-table th {
-    background: #ada0ec;
-    color: #000000;
-    font-weight: bold;
-}
-
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-table button {
-    padding: 5px 10px;
-    margin-right: 5px;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-table button:first-of-type {
-    background-color: #28a745;
-    color: white;
-    border: none;
-}
-
-table button:last-of-type {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-}
+/* --- Header Bar --- */
 .header-bar {
     background-color: transparent;
     color: white;
@@ -247,23 +99,34 @@ table button:last-of-type {
     top: 0;
     z-index: 1000;
     gap: 8px;
-    margin-left: -5px;
 }
 .logo-container{
     position:  relative;
     border-radius: 50%;
-    margin-left: -10px;
-    margin-right: 10px;
+    margin-left: -2.5rem;
 }
 .log{
     background-color: #b8aeec;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 0.2rem;
-    margin-left: -0.7rem;
+    margin-top:0rem;
+    margin-left: -1rem;
     width: 150px;
     height: 150px;
+    margin-right: 49px;
 }
+
+/* Navigation latérale (Menu .gauche) */
+.gauche{
+    display: flex;
+    margin-left:  -14rem;
+    margin-top: 160px;
+    margin-right: 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
 .button-nav{
     padding: 8px 20px;
     border-radius: 25px;
@@ -273,31 +136,1046 @@ table button:last-of-type {
     align-items: center;
     color: white;
     margin-top: -5px;
-    margin-left: -43px;
-    margin-right: 15px;
-}
-.button-la{
-    padding: 8px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    color: rgb(7, 0, 0);
-    margin-top: -5px;
-    margin-left: -43px;
-    margin-right: 15px;
 }
 .button-nav:hover {
     background-color: var(--primary-hover-color);
     box-shadow: 0 4px 10px var(--shadow-medium);
     color: black;
 }
-.gauche{
-    display: flex;
-    margin-left:  -150px;
-    margin-top: 180px;
+.button-la {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    color: rgb(7, 0, 0); /* Couleur de texte différente pour le bouton actif/sélectionné */
+    background-color: var(--primary-hover-color); /* Couleur de fond pour le bouton actif */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 15px;
+}
+
+h1, h2 {
+    color: var(--primary-dark-color);
+    text-align: center;
+    margin-bottom: var(--spacing-unit) * 1.5;
+}
+
+h1 {
+    font-size: 2.2em;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+h2 {
+    font-size: 1.6em;
+    margin-bottom: var(--spacing-unit);
+}
+
+/* Conteneurs principaux */
+.form-container, .table-container, .career-history-section {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: var(--spacing-unit) auto;
+    max-width: 960px; /* Largeur maximale pour une meilleure lisibilité */
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: var(--spacing-unit) * 2 0;
+}
+
+/* Formulaires */
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-align: left;
+    margin-left: 11px;
+}
+
+form input[type="text"],
+form input[type="date"],
+form select,
+form textarea {
+    width: calc(100% - 20px); /* Prend presque toute la largeur avec un peu de padding */
+    padding: 10px;
+    margin-bottom: var(--spacing-unit);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1em;
+    box-sizing: border-box; /* Inclut padding et border dans la largeur */
+}
+
+    form input[type="text"]:focus,
+    form input[type="date"]:focus,
+    form select:focus,
+    form textarea:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+form textarea {
+    resize: vertical; /* Permet le redimensionnement vertical */
+    min-height: 80px;
+}
+
+
+#save-affectation-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+    #save-affectation-btn:hover {
+        background-color: var(--primary-dark-color);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        color: black;
+    }
+
+#cancel-edit-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    margin-left: var(--spacing-unit) / 2;
+}
+
+    #cancel-edit-btn:hover {
+        background-color: #5a6268;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+ 
+button{
+    border: none;
+    border-radius: 15px;
+}
+.btn-view-career { /* Style pour le nouveau bouton "Voir Carrière" */
+    background-color: #057035; /* Un vert-bleu attrayant */
+    color: white;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+    .btn-view-career:hover {
+        background-color: #17a2b8;
+    }
+
+
+/* Boutons d'action dans les tableaux */
+.table-container button, .career-history-section button {
+    padding: 6px 12px;
+    font-size: 0.9em;
     margin-right: 5px;
-    flex-direction: column;
-    align-items: center;
+}
+
+    .table-container button:last-child {
+        margin-right: 0;
+    }
+
+    .table-container button:nth-of-type(1) { /* Modifier */
+        background-color: #faa404;
+        color: white;
+    }
+
+        .table-container button:nth-of-type(1):hover {
+            background-color: #f0e007;
+        }
+
+    .table-container button:nth-of-type(2) { /* Supprimer */
+        background-color: #f1402d;
+        color: white;
+    }
+
+        .table-container button:nth-of-type(2):hover {
+            background-color: #ff0909;
+        }
+
+/* Tableaux */
+.data-table { /* Appliqué à affectations-table et au tableau d'historique */
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-unit);
+}
+
+    .data-table th,
+    .data-table td {
+        border: 1px solid var(--border-color);
+        padding: 12px;
+        text-align: left;
+    }
+
+    .data-table th {
+        background-color: var(--primary-color);
+        color: white;
+        font-weight: 600;
+    }
+
+    .data-table tbody tr:nth-child(even) {
+        background-color: var(--light-bg-color); /* Lignes alternées pour la lisibilité */
+    }
+
+    .data-table tbody tr:hover {
+        background-color: rgba(0, 123, 255, 0.1); /* Effet de survol sur les lignes */
+    }
+
+/* Bouton de retour au tableau de bord */
+.back-button {
+    display: block;
+    width: fit-content;
+    margin: var(--spacing-unit) auto;
+    padding: 10px 25px;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .back-button:hover {
+        background-color: #5a6268;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+/* Section Historique de Carrière */
+#career-history-display {
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--spacing-unit);
+    margin-top: var(--spacing-unit);
+}
+
+    #career-history-display h3 {
+        font-size: 1.2em;
+        color: var(--dark-text-color);
+        margin-bottom: var(--spacing-unit);
+    }
+
+    #career-history-display table {
+        width: 100%;
+    }
+
+/* Styles spécifiques pour le select de l'historique */
+#personnel-history-select {
+    width: auto; /* Ajuste la largeur du select */
+    min-width: 200px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Arrière-plan de la Modale */
+.modal {
+    display: none; /* Masqué par défaut */
+    position: fixed; /* Reste en place */
+    z-index: 1000; /* Se place au-dessus */
+    left: 0;
+    top: 0;
+    width: 100%; /* Pleine largeur */
+    height: 100%; /* Pleine hauteur */
+    overflow: auto; /* Active le défilement si nécessaire */
+    background-color: rgba(0,0,0,0.4); /* Noir avec opacité */
+    padding-top: 60px; /* Position de la boîte */
+}
+
+/* Contenu/Boîte de la Modale */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% du haut et centré */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Peut être plus ou moins, selon la taille de l'écran */
+    max-width: 900px; /* Largeur maximale pour les grands écrans */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    position: relative;
+}
+
+/* Bouton Fermer */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close-button:hover,
+    .close-button:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+/* Style du tableau dans la modale */
+.table-container {
+    max-height: 400px; /* Ou une hauteur appropriée */
+    overflow-y: auto;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.career-history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .career-history-table th,
+    .career-history-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+.career-history-table th {
+    background-color: #f2f2f2;
+    position: sticky; /* Garde l'en-tête visible lors du défilement */
+    top: 0;
+    z-index: 1;
+}
+/* Styles pour les écrans jusqu'à 1190px (grands ordinateurs portables, moniteurs) */
+@media (max-width: 1590px) {
+    body {
+        padding: 15px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: 40px;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-top: 150px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -220px;
+    }
+
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .button-la{
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        margin-top: -50px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 43rem;
+    }
+    .container {
+        max-width: 1000px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 500px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-bottom: -10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .cv-analysis-section {
+        padding: 20px;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 10px;
+    }
+
+    textarea {
+        min-height: 100px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 1em;
+        min-width: 180px;
+    }
+
+    #analysis-results {
+        padding: 20px;
+    }
+
+    #analysis-chart-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    #analysis-percentage {
+        font-size: 2.2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 30px;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        padding-right: 15px;
+    }
+
+    .back-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
+@media (min-width: 1290px) {
+    body {
+        padding: 35px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+    .log {
+        width: 120px;
+        height: 120px;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 20px;
+        margin-top: 150px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .button-la{
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        margin-top: -50px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 43rem;
+    }
+    .container {
+        max-width: 1000px; /* Réduire la largeur max du bloc principal */
+        padding: 30px;
+        height: 590px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+    }
+
+    .container_s{
+    margin-right: 20px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .cv-analysis-section {
+        padding: 20px;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 10px;
+    }
+
+    textarea {
+        min-height: 100px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 1em;
+        min-width: 180px;
+    }
+
+    #analysis-results {
+        padding: 20px;
+    }
+
+    #analysis-chart-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    #analysis-percentage {
+        font-size: 2.2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 30px;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        padding-right: 15px;
+    }
+
+    .back-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* Medium devices (tablets, 750px and up) - Votre media query existante */
+@media (max-width: 1250px) { /* Changed from min-width to max-width for mobile-first approach */
+    body {
+        flex-direction: column; /* Empiler l'en-tête, le menu et le contenu */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        position: relative; /* Moins besoin d'être absolu, car le body est en colonne */
+        top: unset;
+        left: unset;
+        width: 100%;
+    }
+
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 0; /* Réinitialiser les marges négatives */
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-left: 0; /* Réinitialiser le margin-left auto */
+    }
+
+    .gauche {
+        flex-direction: row; /* Passer le menu en ligne */
+        flex-wrap: wrap; /* Permettre aux boutons de passer à la ligne */
+        justify-content: center;
+        width: 100%; /* Prend toute la largeur */
+        margin: 15px 0; /* Marge supérieure et inférieure */
+        padding: 10px;
+        position: relative;
+        top: unset;
+        height: unset;
+        overflow-y: visible;
+        gap: 8px; /* Espacement entre les boutons */
+    }
+
+    .button-nav, .button-la, .voir {
+        width: calc(50% - 10px); /* Deux boutons par ligne */
+        max-width: 180px;
+        margin-bottom: 0; /* Enlever la marge du bas si déjà gérée par le gap */
+        font-size: 0.85em;
+        padding: 8px 10px;
+        margin-left: 0; /* Réinitialiser */
+        margin-top: 0; /* Réinitialiser */
+    }
+
+
+    .container {
+        width: 90%;
+        margin: 10px auto;
+        padding: 30px;
+        max-width: unset; /* Pas de max-width pour cette taille */
+        height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
+        overflow-y: visible; /* Laisser le body gérer le défilement */
+        box-shadow: none; /* Moins d'ombre pour les petits écrans */
+    }
+    .container_s{
+        margin-right: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .cv-analysis-section {
+        padding: 15px;
+        height: auto; /* Auto height for mobile */
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        width: 100%;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        width: 100%; /* Full width for mobile button */
+        margin-bottom: 5px; /* Ajuster l'espacement */
+        align-self: center; /* Centrer le bouton */
+    }
+
+    button[type="submit"],.button-dec {
+        width: 100%;
+        margin: 15px 0 0;
+        align-self: stretch; /* S'étirer pour les petits écrans */
+    }
+
+    #analysis-results {
+        padding: 15px;
+    }
+
+    #analysis-chart-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    #analysis-percentage {
+        font-size: 2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
+    }
+
+    #analysis-qualifications-details {
+        flex-direction: column; /* Stack for mobile */
+        gap: 15px;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        border-right: none; /* No border for mobile */
+        padding-right: 0;
+        border-bottom: 1px dashed var(--border-color); /* Add bottom border for separation */
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    #analysis-qualifications-details ul li {
+        font-size: 0.9rem;
+    }
+
+    .page-content {
+        margin-top: 0; /* Réinitialiser le margin-top négatif si on passe en colonne */
+    }
+}
+@media (max-width: 950px) { /* Changed from min-width to max-width for mobile-first approach */
+    body {
+        flex-direction: column; /* Empiler l'en-tête, le menu et le contenu */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        position: relative; /* Moins besoin d'être absolu, car le body est en colonne */
+        top: unset;
+        left: unset;
+        width: 100%;
+    }
+
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 0; /* Réinitialiser les marges négatives */
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-left: 0; /* Réinitialiser le margin-left auto */
+    }
+
+    .gauche {
+        flex-direction: row; /* Passer le menu en ligne */
+        flex-wrap: wrap; /* Permettre aux boutons de passer à la ligne */
+        justify-content: center;
+        width: 100%; /* Prend toute la largeur */
+        margin: 15px 0; /* Marge supérieure et inférieure */
+        padding: 10px;
+        position: relative;
+        top: unset;
+        height: unset;
+        overflow-y: visible;
+        gap: 8px; /* Espacement entre les boutons */
+    }
+
+    .button-nav, .button-la, .voir {
+        width: calc(50% - 10px); /* Deux boutons par ligne */
+        max-width: 180px;
+        margin-bottom: 0; /* Enlever la marge du bas si déjà gérée par le gap */
+        font-size: 0.85em;
+        padding: 8px 10px;
+        margin-left: 0; /* Réinitialiser */
+        margin-top: 0; /* Réinitialiser */
+    }
+
+    .container {
+        width: 100%;
+        margin: 10px auto;
+        padding: 30px;
+        max-width: unset; /* Pas de max-width pour cette taille */
+        height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
+        overflow-y: visible; /* Laisser le body gérer le défilement */
+        box-shadow: none; /* Moins d'ombre pour les petits écrans */
+    }
+    .container_s{
+    margin-right: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .cv-analysis-section {
+        padding: 15px;
+        height: auto; /* Auto height for mobile */
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        width: 100%;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        width: 100%; /* Full width for mobile button */
+        margin-bottom: 5px; /* Ajuster l'espacement */
+        align-self: center; /* Centrer le bouton */
+    }
+
+    button[type="submit"],.button-dec {
+        width: 100%;
+        margin: 15px 0 0;
+        align-self: stretch; /* S'étirer pour les petits écrans */
+    }
+
+    #analysis-results {
+        padding: 15px;
+    }
+
+    #analysis-chart-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    #analysis-percentage {
+        font-size: 2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
+    }
+
+    #analysis-qualifications-details {
+        flex-direction: column; /* Stack for mobile */
+        gap: 15px;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        border-right: none; /* No border for mobile */
+        padding-right: 0;
+        border-bottom: 1px dashed var(--border-color); /* Add bottom border for separation */
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    #analysis-qualifications-details ul li {
+        font-size: 0.9rem;
+    }
+
+    .page-content {
+        margin-top: 0; /* Réinitialiser le margin-top négatif si on passe en colonne */
+    }
+}
+@media (max-width: 800px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px; /* Encore plus petit */
+        height: 70px;
+    }
+
+    #welcome-message {
+        font-size: 0.85rem;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la, .voir, .button-dec {
+        width: 100%; /* Tous les boutons sur leur propre ligne */
+        font-size: 0.8em;
+        padding: 6px 8px;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+    .container_s{
+    margin-right: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .cv-analysis-section {
+        padding: 10px;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    label {
+        font-size: 0.85em;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+
+    button[type="submit"] {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        min-width: unset;
+    }
+
+    #analysis-results {
+        padding: 10px;
+    }
+
+    #analysis-chart-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    #analysis-percentage {
+        font-size: 1.8em;
+    }
+
+    #analysis-message {
+        font-size: 0.9em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 10px;
+    }
+
+    #analysis-qualifications-details ul li {
+        font-size: 0.85rem;
+    }
+
+    .back-button {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+    /* Votre règle existante pour le tableau, si elle s'applique à cette page */
+    table[class="table-postes"] { /* Note: Le sélecteur 'table [class="table-postes"]' n'est pas standard, préférez 'table.table-postes' */
+        margin: 10px auto;
+        max-height: 150px;
+        max-width: 100%; /* S'adapter à la largeur disponible */
+        overflow-y: auto;
+    }
+}
+
+/* Styles pour les écrans jusqu'à 400px (petits smartphones) */
+@media (max-width: 400px) {
+    body {
+        padding: 20px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px; /* Encore plus petit */
+        height: 70px;
+    }
+
+    #welcome-message {
+        font-size: 0.85rem;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la, .voir, .button-dec {
+        width: 100%; /* Tous les boutons sur leur propre ligne */
+        font-size: 0.8em;
+        padding: 6px 8px;
+        text-align: left;
+    }
+    
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+    .container_s{
+    margin-right: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .cv-analysis-section {
+        padding: 10px;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    label {
+        font-size: 0.85em;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+
+    button[type="submit"] {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        min-width: unset;
+    }
+
+    #analysis-results {
+        padding: 10px;
+    }
+
+    #analysis-chart-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    #analysis-percentage {
+        font-size: 1.8em;
+    }
+
+    #analysis-message {
+        font-size: 0.9em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 10px;
+    }
+
+    #analysis-qualifications-details ul li {
+        font-size: 0.85rem;
+    }
+
+    .back-button {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+    /* Votre règle existante pour le tableau, si elle s'applique à cette page */
+    table[class="table-postes"] { /* Note: Le sélecteur 'table [class="table-postes"]' n'est pas standard, préférez 'table.table-postes' */
+        margin: 10px auto;
+        max-height: 150px;
+        max-width: 100%; /* S'adapter à la largeur disponible */
+        overflow-y: auto;
+    }
+   
 }
