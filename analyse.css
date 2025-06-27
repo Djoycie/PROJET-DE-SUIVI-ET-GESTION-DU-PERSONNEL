@@ -1,6 +1,6 @@
 /* Variables pour les couleurs */
 :root {
-    --primary-color: #b8aeec; /* Vert pour les actions principales */
+    --primary-color: #b8aeec; /* COULEUR pour les actions principales */
     --primary-hover-color: #e3f3ee; /* Vert plus foncé au survol */
     --secondary-color: #007bff; /* Bleu pour les accents ou liens */
     --secondary-hover-color: #0056b3; /* Bleu plus foncé au survol */
@@ -9,7 +9,7 @@
     --text-color-dark: #343a40; /* Texte foncé pour la lisibilité */
     --text-color-light: #6c757d; /* Texte plus clair pour les descriptions */
     --border-color: #dee2e6; /* Couleur des bordures */
-    --success-color: #28a745; /* Couleur de succès */
+    --success-color: #087c23; /* Couleur de succès */
     --info-color: #17a2b8; /* Couleur d'information */
     --warning-color: #ffc107; /* Couleur d'avertissement */
     --error-color: #dc3545; /* Couleur d'erreur */
@@ -18,19 +18,23 @@
 }
 
 /* --- Base et typographie --- */
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 h1, h2, h3 {
-    color: black;
+    color: var(--text-color-dark); /* Utiliser la variable pour le noir */
     margin-bottom: 1rem;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 h1 {
     font-size: 2.2rem;
     text-align: center;
     margin-bottom: 1.5rem;
-    color: black;
+    color: var(--text-color-dark);
 }
 
 h2 {
@@ -39,6 +43,7 @@ h2 {
     padding-bottom: 0.5rem;
     margin-top: 1.5rem;
     color: var(--secondary-color);
+    text-align: center;
 }
 
 h3 {
@@ -49,6 +54,7 @@ h3 {
 p {
     margin-bottom: 1rem;
     color: var(--text-color-light);
+    text-align: center;
 }
 
 /* --- Conteneur principal --- */
@@ -56,33 +62,37 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 20px;
-    background: linear-gradient(to bottom,#e3f3ee,#214137);
+    background: linear-gradient(to bottom, #e3f3ee, #214137);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: #333;
-    display: flex;
+    display: flex; /* Utilisation de flexbox pour aligner la navigation et le contenu principal */
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-start; /* Aligner les éléments en haut */
     min-height: 100vh;
 }
 
 .container {
-    background-color:transparent;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+    background: transparent; /* Utiliser la variable pour le fond blanc, ce n'est plus transparent */
+    max-width: 1100px; /* Ajusté pour une bonne lisibilité sur 1200px */
     width: 100%;
-    height: 582px;
-    max-width: 1200px;
-    text-align: center;
-    margin-left: 2px;
-    margin-top: 10px;
-    /*overflow-y: auto;  active le scroll vertical */
+    margin: 10px 0 20px 0; /* Marge supérieure pour l'en-tête */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px; /* Padding généreux à l'intérieur du conteneur */
+    height: 600px; /* FIXE LA HAUTEUR DU BLOC GLOBAL DE CONTENU */
+    overflow-y: auto; /* Permet le défilement si le contenu dépasse 600px */
+    margin-left: 34px;
 }
 
 .page-content {
-    margin-top: -40px;
+    margin-top: 0;
+    width: 100%; /* S'assure que le contenu remplit le container */
+    padding: 20px 0; /* Ajout de padding pour le contenu */
 }
 
 /* --- Header Bar --- */
@@ -93,54 +103,45 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position: absolute; /* Position absolue pour qu'il soit au-dessus du reste */
     top: 0;
+    left: 0;
+    width: 100%;
     z-index: 1000;
-    gap: 8px;
 }
-.logo-container{
-    position:  relative;
+.logo-container {
+    position: relative;
     border-radius: 50%;
-    margin-left: -15px;
-    margin-right: 15px;
+    margin-right: 5px; /* Ajusté pour un alignement propre */
+    margin-left: 39px; /* Réinitialisé */
 }
-.log{
-    background-color: #b8aeec;
+.log {
+    background-color: var(--primary-color); /* Utiliser la variable */
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 0.2rem;
-    margin-left: -0.7rem;
     width: 150px;
     height: 150px;
+    object-fit: cover;
+    margin-top: 0; /* Réinitialisé */
+    margin-left: 0; /* Réinitialisé */
+    margin-right: 0; /* Réinitialisé */
 }
-
 #welcome-message {
     font-size: 1.1rem;
     font-weight: 500;
+    margin-left: auto; /* Pousse le message à droite si l'espace le permet */
 }
 
-.voir {
-    background-color: var(--primary-color);
-    padding: 8px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+
+/* Navigation latérale (Menu .gauche) */
+.gauche{
     display: flex;
+    margin-left:  -80px;
+    margin-top: 160px;
+    margin-right: 25px;
+    flex-direction: column;
     align-items: center;
-    margin-top: 12px;
-    width: 160px; /* Ajuste la largeur au contenu */
-    height: 30px; /* Hauteur fixe pour un aspect uniforme */
-    margin-top: -60px;
-    margin-left: 480px;
-    color: white;
-}
-a{
-    color: white;
-}
-.voir:hover {
-    background-color: var(--primary-hover-color);
-    transform: translateY(-2px);
-    color: black;
+    gap: 5px;
 }
 
 .button-nav{
@@ -158,47 +159,84 @@ a{
     box-shadow: 0 4px 10px var(--shadow-medium);
     color: black;
 }
-
-.button-dec{
-    background-color: var(--primary-color);
-    padding: 8px 20px;
-    border-radius: 5px;
+/* Styles pour les boutons "Voir" et "Déconnexion" (s'ils sont dans le menu gauche) */
+/* Je les intègre comme des button-nav standard ou des variations */
+.voir, .button-dec {
+    padding: 10px 20px;
+    border-radius: 25px; /* Uniformiser le border-radius avec button-nav */
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
     display: flex;
     align-items: center;
-    margin-top: 12px;
-    width: 180px; /* Ajuste la largeur au contenu */
-    height: 30px; /* Hauteur fixe pour un aspect uniforme */
-    margin-top: -60px;
-    margin-left: 520px;
+    justify-content: center;
     color: white;
-    font-size: 18px;
-}
-.button-dec:hover {
-    background-color: var(--primary-hover-color);
-    box-shadow: 0 4px 10px var(--shadow-medium);
-    color: rgb(8, 8, 8);
+    margin-bottom: 10px;
+    width: 100%; /* S'aligner avec les autres boutons du menu */
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    background-color: var(--primary-color); /* Couleur uniforme */
+    box-shadow: none; /* Pas d'ombre par défaut */
+    margin-left: 0; /* Réinitialiser les marges spécifiques */
+    margin-top: 0; /* Réinitialiser les marges spécifiques */
 }
 
-.voir h2 {
+.voir:hover, .button-dec:hover {
+    background-color: var(--primary-hover-color);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    color: black;
+    transform: none; /* Enlever le translateY(-2px) si non désiré ici */
+}
+
+.voir h2 { /* S'assurer que le h2 dans .voir est stylé correctement */
     color: white;
     margin: 0;
     font-size: 1.1rem;
     font-weight: 500;
-    border-bottom: none; /* Supprime la bordure sous le titre */
+    border-bottom: none;
     padding-bottom: 0;
+}
+
+a {
+    color: white; /* Couleur par défaut pour les liens */
+    text-decoration: none;
+}
+
+.button-la {
+    padding: 10px 20px; /* Ajusté pour la cohérence */
+    font-size: 0.9em;
+    color: rgb(7, 0, 0);
+    background-color: var(--primary-hover-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 25px; /* Uniformiser le border-radius */
+    width: 70%; /* Cohérence */
+}
+
+.button-dec{
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 160px; /* Adapter la largeur au contenu */
+    min-width: 200px; /* Largeur minimale pour un bon clic */
+    margin-top: 20px; /* Plus d'espace au-dessus du bouton */
 }
 
 /* --- Formulaire d'Analyse de CV --- */
 .cv-analysis-section {
     background-color: var(--background-card);
-    padding: 25px;
+    padding: 30px; /* Plus généreux pour les grands écrans */
     border-radius: 10px;
     border: 1px solid var(--border-color);
-    margin-bottom: 25px;
+    margin-bottom: 25px; /* Espacement avec la section de résultats */
     box-shadow: 0 3px 12px var(--shadow-light);
-    height: 440px;
+    height: auto; /* Laisser la hauteur s'adapter au contenu */
+    width: 100%; /* Le formulaire prend toute la largeur du container */
 }
 
 .cv-analysis-section h2 {
@@ -210,26 +248,30 @@ a{
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px; /* Plus d'espacement entre les éléments du formulaire */
 }
 
 label {
     font-weight: 600;
     color: var(--text-color-dark);
-    margin-bottom: -8px; /* Rapproche le label de l'input */
+    margin-bottom: 0; /* L'espacement est géré par le gap du form */
     font-size: 0.95rem;
+    display: flex; /* Permet un contrôle flexible sur la ligne */
+    flex-direction: column; /* Label au-dessus de l'input */
+    align-items: flex-start; /* Aligner le texte du label à gauche */
 }
 
 input[type="text"],
 input[type="file"],
 textarea {
-    width: calc(100% - 20px);
+    width: 100%; /* Prend toute la largeur de son parent */
     padding: 12px;
     border: 1px solid var(--border-color);
     border-radius: 8px;
     font-size: 1rem;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    box-sizing: border-box; /* Inclure le padding dans la largeur */
+    box-sizing: border-box;
+    margin-top: 5px; /* Petit espace entre label et input */
 }
 
 input[type="text"]:focus,
@@ -240,14 +282,17 @@ textarea:focus {
 }
 
 textarea {
-    min-height: 100px;
+    min-height: 120px; /* Un peu plus haut */
     resize: vertical;
 }
 
 input[type="file"] {
     padding: 10px;
-    background-color: #e9ecef;
+    background-color: var(--background-light); /* Utiliser la variable */
     cursor: pointer;
+    display: flex; /* Pour mieux contrôler le bouton interne */
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 input[type="file"]::-webkit-file-upload-button {
@@ -257,8 +302,11 @@ input[type="file"]::-webkit-file-upload-button {
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    margin-right: 15px;
+    margin-right: 0;
     transition: background-color 0.3s ease;
+    width: auto; /* Laisser le bouton avoir sa propre largeur */
+    margin-bottom: 10px; /* Espace entre le bouton et le champ affichant le nom du fichier */
+    align-self: flex-start; /* Aligner le bouton à gauche */
 }
 
 input[type="file"]::-webkit-file-upload-button:hover {
@@ -275,8 +323,9 @@ button[type="submit"] {
     font-size: 1.1rem;
     font-weight: 600;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    align-self: flex-start; /* Aligner le bouton à gauche */
-    margin-top: 10px;
+    width: 160px; /* Adapter la largeur au contenu */
+    min-width: 200px; /* Largeur minimale pour un bon clic */
+    margin-top: 20px; /* Plus d'espace au-dessus du bouton */
 }
 
 button[type="submit"]:hover {
@@ -300,33 +349,33 @@ button[type="submit"]:disabled {
     text-align: center;
 }
 
-#analysis-status-message[style*="color: red"] { /* Pour les messages d'erreur */
+#analysis-status-message[style*="color: red"] {
     background-color: #f8d7da;
     color: var(--error-color);
     border: 1px solid #f5c6cb;
 }
 
-#analysis-status-message[style*="color: green"] { /* Pour les messages de succès */
+#analysis-status-message[style*="color: green"] {
     background-color: #d4edda;
     color: var(--success-color);
     border: 1px solid #c3e6cb;
 }
 
-#analysis-status-message[style*="color: blue"] { /* Pour les messages d'information/en cours */
+#analysis-status-message[style*="color: blue"] {
     background-color: #d1ecf1;
     color: var(--info-color);
     border: 1px solid #bee5eb;
 }
 
-
 /* --- Résultats de l'Analyse --- */
 #analysis-results {
     margin-top: 30px;
-    padding: 25px;
+    padding: 30px; /* Plus généreux pour les grands écrans */
     background-color: var(--background-card);
     border-radius: 10px;
     box-shadow: 0 3px 12px var(--shadow-light);
     border: 1px solid var(--border-color);
+    width: 100%; /* Prend toute la largeur du container */
 }
 
 #analysis-results h3 {
@@ -338,14 +387,14 @@ button[type="submit"]:disabled {
 }
 
 #analysis-chart-container {
-    width: 250px; /* Ajustez la taille du graphique si nécessaire */
+    width: 250px; /* Taille appropriée pour les grands écrans */
     height: 250px;
     margin: 20px auto;
 }
 
 #analysis-percentage {
     text-align: center;
-    font-size: 2.2em;
+    font-size: 2.5em; /* Plus grand pour les grands écrans */
     font-weight: 700;
     color: var(--primary-color);
     margin-top: 10px;
@@ -361,9 +410,10 @@ button[type="submit"]:disabled {
 
 #analysis-qualifications-details {
     display: flex;
+    flex-direction: row; /* Deux colonnes sur les grands écrans */
     justify-content: space-around;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 40px; /* Plus d'espace entre les colonnes */
+    margin-top: 30px;
     padding-top: 20px;
     border-top: 1px dashed var(--border-color);
 }
@@ -372,13 +422,13 @@ button[type="submit"]:disabled {
     list-style: none;
     padding: 0;
     margin: 0;
-    flex: 1; /* Prend l'espace disponible */
+    flex: 1; /* Chaque liste prend une part égale de l'espace */
 }
 
 #analysis-qualifications-details ul li {
     padding: 8px 0;
     border-bottom: 1px dotted #e0e0e0;
-    font-size: 0.95rem;
+    font-size: 0.95rem; /* Un peu plus grand */
     display: flex;
     align-items: center;
 }
@@ -388,8 +438,11 @@ button[type="submit"]:disabled {
 }
 
 #analysis-qualifications-details ul.found-qualifications-list {
-    border-right: 1px solid var(--border-color); /* Séparateur visuel */
-    padding-right: 20px;
+    border-right: 1px dashed var(--border-color); /* Séparateur vertical */
+    padding-right: 20px; /* Espacement */
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 #analysis-qualifications-details ul li.found {
@@ -398,7 +451,7 @@ button[type="submit"]:disabled {
 }
 
 #analysis-qualifications-details ul li.found::before {
-    content: '✔'; /* Icône de coche */
+    content: '✔';
     color: var(--success-color);
     margin-right: 8px;
     font-weight: bold;
@@ -410,7 +463,7 @@ button[type="submit"]:disabled {
 }
 
 #analysis-qualifications-details ul li.missing::before {
-    content: '✖'; /* Icône de croix */
+    content: '✖';
     color: var(--error-color);
     margin-right: 8px;
     font-weight: bold;
@@ -427,7 +480,6 @@ button[type="submit"]:disabled {
     font-size: 1rem;
     margin-top: 30px;
     transition: background-color 0.3s ease;
-    
 }
 
 .back-button:hover {
@@ -435,93 +487,746 @@ button[type="submit"]:disabled {
     transform: translateY(-2px);
     color: black;
 }
-.button-la{
-    padding: 8px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    color: rgb(7, 0, 0);
-    margin-top: -5px;
+
+
+/* ------------------------------------------------------------- */
+/* MEDIA QUERIES POUR LE RESPONSIVE DESIGN */
+/* ------------------------------------------------------------- */
+
+/* Large devices (desktops, 1190px and up) - Styles "par défaut" pour les grands écrans */
+/* J'ai déplacé la plupart des styles spécifiques aux grands écrans hors de la media query
+   pour qu'ils s'appliquent par défaut et soient ensuite écrasés par les media queries plus petites. */
+
+/* Styles pour les écrans jusqu'à 1190px (grands ordinateurs portables, moniteurs) */
+@media (min-width: 1390px) {
+    body {
+        padding: 15px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+    .log {
+        width: 120px;
+        height: 120px;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 20px;
+        margin-top: 150px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .button-la{
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        margin-top: -50px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 43rem;
+    }
+    .container {
+        max-width: 1000px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 590px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .cv-analysis-section {
+        padding: 20px;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 10px;
+    }
+
+    textarea {
+        min-height: 100px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 1em;
+        min-width: 180px;
+    }
+
+    #analysis-results {
+        padding: 20px;
+    }
+
+    #analysis-chart-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    #analysis-percentage {
+        font-size: 2.2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 30px;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        padding-right: 15px;
+    }
+
+    .back-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
 }
-.gauche{
-    display: flex;
-    margin-left:  -210px;
-    margin-top: 180px;
-    margin-right: 15px;
-    flex-direction: column;
-    align-items: center;
+@media (min-width: 1290px) {
+    body {
+        padding: 15px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+    .log {
+        width: 120px;
+        height: 120px;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 20px;
+        margin-top: 150px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .button-la{
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        margin-top: -50px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 43rem;
+    }
+    .container {
+        max-width: 1000px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 590px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .cv-analysis-section {
+        padding: 20px;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 10px;
+    }
+
+    textarea {
+        min-height: 100px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 1em;
+        min-width: 180px;
+    }
+
+    #analysis-results {
+        padding: 20px;
+    }
+
+    #analysis-chart-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    #analysis-percentage {
+        font-size: 2.2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 30px;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        padding-right: 15px;
+    }
+
+    .back-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
 }
 
-/* --- Responsive Design --- */
-@media (max-width: 768px) {
+/* Medium devices (tablets, 750px and up) - Votre media query existante */
+@media (max-width: 1250px) { /* Changed from min-width to max-width for mobile-first approach */
+    body {
+        flex-direction: column; /* Empiler l'en-tête, le menu et le contenu */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        position: relative; /* Moins besoin d'être absolu, car le body est en colonne */
+        top: unset;
+        left: unset;
+        width: 100%;
+    }
+
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 0; /* Réinitialiser les marges négatives */
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-left: 0; /* Réinitialiser le margin-left auto */
+    }
+
+    .gauche {
+        flex-direction: row; /* Passer le menu en ligne */
+        flex-wrap: wrap; /* Permettre aux boutons de passer à la ligne */
+        justify-content: center;
+        width: 100%; /* Prend toute la largeur */
+        margin: 15px 0; /* Marge supérieure et inférieure */
+        padding: 10px;
+        position: relative;
+        top: unset;
+        height: unset;
+        overflow-y: visible;
+        gap: 8px; /* Espacement entre les boutons */
+    }
+
+    .button-nav, .button-la, .voir {
+        width: calc(50% - 10px); /* Deux boutons par ligne */
+        max-width: 180px;
+        margin-bottom: 0; /* Enlever la marge du bas si déjà gérée par le gap */
+        font-size: 0.85em;
+        padding: 8px 10px;
+        margin-left: 0; /* Réinitialiser */
+        margin-top: 0; /* Réinitialiser */
+    }
+
+
     .container {
-        margin: 20px;
-        padding: 20px;
+        width: 100%;
+        margin: 10px auto;
+        padding: 15px;
+        max-width: unset; /* Pas de max-width pour cette taille */
+        height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
+        overflow-y: visible; /* Laisser le body gérer le défilement */
+        box-shadow: none; /* Moins d'ombre pour les petits écrans */
     }
 
     h1 {
         font-size: 1.8rem;
     }
-
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+    }
+
+    .cv-analysis-section {
+        padding: 15px;
+        height: auto; /* Auto height for mobile */
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        width: 100%;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        width: 100%; /* Full width for mobile button */
+        margin-bottom: 5px; /* Ajuster l'espacement */
+        align-self: center; /* Centrer le bouton */
+    }
+
+    button[type="submit"],.button-dec {
+        width: 100%;
+        margin: 15px 0 0;
+        align-self: stretch; /* S'étirer pour les petits écrans */
+    }
+
+    #analysis-results {
+        padding: 15px;
+    }
+
+    #analysis-chart-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    #analysis-percentage {
+        font-size: 2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
+    }
+
+    #analysis-qualifications-details {
+        flex-direction: column; /* Stack for mobile */
+        gap: 15px;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        border-right: none; /* No border for mobile */
+        padding-right: 0;
+        border-bottom: 1px dashed var(--border-color); /* Add bottom border for separation */
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    #analysis-qualifications-details ul li {
+        font-size: 0.9rem;
+    }
+
+    .page-content {
+        margin-top: 0; /* Réinitialiser le margin-top négatif si on passe en colonne */
+    }
+}
+@media (max-width: 950px) { /* Changed from min-width to max-width for mobile-first approach */
+    body {
+        flex-direction: column; /* Empiler l'en-tête, le menu et le contenu */
+        align-items: center;
+        padding: 10px;
     }
 
     .header-bar {
         flex-direction: column;
-        gap: 10px;
+        align-items: center;
+        padding: 10px;
+        position: relative; /* Moins besoin d'être absolu, car le body est en colonne */
+        top: unset;
+        left: unset;
+        width: 100%;
+    }
+
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 0; /* Réinitialiser les marges négatives */
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-left: 0; /* Réinitialiser le margin-left auto */
+    }
+
+    .gauche {
+        flex-direction: row; /* Passer le menu en ligne */
+        flex-wrap: wrap; /* Permettre aux boutons de passer à la ligne */
+        justify-content: center;
+        width: 100%; /* Prend toute la largeur */
+        margin: 15px 0; /* Marge supérieure et inférieure */
+        padding: 10px;
+        position: relative;
+        top: unset;
+        height: unset;
+        overflow-y: visible;
+        gap: 8px; /* Espacement entre les boutons */
+    }
+
+    .button-nav, .button-la, .voir {
+        width: calc(50% - 10px); /* Deux boutons par ligne */
+        max-width: 180px;
+        margin-bottom: 0; /* Enlever la marge du bas si déjà gérée par le gap */
+        font-size: 0.85em;
+        padding: 8px 10px;
+        margin-left: 0; /* Réinitialiser */
+        margin-top: 0; /* Réinitialiser */
+    }
+
+    .container {
+        width: 100%;
+        margin: 10px auto;
+        padding: 15px;
+        max-width: unset; /* Pas de max-width pour cette taille */
+        height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
+        overflow-y: visible; /* Laisser le body gérer le défilement */
+        box-shadow: none; /* Moins d'ombre pour les petits écrans */
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .cv-analysis-section {
+        padding: 15px;
+        height: auto; /* Auto height for mobile */
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        width: 100%;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        width: 100%; /* Full width for mobile button */
+        margin-bottom: 5px; /* Ajuster l'espacement */
+        align-self: center; /* Centrer le bouton */
+    }
+
+    button[type="submit"],.button-dec {
+        width: 100%;
+        margin: 15px 0 0;
+        align-self: stretch; /* S'étirer pour les petits écrans */
+    }
+
+    #analysis-results {
         padding: 15px;
     }
 
-    .voir {
-        width: 100%;
-        text-align: center;
-        justify-content: center;
+    #analysis-chart-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    #analysis-percentage {
+        font-size: 2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
     }
 
     #analysis-qualifications-details {
-        flex-direction: column;
+        flex-direction: column; /* Stack for mobile */
+        gap: 15px;
     }
 
     #analysis-qualifications-details ul.found-qualifications-list {
-        border-right: none;
+        border-right: none; /* No border for mobile */
         padding-right: 0;
-        border-bottom: 1px dashed var(--border-color);
-        margin-bottom: 20px;
-        padding-bottom: 20px;
+        border-bottom: 1px dashed var(--border-color); /* Add bottom border for separation */
+        padding-bottom: 15px;
+        margin-bottom: 15px;
     }
-    .button-nav{
-    padding: 8px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    color: white;
-    margin-top: -5px;
-}
-.button-nav:hover {
-    background-color: var(--primary-hover-color);
-    box-shadow: 0 4px 10px var(--shadow-medium);
-    color: black;
-}
-}
 
-@media (max-width: 480px) {
+    #analysis-qualifications-details ul li {
+        font-size: 0.9rem;
+    }
+
+    .page-content {
+        margin-top: 0; /* Réinitialiser le margin-top négatif si on passe en colonne */
+    }
+}
+@media (max-width: 800px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px; /* Encore plus petit */
+        height: 70px;
+    }
+
+    #welcome-message {
+        font-size: 0.85rem;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la, .voir, .button-dec {
+        width: 100%; /* Tous les boutons sur leur propre ligne */
+        font-size: 0.8em;
+        padding: 6px 8px;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+
     h1 {
         font-size: 1.5rem;
     }
 
-    button[type="submit"] {
-        width: 100%;
-        text-align: center;
+    .cv-analysis-section {
+        padding: 10px;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    label {
+        font-size: 0.85em;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    textarea {
+        min-height: 80px;
     }
 
     input[type="file"]::-webkit-file-upload-button {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 10px;
+        padding: 5px 10px;
+        font-size: 0.8em;
     }
+
+    button[type="submit"] {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        min-width: unset;
+    }
+
+    #analysis-results {
+        padding: 10px;
+    }
+
+    #analysis-chart-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    #analysis-percentage {
+        font-size: 1.8em;
+    }
+
+    #analysis-message {
+        font-size: 0.9em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 10px;
+    }
+
+    #analysis-qualifications-details ul li {
+        font-size: 0.85rem;
+    }
+
+    .back-button {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+    /* Votre règle existante pour le tableau, si elle s'applique à cette page */
+    table[class="table-postes"] { /* Note: Le sélecteur 'table [class="table-postes"]' n'est pas standard, préférez 'table.table-postes' */
+        margin: 10px auto;
+        max-height: 150px;
+        max-width: 100%; /* S'adapter à la largeur disponible */
+        overflow-y: auto;
+    }
+}
+
+/* Styles pour les écrans jusqu'à 400px (petits smartphones) */
+@media (max-width: 400px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px; /* Encore plus petit */
+        height: 70px;
+    }
+
+    #welcome-message {
+        font-size: 0.85rem;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la, .voir, .button-dec {
+        width: 100%; /* Tous les boutons sur leur propre ligne */
+        font-size: 0.8em;
+        padding: 6px 8px;
+        text-align: left;
+    }
+    
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .cv-analysis-section {
+        padding: 10px;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    label {
+        font-size: 0.85em;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+
+    button[type="submit"] {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        min-width: unset;
+    }
+
+    #analysis-results {
+        padding: 10px;
+    }
+
+    #analysis-chart-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    #analysis-percentage {
+        font-size: 1.8em;
+    }
+
+    #analysis-message {
+        font-size: 0.9em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 10px;
+    }
+
+    #analysis-qualifications-details ul li {
+        font-size: 0.85rem;
+    }
+
+    .back-button {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+    /* Votre règle existante pour le tableau, si elle s'applique à cette page */
+    table[class="table-postes"] { /* Note: Le sélecteur 'table [class="table-postes"]' n'est pas standard, préférez 'table.table-postes' */
+        margin: 10px auto;
+        max-height: 150px;
+        max-width: 100%; /* S'adapter à la largeur disponible */
+        overflow-y: auto;
+    }
+   
 }
