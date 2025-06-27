@@ -41,7 +41,8 @@
         }
         .container_s {
             margin-top: -10px;
-            height: 280px;
+            height: 580px;
+            overflow-y: auto;
         }
 
         .header {
@@ -147,6 +148,7 @@
         .filter-actions {
             display: flex;
             gap: 15px;
+            
         }
 
         .btn {
