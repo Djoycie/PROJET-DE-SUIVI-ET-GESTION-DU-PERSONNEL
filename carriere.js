@@ -105,6 +105,7 @@ async function loadAffectations() {
 
         const actionsCell = row.insertCell();
         const editButton = document.createElement('button');
+        editButton.className = 'modifier'; // Pour un style potentiel
         editButton.textContent = 'Modifier';
         editButton.onclick = () => editAffectation(affectation);
         actionsCell.appendChild(editButton);
