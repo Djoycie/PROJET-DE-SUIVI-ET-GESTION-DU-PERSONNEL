@@ -54,7 +54,7 @@ body {
     padding: 30px; /* Padding défini par les styles utilisateurs */
     width: 100%;
     max-width: 1200px; /* Max-width défini par les styles utilisateurs */
-    max-height: 625px; /* Max-height défini par les styles utilisateurs */
+    max-height: 580px; /* Max-height défini par les styles utilisateurs */
     text-align: center;
     margin-left: 20px; /* Conserve cette marge si intentionnelle, mais à reconsidérer */
     margin-top: 5px;
@@ -64,7 +64,7 @@ body {
 }
 
 .container_s {
-    height: 515px; /* Hauteur définie par les styles utilisateurs */
+    height: 525px; /* Hauteur définie par les styles utilisateurs */
     overflow-y: auto; /* Active le scroll vertical pour les listes/contenu */
     background-color: #fdfdfd; /* Fond blanc pour le contenu scrollable */
     border-radius: 8px; /* Bordure arrondie */
@@ -120,11 +120,11 @@ body {
     position: sticky; /* Rendre sticky si le layout le permet */
     top: 20px; /* Positionnement sticky */
     flex-shrink: 0; /* Empêche le rétrécissement */
-    gap: 8px;
+    gap: 5px;
 }
 
 .button-nav, .button-la {
-    padding: 6px 20px;
+    padding: 8px 20px;
     border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
@@ -133,7 +133,7 @@ body {
     justify-content: center; /* Centre le texte */
     font-weight: bold;
     text-decoration: none;
-    margin-top: -2px; /* Ajustement vertical */
+    margin-top: -5px; /* Ajustement vertical */
     margin-bottom: -3px; /* Espace entre les boutons */
 }
 
@@ -203,7 +203,6 @@ body {
     color: #555;
     font-weight: bold;
     font-size: 0.95em;
-    text-align: left;
 }
 
 .form-section form input[type="text"],
@@ -225,7 +224,6 @@ body {
     border-color: #007bff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     outline: none;
-    
 }
 
 .form-buttons { /* Container for form action buttons */
@@ -386,43 +384,9 @@ body {
         padding: 15px;
     }
     .container {
-        width: 1100px; /* Ajuster la largeur max pour ce breakpoint */
-        padding: 25px;
-    }
-    .header-bar {
-        padding: 10px 20px;
-    }
-    .gauche {
-        margin-left: 0; /* Assure que la marge est à 0 */
-        margin-top: 160px;
-        margin-right: 10px;
-        margin-left: -1300px;
-    }
-    .log {
-        width: 120px;
-        height: 120px;
-        margin-left: -1240px;
-    }
-    .page-content h1 {
-        font-size: 2.2em;
-    }
-    .form-section {
+        width: 900px; /* Ajuster la largeur max pour ce breakpoint */
         padding: 15px;
-    }
-    .list-section {
-        padding: 10px;
-    }
-    #users-list th, #users-list td {
-        padding: 10px 12px;
-    }
-}
-@media (max-width: 1350px) {
-    body {
-        padding: 15px;
-    }
-    .container {
-        width: 1000px; /* Ajuster la largeur max pour ce breakpoint */
-        padding: 25px;
+        margin-right: -14rem;
     }
     .header-bar {
         padding: 10px 20px;
@@ -452,9 +416,8 @@ body {
     }
 }
 
-
-/* Medium devices (large tablets, smaller laptops, 1250px and down) */
-@media (max-width: 1250px) {
+/* Medium devices (large tablets, smaller laptops, 1150px and down) */
+@media (max-width: 1100px) {
     body {
         flex-direction: column; /* Le body passe en colonne */
         align-items: center; /* Centre le contenu horizontalement */
@@ -497,12 +460,11 @@ body {
     }
     .container {
         padding: 15px;
-        width: 100%; /* Permet au conteneur de prendre toute la largeur disponible */
+        max-width: 100%; /* Permet au conteneur de prendre toute la largeur disponible */
         margin-left: 0;
         margin-top: 5px;
         height: auto; /* La hauteur doit être auto pour s'adapter */
         max-height: unset; /* Enlever la max-height fixe */
-        margin-right: -20px;
     }
     .container_s {
         height: auto; /* Laisser le contenu définir la hauteur */
@@ -521,164 +483,7 @@ body {
     }
 }
 
-@media (max-width: 950px) {
-    body {
-        padding: 10px;
-    }
-    .header-bar {
-        padding: 8px 15px;
-    }
-    .log {
-        width: 80px;
-        height: 80px;
-    }
-    .gauche {
-        gap: 5px;
-        padding: 8px;
-    }
-    .button-nav, .button-la {
-        width: calc(100% - 10px); /* Chaque bouton sur sa propre ligne */
-        max-width: unset; /* Retire la limite de largeur */
-        font-size: 0.85em;
-        padding: 10px 15px;
-    }
-    .container {
-        padding: 10px;
-        margin: 5px auto;
-        border-radius: 8px;
-    }
-    .container_s {
-        max-height: 350px; /* Réduire la hauteur max pour le scroll */
-    }
-    .page-content h1 {
-        font-size: 1.8em;
-        margin-top: -15px;
-        margin-bottom: 10px;
-    }
-    .page-content p {
-        font-size: 0.75em;
-        margin-top: -18px;
-        margin-bottom: 15px;
-    }
-    .form-section {
-        padding: 10px;
-        margin-bottom: 15px;
-    }
-    .form-section h2 {
-        font-size: 1.4em;
-        margin-bottom: 15px;
-    }
-    .form-section form input,
-    .form-section form select {
-        padding: 10px;
-        font-size: 0.9em;
-    }
-    .form-section form button {
-        padding: 10px 20px;
-        font-size: 0.95em;
-    }
-    .list-section {
-        padding: 10px;
-    }
-    .list-section h2 {
-        font-size: 1.6em;
-        margin-bottom: 15px;
-    }
-    #users-list th, #users-list td {
-        padding: 8px 10px;
-        font-size: 0.8em;
-    }
-    .action-buttons button {
-        padding: 6px 8px;
-        font-size: 0.8em;
-        gap: 5px;
-    }
-    .back-button {
-        padding: 10px 20px;
-        font-size: 0.9em;
-        margin-top: 20px;
-    }
-}
 
-/* Tablets (800px and down) */
-@media (max-width: 800px) {
-    body {
-        padding: 10px;
-    }
-    .header-bar {
-        padding: 8px 15px;
-    }
-    .log {
-        width: 80px;
-        height: 80px;
-    }
-    .gauche {
-        gap: 5px;
-        padding: 8px;
-    }
-    .button-nav, .button-la {
-        width: calc(100% - 10px); /* Chaque bouton sur sa propre ligne */
-        max-width: unset; /* Retire la limite de largeur */
-        font-size: 0.85em;
-        padding: 10px 15px;
-    }
-    .container {
-        padding: 10px;
-        margin: 5px auto;
-        border-radius: 8px;
-    }
-    .container_s {
-        max-height: 350px; /* Réduire la hauteur max pour le scroll */
-    }
-    .page-content h1 {
-        font-size: 1.8em;
-        margin-top: -15px;
-        margin-bottom: 10px;
-    }
-    .page-content p {
-        font-size: 0.75em;
-        margin-top: -18px;
-        margin-bottom: 15px;
-    }
-    .form-section {
-        padding: 10px;
-        margin-bottom: 15px;
-    }
-    .form-section h2 {
-        font-size: 1.4em;
-        margin-bottom: 15px;
-    }
-    .form-section form input,
-    .form-section form select {
-        padding: 10px;
-        font-size: 0.9em;
-    }
-    .form-section form button {
-        padding: 10px 20px;
-        font-size: 0.95em;
-    }
-    .list-section {
-        padding: 10px;
-    }
-    .list-section h2 {
-        font-size: 1.6em;
-        margin-bottom: 15px;
-    }
-    #users-list th, #users-list td {
-        padding: 8px 10px;
-        font-size: 0.8em;
-    }
-    .action-buttons button {
-        padding: 6px 8px;
-        font-size: 0.8em;
-        gap: 5px;
-    }
-    .back-button {
-        padding: 10px 20px;
-        font-size: 0.9em;
-        margin-top: 20px;
-    }
-}
 
 /* Small devices (smartphones, 400px and down) */
 @media (max-width: 400px) {
