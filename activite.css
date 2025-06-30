@@ -631,7 +631,7 @@ table button {
         padding: 20px; /* Conserver le padding global */
     }
     .container {
-        width: 1150px; /* Ajuster la largeur max pour ce breakpoint */
+        width: 1190px; /* Ajuster la largeur max pour ce breakpoint */
         padding: 25px;
     }
     .header-bar {
@@ -655,26 +655,251 @@ table button {
         padding: 20px; /* Conserver le padding global */
     }
     .container {
-        width: 1150px; /* Ajuster la largeur max pour ce breakpoint */
+        width: 1060px; /* Ajuster la largeur max pour ce breakpoint */
         padding: 25px;
     }
-    .header-bar {
-        padding: 5px 20px;
-    }
-    .gauche {
-        width: 180px; /* Réduire légèrement la largeur du menu latéral */
-        margin-right: 30px; /* Ajuster l'espacement */
-        margin-top: 150px; /* Ajuster la marge pour le logo plus petit */
-        margin-left: -75rem; /* Removing problematic negative margin */
-    }
-    .log {
-        width: 130px;
-        height: 130px;
-        margin-left: -71.4rem;
-        margin-top: -15px;
+    .container_s{
+        width: 1010px;
     }
 }
-@media (max-width: 1310px) {
+@media (max-width: 1330px) {
+    .container {
+        width: 1050px; /* Ajuster la largeur max pour ce breakpoint */
+        padding: 25px;
+    }
+    .container_s{
+        width: 1000px;
+    }
+}
+@media (max-width: 1300px) {
+    .container {
+        width: 1030px; /* Ajuster la largeur max pour ce breakpoint */
+        padding: 25px;
+    }
+    .container_s{
+        width: 990px;
+    }
+}
+@media (max-width: 1290px) {
+    .container {
+        width: 1010px; /* Ajuster la largeur max pour ce breakpoint */
+        padding: 25px;
+    }
+    .container_s{
+        width: 965px;
+    }
+}
+@media (max-width: 1250px) {
+    .container {
+        width: 990px; /* Ajuster la largeur max pour ce breakpoint */
+        padding: 25px;
+    }
+    .container_s{
+        width: 935px;
+    }
+}
+@media (max-width: 1230px) {
+    .container {
+        width: 980px; /* Ajuster la largeur max pour ce breakpoint */
+        padding: 25px;
+    }
+    .container_s{
+        width: 920px;
+    }
+}
+@media (max-width: 1210px) {
+    body{
+        padding: 20px;
+    }
+    .container {
+        width: 960px; /* Ajuster la largeur max pour ce breakpoint */
+        padding: 25px;
+        margin-right: -0.5rem;
+    }
+    .container_s{
+        padding: 12px;
+        width: 890px;
+    }
+ .gauche {
+        width: 180px; /* Réduire légèrement la largeur du menu latéral */
+        margin-right: 20px; /* Ajuster l'espacement */
+        margin-top: 150px; /* Ajuster la marge pour le logo plus petit */
+        margin-left: -49rem; /* Removing problematic negative margin */
+    }
+    .header-bar {
+        flex-direction: column; /* Les éléments du header s'empilent */
+        align-items: center; /* Centrer les éléments du header */
+        width: 100%;
+        padding: 10px;
+    }
+    .logo-container {
+        margin: 0; /* Réinitialiser les marges du logo */
+    }
+    .log {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto; /* Centrer le logo */
+        display: block;
+        margin-left: -22rem;
+    }
+    
+}
+@media (max-width: 1200px) {
+    .container {
+        width: 940px; /* Ajuster la largeur max pour ce breakpoint */
+        padding: 25px;
+        margin-right: -1rem;
+    }
+    .container_s{
+        width: 840px;
+    }
+     .gauche {
+        width: 180px; /* Réduire légèrement la largeur du menu latéral */
+        margin-right: 20px; /* Ajuster l'espacement */
+        margin-top: 150px; /* Ajuster la marge pour le logo plus petit */
+        margin-left: -56rem; /* Removing problematic negative margin */
+    }
+    .header-bar {
+        flex-direction: column; /* Les éléments du header s'empilent */
+        align-items: center; /* Centrer les éléments du header */
+        width: 100%;
+        padding: 10px;
+    }
+    .logo-container {
+        margin: 0; /* Réinitialiser les marges du logo */
+    }
+    .log {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto; /* Centrer le logo */
+        display: block;
+        margin-left: -24.5rem;
+    }
+}
+@media (max-width: 1150px) {
+    .container {
+        width: 870px; /* Ajuster la largeur max pour ce breakpoint */
+        padding: 25px;
+        margin-right: -0.4rem;
+    }
+    .container_s{
+        width: 800px;
+    }
+    
+    .gauche {
+        width: 180px; /* Réduire légèrement la largeur du menu latéral */
+        margin-right: 20px; /* Ajuster l'espacement */
+        margin-top: 150px; /* Ajuster la marge pour le logo plus petit */
+        margin-left: -49rem; /* Removing problematic negative margin */
+    }
+    .header-bar {
+        flex-direction: column; /* Les éléments du header s'empilent */
+        align-items: center; /* Centrer les éléments du header */
+        width: 100%;
+        padding: 10px;
+    }
+    .logo-container {
+        margin: 0; /* Réinitialiser les marges du logo */
+    }
+    .log {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto; /* Centrer le logo */
+        display: block;
+        margin-left: -22rem;
+    }
+}
+@media (max-width: 1130px) {
+    .container {
+        width: 870px; /* Ajuster la largeur max pour ce breakpoint */
+        padding: 25px;
+        margin-right: -0.4rem;
+    }
+    .container_s{
+        width: 820px;
+    }
+    
+    .gauche {
+        width: 180px; /* Réduire légèrement la largeur du menu latéral */
+        margin-right: 20px; /* Ajuster l'espacement */
+        margin-top: 150px; /* Ajuster la marge pour le logo plus petit */
+        margin-left: -49rem; /* Removing problematic negative margin */
+    }
+    .header-bar {
+        flex-direction: column; /* Les éléments du header s'empilent */
+        align-items: center; /* Centrer les éléments du header */
+        width: 100%;
+        padding: 10px;
+    }
+    .logo-container {
+        margin: 0; /* Réinitialiser les marges du logo */
+    }
+    .log {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto; /* Centrer le logo */
+        display: block;
+        margin-left: -22rem;
+    }
+}
+@media (max-width: 1100px) {
+    .container_s{
+        width: 770px;
+        margin-right: 12px;
+    }    
+}
+@media (max-width: 1060px) {
+    .container_s{
+        width: 730px;
+    }    
+}
+@media (max-width: 1040px) {
+    .container_s{
+        width: 710px;
+    }    
+}
+@media (max-width: 1020px) {
+    .container_s{
+        width: 700px;
+    }    
+}
+@media (max-width: 1000px) {
+    .container_s{
+        width: 690px;
+    }    
+}
+@media (max-width: 990px) {
+   body {
+        padding: 20px; /* Conserver le padding global */
+    }
+    .container_s{
+        width: 685px;
+    }    
+}
+@media (max-width: 983px) {
+   body {
+        padding: 20px; /* Conserver le padding global */
+    }
+    .container_s{
+        width: 675px;
+    }    
+    .log{
+        margin-left: 1rem;
+    }
+    .gauche{
+        margin-left: -9rem;
+    }
+}
+@media (max-width: 970px) {
+   body {
+        padding: 20px; /* Conserver le padding global */
+    }
+    .container_s{
+        width: 674px;
+        
+    }    
+}
+@media (max-width: 930px) {
    body {
         padding: 20px; /* Conserver le padding global */
     }
@@ -682,29 +907,12 @@ table button {
         width: 1000px; /* Ajuster la largeur max pour ce breakpoint */
     }
     .container_s{
-        width: 800px;
-    }
-    .header-bar {
-        padding: 5px 20px;
-    }
-    .gauche {
-        width: 180px; /* Réduire légèrement la largeur du menu latéral */
-        margin-right: 30px; /* Ajuster l'espacement */
-        margin-top: 150px; /* Ajuster la marge pour le logo plus petit */
-        margin-left: -15rem; /* Removing problematic negative margin */
-    }
-    .log {
-        width: 130px;
-        height: 130px;
-        margin-left: -11.4rem;
-        margin-top: -15px;
-    }
-    
+        width: 600px;
+    }    
 }
 
-
 /* Medium devices (large tablets, smaller laptops, 1150px and down) */
-@media (max-width: 1100px) {
+@media (max-width: 900px) {
     body {
         flex-direction: column; /* Le body passe en colonne */
         align-items: center; /* Centre le contenu horizontalement */
@@ -768,8 +976,9 @@ table button {
 }
 
 
+
 /* Tablets (800px and down) */
-@media (max-width: 950px) {
+@media (max-width: 850px) {
     body {
         padding: 10px;
     }
