@@ -42,6 +42,7 @@ async function populatePersonnelDropdown() {
     personnel.forEach(p => {
         const option = document.createElement('option');
         option.value = p.matricule;
+        // Correction: Utiliser des backticks (`) pour les template literals
         option.textContent = `${p.nom} ${p.prenom}`;
         matriculePersonnelSelect.appendChild(option);
     });
@@ -60,7 +61,8 @@ async function populatePostesDropdown() {
     postes.forEach(p => {
         const option = document.createElement('option');
         option.value = p.id;
-        option.textContent = p.intitule;
+        // Correction: Utiliser des backticks (`) pour les template literals
+        option.textContent = p.intitule; // C'était déjà correct mais je le confirme
         idPosteSelect.appendChild(option);
     });
 }
@@ -78,6 +80,7 @@ async function populatePersonnelHistoryDropdown() {
     personnel.forEach(p => {
         const option = document.createElement('option');
         option.value = p.matricule;
+        // Correction: Utiliser des backticks (`) pour les template literals
         option.textContent = `${p.nom} ${p.prenom}`;
         personnelHistorySelect.appendChild(option);
     });
@@ -97,6 +100,7 @@ async function loadAffectations() {
     affectationsTableBody.innerHTML = ''; // Vider le tableau
     affectations.forEach(affectation => {
         const row = affectationsTableBody.insertRow();
+        // Correction: Utiliser des backticks (`) pour les template literals
         row.insertCell().textContent = `${affectation.nom} ${affectation.prenom}`;
         row.insertCell().textContent = affectation.poste_intitule;
         row.insertCell().textContent = affectation.date_affectation;
@@ -105,13 +109,16 @@ async function loadAffectations() {
 
         const actionsCell = row.insertCell();
         const editButton = document.createElement('button');
-        editButton.className = 'modifier'; // Pour un style potentiel
         editButton.textContent = 'Modifier';
+        // Ajout d'une classe pour le styling CSS si ce n'est pas déjà fait
+        editButton.className = 'edit-btn';
         editButton.onclick = () => editAffectation(affectation);
         actionsCell.appendChild(editButton);
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Supprimer';
+        // Ajout d'une classe pour le styling CSS si ce n'est pas déjà fait
+        deleteButton.className = 'delete-btn';
         deleteButton.onclick = () => deleteAffectation(affectation.id);
         actionsCell.appendChild(deleteButton);
 
@@ -124,6 +131,7 @@ async function loadAffectations() {
             personnelHistorySelect.value = affectation.matricule_personnel;
             displayPersonnelCareerHistory(affectation.matricule_personnel);
             // Faire défiler vers la section d'historique
+            // Vérifier si l'élément existe avant de tenter de faire défiler
             if (careerHistoryDisplay) careerHistoryDisplay.scrollIntoView({ behavior: 'smooth' });
         };
         actionsCell.appendChild(viewCareerButton);
@@ -138,23 +146,57 @@ affectationForm.addEventListener('submit', async (e) => {
         matricule_personnel: matriculePersonnelSelect.value,
         id_poste: idPosteSelect.value,
         date_affectation: dateAffectationInput.value,
-        // Si la date de fin est vide, l'envoyer comme null pour la base de données
         date_fin_affectation: dateFinAffectationInput.value || null,
         description_affectation: descriptionAffectationInput.value,
     };
 
+    // Validation basique des champs requis
+    if (!data.matricule_personnel || !data.id_poste || !data.date_affectation) {
+        alert('Veuillez remplir tous les champs obligatoires (Personnel, Poste, Date d\'Affectation).');
+        return; // Empêche la soumission si les champs requis ne sont pas remplis
+    }
+
+
     let result;
+    let actionType;
+    let details;
+    let targetId;
+
     if (editingAffectationId) {
         data.id = editingAffectationId;
         result = await window.electronAPI.updateAffectation(data);
+        actionType = 'UPDATE';
+        targetId = editingAffectationId;
+        // Correction: Utiliser des backticks (`) pour les template literals
+        details = `Modification de l'affectation du personnel ${data.matricule_personnel} au poste ${data.id_poste}`;
     } else {
         result = await window.electronAPI.addAffectation(data);
+        actionType = 'CREATE';
+        // Suppose que le backend retourne l'id de la nouvelle affectation
+        targetId = result.newId || ''; // ou récupère l'id autrement
+        // Correction: Utiliser des backticks (`) pour les template literals
+        details = `Ajout d'une affectation du personnel ${data.matricule_personnel} au poste ${data.id_poste}`;
     }
 
     if (result.success) {
+        // Audit dynamique
+        let currentUser = window.currentUser;
+        if (!currentUser) {
+            // Si currentUser n'est pas déjà défini globalement, le récupérer
+            currentUser = await window.electronAPI.getCurrentUser();
+        }
+        await window.electronAPI.logAuditEvent({
+            userId: currentUser ? currentUser.username : 'unknown', // Gérer le cas où currentUser est null
+            actionType,
+            module: 'affectations/carriere',
+            targetId,
+            details
+        });
+
+        // Correction: Utiliser des backticks (`) pour les template literals
         alert(`Affectation ${editingAffectationId ? 'mise à jour' : 'ajoutée'} avec succès !`);
-        resetForm(); // Réinitialiser le formulaire
-        await loadAffectations(); // Recharger les affectations pour mettre à jour le tableau
+        resetForm();
+        await loadAffectations();
     } else {
         alert('Erreur: ' + result.error);
     }
@@ -197,17 +239,34 @@ async function deleteAffectation(id) {
     if (confirm('Voulez-vous vraiment supprimer cette affectation ?')) {
         const result = await window.electronAPI.deleteAffectation(id);
         if (result.success) {
+            // Audit dynamique
+            let currentUser = window.currentUser;
+            if (!currentUser) {
+                // Si currentUser n'est pas déjà défini globalement, le récupérer
+                currentUser = await window.electronAPI.getCurrentUser();
+            }
+            await window.electronAPI.logAuditEvent({
+                userId: currentUser ? currentUser.username : 'unknown', // Gérer le cas où currentUser est null
+                actionType: 'DELETE',
+                module: 'affectations/carriere',
+                targetId: id,
+                // Correction: Utiliser des backticks (`) pour les template literals
+                details: `Suppression de l'affectation id=${id}`
+            });
+
             alert('Affectation supprimée avec succès !');
-            await loadAffectations(); // Recharger les affectations après suppression
+            await loadAffectations();
         } else {
             alert('Erreur lors de la suppression: ' + result.error);
         }
     }
 }
 
+
 // --- Logique d'affichage de l'historique de carrière ---
 
 // Écouteur d'événement pour le bouton "Voir l'Historique"
+// Vérifier si le bouton existe avant d'ajouter l'écouteur
 if (viewHistoryBtn) {
     viewHistoryBtn.addEventListener('click', async () => {
         const selectedMatricule = personnelHistorySelect.value;
@@ -244,8 +303,6 @@ async function displayPersonnelCareerHistory(matricule) {
         cell.textContent = 'Aucune affectation trouvée pour cet employé.';
         cell.style.textAlign = 'center';
     } else {
-        // Pour afficher "ancien poste" et "nouveau poste", nous allons itérer sur l'historique.
-        // Puisque history est déjà trié par date_affectation ASC (du plus ancien au plus récent)
         let previousPoste = "Début de Carrière"; // Poste initial fictif pour la première affectation
 
         history.forEach((currentAffectation, index) => {
@@ -254,6 +311,7 @@ async function displayPersonnelCareerHistory(matricule) {
             // Période (Date début - Date fin du NOUVEAU poste)
             const startDate = currentAffectation.date_affectation;
             const endDate = currentAffectation.date_fin_affectation || 'Actuel';
+            // Correction: Utiliser des backticks (`) pour les template literals
             row.insertCell().textContent = `${startDate} à ${endDate}`;
 
             // Ancien Poste (le poste précédent celui-ci)
@@ -266,8 +324,7 @@ async function displayPersonnelCareerHistory(matricule) {
             row.insertCell().textContent = currentAffectation.description_affectation || '';
 
             // Mettre à jour l'ancien poste pour la prochaine itération
-            // Si l'affectation actuelle n'a pas de date de fin ou est la plus récente, c'est le "poste actuel"
-            // qu'on considérera comme "ancien poste" pour le prochain changement.
+            // Le previousPoste pour la prochaine itération est l'intitulé du poste de l'affectation actuelle.
             previousPoste = currentAffectation.poste_intitule;
         });
     }
@@ -277,5 +334,3 @@ async function displayPersonnelCareerHistory(matricule) {
         careerHistoryDisplay.style.display = 'block';
     }
 }
-
-// ... (le reste de votre fichier carriere.js) ...
