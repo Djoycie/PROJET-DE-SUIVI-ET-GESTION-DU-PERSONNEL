@@ -34,7 +34,6 @@ h1 {
 
 h2 {
     font-size: 1.8rem;
-    border-bottom: 2px solid var(--border-color);
     padding-bottom: 0.5rem;
     margin-top: 1.5rem;
     color: var(--secondary-color);
@@ -159,8 +158,7 @@ h1, h2 {
 
 h1 {
     font-size: 2.2em;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;;
 }
 
 h2 {
@@ -257,8 +255,14 @@ button{
     .btn-view-career:hover {
         background-color: #17a2b8;
     }
-
-
+#view-history-btn{
+    background-color: #1c633c;
+    color: white;
+}
+#view-history-btn:hover{
+    background-color: #0d582f;
+    color: white;
+}
 /* Boutons d'action dans les tableaux */
 .table-container button, .career-history-section button {
     padding: 6px 12px;
@@ -273,6 +277,8 @@ button{
     .table-container button:nth-of-type(1) { /* Modifier */
         background-color: #faa404;
         color: white;
+        width: 105px;
+        margin-left: 0.5rem;
     }
 
         .table-container button:nth-of-type(1):hover {
@@ -282,10 +288,12 @@ button{
     .table-container button:nth-of-type(2) { /* Supprimer */
         background-color: #f1402d;
         color: white;
+        width: 105px;
+        margin-left: 0.5rem;
     }
 
         .table-container button:nth-of-type(2):hover {
-            background-color: #ff0909;
+            background-color: #c00606;
         }
 
 /* Tableaux */
@@ -545,7 +553,7 @@ button{
         font-size: 0.9em;
     }
 }
-@media (min-width: 1290px) {
+@media (max-width: 1390px) {
     body {
         padding: 35px;
     }
@@ -664,147 +672,109 @@ button{
 
 /* Medium devices (tablets, 750px and up) - Votre media query existante */
 @media (max-width: 1250px) { /* Changed from min-width to max-width for mobile-first approach */
-    body {
-        flex-direction: column; /* Empiler l'en-tête, le menu et le contenu */
-        align-items: center;
+        body {
         padding: 10px;
     }
 
     .header-bar {
-        flex-direction: column;
-        align-items: center;
-        padding: 10px;
-        position: relative; /* Moins besoin d'être absolu, car le body est en colonne */
-        top: unset;
-        left: unset;
-        width: 100%;
-    }
-
-    .logo-container {
-        margin: 0;
+        padding: 10px 20px;
     }
 
     .log {
-        width: 100px;
-        height: 100px;
-        margin-top: 0; /* Réinitialiser les marges négatives */
-        margin-left: 0;
-        margin-right: 0;
+        width: 120px;
+        height: 120px;
+        margin-left: 2rem;
     }
 
     #welcome-message {
         font-size: 1rem;
-        margin-top: 10px;
-        margin-left: 0; /* Réinitialiser le margin-left auto */
     }
 
     .gauche {
-        flex-direction: row; /* Passer le menu en ligne */
-        flex-wrap: wrap; /* Permettre aux boutons de passer à la ligne */
-        justify-content: center;
-        width: 100%; /* Prend toute la largeur */
-        margin: 15px 0; /* Marge supérieure et inférieure */
-        padding: 10px;
-        position: relative;
-        top: unset;
-        height: unset;
-        overflow-y: visible;
-        gap: 8px; /* Espacement entre les boutons */
-    }
-
-    .button-nav, .button-la, .voir {
-        width: calc(50% - 10px); /* Deux boutons par ligne */
-        max-width: 180px;
-        margin-bottom: 0; /* Enlever la marge du bas si déjà gérée par le gap */
-        font-size: 0.85em;
-        padding: 8px 10px;
-        margin-left: 0; /* Réinitialiser */
-        margin-top: 0; /* Réinitialiser */
-    }
-
-
-    .container {
-        width: 90%;
-        margin: 10px auto;
-        padding: 30px;
-        max-width: unset; /* Pas de max-width pour cette taille */
-        height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
-        overflow-y: visible; /* Laisser le body gérer le défilement */
-        box-shadow: none; /* Moins d'ombre pour les petits écrans */
-    }
-    .container_s{
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
         margin-right: 20px;
+        margin-top: 150px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -13rem;
     }
 
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .button-la{
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        margin-top: -50px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 43rem;
+    }
+    .container {
+        max-width: 1000px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 560px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+    }
+
+    .container_s{
+    margin-right: 20px;
+    margin-left: 5px;
+    }
     h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     h2 {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
     }
 
     .cv-analysis-section {
-        padding: 15px;
-        height: auto; /* Auto height for mobile */
+        padding: 20px;
+    }
+
+    form {
+        gap: 15px;
     }
 
     input[type="text"],
     input[type="file"],
     textarea {
-        width: 100%;
+        padding: 10px;
+    }
+
+    textarea {
+        min-height: 100px;
     }
 
     input[type="file"]::-webkit-file-upload-button {
-        width: 100%; /* Full width for mobile button */
-        margin-bottom: 5px; /* Ajuster l'espacement */
-        align-self: center; /* Centrer le bouton */
+        padding: 6px 12px;
+        font-size: 0.9em;
     }
 
-    button[type="submit"],.button-dec {
-        width: 100%;
-        margin: 15px 0 0;
-        align-self: stretch; /* S'étirer pour les petits écrans */
-    }
-
-    #analysis-results {
-        padding: 15px;
-    }
-
-    #analysis-chart-container {
-        width: 200px;
-        height: 200px;
-    }
-
-    #analysis-percentage {
-        font-size: 2em;
-    }
-
-    #analysis-message {
+    button[type="submit"] {
+        padding: 10px 20px;
         font-size: 1em;
+        min-width: 180px;
     }
 
-    #analysis-qualifications-details {
-        flex-direction: column; /* Stack for mobile */
-        gap: 15px;
+    .table-container button:nth-of-type(1){
+        margin-bottom: 2px;
     }
+    .table-container button:nth-of-type(1),.table-container button:nth-of-type(2), .btn-view-career{
+        padding: 6px 12px;
+        font-size: 0.9em;
 
-    #analysis-qualifications-details ul.found-qualifications-list {
-        border-right: none; /* No border for mobile */
-        padding-right: 0;
-        border-bottom: 1px dashed var(--border-color); /* Add bottom border for separation */
-        padding-bottom: 15px;
-        margin-bottom: 15px;
     }
-
-    #analysis-qualifications-details ul li {
-        font-size: 0.9rem;
-    }
-
-    .page-content {
-        margin-top: 0; /* Réinitialiser le margin-top négatif si on passe en colonne */
+    .back-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
     }
 }
-@media (max-width: 950px) { /* Changed from min-width to max-width for mobile-first approach */
+@media (max-width: 900px) { /* Changed from min-width to max-width for mobile-first approach */
     body {
         flex-direction: column; /* Empiler l'en-tête, le menu et le contenu */
         align-items: center;
@@ -865,13 +835,14 @@ button{
 
     .container {
         width: 100%;
-        margin: 10px auto;
-        padding: 30px;
+        margin: 5px auto;
+        padding: 20px;
         max-width: unset; /* Pas de max-width pour cette taille */
         height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
         overflow-y: visible; /* Laisser le body gérer le défilement */
         box-shadow: none; /* Moins d'ombre pour les petits écrans */
     }
+    
     .container_s{
     margin-right: 20px;
     }
