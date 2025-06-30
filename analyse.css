@@ -536,7 +536,7 @@ button[type="submit"]:disabled {
 
     .button-dec {
         padding: 8px 15px;
-        font-size: 0.9em;
+        font-size: 1.1em;
         margin-top: -50px; /* Plus d'espace au-dessus du bouton */
         margin-left: 43rem;
     }
@@ -652,7 +652,7 @@ button[type="submit"]:disabled {
 
     .button-dec {
         padding: 8px 15px;
-        font-size: 0.9em;
+        font-size: 1.1em;
         margin-top: -50px; /* Plus d'espace au-dessus du bouton */
         margin-left: 36rem;
     }
@@ -771,7 +771,7 @@ button[type="submit"]:disabled {
         padding: 8px 15px;
         font-size: 0.9em;
         margin-top: -50px; /* Plus d'espace au-dessus du bouton */
-        margin-left: 23.5rem;
+        margin-left: 35.5rem;
     }
     .container {
         max-width: 1000px; /* Réduire la largeur max du bloc principal */
@@ -846,7 +846,298 @@ button[type="submit"]:disabled {
         font-size: 0.9em;
     }
 }
+@media (max-width: 1090px) {
+    body {
+        padding: 15px;
+    }
 
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -0.5rem;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 10px;
+        margin-top: 150px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: 1rem;
+    }
+
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .button-la{
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+        margin-left: 1rem;
+    }
+
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 1.1em;
+        margin-top: -54px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 34.5rem;
+    }
+    .container {
+        max-width: 1000px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 590px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-right: 0.2rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .cv-analysis-section {
+        padding: 20px;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 10px;
+    }
+
+    textarea {
+        min-height: 100px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 1em;
+        min-width: 180px;
+    }
+
+    #analysis-results {
+        padding: 20px;
+    }
+
+    #analysis-chart-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    #analysis-percentage {
+        font-size: 2.2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 30px;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        padding-right: 15px;
+    }
+
+    .back-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
+@media (max-width: 1080px) {
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 1.1em;
+        margin-top: -54px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 33.5rem;
+    }
+}
+@media (max-width: 1045px) {
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 1.1em;
+        margin-top: -54px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 30.5rem;
+    }
+}
+@media (max-width: 1010px) {
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 1.1em;
+        margin-top: -54px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 29.5rem;
+    }
+}
+@media (max-width: 995px) {
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 1.1em;
+        margin-top: -54px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 28.5rem;
+    }
+}
+@media (max-width: 975px) {
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 1.1em;
+        margin-top: -54px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 27.8rem;
+    }
+}
+@media (max-width: 965px) {
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 1.1em;
+        margin-top: -54px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 26.5rem;
+    }
+}
+@media (max-width: 943px) {
+    body {
+        padding: 15px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -0.5rem;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 10px;
+        margin-top: 150px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: 1rem;
+    }
+
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    .button-la{
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+        margin-left: 1rem;
+    }
+
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 1.1em;
+        margin-top: -56px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 24.5rem;
+        height: 38px;
+    }
+    .container {
+        max-width: 1000px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 590px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-right: 0.2rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .cv-analysis-section {
+        padding: 20px;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 10px;
+    }
+
+    textarea {
+        min-height: 100px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 1em;
+        min-width: 180px;
+    }
+
+    #analysis-results {
+        padding: 20px;
+    }
+
+    #analysis-chart-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    #analysis-percentage {
+        font-size: 2.2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 30px;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        padding-right: 15px;
+    }
+
+    .back-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
+@media (max-width: 911px) {
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 1.1em;
+        margin-top: -55px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 22.5rem;
+        height: 40px;
+    }
+}
 /* Medium devices (tablets, 750px and up) - Votre media query existante */
 @media (max-width: 900px) { /* Changed from min-width to max-width for mobile-first approach */
     body {
@@ -937,7 +1228,7 @@ button[type="submit"]:disabled {
     }
 
     input[type="file"]::-webkit-file-upload-button {
-        width: 100%; /* Full width for mobile button */
+        width: 70%; /* Full width for mobile button */
         margin-bottom: 5px; /* Ajuster l'espacement */
         align-self: center; /* Centrer le bouton */
     }
@@ -1054,6 +1345,7 @@ button[type="submit"]:disabled {
     input[type="file"]::-webkit-file-upload-button {
         padding: 5px 10px;
         font-size: 0.8em;
+        width: 70%;
     }
 
     button[type="submit"] {
@@ -1099,7 +1391,119 @@ button[type="submit"]:disabled {
         overflow-y: auto;
     }
 }
+@media (max-width: 600px) {
+    body {
+        padding: 5px;
+    }
 
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px; /* Encore plus petit */
+        height: 70px;
+    }
+
+    #welcome-message {
+        font-size: 0.85rem;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la, .voir, .button-dec {
+        width: 100%; /* Tous les boutons sur leur propre ligne */
+        font-size: 0.8em;
+        padding: 6px 8px;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .cv-analysis-section {
+        padding: 10px;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    label {
+        font-size: 0.85em;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 5px 10px;
+        font-size: 0.8em;
+        width: 60%;
+    }
+
+    button[type="submit"] {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        min-width: unset;
+    }
+
+    #analysis-results {
+        padding: 10px;
+    }
+
+    #analysis-chart-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    #analysis-percentage {
+        font-size: 1.8em;
+    }
+
+    #analysis-message {
+        font-size: 0.9em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 10px;
+    }
+
+    #analysis-qualifications-details ul li {
+        font-size: 0.85rem;
+    }
+
+    .back-button {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+    /* Votre règle existante pour le tableau, si elle s'applique à cette page */
+    table[class="table-postes"] { /* Note: Le sélecteur 'table [class="table-postes"]' n'est pas standard, préférez 'table.table-postes' */
+        margin: 10px auto;
+        max-height: 150px;
+        max-width: 100%; /* S'adapter à la largeur disponible */
+        overflow-y: auto;
+    }
+}
 /* Styles pour les écrans jusqu'à 400px (petits smartphones) */
 @media (max-width: 400px) {
     body {
@@ -1170,6 +1574,7 @@ button[type="submit"]:disabled {
     input[type="file"]::-webkit-file-upload-button {
         padding: 5px 10px;
         font-size: 0.8em;
+        width: 35%;
     }
 
     button[type="submit"] {
