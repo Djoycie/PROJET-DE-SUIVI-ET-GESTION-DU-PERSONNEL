@@ -109,7 +109,7 @@ body {
 /* Conteneur principal et sections de module */
 .module-block[data-module="personnel"] {
     background-color: var(--background-card); /* Utiliser la variable pour le fond blanc */
-    max-width: 1100px; /* Largeur optimale pour 1200px d'écran, peut être ajustée */
+    max-width: 1200px; /* Largeur optimale pour 1200px d'écran, peut être ajustée */
     width: 100%; /* Prend toute la largeur disponible jusqu'à max-width */
     margin: 10px 0 20px 0; /* Marge supérieure pour laisser de la place à l'en-tête */
     border-radius: 8px;
@@ -174,9 +174,9 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 100%;
+    width: 95%;
     background-color: white;
-    padding: 30px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 8px var(--shadow-light);
     margin: 0 auto;
@@ -296,7 +296,7 @@ h3 {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.95em;
-    background: var(--background-card);
+    background: white;
     border-radius: 8px;
     overflow: hidden;
     min-width: 1200px;
@@ -518,13 +518,88 @@ th[data-col] {
     background: #fff;
     box-sizing: border-box;
 }
+/* Styles pour l'arrière-plan de la modale (qui couvre tout l'écran) */
+#modal-emp-details {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Reste en place même au défilement */
+    z-index: 1000; /* Assurez-vous qu'elle est au-dessus de tout le reste */
+    left: 0;
+    top: 0;
+    width: 100%; /* Pleine largeur */
+    height: 95%; /* Pleine hauteur */
+    overflow: auto; /* Permet le défilement si le contenu dépasse */
+    background-color: rgba(0,0,0,0.4); /* Arrière-plan noir semi-transparent */
+    display: flex; /* Utilise flexbox pour centrer le contenu */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    margin-top: 20px;
+}
 
+/* Styles pour le contenu interne de la modale (la boîte blanche) */
+.modal-content {
+    background-color: #fefefe; /* Couleur blanche ! */
+    margin: auto; /* Permet le centrage avec display: flex sur le parent */
+    padding: 10px; /* Espacement intérieur */
+    border: 1px solid #888;
+    width: 80%; /* Largeur de la modale, ajustez selon vos besoins */
+    max-width: 600px; /* Largeur maximale pour les grands écrans */
+    border-radius: 10px; /* Bords arrondis */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Ombre pour la faire ressortir */
+    position: relative; /* Pour positionner le bouton de fermeture */
+    text-align: left; /* Aligne le texte à gauche dans la modale */
+}
+
+/* Style du bouton de fermeture */
+.close-button {
+    color: #aaa;
+    float: right; /* Flotte à droite */
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute; /* Position absolue par rapport à .modal-content */
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Styles pour les titres et labels à l'intérieur de la modale */
+.modal-content h3 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-left: 12px;
+}
+
+.modal-content div {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #555;
+    margin-left: 12px;
+    align-items: center;
+}
+
+.modal-content div b {
+    color: #333;
+    display: inline-block; /* Ou block si vous voulez que le label soit sur sa propre ligne */
+    width: 120px; /* Pour aligner les valeurs si les labels sont de longueurs différentes */
+}
+.modal-content button{
+    margin-left: 24px;
+}
 /* ------------------------------------------------------------- */
 /* MEDIA QUERIES POUR LE RESPONSIVE DESIGN */
 /* ------------------------------------------------------------- */
 
 /* Styles pour les écrans jusqu'à 1190px (grands ordinateurs portables, moniteurs) */
-@media (min-width: 1390px) {
+@media (max-width: 1590px) {
     body {
         padding: 5px;
     }
@@ -550,7 +625,7 @@ th[data-col] {
     }
 
     .module-block[data-module="personnel"] {
-        max-width: 970px;
+        
         margin-top: 20px;
         padding: 5px;
         height: 580px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
@@ -598,7 +673,443 @@ th[data-col] {
 
     .table-container-scroll {
         max-height: 200px; /* Ajuster la hauteur du tableau défilant */
-        min-width: 900px;
+        min-width:100px;
+    }
+
+    #table-personnel th,
+    #table-personnel td {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+}
+@media (max-width: 1390px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 10px;
+    }
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 10px;
+        margin-left: -3rem;
+    }
+
+    .gauche {
+        width: 180px;
+        margin-left:-12rem;
+        margin-top: 150px;
+        margin-right: 2rem;
+    }
+
+    .button-nav, .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .module-block[data-module="personnel"] {
+        width: 1100px;
+        margin-top: 20px;
+        padding: 5px;
+        height: 600px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-right: -7rem;
+    }
+
+    .circle {
+        width: 90px;
+        height: 90px;
+        margin-top: 5px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    #add-employee-form {
+        padding: 20px 25px;
+    }
+
+    .droite {
+        grid-template-columns: repeat(2, 1fr); /* Passe à 2 colonnes */
+        gap: 20px;
+    }
+
+    #add-employee-form button[type="submit"] {
+        width: 200px;
+        padding: 10px 20px;
+    }
+
+    #search-personnel,
+    #filter-departement,
+    #filter-poste,
+    #filter-type-contrat,
+    #filter-agence {
+        width: 180px;
+        margin-right: 10px;
+    }
+
+    #reset-filters,
+    #download-filtered-pdf,
+    #print-emp2 {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .table-container-scroll {
+        max-height: 200px; /* Ajuster la hauteur du tableau défilant */
+        min-width:100px;
+    }
+
+    #table-personnel th,
+    #table-personnel td {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+}
+@media (max-width: 1350px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 10px;
+    }
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 10px;
+        margin-left: -3rem;
+    }
+
+    .gauche {
+        width: 180px;
+        margin-left:-12.5rem;
+        margin-top: 150px;
+        margin-right: 0.3rem;
+    }
+
+    .button-nav, .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .module-block[data-module="personnel"] {
+        width: 1100px;
+        margin-top: 20px;
+        padding: 5px;
+        height: 600px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        
+    }
+
+    .circle {
+        width: 90px;
+        height: 90px;
+        margin-top: 5px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    #add-employee-form {
+        padding: 20px 25px;
+    }
+
+    .droite {
+        grid-template-columns: repeat(2, 1fr); /* Passe à 2 colonnes */
+        gap: 20px;
+    }
+
+    #add-employee-form button[type="submit"] {
+        width: 200px;
+        padding: 10px 20px;
+    }
+
+    #search-personnel,
+    #filter-departement,
+    #filter-poste,
+    #filter-type-contrat,
+    #filter-agence {
+        width: 180px;
+        margin-right: 10px;
+    }
+
+    #reset-filters,
+    #download-filtered-pdf,
+    #print-emp2 {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .table-container-scroll {
+        max-height: 200px; /* Ajuster la hauteur du tableau défilant */
+        min-width:100px;
+    }
+
+    #table-personnel th,
+    #table-personnel td {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+}
+@media (max-width: 1290px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 10px;
+    }
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 10px;
+        margin-left: -3rem;
+    }
+
+    .gauche {
+        width: 180px;
+        margin-left:-12.5rem;
+        margin-top: 150px;
+        margin-right: 0.3rem;
+    }
+
+    .button-nav, .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .module-block[data-module="personnel"] {
+        width: 900px;
+        margin-top: 20px;
+        padding: 5px;
+        height: 600px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        
+    }
+
+    .circle {
+        width: 90px;
+        height: 90px;
+        margin-top: 5px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    #add-employee-form {
+        padding: 20px 25px;
+    }
+
+    .droite {
+        grid-template-columns: repeat(2, 1fr); /* Passe à 2 colonnes */
+        gap: 20px;
+    }
+
+    #add-employee-form button[type="submit"] {
+        width: 200px;
+        padding: 10px 20px;
+    }
+
+    #search-personnel,
+    #filter-departement,
+    #filter-poste,
+    #filter-type-contrat,
+    #filter-agence {
+        width: 180px;
+        margin-right: 10px;
+    }
+
+    #reset-filters,
+    #download-filtered-pdf,
+    #print-emp2 {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .table-container-scroll {
+        max-height: 200px; /* Ajuster la hauteur du tableau défilant */
+        min-width: 150px;
+    }
+
+    #table-personnel th,
+    #table-personnel td {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+}
+@media (max-width: 1150px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 10px;
+    }
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 10px;
+        margin-left: 1rem;
+    }
+
+    .gauche {
+        width: 180px;
+        margin-left:-12rem;
+        margin-top: 150px;
+        margin-right: -2em;
+    }
+
+    .button-nav, .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .module-block[data-module="personnel"] {
+        width: 800px;
+        margin-top: 20px;
+        margin-left: 2rem;
+        margin-right: -3rem;
+        padding: 5px;
+        height: 600px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        
+    }
+
+    .circle {
+        width: 90px;
+        height: 90px;
+        margin-top: 5px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    #add-employee-form {
+        padding: 20px 25px;
+    }
+    
+
+    .droite {
+        grid-template-columns: repeat(2, 1fr); /* Passe à 2 colonnes */
+        gap: 20px;
+    }
+
+    #add-employee-form button[type="submit"] {
+        width: 200px;
+        padding: 10px 20px;
+    }
+
+    #search-personnel,
+    #filter-departement,
+    #filter-poste,
+    #filter-type-contrat,
+    #filter-agence {
+        width: 180px;
+        margin-right: 10px;
+    }
+
+    #reset-filters,
+    #download-filtered-pdf,
+    #print-emp2 {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .table-container-scroll {
+        max-height: 200px; /* Ajuster la hauteur du tableau défilant */
+        min-width:100px;
+    }
+
+    #table-personnel th,
+    #table-personnel td {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+}
+@media (max-width: 940px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 10px;
+    }
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 10px;
+        margin-left: 1rem;
+    }
+
+    .gauche {
+        width: 180px;
+        margin-left:-12rem;
+        margin-top: 150px;
+        margin-right: -2em;
+    }
+
+    .button-nav, .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .module-block[data-module="personnel"] {
+        width: 700px;
+        margin-top: 20px;
+        margin-left: 2rem;
+        margin-right: -3rem;
+        padding: 5px;
+        height: 600px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        
+    }
+
+    .circle {
+        width: 90px;
+        height: 90px;
+        margin-top: 5px;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    #add-employee-form {
+        padding: 20px 25px;
+    }
+    
+
+    .droite {
+        grid-template-columns: repeat(2, 1fr); /* Passe à 2 colonnes */
+        gap: 20px;
+    }
+
+    #add-employee-form button[type="submit"] {
+        width: 200px;
+        padding: 10px 20px;
+    }
+
+    #search-personnel,
+    #filter-departement,
+    #filter-poste,
+    #filter-type-contrat,
+    #filter-agence {
+        width: 180px;
+        margin-right: 10px;
+    }
+
+    #reset-filters,
+    #download-filtered-pdf,
+    #print-emp2 {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .table-container-scroll {
+        max-height: 200px; /* Ajuster la hauteur du tableau défilant */
+        min-width: 60px;
     }
 
     #table-personnel th,
@@ -609,11 +1120,11 @@ th[data-col] {
 }
 
 /*styles pour ordinateurs et tablettes jusqu'à 1050px */
-@media (max-width: 1150px) {
+@media (max-width: 900px) {
     body {
         flex-direction: column;
         align-items: center;
-        padding: 10px;
+        padding: 20px;
     }
 
     .header-bar {
@@ -704,17 +1215,15 @@ th[data-col] {
     #filter-poste,
     #filter-type-contrat,
     #filter-agence {
-        display: block;
         margin-right: 0;
         margin-bottom: 8px;
-        width: 100%;
-        max-width: unset;
+        width: 30%;
     }
 
     #reset-filters,
     #download-filtered-pdf,
     #print-emp2 {
-        width: 100%;
+        width: 30%;
         margin-bottom: 8px;
         margin-right: 0;
     }
@@ -722,7 +1231,7 @@ th[data-col] {
     .table-container-scroll {
         margin: 15px auto;
         max-height: 200px; /* Maintenir la hauteur de défilement pour le tableau */
-        min-width: 800px;
+        min-width:100px;
     }
 
     #table-personnel th,
@@ -840,17 +1349,16 @@ th[data-col] {
     #filter-poste,
     #filter-type-contrat,
     #filter-agence {
-        display: block;
         margin-right: 0;
         margin-bottom: 8px;
-        width: 100%;
+        width: 40%;
         max-width: unset;
     }
 
     #reset-filters,
     #download-filtered-pdf,
     #print-emp2 {
-        width: 100%;
+        width: 30%;
         margin-bottom: 8px;
         margin-right: 0;
     }
@@ -858,7 +1366,7 @@ th[data-col] {
     .table-container-scroll {
         margin: 15px auto;
         max-height: 200px; /* Maintenir la hauteur de défilement pour le tableau */
-        min-width: 800px;
+        min-width: 60px;
     }
 
     #table-personnel th,
