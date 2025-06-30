@@ -403,7 +403,7 @@ body {
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: -1rem;
-    margin-left: -0.2rem;
+    margin-left: 1rem;
     width: 120px;
     height: 120px;
     margin-right: 10px;
@@ -531,29 +531,81 @@ button[type="submit"]:disabled {
 
 .gauche{
     display: flex;
-    margin-left:  -200px;
+    margin-left:  -210px;
     margin-top: 140px;
     margin-right: 15px;
     flex-direction: column;
     align-items: center;
     gap: 4px;
 }
+/* --- Tableau des postes --- */
+.table-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Permet le défilement horizontal si le contenu dépasse */
+    overflow-y: auto; /* Permet le défilement vertical si le contenu dépasse */
+    max-height: 400px; /* Hauteur maximale pour le défilement vertical, ajustez selon vos besoins */
+    border: 1px solid #e9ecef; /* Bordure autour du conteneur du tableau */
+}
+
+#table-postes {
+    width: 100%;
+    min-width: 800px; /* Largeur minimale pour forcer le défilement horizontal si nécessaire.
+    Ajustez cette valeur en fonction du nombre de colonnes et de leur contenu. */
+}
+
+#table-postes th,
+#table-postes td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+#table-postes th {
+    background: #667eea;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    top: 0; /* Colle l'en-tête en haut du conteneur de défilement */
+    z-index: 2; /* Assure que l'en-tête est au-dessus du contenu défilant */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.2); /* Légère ombre pour la distinction */
+}
+
+#table-postes tbody tr:hover {
+    background: #f8f9fa;
+}
+/* Styles des boutons d'action dans le tableau */
+.action-btn {
+    display: block; /* Chaque bouton prendra sa propre ligne */
+    width: 20%; 
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    gap: 5px;
+}
+
 
 /* --- Responsive Design --- */
-@media (max-width: 1100px) {
+
+@media (max-width: 900px) {
     body {
         flex-direction: column;
         align-items: center;
-        padding: 10px;
+        padding: 20px;
     }
 
     .container {
         width: 100%;
         margin: 10px auto;
         padding: 10px;
-        max-width: unset;
         height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
-        overflow-y: visible; /* Laisser le body gérer le défilement */
+        overflow-y: auto; /* Laisser le body gérer le défilement */
     }
 
     h1 {
@@ -611,6 +663,7 @@ button[type="submit"]:disabled {
         text-align: center;
         justify-content: center;
     }
+    
     
 }
 @media (max-width: 768px) {
@@ -694,7 +747,11 @@ button[type="submit"]:disabled {
         max-width: 800px;
         overflow-y: auto;
     }
+    .form-group input{
+        width: 100%;
+    }
 }
+
 
 .edit-poste{
   background-color: #faa404; /* orange */
@@ -724,7 +781,20 @@ button[type="submit"]:disabled {
 .delete-poste:hover {
   background-color: #ff0909;
 }
-
+.view-details-poste{
+  background-color: #28a745; /* orange */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 8px;
+  width: 85px;
+  margin-bottom: 10px;
+}
+.view-details-poste:hover {
+  background-color: #135f25;
+}
 #modal-poste-details {
   display: none; /* Caché par défaut */
   position: fixed;
