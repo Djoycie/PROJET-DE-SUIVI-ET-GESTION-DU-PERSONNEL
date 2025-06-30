@@ -89,8 +89,8 @@ body {
     min-height: 632px; /* FIXE LA HAUTEUR DU CONTENEUR À 632px */
     max-width: 1100px; /* Largeur maximale pour une bonne lisibilité sur grand écran */
     text-align: center;
-    margin-left: 2px;
-    margin-top: 30px;
+    margin-left: -2px;
+    margin-top: -3px;
     margin-right: 2px;
     /*overflow-y: auto;  active le scroll vertical */ /* Re-enable if scrolling content is needed */
 }
@@ -204,6 +204,7 @@ a {
     margin-top: -45px;
     font-size: 2.5em;
     margin-bottom: 10px;
+    margin-top: -2px;
     font-weight: 300;
     color: black;
     padding-bottom: 10px;
@@ -417,7 +418,7 @@ textarea {
 /* Tableaux (from new code, updated to be more generic) */
 .container_s { /* Renamed from your new code's .container_s */
     background-color: white;
-    margin-top: -10px;
+    margin-top: 10px;
     height: 510px;
     overflow-y: auto;
     border-radius: 5px;
@@ -430,6 +431,7 @@ table {
     width: 100%; /* Ensure table takes full width of its container */
     border-collapse: collapse;
     margin-top: 20px;
+    
 }
 
 table th, table td {
@@ -455,6 +457,54 @@ table button { /* Generic table button style from your new code */
     border-radius: 4px;
 }
 
+#congesTable th,
+#congesTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+#congesTable th {
+    background: #667eea;
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    top: 0; /* Colle l'en-tête en haut du conteneur de défilement */
+    z-index: 2; /* Assure que l'en-tête est au-dessus du contenu défilant */
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.2); /* Légère ombre pour la distinction */
+}
+
+#congesTable tbody tr:hover {
+    background: #f8f9fa;
+}
+.filter-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 5px;
+    gap: 10px;
+}
+/* Ajoutez ceci ou modifiez votre .table-container existant */
+.table-container {
+    overflow-x: auto; /* Active le défilement horizontal */
+    background: white; /* Ou votre couleur de fond préférée */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 20px; /* Ajoute un espace au-dessus du tableau */
+    padding: 10px; /* Un peu de padding interne pour l'esthétique */
+    min-width: 30px;
+}
+
+/* Assurez-vous que le tableau a une largeur minimale pour forcer le scroll */
+#congesTable {
+    width: 100%; /* Le tableau prendra 100% de la largeur de son conteneur */
+    border-collapse: collapse; /* Assure que les bordures des cellules se touchent */
+    min-width: 1200px; 
+}
+
+
 /* ------------------------------------------------------------- */
 /* MEDIA QUERIES POUR LE RESPONSIVE DESIGN */
 /* ------------------------------------------------------------- */
@@ -462,7 +512,7 @@ table button { /* Generic table button style from your new code */
 /* Large devices (desktops, 1350px and down) */
 @media (max-width: 1550px) {
     body{
-        padding: 30px;
+        padding: 20px;
     }
     .container {
         max-width: 1050px; /* Adjust container width */
@@ -479,7 +529,7 @@ table button { /* Generic table button style from your new code */
     .log {
         width: 120px;
         height: 120px;
-        margin-left: 7rem;
+        margin-left: 3rem;
     }
 
 }
@@ -487,12 +537,74 @@ table button { /* Generic table button style from your new code */
 /* Large devices (desktops, 1290px and down) */
 @media (max-width: 1290px) {
    body{
-        padding: 30px;
+        padding: 20px;
     }
     .container {
-        max-width: 1050px; /* Adjust container width */
+        max-width: 860px; /* Adjust container width */
+        margin-right: 6rem;
+        margin-left: 3rem;
+    }
+    .container_s{
+        width: 820px;
+        height: 500px;
+    }
+    .header-bar {
+        margin-right: -20px; /* Reduce negative margin */
+    }
+    .gauche {
+        margin-left: -90px; /* Adjust left menu position */
+        width: 180px; /* Slightly reduce width */
+    }
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: 7rem;
+    }
+}
+/* Large devices (desktops, 970px and down) */
+@media (max-width: 1190px) {
+   body{
+        padding: 20px;
+    }
+    .container {
+        max-width: 790px; /* Adjust container width */
         margin-right: 6rem;
         margin-left: 2rem;
+    }
+    .container_s{
+        width: 750px;
+        height: 500px;
+    }
+    
+}
+@media (max-width: 1090px) {
+   body{
+        padding: 20px;
+    }
+    .container {
+        max-width: 770px; /* Adjust container width */
+        margin-right: 6rem;
+        margin-left: 2rem;
+    }
+    .container_s{
+        width: 730px;
+        height: 500px;
+    }
+    
+}
+/* Large devices (desktops, 1000px and down) */
+@media (max-width: 1020px) {
+   body{
+        padding: 20px;
+    }
+    .container {
+        max-width: 760px; /* Adjust container width */
+        margin-right: 6rem;
+        margin-left: 1rem;
+    }
+    .container_s{
+        width: 700px;
+        height: 500px;
     }
     .header-bar {
         margin-right: -20px; /* Reduce negative margin */
@@ -508,13 +620,43 @@ table button { /* Generic table button style from your new code */
     }
 }
 
-
+/* Large devices (desktops, 970px and down) */
+@media (max-width: 970px) {
+   body{
+        padding: 20px;
+    }
+    .container {
+        max-width: 720px; /* Adjust container width */
+        margin-right: 6rem;
+        margin-left: 1rem;
+    }
+    .container_s{
+        width: 670px;
+        height: 500px;
+    }
+    
+}
+@media (max-width: 940px) {
+   body{
+        padding: 20px;
+    }
+    .container {
+        max-width: 700px; /* Adjust container width */
+        margin-right: 6rem;
+        margin-left: 1rem;
+    }
+    .container_s{
+        width: 640px;
+        height: 500px;
+    }
+    
+}
 /* Medium devices (tablets, 750px and down) */
-@media (max-width: 1250px) {
+@media (max-width:  900px) {
     body {
         flex-direction: column; /* Stack header, menu, and content */
         align-items: center;
-        padding: 10px;
+        padding: 30px;
     }
 
     .header-bar {
@@ -576,12 +718,18 @@ table button { /* Generic table button style from your new code */
         width: 100%;
         margin: 10px auto;
         padding: 15px;
-        max-width: unset; /* No max-width for this size */
+        max-width: 100%; /* No max-width for this size */
         height: auto; /* Adapt to content on mobile */
         overflow-y: visible; /* Let body handle scrolling */
         box-shadow: none; /* Less shadow for small screens */
+        
     }
 
+    .container_s{
+        width: 100%;
+        min-height: 400px; /* Adjust height for smaller screens */
+        margin-top: 10px;
+    }
     h1 {
         font-size: 1.5rem;
     }
@@ -615,7 +763,6 @@ table button { /* Generic table button style from your new code */
     table {
         min-width: 600px; /* Minimum width to prevent content overlap */
         display: block; /* Allows overflow-x to work */
-        overflow-x: auto;
         -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
     }
 
@@ -623,8 +770,88 @@ table button { /* Generic table button style from your new code */
         padding: 8px;
         font-size: 0.85em;
     }
-}
 
+
+}
+/* Styles for very small screens (700px and down) */
+@media (max-width: 700px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 60px;
+        height: 60px;
+    }
+
+    #welcome-message {
+        font-size: 0.8rem;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la, .voir, .button-dec {
+        width: 100%; /* All buttons on their own line */
+        font-size: 0.8em;
+        padding: 6px 8px;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+    h2 {
+        font-size: 1em;
+    }
+
+    .form-container, .table-container, .career-history-section, .container_s {
+        padding: 10px;
+    }
+
+    form input[type="text"],
+    form input[type="date"],
+    form select,
+    form textarea {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    form textarea {
+        min-height: 50px;
+    }
+
+    .btn {
+        padding: 6px 10px;
+        font-size: 0.85em;
+        margin-bottom: 8px;
+    }
+
+    table {
+        min-width: 350px; /* Further reduce min-width for very small screens */
+    }
+    table th, table td {
+        padding: 6px;
+        font-size: 0.75em;
+    }
+    .modifier-btn, .supprimer-btn, .imprimer-btn, .pdf-btn {
+        padding: 3px 5px; /* Smaller padding for actions buttons */
+        font-size: 0.7em;
+    }
+}
 /* Styles for very small screens (smartphones, 400px and down) */
 @media (max-width: 400px) {
     body {
