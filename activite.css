@@ -48,9 +48,9 @@ body {
 
 /* Styles du conteneur principal (pour les formulaires, tableaux, etc.) */
 .container {
-    max-width: 1400px; /* Largeur maximale pour le contenu principal */
+    max-width: 1200px; /* Largeur maximale pour le contenu principal */
     margin: 0 auto; /* Centre le conteneur */
-    background: rgba(255, 255, 255, 0.95); /* Fond transparent avec blur */
+    background: transparent; /* Fond transparent avec blur */
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
@@ -674,68 +674,37 @@ table button {
         margin-top: -15px;
     }
 }
-@media (max-width: 1290px) {
+@media (max-width: 1310px) {
    body {
-        flex-direction: column; /* Le body passe en colonne */
-        align-items: center; /* Centre le contenu horizontalement */
-        padding: 15px;
-    }
-    .header-bar {
-        flex-direction: column; /* Les éléments du header s'empilent */
-        align-items: center; /* Centrer les éléments du header */
-        width: 100%;
-        padding: 10px;
-    }
-    .logo-container {
-        margin: 0; /* Réinitialiser les marges du logo */
-    }
-    .log {
-        width: 100px;
-        height: 100px;
-        margin: 0 auto; /* Centrer le logo */
-        display: block;
-    }
-    /* Si vous avez un message de bienvenue ici */
-    #welcome-message {
-        font-size: 1rem;
-        margin-top: 10px;
-        margin-left: 0;
-        text-align: center;
-    }
-    .gauche {
-        flex-direction: row; /* Le menu passe en ligne (horizontal) */
-        flex-wrap: wrap; /* Les boutons peuvent s'enrouler */
-        justify-content: center; /* Centrer les boutons */
-        width: 100%; /* Prend toute la largeur */
-        margin: 15px 0; /* Marge au-dessus et en-dessous du menu */
-        padding: 10px;
-        position: relative; /* Ne plus être sticky/fixed */
-        top: unset;
-        height: unset; /* Hauteur adaptative */
-        overflow-y: visible;
-        gap: 8px; /* Espacement entre les boutons */
-    }
-    .button-nav, .button-la, .voir, .button-dec {
-        width: calc(50% - 10px); /* Deux boutons par ligne */
-        max-width: 200px;
-        font-size: 0.9em;
-        margin-bottom: 0; /* Pas de marge verticale entre boutons s'ils sont wrap */
+        padding: 20px; /* Conserver le padding global */
     }
     .container {
-        padding: 20px;
-        max-width: 100%; /* Permet au conteneur de prendre toute la largeur disponible */
-        margin: 10px auto; /* Centrer à nouveau */
+        width: 1000px; /* Ajuster la largeur max pour ce breakpoint */
     }
-    .charts-grid {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Ajuster pour cette taille */
-        gap: 20px;
+    .container_s{
+        width: 800px;
+    }
+    .header-bar {
+        padding: 5px 20px;
+    }
+    .gauche {
+        width: 180px; /* Réduire légèrement la largeur du menu latéral */
+        margin-right: 30px; /* Ajuster l'espacement */
+        margin-top: 150px; /* Ajuster la marge pour le logo plus petit */
+        margin-left: -15rem; /* Removing problematic negative margin */
+    }
+    .log {
+        width: 130px;
+        height: 130px;
+        margin-left: -11.4rem;
+        margin-top: -15px;
     }
     
 }
 
 
 /* Medium devices (large tablets, smaller laptops, 1150px and down) */
-@media (max-width: 1250px) {
+@media (max-width: 1100px) {
     body {
         flex-direction: column; /* Le body passe en colonne */
         align-items: center; /* Centre le contenu horizontalement */
@@ -787,11 +756,17 @@ table button {
         max-width: 100%; /* Permet au conteneur de prendre toute la largeur disponible */
         margin: 10px auto; /* Centrer à nouveau */
     }
+    .container_s{
+        width: 100%; /* Permet au conteneur de prendre toute la largeur disponible */
+        padding: 10px;
+        margin: 10px auto; /* Centrer à nouveau */
+    }
     .charts-grid {
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Ajuster pour cette taille */
         gap: 20px;
     }
 }
+
 
 /* Tablets (800px and down) */
 @media (max-width: 950px) {
