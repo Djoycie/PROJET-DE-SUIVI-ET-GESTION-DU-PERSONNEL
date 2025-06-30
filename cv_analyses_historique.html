@@ -7,6 +7,40 @@
     <link rel="stylesheet" href="analyse.css">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
     <style>
+        .header-bar {
+            background-color: transparent;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute; /* Position absolue pour qu'il soit au-dessus du reste */
+            top: 0;
+            left: -48.3rem;
+            width: 100%;
+            z-index: 1000;
+        }
+        .logo-container {
+            position: relative;
+            border-radius: 50%;
+            margin-right: 5px; /* Ajusté pour un alignement propre */
+            margin-left: 39px; /* Réinitialisé */
+        }
+        .log {
+            background-color: var(--primary-color); /* Utiliser la variable */
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            margin-top: 0; /* Réinitialisé */
+            margin-left: 0; /* Réinitialisé */
+            margin-right: 0; /* Réinitialisé */
+        }
+        h2{
+            background-color: white;
+            border-radius: 15px;
+        }
         .filter-section {
             background-color: #fdfdfd;
             border: 1px solid #e0e0e0;
@@ -86,7 +120,7 @@
     </div>
     
     <div class="gauche">
-       <b class="button-nav" onclick="location.href='#'">Recrutement</b>
+       <b class="button-nav" onclick="location.href='analyse_cv.html'">Analyse de CV</b>
        <b class="button-nav" onclick="location.href='postes.html'">Postes</b>
        <b class="button-nav" onclick="location.href='personnel.html'">Personnel</b>
        <b class="button-nav" onclick="location.href='carriere.html'">Carrière</b>
@@ -98,7 +132,7 @@
        <b class="button-nav" onclick="location.href='audit.html'">Audit</b>
        <b class="button-nav" onclick="location.href='sauvegarde.html'">Sauvegardes</b>
        <b class="button-nav" onclick="location.href='parametres.html'">Paramètres</b>
-        <a href="accueil.html" class="button-nav"><b align="center">Retour au tableau de bord</B></a>
+        <a href="accueil.html" class="button-nav"><b align="center">Retour </B></a>
     </div>
 
     <div class="header-bar">
@@ -136,7 +170,7 @@
                 </table>
             </div>
 
-            <a href="analyse_cv.html" class="back-button">Retour</a>
+            <a href="analyse_cv.html" class="back-button">Retour à l'analyse</a>
         </div>
     </div>
 
