@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Optionnel : faire défiler jusqu'au formulaire
     addPosteForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-
+ 
   // Réinitialiser le formulaire
   function resetForm() {
     addPosteForm.reset();

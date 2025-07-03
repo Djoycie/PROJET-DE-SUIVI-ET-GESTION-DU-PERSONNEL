@@ -390,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (elements.filterDepartement.value) {
       filters.departement = elements.filterDepartement.value;
-    }
+    } 
     if (elements.filterStatut.value) {
       filters.statut = elements.filterStatut.value;
     }

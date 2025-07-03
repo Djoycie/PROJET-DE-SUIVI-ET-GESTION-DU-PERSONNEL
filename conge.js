@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         option.value = item;
         option.textContent = item;
         select.appendChild(option);
-      });
+      }); 
       
       // Restaurer la valeur si elle existe encore
       if (currentValue && items.has(currentValue)) {

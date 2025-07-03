@@ -278,7 +278,7 @@ if (viewHistoryBtn) {
     });
 }
 
-
+ 
 /**
  * Affiche l'historique de carrière pour un personnel donné,
  * en montrant les transitions entre ancien et nouveau poste.

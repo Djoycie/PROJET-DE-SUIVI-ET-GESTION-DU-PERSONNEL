@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('modal-emp-body').innerHTML = html;
     document.getElementById('modal-emp-details').style.display = 'flex';
   }
-
+ 
   // Fermer la modale
   document.getElementById('close-modal-emp').onclick = function() {
     document.getElementById('modal-emp-details').style.display = 'none';
