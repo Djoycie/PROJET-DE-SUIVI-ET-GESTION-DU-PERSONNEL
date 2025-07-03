@@ -523,13 +523,13 @@ table button { /* Generic table button style from your new code */
         margin-right: -20px; /* Reduce negative margin */
     }
     .gauche {
-        margin-left: -90px; /* Adjust left menu position */
+        margin-left: -100px; /* Adjust left menu position */
         width: 180px; /* Slightly reduce width */
     }
     .log {
         width: 120px;
         height: 120px;
-        margin-left: 3rem;
+        margin-left: 3.3rem;
     }
 
 }
@@ -567,12 +567,12 @@ table button { /* Generic table button style from your new code */
         padding: 20px;
     }
     .container {
-        max-width: 790px; /* Adjust container width */
+        max-width: 860px; /* Adjust container width */
         margin-right: 6rem;
-        margin-left: 2rem;
+        margin-left: 1rem;
     }
     .container_s{
-        width: 750px;
+        width: 820px;
         height: 500px;
     }
     

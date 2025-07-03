@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module de Sauvegarde et Exploration de Base de Données</title>
+    <link rel="stylesheet" href="./sauvegarde.css">
+</head>
+<body>
+    <div class="header-bar">
+         <div class="logo-container">
+            <img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/HR-etoile2.png" alt="Logo" class="log">
+         </div>
+    </div>
+    
+    <div class="gauche">
+       <b class="button-nav" onclick="location.href='analyse_cv.html'">Recrutement</b>
+       <b class="button-nav" onclick="location.href='postes.html'">Postes</b>
+       <b class="button-nav" onclick="location.href='personnel.html'">Personnel</b>
+       <b class="button-nav" onclick="location.href='carriere.html'">Carrière/Affectation</b>
+       <b class="button-nav" onclick="location.href='conges.html'">Congés</b>
+       <b class="button-nav" onclick="location.href='paie.html'">Paie</b>
+       <b class="button-nav" onclick="location.href='stages_formation.html'">Stage/formation</b>
+       <b class="button-nav" onclick="location.href='plan_activite.html'">Statistiques</b>
+       <b class="button-nav" onclick="location.href='utilisateurs.html'">Utilisateurs</b>
+       <b class="button-nav" onclick="location.href='audit.html'">Audit</b>
+       <b class="button-la" onclick="location.href='archivage_documentation.html'">Sauvegardes</b>
+       <b class="button-nav" onclick="location.href='parametres.html'">Paramètres</b>
+       <b class="button-nav" onclick="location.href='alerte.html'">Alertes</b>
+        <a href="accueil.html" class="button-nav"><b>Retour</B></a>
+    </div>
+    
+    <div class="container">
+        <h1>Explorateur de Base de Données</h1>
+
+        <div class="controls">
+            <div class="form-group">
+                <label for="table-select">Sélectionner une table :</label>
+                <select id="table-select">
+                    <option value="">-- Choisir une table --</option>
+                     <option value="paie">paie</option>
+                      <option value="personnel">personnel</option>
+                       <option value="conges">conges</option>
+                        <option value="postes">postes</option>
+                        <option value="stages">stages</option>
+                        <option value="users">users</option>
+                        <option value="audit_logs">logs</option>
+                        <option value="affectations">affectations</option>
+                </select>
+            </div>
+
+            <div class="form-group search-group">
+                <label for="search-input">Rechercher/Filtrer :</label><br>
+                <input type="text" id="search-input" placeholder="Entrez un terme de recherche">
+                <button id="apply-filter-btn" class="action-btn">Appliquer le filtre</button>
+                <button id="reset-filter-btn" class="action-btn reset-btn">Réinitialiser</button>
+            </div>
+        </div>
+
+        <div id="table-data-container" class="table-data-container">
+            <p class="placeholder-text">Veuillez sélectionner une table pour afficher ses données.</p>
+        </div>
+    </div>
+
+    <script src="sauvegarde.js"></script>
+</body>
+</html>

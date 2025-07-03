@@ -19,18 +19,19 @@
     </div>
 
     <div class="gauche">
-        <b class="button-nav" onclick="location.href='analyse_cv.html'">Recrutement</b>
+        <b class="button-nav" onclick="location.href='analyse_cv.html'">Analyse de CV</b>
         <b class="button-nav" onclick="location.href='postes.html'">Postes</b>
         <b class="button-nav" onclick="location.href='personnel.html'">Personnel</b>
-        <b class="button-nav" onclick="location.href='carriere.html'">Carrière</b>
+        <b class="button-nav" onclick="location.href='carriere.html'">Carrière/Affectation</b>
         <b class="button-nav" onclick="location.href='conges.html'">Congés</b>
         <b class="button-nav" onclick="location.href='paie.html'">Paie</b>
-        <b class="button-nav" onclick="location.href='stages_formation.html'">Stage/formation</b>
+        <b class="button-la" onclick="location.href='stages_formation.html'">Stage/formation</b>
         <b class="button-nav" onclick="location.href='plan_activite.html'">Statistiques</b>
         <b class="button-nav" onclick="location.href='utilisateurs.html'">Utilisateurs</b>
         <b class="button-nav" onclick="location.href='audit.html'">Audit</b>
-        <b class="button-nav" onclick="location.href='sauvegarde.html'">Sauvegardes</b>
+        <b class="button-nav" onclick="location.href='archivage_documentation.html'">Sauvegardes</b>
         <b class="button-nav" onclick="location.href='parametres.html'">Paramètres</b>
+        <b class="button-nav" onclick="location.href='alerte.html'">Alertes</b>
         <a href="accueil.html" class="button-nav"><b>Retour</b></a>
     </div>
 
@@ -231,11 +232,12 @@
 
                 <div class="export-actions">
                     <button id="btnSearch" class="btn btn-primary">
-                        🔍 Rechercher
+                        🔍Rechercher
                     </button>
                     <button id="btnClearFilters" class="btn btn-secondary">
                         🗑 Effacer
                     </button>
+                    <div class="bexport">
                     <button id="btnPrint" class="btn btn-export">
                         🖨 Imprimer
                     </button>
@@ -245,6 +247,7 @@
                     <button id="btnExportExcel" class="btn btn-export">
                         📊 Export Excel
                     </button>
+                    </div>
                 </div>
             </div>
 
@@ -342,10 +345,9 @@
                 </div>
             </div>
         </div>
-
         <!-- Notifications -->
         <div id="notification" class="notification"></div>
-
-        <a href="accueil.html" class="back-button">← Retour au Tableau de Bord</a>
-
         <script src="stage.js"></script>
+    </div>
+</body>
+</html>

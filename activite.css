@@ -1089,6 +1089,7 @@ table button {
         width: 100%; /* Tous les boutons du menu sur une ligne complète */
         font-size: 0.8em;
         padding: 8px 10px;
+        justify-content: left;
     }
     .container {
         padding: 10px;

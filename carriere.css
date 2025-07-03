@@ -18,7 +18,6 @@
 
 /* --- Base et typographie --- */
 
-
 h1, h2, h3 {
     color: black;
     margin-bottom: 1rem;
@@ -53,7 +52,7 @@ p {
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    background: linear-gradient(to bottom,#e3f3ee,#214137);
+    background: linear-gradient(to bottom, #e3f3ee, #214137);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -65,7 +64,7 @@ body {
 }
 
 .container {
-    background-color:transparent;
+    background-color: transparent;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     padding: 10px;
@@ -75,13 +74,14 @@ body {
     text-align: center;
     margin-left: 2px;
     margin-top: -25px;
-    overflow-y: auto;  /*active le scroll vertical */
 }
-.container_s{
+
+.container_s {
     height: 500px;
     overflow-y: auto;
     border-radius: 15px;
 }
+
 .page-content {
     margin-top: -40px;
 }
@@ -99,16 +99,18 @@ body {
     z-index: 1000;
     gap: 8px;
 }
-.logo-container{
-    position:  relative;
+
+.logo-container {
+    position: relative;
     border-radius: 50%;
     margin-left: -2.5rem;
 }
-.log{
+
+.log {
     background-color: #b8aeec;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top:0rem;
+    margin-top: 0rem;
     margin-left: -1rem;
     width: 150px;
     height: 150px;
@@ -116,9 +118,9 @@ body {
 }
 
 /* Navigation latérale (Menu .gauche) */
-.gauche{
+.gauche {
     display: flex;
-    margin-left:  -14rem;
+    margin-left: -14rem;
     margin-top: 160px;
     margin-right: 15px;
     flex-direction: column;
@@ -126,7 +128,7 @@ body {
     gap: 3px;
 }
 
-.button-nav{
+.button-nav {
     padding: 8px 20px;
     border-radius: 25px;
     cursor: pointer;
@@ -136,50 +138,52 @@ body {
     color: white;
     margin-top: -5px;
 }
+
 .button-nav:hover {
     background-color: var(--primary-hover-color);
     box-shadow: 0 4px 10px var(--shadow-medium);
     color: black;
 }
+
 .button-la {
     padding: 8px 15px;
     font-size: 0.9em;
     color: rgb(7, 0, 0); /* Couleur de texte différente pour le bouton actif/sélectionné */
     background-color: var(--primary-hover-color); /* Couleur de fond pour le bouton actif */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
 }
 
 h1, h2 {
-    color: var(--primary-dark-color);
+    color: black; /* Replaced with var(--primary-dark-color) for consistency */
     text-align: center;
-    margin-bottom: var(--spacing-unit) * 1.5;
+    margin-bottom: 1.5rem; /* Replaced with a direct value */
 }
 
 h1 {
     font-size: 2.2em;
-    padding-bottom: 10px;;
+    padding-bottom: 10px;
 }
 
 h2 {
     font-size: 1.6em;
-    margin-bottom: var(--spacing-unit);
+    margin-bottom: 1rem; /* Replaced with a direct value */
 }
 
 /* Conteneurs principaux */
 .form-container, .table-container, .career-history-section {
     background-color: #ffffff;
     padding: 15px;
-    border-radius: var(--border-radius);
+    border-radius: 8px; /* Replaced with a direct value */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: var(--spacing-unit) auto;
+    margin: 1rem auto; /* Replaced with a direct value */
     max-width: 960px; /* Largeur maximale pour une meilleure lisibilité */
 }
 
 hr {
     border: none;
     border-top: 1px solid var(--border-color);
-    margin: var(--spacing-unit) * 2 0;
+    margin: 2rem 0; /* Replaced with a direct value */
 }
 
 /* Formulaires */
@@ -187,7 +191,7 @@ form label {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    text-align: left;
+    text-align: center;
     margin-left: 11px;
 }
 
@@ -197,54 +201,54 @@ form select,
 form textarea {
     width: calc(100% - 20px); /* Prend presque toute la largeur avec un peu de padding */
     padding: 10px;
-    margin-bottom: var(--spacing-unit);
+    margin-bottom: 1rem; /* Replaced with a direct value */
     border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
+    border-radius: 8px; /* Replaced with a direct value */
     font-size: 1em;
     box-sizing: border-box; /* Inclut padding et border dans la largeur */
 }
 
-    form input[type="text"]:focus,
-    form input[type="date"]:focus,
-    form select:focus,
-    form textarea:focus {
-        border-color: var(--primary-color);
-        outline: none;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form select:focus,
+form textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
 
 form textarea {
     resize: vertical; /* Permet le redimensionnement vertical */
     min-height: 80px;
 }
 
-
 #save-affectation-btn {
     background-color: var(--primary-color);
     color: white;
 }
 
-    #save-affectation-btn:hover {
-        background-color: var(--primary-dark-color);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        color: black;
-    }
+#save-affectation-btn:hover {
+    background-color: #9c92cc; /* A direct color, as var(--primary-dark-color) is not defined */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: black;
+}
 
 #cancel-edit-btn {
     background-color: var(--secondary-color);
     color: white;
-    margin-left: var(--spacing-unit) / 2;
+    margin-left: 0.5rem; /* Replaced with a direct value */
 }
 
-    #cancel-edit-btn:hover {
-        background-color: #5a6268;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
- 
-button{
+#cancel-edit-btn:hover {
+    background-color: #5a6268;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button {
     border: none;
     border-radius: 15px;
 }
+
 .btn-view-career { /* Style pour le nouveau bouton "Voir Carrière" */
     background-color: #057035; /* Un vert-bleu attrayant */
     color: white;
@@ -252,17 +256,20 @@ button{
     margin-top: 3px;
 }
 
-    .btn-view-career:hover {
-        background-color: #17a2b8;
-    }
-#view-history-btn{
+.btn-view-career:hover {
+    background-color: #17a2b8;
+}
+
+#view-history-btn {
     background-color: #1c633c;
     color: white;
 }
-#view-history-btn:hover{
+
+#view-history-btn:hover {
     background-color: #0d582f;
     color: white;
 }
+
 /* Boutons d'action dans les tableaux */
 .table-container button, .career-history-section button {
     padding: 6px 12px;
@@ -270,95 +277,95 @@ button{
     margin-right: 5px;
 }
 
-    .table-container button:last-child {
-        margin-right: 0;
-    }
+.table-container button:last-child {
+    margin-right: 0;
+}
 
-    .table-container button:nth-of-type(1) { /* Modifier */
-        background-color: #faa404;
-        color: white;
-        width: 105px;
-        margin-left: 0.5rem;
-    }
+.table-container button:nth-of-type(1) { /* Modifier */
+    background-color: #faa404;
+    color: white;
+    width: 105px;
+    margin-left: 0.5rem;
+}
 
-        .table-container button:nth-of-type(1):hover {
-            background-color: #f0e007;
-        }
+.table-container button:nth-of-type(1):hover {
+    background-color: #f0e007;
+}
 
-    .table-container button:nth-of-type(2) { /* Supprimer */
-        background-color: #f1402d;
-        color: white;
-        width: 105px;
-        margin-left: 0.5rem;
-    }
+.table-container button:nth-of-type(2) { /* Supprimer */
+    background-color: #f1402d;
+    color: white;
+    width: 105px;
+    margin-left: 0.5rem;
+}
 
-        .table-container button:nth-of-type(2):hover {
-            background-color: #c00606;
-        }
+.table-container button:nth-of-type(2):hover {
+    background-color: #c00606;
+}
 
 /* Tableaux */
 .data-table { /* Appliqué à affectations-table et au tableau d'historique */
     width: 100%;
     border-collapse: collapse;
-    margin-top: var(--spacing-unit);
+    margin-top: 1rem; /* Replaced with a direct value */
 }
 
-    .data-table th,
-    .data-table td {
-        border: 1px solid var(--border-color);
-        padding: 12px;
-        text-align: left;
-    }
+.data-table th,
+.data-table td {
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    text-align: center;
+}
 
-    .data-table th {
-        background-color: var(--primary-color);
-        color: white;
-        font-weight: 600;
-    }
+.data-table th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+}
 
-    .data-table tbody tr:nth-child(even) {
-        background-color: var(--light-bg-color); /* Lignes alternées pour la lisibilité */
-    }
+.data-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Replaced var(--light-bg-color) as it's not defined */
+}
 
-    .data-table tbody tr:hover {
-        background-color: rgba(0, 123, 255, 0.1); /* Effet de survol sur les lignes */
-    }
+.data-table tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1); /* Effet de survol sur les lignes */
+}
 
 /* Bouton de retour au tableau de bord */
 .back-button {
     display: block;
     width: fit-content;
-    margin: var(--spacing-unit) auto;
+    margin: 1rem auto; /* Replaced with a direct value */
     padding: 10px 25px;
     background-color: var(--secondary-color);
     color: white;
     text-decoration: none;
-    border-radius: var(--border-radius);
+    border-radius: 8px; /* Replaced with a direct value */
     text-align: center;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-    .back-button:hover {
-        background-color: #5a6268;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
+.back-button:hover {
+    background-color: #5a6268;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
 /* Section Historique de Carrière */
 #career-history-display {
     border-top: 1px solid var(--border-color);
-    padding-top: var(--spacing-unit);
-    margin-top: var(--spacing-unit);
+    padding-top: 1rem; /* Replaced with a direct value */
+    margin-top: 1rem; /* Replaced with a direct value */
 }
 
-    #career-history-display h3 {
-        font-size: 1.2em;
-        color: var(--dark-text-color);
-        margin-bottom: var(--spacing-unit);
-    }
+#career-history-display h3 {
+    font-size: 1.2em;
+    color: var(--text-color-dark); /* Replaced with a direct value */
+    margin-bottom: 1rem; /* Replaced with a direct value */
+}
 
-    #career-history-display table {
-        width: 100%;
-    }
+#career-history-display table {
+    width: 100%;
+}
 
 /* Styles spécifiques pour le select de l'historique */
 #personnel-history-select {
@@ -378,7 +385,7 @@ button{
     width: 100%; /* Pleine largeur */
     height: 100%; /* Pleine hauteur */
     overflow: auto; /* Active le défilement si nécessaire */
-    background-color: rgba(0,0,0,0.4); /* Noir avec opacité */
+    background-color: rgba(0, 0, 0, 0.4); /* Noir avec opacité */
     padding-top: 60px; /* Position de la boîte */
 }
 
@@ -391,7 +398,7 @@ button{
     width: 80%; /* Peut être plus ou moins, selon la taille de l'écran */
     max-width: 900px; /* Largeur maximale pour les grands écrans */
     border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     position: relative;
 }
 
@@ -403,12 +410,12 @@ button{
     font-weight: bold;
 }
 
-    .close-button:hover,
-    .close-button:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 /* Style du tableau dans la modale */
 .table-container {
@@ -424,20 +431,23 @@ button{
     border-collapse: collapse;
 }
 
-    .career-history-table th,
-    .career-history-table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
+.career-history-table th,
+.career-history-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
 
 .career-history-table th {
     background-color: #f2f2f2;
     position: sticky; /* Garde l'en-tête visible lors du défilement */
     top: 0;
-    z-index: 1;
+    z-index: 1;
 }
-/* Styles pour les écrans jusqu'à 1190px (grands ordinateurs portables, moniteurs) */
+
+/* --- Responsive Media Queries --- */
+
+/* Styles pour les écrans jusqu'à 1590px (grands ordinateurs portables, moniteurs) */
 @media (max-width: 1590px) {
     body {
         padding: 15px;
@@ -468,7 +478,8 @@ button{
         padding: 8px 15px;
         font-size: 0.9em;
     }
-    .button-la{
+
+    .button-la {
         padding: 8px 15px;
         font-size: 0.9em;
         text-align: center;
@@ -480,6 +491,7 @@ button{
         margin-top: -50px; /* Plus d'espace au-dessus du bouton */
         margin-left: 43rem;
     }
+
     .container {
         max-width: 1000px; /* Réduire la largeur max du bloc principal */
         padding: 20px;
@@ -490,6 +502,7 @@ button{
     h1 {
         font-size: 2rem;
     }
+
     h2 {
         font-size: 1.6rem;
     }
@@ -553,9 +566,11 @@ button{
         font-size: 0.9em;
     }
 }
+
+/* For screens up to 1390px */
 @media (max-width: 1390px) {
     body {
-        padding: 35px;
+        padding: 30px;
     }
 
     .header-bar {
@@ -582,7 +597,8 @@ button{
         padding: 8px 15px;
         font-size: 0.9em;
     }
-    .button-la{
+
+    .button-la {
         padding: 8px 15px;
         font-size: 0.9em;
         text-align: center;
@@ -594,18 +610,21 @@ button{
         margin-top: -50px; /* Plus d'espace au-dessus du bouton */
         margin-left: 43rem;
     }
+
     .container {
         max-width: 1000px; /* Réduire la largeur max du bloc principal */
         padding: 30px;
-        height: 590px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        height: 580px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
     }
 
-    .container_s{
-    margin-right: 20px;
+    .container_s {
+        margin-right: 20px;
     }
+
     h1 {
         font-size: 2rem;
     }
+
     h2 {
         font-size: 1.6rem;
     }
@@ -670,9 +689,9 @@ button{
     }
 }
 
-/* Medium devices (tablets, 750px and up) - Votre media query existante */
-@media (max-width: 1250px) { /* Changed from min-width to max-width for mobile-first approach */
-        body {
+/* For screens up to 1250px */
+@media (max-width: 1250px) {
+    body {
         padding: 10px;
     }
 
@@ -683,7 +702,7 @@ button{
     .log {
         width: 120px;
         height: 120px;
-        margin-left: 2rem;
+        margin-left: 4rem;
     }
 
     #welcome-message {
@@ -695,86 +714,36 @@ button{
         margin-right: 20px;
         margin-top: 150px; /* Ajuster la marge supérieure */
         gap: -3px;
-        margin-left: -13rem;
+        margin-left: -13.5rem;
     }
 
     .button-nav, .voir, .button-dec {
         padding: 8px 15px;
         font-size: 0.9em;
     }
-    .button-la{
+
+    .button-la {
         padding: 8px 15px;
         font-size: 0.9em;
         text-align: center;
     }
 
-    .button-dec {
-        padding: 8px 15px;
-        font-size: 0.9em;
-        margin-top: -50px; /* Plus d'espace au-dessus du bouton */
-        margin-left: 43rem;
-    }
     .container {
-        max-width: 1000px; /* Réduire la largeur max du bloc principal */
+        max-width: 900px; /* Réduire la largeur max du bloc principal */
         padding: 25px;
         height: 560px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
         margin-top: 5px;
+        margin-bottom: -12px;
     }
 
-    .container_s{
-    margin-right: 20px;
-    margin-left: 5px;
-    }
-    h1 {
-        font-size: 2rem;
-    }
-    h2 {
-        font-size: 1.6rem;
-    }
-
-    .cv-analysis-section {
-        padding: 20px;
-    }
-
-    form {
-        gap: 15px;
-    }
-
-    input[type="text"],
-    input[type="file"],
-    textarea {
-        padding: 10px;
-    }
-
-    textarea {
-        min-height: 100px;
-    }
-
-    input[type="file"]::-webkit-file-upload-button {
-        padding: 6px 12px;
-        font-size: 0.9em;
-    }
-
-    button[type="submit"] {
-        padding: 10px 20px;
-        font-size: 1em;
-        min-width: 180px;
-    }
-
-    .table-container button:nth-of-type(1){
-        margin-bottom: 2px;
-    }
-    .table-container button:nth-of-type(1),.table-container button:nth-of-type(2), .btn-view-career{
-        padding: 6px 12px;
-        font-size: 0.9em;
-
-    }
-    .back-button {
-        padding: 8px 15px;
-        font-size: 0.9em;
+    .container_s {
+        margin-right: 20px;
+        margin-left: 5px;
     }
 }
-@media (max-width: 900px) { /* Changed from min-width to max-width for mobile-first approach */
+
+/* For screens up to 900px */
+@media (max-width: 900px) {
     body {
         flex-direction: column; /* Empiler l'en-tête, le menu et le contenu */
         align-items: center;
@@ -806,7 +775,8 @@ button{
     #welcome-message {
         font-size: 1rem;
         margin-top: 10px;
-        margin-left: 0; /* Réinitialiser le margin-left auto */
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .gauche {
@@ -821,6 +791,8 @@ button{
         height: unset;
         overflow-y: visible;
         gap: 8px; /* Espacement entre les boutons */
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .button-nav, .button-la, .voir {
@@ -839,17 +811,17 @@ button{
         padding: 20px;
         max-width: unset; /* Pas de max-width pour cette taille */
         height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
-        overflow-y: visible; /* Laisser le body gérer le défilement */
         box-shadow: none; /* Moins d'ombre pour les petits écrans */
     }
-    
-    .container_s{
-    margin-right: 20px;
+
+    .container_s {
+        margin-right: 20px;
     }
 
     h1 {
         font-size: 1.8rem;
     }
+
     h2 {
         font-size: 1.4rem;
     }
@@ -871,7 +843,7 @@ button{
         align-self: center; /* Centrer le bouton */
     }
 
-    button[type="submit"],.button-dec {
+    button[type="submit"], .button-dec {
         width: 100%;
         margin: 15px 0 0;
         align-self: stretch; /* S'étirer pour les petits écrans */
@@ -915,6 +887,8 @@ button{
         margin-top: 0; /* Réinitialiser le margin-top négatif si on passe en colonne */
     }
 }
+
+/* For screens up to 800px */
 @media (max-width: 800px) {
     body {
         padding: 5px;
@@ -951,8 +925,9 @@ button{
         padding: 10px;
         box-shadow: none;
     }
-    .container_s{
-    margin-right: 20px;
+
+    .container_s {
+        margin-right: 20px;
     }
 
     h1 {
@@ -1022,8 +997,9 @@ button{
         padding: 6px 12px;
         font-size: 0.85em;
     }
+
     /* Votre règle existante pour le tableau, si elle s'applique à cette page */
-    table[class="table-postes"] { /* Note: Le sélecteur 'table [class="table-postes"]' n'est pas standard, préférez 'table.table-postes' */
+    table.table-postes {
         margin: 10px auto;
         max-height: 150px;
         max-width: 100%; /* S'adapter à la largeur disponible */
@@ -1031,7 +1007,7 @@ button{
     }
 }
 
-/* Styles pour les écrans jusqu'à 400px (petits smartphones) */
+/* For screens up to 400px (small smartphones) */
 @media (max-width: 400px) {
     body {
         padding: 20px;
@@ -1057,21 +1033,23 @@ button{
         gap: 5px;
     }
 
-    .button-nav, .button-la, .voir, .button-dec {
+    .button-nav, .button-la {
         width: 100%; /* Tous les boutons sur leur propre ligne */
         font-size: 0.8em;
         padding: 6px 8px;
+        display: flex;
+        align-items: center;
         text-align: left;
     }
-    
 
     .container {
         margin: 5px auto;
         padding: 10px;
         box-shadow: none;
     }
-    .container_s{
-    margin-right: 20px;
+
+    .container_s {
+        margin-right: 20px;
     }
 
     h1 {
@@ -1141,12 +1119,12 @@ button{
         padding: 6px 12px;
         font-size: 0.85em;
     }
+
     /* Votre règle existante pour le tableau, si elle s'applique à cette page */
-    table[class="table-postes"] { /* Note: Le sélecteur 'table [class="table-postes"]' n'est pas standard, préférez 'table.table-postes' */
+    table.table-postes {
         margin: 10px auto;
         max-height: 150px;
         max-width: 100%; /* S'adapter à la largeur disponible */
         overflow-y: auto;
     }
-   
 }

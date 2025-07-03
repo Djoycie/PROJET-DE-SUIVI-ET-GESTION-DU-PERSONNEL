@@ -303,3 +303,97 @@ function rafraichirAffichage() {
 setInterval(() => {
   rafraichirAffichage();
 }, 3600000); // 1 heure = 3600000 ms
+// Convertit une date ISO (YYYY-MM-DD) en format jj/mm/aa
+function formatDateJJMMAA(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
+  const jour = String(d.getDate()).padStart(2, '0');
+  const mois = String(d.getMonth() + 1).padStart(2, '0');
+  const annee = String(d.getFullYear());
+  return `${jour}/${mois}/${annee}`;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  chargerAlertes();
+
+  // Rafraîchissement automatique toutes les 24h
+  setInterval(chargerAlertes, 86400000);
+});
+
+function chargerAlertes() {
+  window.electronAPI.getAlertes().then((alertes) => {
+    afficherAnniversaires(alertes.anniversaires);
+    afficherContratsCDD(alertes.contratsCDD);
+    afficherPostes(alertes.postes);
+    afficherStages(alertes.stagesFinissants);
+    afficherNotification(alertes);
+  }).catch(err => {
+    console.error("Erreur récupération alertes :", err);
+  });
+}
+
+function afficherAnniversaires(anniversaires) {
+  const ul = document.getElementById('anniversaires-list');
+  if (anniversaires.length === 0) {
+    ul.innerHTML = '<li>Aucun anniversaire aujourd\'hui.</li>';
+    return;
+  }
+  ul.innerHTML = '';
+  anniversaires.forEach(emp => {
+    ul.innerHTML += <li>${emp.prenom} ${emp.nom} - Né(e) le ${formatDateJJMMAA(emp.date_naissance)}</li>;
+  });
+}
+
+function afficherContratsCDD(contrats) {
+  const ul = document.getElementById('contrats-cdd-list');
+  if (contrats.length === 0) {
+    ul.innerHTML = '<li>Aucun contrat CDD proche d\'expiration.</li>';
+    return;
+  }
+  ul.innerHTML = '';
+  contrats.forEach(emp => {
+    ul.innerHTML += <li class="alert-expiring">${emp.prenom} ${emp.nom} - Contrat expire le ${formatDateJJMMAA(emp.date_fin)}</li>;
+  });
+}
+
+function afficherPostes(postes) {
+  const ul = document.getElementById('postes-list');
+  if (postes.length === 0) {
+    ul.innerHTML = '<li>Tous les postes sont pleins.</li>';
+    return;
+  }
+  ul.innerHTML = '';
+  postes.forEach(poste => {
+    ul.innerHTML += <li>${poste.intitule} - Places désirées : ${poste.places_desirees}</li>;
+  });
+}
+
+
+
+
+function afficherStages(stages) {
+  const ul = document.getElementById('stages-list');
+  if (stages.length === 0) {
+    ul.innerHTML = '<li>Aucun stage ne se termine dans les 7 prochains jours.</li>';
+    return;
+  }
+  ul.innerHTML = '';
+  stages.forEach(stage => {
+    ul.innerHTML += <li class="alert-expiring">${stage.prenom_stagiaire} ${stage.nom_stagiaire} - Stage se termine le ${formatDateJJMMAA(stage.date_fin)}</li>;
+  });
+}
+
+function afficherNotification(alertes) {
+  const nbAlertes = alertes.anniversairesDemain.length + alertes.contratsCDD.length + alertes.stagesFinissants.length;
+
+  // Supprimer ancienne notification s’il y en a
+  const oldNotif = document.getElementById('notification-badge');
+  if (oldNotif) oldNotif.remove();
+
+  if (nbAlertes > 0) {
+    const notif = document.createElement('div');
+    notif.id = 'notification-badge';
+    notif.textContent = nbAlertes;
+    document.body.appendChild(notif);
+  }
+}

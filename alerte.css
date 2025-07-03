@@ -1,0 +1,582 @@
+:root {
+    --primary-color: #b8aeec; /* Vert pour les actions principales */
+    --primary-hover-color: #e3f3ee; /* Vert plus foncé au survol */
+    --secondary-color: #007bff; /* Bleu pour les accents ou liens */
+    --secondary-hover-color: #0056b3; /* Bleu plus foncé au survol */
+    --background-light: #f8f9fa; /* Arrière-plan général clair */
+    --background-card: #ffffff; /* Arrière-plan des blocs de contenu */
+    --text-color-dark: #343a40; /* Texte foncé pour la lisibilité */
+    --text-color-light: #6c757d; /* Texte plus clair pour les descriptions */
+    --border-color: #dee2e6; /* Couleur des bordures */
+    --success-color: #28a745; /* Couleur de succès */
+    --info-color: #17a2b8; /* Couleur d'information */
+    --warning-color: #ffc107; /* Couleur d'avertissement */
+    --error-color: #dc3545; /* Couleur d'erreur */
+    --shadow-light: rgba(0, 0, 0, 0.08); /* Ombre légère */
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* Ombre moyenne */
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background: linear-gradient(to bottom, #e3f3ee, #214137);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+
+.container {
+    background-color: transparent;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 100%;
+    height: 640px;
+    max-width: 1200px;
+    text-align: center;
+    margin-left: 2px;
+}
+
+.container_s {
+    height: 430px;
+    overflow-y: auto;
+    border-radius: 15px;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+section {
+  max-width: 800px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  border-bottom: 2px solid #2980b9;
+  padding-bottom: 5px;
+  margin-top: 30px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+.alert-expiring {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+#notification-badge {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #e74c3c; /* rouge vif */
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 16px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+  cursor: pointer;
+}
+
+/* --- Header Bar --- */
+.header-bar {
+    background-color: transparent;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    top: 0;
+    z-index: 1000;
+    gap: 8px;
+}
+
+.logo-container {
+    position: relative;
+    border-radius: 50%;
+    margin-left: -2.5rem;
+}
+
+.log {
+    background-color: #b8aeec;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 0rem;
+    margin-left: -1rem;
+    width: 150px;
+    height: 150px;
+    margin-right: 49px;
+}
+
+/* Navigation latérale (Menu .gauche) */
+.gauche {
+    display: flex;
+    margin-left: -14rem;
+    margin-top: 160px;
+    margin-right: 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.button-nav {
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-top: -5px;
+}
+
+.button-nav:hover {
+    background-color: var(--primary-hover-color);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    color: black;
+}
+
+.button-la {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    color: rgb(7, 0, 0); /* Couleur de texte différente pour le bouton actif/sélectionné */
+    background-color: var(--primary-hover-color); /* Couleur de fond pour le bouton actif */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+h1, h2 {
+    color: black; /* Replaced with var(--primary-dark-color) for consistency */
+    text-align: center;
+    margin-bottom: 1.5rem; /* Replaced with a direct value */
+}
+
+h1 {
+    font-size: 2.2em;
+    padding-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.6em;
+    margin-bottom: 1rem; /* Replaced with a direct value */
+}
+
+/* --- Responsive Media Queries --- */
+
+/* Styles pour les écrans jusqu'à 1590px (grands ordinateurs portables, moniteurs) */
+@media (max-width: 1590px) {
+    body {
+        padding: 15px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: 40px;
+    }
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-top: 150px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -20px;
+    }
+
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        margin-top: -50px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 43rem;
+    }
+
+    .container {
+        max-width: 1000px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 500px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-bottom: -10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .cv-analysis-section {
+        padding: 20px;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 10px;
+    }
+
+    textarea {
+        min-height: 100px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 1em;
+        min-width: 180px;
+    }
+
+    #analysis-results {
+        padding: 20px;
+    }
+
+    #analysis-chart-container {
+        width: 220px;
+        height: 220px;
+    }
+
+    #analysis-percentage {
+        font-size: 2.2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 30px;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        padding-right: 15px;
+    }
+
+    .back-button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+}
+
+/* For screens up to 1390px */
+@media (max-width: 1390px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+    .log {
+        width: 120px;
+        height: 120px;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 20px;
+        margin-top: 150px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        margin-top: -50px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 43rem;
+    }
+
+    .container {
+        max-width: 1000px; /* Réduire la largeur max du bloc principal */
+        padding: 30px;
+        height: 580px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+    }
+
+    .container_s {
+        margin-right: 20px;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+/* For screens up to 1250px */
+@media (max-width: 1250px) {
+    body {
+        padding: 10px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: 4rem;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 20px;
+        margin-top: 150px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -13.5rem;
+    }
+
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 900px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 560px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+    .container_s {
+        margin-right: 20px;
+        margin-left: 5px;
+    }
+}
+
+/* For screens up to 900px */
+@media (max-width: 900px) {
+    body {
+        flex-direction: column; /* Empiler l'en-tête, le menu et le contenu */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        position: relative; /* Moins besoin d'être absolu, car le body est en colonne */
+        top: unset;
+        left: unset;
+        width: 100%;
+    }
+
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 0; /* Réinitialiser les marges négatives */
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .gauche {
+        flex-direction: row; /* Passer le menu en ligne */
+        flex-wrap: wrap; /* Permettre aux boutons de passer à la ligne */
+        justify-content: center;
+        width: 100%; /* Prend toute la largeur */
+        margin: 15px 0; /* Marge supérieure et inférieure */
+        padding: 10px;
+        position: relative;
+        top: unset;
+        height: unset;
+        overflow-y: visible;
+        gap: 8px; /* Espacement entre les boutons */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .button-nav, .button-la, .voir {
+        width: calc(50% - 10px); /* Deux boutons par ligne */
+        max-width: 180px;
+        margin-bottom: 0; /* Enlever la marge du bas si déjà gérée par le gap */
+        font-size: 0.85em;
+        padding: 8px 10px;
+        margin-left: 0; /* Réinitialiser */
+        margin-top: 0; /* Réinitialiser */
+    }
+
+    .container {
+        width: 100%;
+        margin: 5px auto;
+        padding: 20px;
+        max-width: unset; /* Pas de max-width pour cette taille */
+        height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
+        box-shadow: none; /* Moins d'ombre pour les petits écrans */
+    }
+
+    .container_s {
+        margin-right: 20px;
+    }
+
+    h2{
+        font-size: 1.8rem;
+    }
+}
+
+/* For screens up to 800px */
+@media (max-width: 800px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px; /* Encore plus petit */
+        height: 70px;
+    }
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la, .voir, .button-dec {
+        width: 100%; /* Tous les boutons sur leur propre ligne */
+        font-size: 0.8em;
+        padding: 6px 8px;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .container_s {
+        margin-right: 20px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* For screens up to 400px (small smartphones) */
+@media (max-width: 400px) {
+    body {
+        padding: 20px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px; /* Encore plus petit */
+        height: 70px;
+    }
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la {
+        width: 100%; /* Tous les boutons sur leur propre ligne */
+        font-size: 0.8em;
+        padding: 6px 8px;
+        display: flex;
+        align-items: center;
+        text-align: left;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .container_s {
+        margin-right: 20px;
+    }
+
+    h2{
+        font-size: 1.5rem;
+    }
+}

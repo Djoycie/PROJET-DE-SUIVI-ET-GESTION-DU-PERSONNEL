@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alertes Employés</title>
+  <link rel="stylesheet" href="alerte.css" />
+</head>
+<body>
+        <div class="header-bar">
+         <div class="logo-container">
+            <img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/HR-etoile2.png" alt="Logo" class="log">
+         </div>
+    </div>
+    
+    <div class="gauche">
+       <b class="button-nav" onclick="location.href='analyse_cv.html'">Recrutement</b>
+       <b class="button-nav" onclick="location.href='postes.html'">Postes</b>
+       <b class="button-nav" onclick="location.href='personnel.html'">Personnel</b>
+       <b class="button-nav" onclick="location.href='carriere.html'">Carrière/Affectation</b>
+       <b class="button-nav" onclick="location.href='conges.html'">Congés</b>
+       <b class="button-nav" onclick="location.href='paie.html'">Paie</b>
+       <b class="button-nav" onclick="location.href='stages_formation.html'">Stage/formation</b>
+       <b class="button-nav" onclick="location.href='plan_activite.html'">Statistiques</b>
+       <b class="button-nav" onclick="location.href='utilisateurs.html'">Utilisateurs</b>
+       <b class="button-nav" onclick="location.href='audit.html'">Audit</b>
+       <b class="button-nav" onclick="location.href='archivage_documentation.html'">Sauvegardes</b>
+       <b class="button-nav" onclick="location.href='parametres.html'">Paramètres</b>
+       <b class="button-la" onclick="location.href='alerte.html'">Alertes</b>
+        <a href="accueil.html" class="button-nav"><b>Retour</B></a>
+    </div>
+
+    <div class="container">
+    <h1>Alertes RH</h1>
+    <section id="alertes-container" class="container_s">
+        <h2>Anniversaires du jour</h2>
+        <ul id="anniversaires-list"></ul>
+
+        <h2>Contrats CDD proches d'expiration</h2>
+        <ul id="contrats-cdd-list"></ul>
+
+        <h2>Postes avec places désirées non pourvues</h2>
+        <ul id="postes-list"></ul>
+
+        <h2>Stages se terminant bientôt</h2>
+        <ul id="stages-list"></ul>
+    </section>
+    </div>
+    <script src="alerte.js"></script>
+</body>
+</html>

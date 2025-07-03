@@ -1,41 +1,165 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recrutement - Gestion du Personnel</title>
-    <link rel="stylesheet" href="accueil.css">
-    <style>
-        /* Styles spécifiques pour cette page */
-        .page-content {
-            padding: 20px;
-            text-align: center;
-        }
-        .page-content h1 {
-            color: #28a745;
-            margin-bottom: 20px;
-        }
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .back-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion de la Paie - Personnel</title>
+  <link rel="stylesheet" href="paie.css" />
+  <!-- jsPDF et jsPDF AutoTable depuis des CDNs plus fiables (conservés si d'autres usages sont prévus côté client) -->
+ <!-- Dans paie.html -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </head>
 <body>
-    <div class="container">
-        <div class="page-content">
-            <h1>Module de la paie</h1>
-           <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+     <div class="header-bar">
+        <span id="welcome-message"></span>
+        <div class="logo-container">
+            <img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/HR-etoile2.png" alt="Logo" class="log">
         </div>
     </div>
+
+    <div class="gauche">
+        <b class="button-nav" onclick="location.href='analyse_cv.html'">Analyse de CV</b>
+        <b class="button-nav" onclick="location.href='postes.html'">Postes</b>
+        <b class="button-nav" onclick="location.href='personnel.html'">Personnel</b>
+        <b class="button-nav" onclick="location.href='carriere.html'">Carrière/Affectation</b>
+        <b class="button-nav" onclick="location.href='conges.html'">Congés</b>
+        <b class="button-la" onclick="location.href='paie.html'">Paie</b>
+        <b class="button-nav" onclick="location.href='stages_formation.html'">Stage/formation</b>
+        <b class="button-nav" onclick="location.href='plan_activite.html'">Statistiques</b>
+        <b class="button-nav" onclick="location.href='utilisateurs.html'">Utilisateurs</b>
+        <b class="button-nav" onclick="location.href='audit.html'">Audit</b>
+        <b class="button-nav" onclick="location.href='archivage_documentation.html'">Sauvegardes</b>
+        <b class="button-nav" onclick="location.href='parametres.html'">Paramètres</b>
+        <b class="button-nav" onclick="location.href='alerte.html'">Alertes</b>
+        <a href="accueil.html" class="button-nav"><b>Retour</b></a>
+    </div>
+
+  <div class="container">
+    <header>
+      <h1>Gestion de la Paie</h1>
+    </header>
+
+    <main>
+      <section id="form-section" class="card">
+        <h2>Calcul & Enregistrement de la Paie</h2>
+        <form id="paie-form" autocomplete="off">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="matricule">Employé (Matricule) :</label>
+              <select id="matricule" required>
+                <option value="">Sélectionner un employé</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="display_salaire_base">Salaire de base (FCFA) :</label>
+              <input type="number" id="display_salaire_base" min="0" step="0.01" readonly />
+            </div>
+            <div class="form-group">
+              <label for="periode">Période (AAAA-MM) :</label>
+              <input type="month" id="periode" required />
+            </div>
+            <div class="form-group">
+              <label for="heures_sup">Heures supplémentaires :</label>
+              <input type="number" id="heures_sup" min="0" step="0.01" value="0" />
+            </div>
+            <div class="form-group">
+              <label for="taux_majoration_sup">Taux majoration heures sup (%) :</label>
+              <input type="number" id="taux_majoration_sup" min="0" step="0.01" value="25" />
+            </div>
+            <div class="form-group">
+              <label for="primes">Primes (FCFA) :</label>
+              <input type="number" id="primes" min="0" step="0.01" value="0" />
+            </div>
+            <div class="form-group">
+              <label for="commissions">Commissions (FCFA) :</label>
+              <input type="number" id="commissions" min="0" step="0.01" value="0" />
+            </div>
+            <div class="form-group">
+              <label for="avantages_nature">Avantages en nature (FCFA) :</label>
+              <input type="number" id="avantages_nature" min="0" step="0.01" value="0" />
+            </div>
+            <div class="form-group">
+              <label for="heures_absences">Heures d'absences :</label>
+              <input type="number" id="heures_absences" min="0" step="0.01" value="0" />
+            </div>
+            <div class="form-group">
+              <label for="maladie">Maladie (FCFA) :</label>
+              <input type="number" id="maladie" min="0" step="0.01" value="0" />
+            </div>
+            <div class="form-group">
+              <label for="retenues">Retenues diverses (FCFA) :</label>
+              <input type="number" id="retenues" min="0" step="0.01" value="0" />
+            </div>
+            <div class="form-group">
+              <label for="nombre_dependants">Nombre de personnes à charge :</label>
+              <input type="number" id="nombre_dependants" min="0" step="1" value="0" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <input type="hidden" id="paie_id" value="" />
+            <button type="submit" class="btn btn-primary" id="submit-btn">Calculer & Enregistrer</button>
+            <button type="button" class="btn btn-secondary" id="cancel-edit-btn" style="display: none;">Annuler Modification</button>
+          </div>
+        </form>
+        <div id="resultat-paie" class="message-box" aria-live="polite"></div>
+      </section>
+
+      <section id="historique-section" class="card">
+        <h2>Historique des Paiements</h2>
+        <div class="filter-controls">
+          <div class="form-group">
+            <label for="search-matricule">Rechercher par Matricule/Nom :</label>
+            <input type="text" id="search-matricule" placeholder="Matricule ou Nom de l'employé" />
+          </div>
+          <div class="form-group">
+            <label for="filter-periode">Filtrer par Période :</label>
+            <input type="month" id="filter-periode" />
+          </div>
+          <div class="filter-actions">
+            <button id="apply-filters" class="btn btn-secondary">Appliquer Filtres</button>
+            <button id="reset-filters" class="btn btn-secondary">Réinitialiser</button>
+            <button id="export-pdf" class="btn btn-success">Exporter PDF</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table id="historique-table" aria-label="Historique des paiements">
+            <thead>
+              <tr>
+                
+                <th>Période</th>
+                <th>Matricule</th>
+                <th>Nom Complet</th>
+                <th>Salaire Base (FCFA)</th>
+                <th>Heures Sup (Montant)</th>
+                <th>Primes</th>
+                <th>Commissions</th>
+                <th>Avantages Nature</th>
+                <th>Absences</th>
+                <th>Maladie</th>
+                <th>Retenues</th>
+                <th>Cotisations CNPS (Salarié)</th>
+                <th>IRPP</th>
+                <th>Taxe Communale</th>
+                <th>Salaire Brut</th>
+                <th>Salaire Net</th>
+                <th>Date Paiement</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Les données seront insérées ici par JavaScript -->
+            </tbody>
+          </table>
+        </div>
+        <div id="no-data-message" class="message-box info-box" style="display: none;">
+          Aucune donnée de paie trouvée pour les critères sélectionnés.
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="paie.js"></script>
 </body>
 </html>

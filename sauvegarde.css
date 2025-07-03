@@ -1,0 +1,1920 @@
+/* sauvegarde.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Un gris très clair */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Aligne le contenu en haut */
+    min-height: 100vh;
+}
+
+.container {
+    background-color: transparent;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
+    width: 95%; /* Plus large sur les grands écrans */
+    max-width: 1200px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2em; /* Taille de titre légèrement plus grande */
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 15px;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap; /* Permet le retour à la ligne sur petits écrans */
+    gap: 20px; /* Espace entre les éléments */
+    margin-bottom: 25px;
+    align-items: flex-end; /* Aligne les éléments du bas */
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Permet aux groupes de grandir */
+    min-width: 250px; /* Largeur minimale pour les champs */
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+    font-size: 0.95em;
+}
+
+select, input[type="text"] {
+    padding: 10px 12px;
+    border: 1px solid #c0c0c0; /* Bordure légèrement plus foncée */
+    border-radius: 6px; /* Coins légèrement plus arrondis */
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+select:focus, input[type="text"]:focus {
+    border-color: #3498db; /* Bordure bleue au focus */
+    outline: none; /* Supprime l'outline par défaut */
+}
+
+.search-group {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    flex-grow: 2; /* Donne plus de place au groupe de recherche */
+}
+
+.search-group input[type="text"] {
+    flex-grow: 1;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    background-color: #3498db; /* Bleu primaire */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500; /* Légèrement plus épais */
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.action-btn:hover {
+    background-color: #2980b9; /* Bleu plus foncé au survol */
+    transform: translateY(-1px); /* Léger effet de soulèvement */
+}
+
+.action-btn:active {
+    transform: translateY(0); /* Retour à la position normale au clic */
+}
+
+.reset-btn {
+    background-color: #e74c3c; /* Rouge pour réinitialiser */
+}
+
+.reset-btn:hover {
+    background-color: #c0392b; /* Rouge plus foncé au survol */
+}
+
+.table-data-container {
+    overflow-x: auto; /* Permet le défilement horizontal */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    max-height: 550px; /* Hauteur maximale avec défilement vertical */
+    overflow-y: auto;
+    background-color: #fdfdfd;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Empêche le tableau de devenir trop petit */
+}
+
+th, td {
+    border: 1px solid #e9e9e9; /* Bordures de cellules plus claires */
+    padding: 12px 18px;
+    text-align: left;
+    font-size: 0.95em;
+    word-break: break-word; /* Casse les mots longs */
+}
+
+th {
+    background-color: #ecf0f1; /* Fond pour l'en-tête */
+    color: #2c3e50;
+    font-weight: 600; /* Plus gras */
+    position: sticky;
+    top: 0;
+    z-index: 2; /* S'assure que l'en-tête est au-dessus du reste */
+    white-space: nowrap; /* Empêche les en-têtes de se casser sur plusieurs lignes */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8fbfd; /* Bandes pour améliorer la lisibilité */
+}
+
+tbody tr:hover {
+    background-color: #eef7fd; /* Effet de survol sur les lignes */
+}
+
+/* Messages d'état */
+.placeholder-text, .loading-message, .no-data-message, .info-message, .error-message {
+    text-align: center;
+    padding: 30px;
+    font-size: 1.1em;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.loading-message {
+    color: #3498db;
+}
+
+.no-data-message {
+    color: #f39c12; /* Orange pour "pas de données" */
+}
+
+.info-message {
+    color: #2980b9; /* Bleu pour les informations */
+    font-weight: bold;
+}
+
+.error-message {
+    color: #e74c3c; /* Rouge pour les erreurs */
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .search-group button {
+        width: 100%;
+    }
+    .form-group {
+        min-width: unset; /* Annule la largeur minimale */
+    }
+}
+
+/* Variables pour les couleurs */
+:root {
+    --primary-color: #b8aeec; /* Vert pour les actions principales */
+    --primary-hover-color: #e3f3ee; /* Vert plus foncé au survol */
+    --secondary-color: #007bff; /* Bleu pour les accents ou liens */
+    --secondary-hover-color: #0056b3; /* Bleu plus foncé au survol */
+    --background-light: #f8f9fa; /* Arrière-plan général clair */
+    --background-card: transparent; /* Arrière-plan des blocs de contenu */
+    --text-color-dark: #343a40; /* Texte foncé pour la lisibilité */
+    --text-color-light: #6c757d; /* Texte plus clair pour les descriptions */
+    --border-color: #dee2e6; /* Couleur des bordures */
+    --success-color: #28a745; /* Couleur de succès */
+    --info-color: #17a2b8; /* Couleur d'information */
+    --warning-color: #ffc107; /* Couleur d'avertissement */
+    --error-color: #dc3545; /* Couleur d'erreur */
+    --shadow-light: rgba(0, 0, 0, 0.08); /* Ombre légère */
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* Ombre moyenne */
+}
+
+/* Base et réinitialisation */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(to bottom, #e3f3ee, #214137);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333;
+    display: flex; /* Utilisation de flexbox pour aligner la navigation et le contenu principal */
+    justify-content: center;
+    align-items: flex-start; /* Aligner les éléments en haut */
+    min-height: 100vh;
+}
+
+/* En-tête */
+.header-bar {
+    background-color: transparent;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    top: 0;
+    z-index: 1000;
+    gap: 8px;
+}
+.logo-container{
+    position:  relative;
+    border-radius: 50%;
+    margin-left: -42px;
+    margin-right: 45px;
+}
+.log{
+    background-color: #b8aeec;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: -1rem;
+    margin-left: -3px;
+    width: 120px;
+    height: 120px;
+    display: flex;
+}
+
+
+
+/* Navigation latérale (Menu .gauche) */
+.gauche{
+    display: flex;
+    margin-left:  -220px;
+    margin-top: 140px;
+    margin-right: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.button-nav{
+    padding: 8px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-top: -5px;
+}
+.button-nav:hover {
+    background-color: var(--primary-hover-color);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    color: black;
+}
+.button-la {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    color: rgb(7, 0, 0); /* Couleur de texte différente pour le bouton actif/sélectionné */
+    background-color: var(--primary-hover-color); /* Couleur de fond pour le bouton actif */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 15px;
+}
+
+/* Conteneur principal et sections de module */
+.module-block[data-module="personnel"] {
+    background-color: var(--background-card); /* Utiliser la variable pour le fond blanc */
+    max-width: 1200px; /* Largeur optimale pour 1200px d'écran, peut être ajustée */
+    width: 100%; /* Prend toute la largeur disponible jusqu'à max-width */
+    margin: 10px 0 20px 0; /* Marge supérieure pour laisser de la place à l'en-tête */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    height: 600px; /* FIXE LA HAUTEUR DU BLOC GLOBAL DU PERSONNEL */
+    overflow-y: auto; /* Permet le défilement de tout le contenu si la hauteur est dépassée */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-left: 10px; /* Décalage pour laisser de la place à la navigation latérale */
+
+}
+
+#personnel-section {
+    background-color: transparent;
+    border-radius: 12px;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px 20px;
+}
+
+.section-personnel {
+    max-height: unset; /* Enlever les contraintes de hauteur si le parent gère le défilement */
+    overflow-y: visible; /* Laisser le parent (module-block) gérer le défilement */
+    width: 100%;
+}
+
+.contour2 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    padding: 10px;
+}
+
+.circle img.training {
+    max-width: 70%;
+    max-height: 70%;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color-dark);
+    font-size: 2em;
+}
+
+/* Formulaire */
+#add-employee-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 95%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    margin: 0 auto;
+    /* Pas de max-height ici, le formulaire s'adaptera au contenu. */
+    /* Si le formulaire seul devient trop grand pour la hauteur de 600px du module-block,
+       alors le module-block entier défilera. */
+}
+.mini{
+    background-color: white;
+    border-radius: 15px;
+}
+
+.droite {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px 30px;
+    padding: 0 10px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-weight: 500;
+    color: var(--text-color-dark);
+    font-size: 0.95em;
+}
+
+#add-employee-form input,
+#add-employee-form select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    margin-top: 5px;
+    font-size: 1em;
+    background-color: var(--background-light);
+}
+
+#add-employee-form button[type="submit"] {
+    background: var(--success-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 12px 25px;
+    border-radius: 6px;
+    width: auto;
+    margin: 20px auto 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+#add-employee-form button[type="submit"]:hover {
+    background-color: #36a459;
+}
+
+/* Section de liste du personnel (recherche, filtres, tableau) */
+h3 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: var(--text-color-dark);
+    font-size: 1.7em;
+}
+
+#search-personnel,
+#filter-departement,
+#filter-poste,
+#filter-type-contrat,
+#filter-agence {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 15px;
+    width: 200px;
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 0.95em;
+    background-color: var(--background-light);
+}
+
+#reset-filters,
+#download-filtered-pdf,
+#print-emp2 {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: var(--info-color);
+    color: white;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    transition: background-color 0.3s ease;
+    font-size: 0.95em;
+}
+
+#reset-filters:hover,
+#download-filtered-pdf:hover,
+#print-emp2:hover {
+    background-color: var(--secondary-hover-color);
+}
+
+/* Tableau */
+.table-container-scroll {
+    overflow-x: auto; /* Permet le défilement horizontal */
+    max-width: 100%;
+    margin: 20px auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+    /* Hauteur maximale pour le tableau et activation du défilement vertical */
+    max-height: 250px; /* Ajustez cette valeur pour contrôler la hauteur du tableau */
+    overflow-y: auto; /* Permet le défilement vertical du tableau */
+}
+
+#table-personnel {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 1200px;
+}
+
+#table-personnel thead {
+    background: var(--primary-color);
+    color: #fff;
+    position: sticky; /* Rend l'en-tête du tableau collant */
+    top: 0;
+    z-index: 1; /* Assure que l'en-tête reste au-dessus du contenu défilant */
+}
+
+#table-personnel th,
+#table-personnel td {
+    padding: 12px 15px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+#table-personnel th {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    position: relative;
+    cursor: pointer;
+}
+
+#table-personnel tbody tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+#table-personnel tbody tr:last-child {
+    border-bottom: none;
+}
+
+#table-personnel tbody tr:hover {
+    background: var(--background-light);
+}
+
+.edit-emp, .delete-emp {
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 8px;
+    width: auto;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.edit-emp {
+    background-color: var(--warning-color);
+    color: var(--text-color-dark);
+}
+
+.delete-emp {
+    background-color: var(--error-color);
+    color: white;
+}
+
+.edit-emp:hover {
+    background-color: #e6b300;
+}
+
+.delete-emp:hover {
+    background-color: #c82333;
+}
+
+/* Modale */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(44, 44, 44, 0.55);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--background-card);
+    border-radius: 14px;
+    box-shadow: 0 6px 32px var(--shadow-medium);
+    max-width: 500px;
+    width: 90vw;
+    margin: auto;
+    padding: 30px;
+    position: relative;
+    animation: modalIn 0.25s;
+}
+
+@keyframes modalIn {
+    from {
+        transform: translateY(-40px) scale(0.97);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2.2em;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: var(--error-color);
+}
+
+#modal-emp-body {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: var(--text-color-dark);
+    line-height: 1.8;
+    text-align: left;
+}
+
+.modal-content button {
+    background: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-right: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background: var(--secondary-hover-color);
+}
+
+.fiche-employe {
+    background: var(--background-light);
+    border-radius: 14px;
+    padding: 25px 30px;
+    box-shadow: 0 4px 18px var(--shadow-medium);
+    max-width: 450px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.fiche-employe h2 {
+    text-align: center;
+    color: var(--text-color-dark);
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.fiche-employe ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fiche-employe li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+    font-size: 1em;
+    background: var(--background-card);
+    border-radius: 6px;
+    padding: 8px 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.fiche-employe span {
+    color: var(--text-color-light);
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.fiche-employe b {
+    color: var(--secondary-color);
+    font-weight: 600;
+    text-align: right;
+}
+
+.sort-sign {
+    font-size: 0.8em;
+    margin-left: 4px;
+    color: #888;
+}
+
+th[data-col] {
+    cursor: pointer;
+}
+
+#duree-contrat-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+#duree-contrat-container label {
+    margin-bottom: 3px;
+}
+
+#duree-contrat-container input {
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    font-size: 1em;
+    background: #fff;
+    box-sizing: border-box;
+}
+/* Styles pour l'arrière-plan de la modale (qui couvre tout l'écran) */
+#modal-emp-details {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Reste en place même au défilement */
+    z-index: 1000; /* Assurez-vous qu'elle est au-dessus de tout le reste */
+    left: 0;
+    top: 0;
+    width: 100%; /* Pleine largeur */
+    height: 95%; /* Pleine hauteur */
+    overflow: auto; /* Permet le défilement si le contenu dépasse */
+    background-color: rgba(0,0,0,0.4); /* Arrière-plan noir semi-transparent */
+    display: flex; /* Utilise flexbox pour centrer le contenu */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    margin-top: 20px;
+}
+
+/* Styles pour le contenu interne de la modale (la boîte blanche) */
+.modal-content {
+    background-color: #fefefe; /* Couleur blanche ! */
+    margin: auto; /* Permet le centrage avec display: flex sur le parent */
+    padding: 10px; /* Espacement intérieur */
+    border: 1px solid #888;
+    width: 80%; /* Largeur de la modale, ajustez selon vos besoins */
+    max-width: 600px; /* Largeur maximale pour les grands écrans */
+    border-radius: 10px; /* Bords arrondis */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Ombre pour la faire ressortir */
+    position: relative; /* Pour positionner le bouton de fermeture */
+    text-align: left; /* Aligne le texte à gauche dans la modale */
+}
+
+/* Style du bouton de fermeture */
+.close-button {
+    color: #aaa;
+    float: right; /* Flotte à droite */
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute; /* Position absolue par rapport à .modal-content */
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Styles pour les titres et labels à l'intérieur de la modale */
+.modal-content h3 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-left: 12px;
+}
+
+.modal-content div {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #555;
+    margin-left: 12px;
+    align-items: center;
+}
+
+.modal-content div b {
+    color: #333;
+    display: inline-block; /* Ou block si vous voulez que le label soit sur sa propre ligne */
+    width: 120px; /* Pour aligner les valeurs si les labels sont de longueurs différentes */
+}
+.modal-content button{
+    margin-left: 24px;
+}
+/* ------------------------------------------------------------- */
+/* MEDIA QUERIES POUR LE RESPONSIVE DESIGN */
+/* ------------------------------------------------------------- */
+
+/* --- Responsive Media Queries --- */
+
+/* Styles pour les écrans jusqu'à 1590px (grands ordinateurs portables, moniteurs) */
+@media (max-width: 1590px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 1050px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -8rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+
+/* For screens up to 1390px */
+@media (max-width: 1390px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 1050px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -8rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1350px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 1020px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+/* For screens up to 1250px */
+@media (max-width: 1300px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 990px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -8rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1290px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 990px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -8rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1250px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 990px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -8rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1200px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 940px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -8rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1190px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 0.5rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 920px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1150px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 880px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1120px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 870px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1100px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 850px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1080px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 830px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1065px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 800px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1050px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 780px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 1000px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 750px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 978px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 0.5rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 720px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 958px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 0.5rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 680px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+@media (max-width: 918px) {
+    body {
+        padding: 30px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+   .log {
+        width: 120px;
+        height: 120px;
+        margin-left: -7.5rem;
+        margin-top: -1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 0.5rem;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+    }
+
+    .button-nav{
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+   .container {
+        width: 670px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: -30px;
+        margin-right: -10rem;
+        margin-left: 1rem;
+    }
+    .controls{
+        height: 200px;
+        padding: 20px;
+    }
+}
+/* For screens up to 900px */
+@media (max-width: 900px) {
+    body {
+        flex-direction: column; /* Empiler l'en-tête, le menu et le contenu */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        position: relative; /* Moins besoin d'être absolu, car le body est en colonne */
+        top: unset;
+        left: unset;
+        width: 100%;
+    }
+
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 0; /* Réinitialiser les marges négatives */
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .gauche {
+        flex-direction: row; /* Passer le menu en ligne */
+        flex-wrap: wrap; /* Permettre aux boutons de passer à la ligne */
+        justify-content: center;
+        width: 100%; /* Prend toute la largeur */
+        margin: 15px 0; /* Marge supérieure et inférieure */
+        padding: 10px;
+        position: relative;
+        top: unset;
+        height: unset;
+        overflow-y: visible;
+        gap: 8px; /* Espacement entre les boutons */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .button-nav, .button-la, .voir {
+        width: calc(50% - 10px); /* Deux boutons par ligne */
+        max-width: 180px;
+        margin-bottom: 0; /* Enlever la marge du bas si déjà gérée par le gap */
+        font-size: 0.85em;
+        padding: 8px 10px;
+        margin-left: 0; /* Réinitialiser */
+        margin-top: 0; /* Réinitialiser */
+    }
+
+    .container {
+        width: 100%;
+        margin: 5px auto;
+        padding: 20px;
+        max-width: unset; /* Pas de max-width pour cette taille */
+        height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
+        box-shadow: none; /* Moins d'ombre pour les petits écrans */
+    }
+
+    .container_s {
+        margin-right: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .cv-analysis-section {
+        padding: 15px;
+        height: auto; /* Auto height for mobile */
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        width: 100%;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        width: 100%; /* Full width for mobile button */
+        margin-bottom: 5px; /* Ajuster l'espacement */
+        align-self: center; /* Centrer le bouton */
+    }
+
+    button[type="submit"], .button-dec {
+        width: 100%;
+        margin: 15px 0 0;
+        align-self: stretch; /* S'étirer pour les petits écrans */
+    }
+    .page-content {
+        margin-top: 0; /* Réinitialiser le margin-top négatif si on passe en colonne */
+    }
+}
+
+/* For screens up to 800px */
+@media (max-width: 800px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px; /* Encore plus petit */
+        height: 70px;
+    }
+
+    #welcome-message {
+        font-size: 0.85rem;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la, .voir, .button-dec {
+        width: 100%; /* Tous les boutons sur leur propre ligne */
+        font-size: 0.8em;
+        padding: 6px 8px;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .container_s {
+        margin-right: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .cv-analysis-section {
+        padding: 10px;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    label {
+        font-size: 0.85em;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+
+    button[type="submit"] {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        min-width: unset;
+    }
+
+    /* Votre règle existante pour le tableau, si elle s'applique à cette page */
+    table.table-postes {
+        margin: 10px auto;
+        max-height: 150px;
+        max-width: 100%; /* S'adapter à la largeur disponible */
+        overflow-y: auto;
+    }
+}
+
+/* For screens up to 400px (small smartphones) */
+@media (max-width: 400px) {
+    body {
+        padding: 20px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px; /* Encore plus petit */
+        height: 70px;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+        
+    }
+
+    .button-nav, .button-la {
+        width: 100%; /* Tous les boutons sur leur propre ligne */
+        font-size: 0.8em;
+        padding: 6px 8px;
+        display: flex;
+        justify-content: left; /* Centrer le texte */
+        text-align: left;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    label {
+        font-size: 0.85em;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    button[type="submit"] {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        min-width: unset;
+    }
+    .controls{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, shell} = require('electron');
+const { app, BrowserWindow, ipcMain, shell, dialog} = require('electron');
 const path = require('path');
 const pdf = require('pdf-parse');
 const mammoth = require('mammoth');
@@ -1026,5 +1026,506 @@ ipcMain.handle('get-personnel-career-history', async (event, matricule_personnel
     } catch (err) {
         console.error('Erreur lors de la récupération de l\'historique de carrière du personnel :', err);
         return { error: err.message };
+    }
+});
+console.log('main.js: Electron dialog module loaded:', !!dialog); // Diagnostic log
+
+// Assurez-vous d'avoir ces imports en haut de votre fichier main.js
+
+// --- Gestionnaires IPC pour la Paie ---
+
+/**
+ * Charge la liste des employés depuis la base de données.
+ * @returns {Array} Liste des employés (matricule, nom, prenom, salaire).
+ */
+ipcMain.handle('load-employees', async () => {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        // Ajout de salaire dans la sélection pour le cas où il serait utile au frontend
+        const [rows] = await connection.execute('SELECT matricule, nom, prenom, salaire FROM personnel');
+        return rows;
+    } catch (error) {
+        console.error('Erreur lors du chargement des employés:', error);
+        return [];
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
+/**
+ * Calcule les éléments de paie basés sur les données fournies.
+ * Cette fonction est réutilisable pour l'insertion et la mise à jour.
+ * @param {Object} paieData - Les données de paie soumises.
+ * @param {number} salaire_base - Le salaire de base de l'employé.
+ * @returns {Object} Les éléments de paie calculés.
+ */
+function calculatePayslipElements(paieData, salaire_base) {
+    const {
+        heures_sup,
+        taux_majoration_sup,
+        primes,
+        commissions,
+        avantages_nature,
+        heures_absences,
+        maladie,
+        retenues,
+        nombre_dependants
+    } = paieData;
+
+    // 1. Montant Heures Supplémentaires
+    const montant_heures_sup = heures_sup * (salaire_base / 173.33) * (1 + taux_majoration_sup / 100);
+
+    // 2. Calcul du montant des absences
+    const taux_horaire = salaire_base / 173.33;
+    const absences = heures_absences * taux_horaire;
+
+    // 3. Salaire Brut
+    const salaire_brut = salaire_base + montant_heures_sup + primes + commissions + avantages_nature - absences - maladie;
+
+    // 4. Cotisations CNPS (Caisse Nationale de Prévoyance Sociale)
+    const plafond_cnps_vid = 300000;
+    const base_cnps = Math.min(salaire_brut, plafond_cnps_vid);
+    const cnps_employee = base_cnps * 0.042;
+
+    // 5. IRPP (Impôt sur le Revenu des Personnes Physiques)
+    const abattement_frais_pro = Math.min(salaire_brut * 0.10, 200000);
+    const abattement_charges_famille = Math.min(nombre_dependants || 0, 5) * 2000;
+
+    let base_irpp = salaire_brut - cnps_employee - abattement_frais_pro - abattement_charges_famille;
+    base_irpp = Math.max(0, base_irpp);
+
+    let irpp = 0;
+    if (base_irpp <= 166666.67) {
+        irpp = base_irpp * 0.10;
+    } else if (base_irpp <= 291666.67) {
+        irpp = (166666.67 * 0.10) + ((base_irpp - 166666.67) * 0.15);
+    } else if (base_irpp <= 416666.67) {
+        irpp = (166666.67 * 0.10) + (125000 * 0.15) + ((base_irpp - 291666.67) * 0.20);
+    } else if (base_irpp <= 666666.67) {
+        irpp = (166666.67 * 0.10) + (125000 * 0.15) + (125000 * 0.20) + ((base_irpp - 416666.67) * 0.25);
+    } else {
+        irpp = (166666.67 * 0.10) + (125000 * 0.15) + (125000 * 0.20) + (250000 * 0.25) + ((base_irpp - 666666.67) * 0.35);
+    }
+    irpp = Math.max(0, irpp);
+
+    // 6. Taxe Communale
+    const taxe_communale = salaire_brut * 0.001;
+
+    // 7. Salaire Net à Payer
+    const salaire_net = salaire_brut - cnps_employee - irpp - taxe_communale - retenues;
+
+    return {
+        montant_heures_sup,
+        absences,
+        salaire_brut,
+        cnps_employee,
+        irpp,
+        taxe_communale,
+        salaire_net
+    };
+}
+
+/**
+ * Calcule et enregistre une nouvelle entrée de paie.
+ * @param {Object} event - L'objet événement IPC.
+ * @param {Object} paieData - Les données de paie soumises depuis le formulaire.
+ * @returns {Object} Résultat de l'opération (succès/erreur, message, données calculées).
+ */
+ipcMain.handle('calculate-and-save-paie', async (event, paieData) => {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        await connection.beginTransaction();
+
+        const { matricule, periode } = paieData;
+
+        const [employeeRows] = await connection.execute(
+            'SELECT salaire FROM personnel WHERE matricule = ?',
+            [matricule]
+        );
+
+        if (employeeRows.length === 0) {
+            await connection.rollback();
+            return { success: false, message: 'Employé non trouvé.' };
+        }
+        const salaire_base = parseFloat(employeeRows[0].salaire) || 0;
+
+        const calculated = calculatePayslipElements(paieData, salaire_base);
+        const date_paiement = new Date().toISOString().split('T')[0];
+
+        const insertQuery = `
+            INSERT INTO paie (
+                matricule, periode, salaire_base, heures_sup, taux_majoration_sup,
+                montant_heures_sup, primes, commissions, avantages_nature,
+                absences, maladie, retenues_diverses, salaire_brut,
+                cnps_employee, irpp, taxe_communale, salaire_net, date_paiement
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+        const values = [
+            matricule, periode, salaire_base,
+            paieData.heures_sup, paieData.taux_majoration_sup,
+            calculated.montant_heures_sup, paieData.primes, paieData.commissions, paieData.avantages_nature,
+            calculated.absences, paieData.maladie, paieData.retenues, calculated.salaire_brut,
+            calculated.cnps_employee, calculated.irpp, calculated.taxe_communale, calculated.salaire_net, date_paiement
+        ];
+
+        const [result] = await connection.execute(insertQuery, values);
+        await connection.commit();
+
+        return {
+            success: true,
+            message: 'Paie calculée et enregistrée avec succès!',
+            data: { id: result.insertId, ...paieData, salaire_base, ...calculated, date_paiement }
+        };
+
+    } catch (error) {
+        console.error('Erreur lors du calcul ou de l\'enregistrement de la paie:', error);
+        if (connection) await connection.rollback();
+        return { success: false, message: `Erreur: ${error.message}` };
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
+/**
+ * Met à jour une entrée de paie existante.
+ * @param {Object} event - L'objet événement IPC.
+ * @param {Object} paieData - Les données de paie mises à jour, incluant l'ID.
+ * @returns {Object} Résultat de l'opération (succès/erreur, message, données calculées).
+ */
+ipcMain.handle('update-paie-entry', async (event, paieData) => {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        await connection.beginTransaction();
+
+        const { id, matricule, periode } = paieData;
+
+        const [employeeRows] = await connection.execute(
+            'SELECT salaire FROM personnel WHERE matricule = ?',
+            [matricule]
+        );
+
+        if (employeeRows.length === 0) {
+            await connection.rollback();
+            return { success: false, message: 'Employé non trouvé.' };
+        }
+        const salaire_base = parseFloat(employeeRows[0].salaire) || 0;
+
+        const calculated = calculatePayslipElements(paieData, salaire_base);
+        const date_paiement = new Date().toISOString().split('T')[0]; // Date de mise à jour
+
+        const updateQuery = `
+            UPDATE paie SET
+                matricule = ?, periode = ?, salaire_base = ?, heures_sup = ?, taux_majoration_sup = ?,
+                montant_heures_sup = ?, primes = ?, commissions = ?, avantages_nature = ?,
+                absences = ?, maladie = ?, retenues_diverses = ?, salaire_brut = ?,
+                cnps_employee = ?, irpp = ?, taxe_communale = ?, salaire_net = ?, date_paiement = ?
+            WHERE id = ?
+        `;
+        const values = [
+            matricule, periode, salaire_base,
+            paieData.heures_sup, paieData.taux_majoration_sup,
+            calculated.montant_heures_sup, paieData.primes, paieData.commissions, paieData.avantages_nature,
+            calculated.absences, paieData.maladie, paieData.retenues, calculated.salaire_brut,
+            calculated.cnps_employee, calculated.irpp, calculated.taxe_communale, calculated.salaire_net, date_paiement,
+            id
+        ];
+
+        const [result] = await connection.execute(updateQuery, values);
+        await connection.commit();
+
+        if (result.affectedRows === 0) {
+            return { success: false, message: 'Aucune entrée de paie trouvée avec cet ID pour la mise à jour.' };
+        }
+
+        return {
+            success: true,
+            message: 'Paie mise à jour avec succès!',
+            data: { ...paieData, salaire_base, ...calculated, date_paiement }
+        };
+
+    } catch (error) {
+        console.error('Erreur lors de la mise à jour de la paie:', error);
+        if (connection) await connection.rollback();
+        return { success: false, message: `Erreur: ${error.message}` };
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
+/**
+ * Charge l'historique de paie avec des options de filtrage.
+ * @param {Object} event - L'objet événement IPC.
+ * @param {Object} filters - Les filtres de recherche (searchQuery, periode).
+ * @returns {Array} Liste des enregistrements de paie.
+ */
+ipcMain.handle('load-paie-history', async (event, filters) => {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        let query = `
+            SELECT
+                p.id,
+                p.periode,
+                p.matricule,
+                pe.nom,
+                pe.prenom,
+                p.salaire_base, -- La colonne dans la table paie reste salaire_base
+                p.heures_sup,
+                p.taux_majoration_sup,
+                p.montant_heures_sup,
+                p.primes,
+                p.commissions,
+                p.avantages_nature,
+                p.absences,
+                p.maladie,
+                p.retenues_diverses,
+                p.salaire_brut,
+                p.cnps_employee,
+                p.irpp,
+                p.taxe_communale,
+                p.salaire_net,
+                p.date_paiement
+            FROM
+                paie p
+            JOIN
+                personnel pe ON p.matricule = pe.matricule
+            WHERE 1=1
+        `;
+        const params = [];
+
+        if (filters.searchQuery) {
+            query += ` AND (p.matricule LIKE ? OR pe.nom LIKE ? OR pe.prenom LIKE ?)`;
+            params.push(`%${filters.searchQuery}%`, `%${filters.searchQuery}%`, `%${filters.searchQuery}%`);
+        }
+        if (filters.periode) {
+            query += ` AND p.periode = ?`;
+            params.push(filters.periode);
+        }
+
+        query += ` ORDER BY p.periode DESC, pe.nom ASC`; // Tri par défaut
+
+        const [rows] = await connection.execute(query, params);
+        return rows;
+    } catch (error) {
+        console.error('Erreur lors du chargement de l\'historique de paie:', error);
+        return [];
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
+/**
+ * Supprime une entrée de paie par son ID.
+ * @param {Object} event - L'objet événement IPC.
+ * @param {number} id - L'ID de l'entrée de paie à supprimer.
+ * @returns {Object} Résultat de l'opération (succès/erreur, message).
+ */
+ipcMain.handle('delete-paie-entry', async (event, id) => {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        const [result] = await connection.execute('DELETE FROM paie WHERE id = ?', [id]);
+        if (result.affectedRows > 0) {
+            return { success: true, message: 'Entrée de paie supprimée avec succès.' };
+        } else {
+            return { success: false, message: 'Entrée de paie non trouvée.' };
+        }
+    } catch (error) {
+        console.error('Erreur lors de la suppression de l\'entrée de paie:', error);
+        return { success: false, message: `Erreur: ${error.message}` };
+    } finally {
+        if (connection) connection.release();
+    }
+});
+
+/**
+ * Affiche une boîte de message personnalisée.
+ * @param {Object} event - L'objet événement IPC.
+ * @param {Object} options - Options pour la boîte de message (type, title, message, buttons).
+ * @returns {number} L'index du bouton cliqué.
+ */
+ipcMain.handle('show-message-box', async (event, options) => {
+    console.log('main.js: show-message-box called with options:', options); // New log
+    const response = await dialog.showMessageBox(options);
+    console.log('main.js: show-message-box response:', response.response); // New log
+    return response.response;
+});
+
+/**
+ * Gère la confirmation de suppression via une boîte de dialogue native.
+ * @param {Object} event - L'objet événement IPC.
+ * @param {string} message - Le message à afficher dans la boîte de dialogue.
+ * @returns {boolean} True si l'utilisateur a confirmé, false sinon.
+ */
+ipcMain.handle('confirm-deletion', async (event, message) => {
+    console.log('main.js: confirm-deletion called with message:', message); // New log
+    const response = await dialog.showMessageBox({
+        type: 'question',
+        buttons: ['Oui', 'Non'],
+        defaultId: 1, // 'Non' est le bouton par défaut
+        title: 'Confirmer la suppression',
+        message: message,
+    });
+    console.log('main.js: confirm-deletion response:', response.response); // New log
+    return response.response === 0; // Retourne true si 'Oui' est cliqué (index 0)
+});
+
+// --- Schéma de la table 'paie' (à exécuter une fois dans votre base de données) ---
+/*
+CREATE TABLE IF NOT EXISTS paie (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    matricule VARCHAR(255) NOT NULL,
+    periode VARCHAR(7) NOT NULL, -- Format YYYY-MM
+    salaire_base DECIMAL(10, 2) NOT NULL, -- Cette colonne dans la table paie reste 'salaire_base' pour stocker la valeur du salaire au moment du calcul
+    heures_sup DECIMAL(10, 2) DEFAULT 0,
+    taux_majoration_sup DECIMAL(5, 2) DEFAULT 0,
+    montant_heures_sup DECIMAL(10, 2) DEFAULT 0,
+    primes DECIMAL(10, 2) DEFAULT 0,
+    commissions DECIMAL(10, 2) DEFAULT 0,
+    avantages_nature DECIMAL(10, 2) DEFAULT 0,
+    absences DECIMAL(10, 2) DEFAULT 0,
+    maladie DECIMAL(10, 2) DEFAULT 0,
+    retenues_diverses DECIMAL(10, 2) DEFAULT 0,
+    salaire_brut DECIMAL(10, 2) DEFAULT 0,
+    cnps_employee DECIMAL(10, 2) DEFAULT 0,
+    irpp DECIMAL(10, 2) DEFAULT 0,
+    taxe_communale DECIMAL(10, 2) DEFAULT 0,
+    salaire_net DECIMAL(10, 2) DEFAULT 0,
+    date_paiement DATE NOT NULL, -- Format YYYY-MM-DD
+    FOREIGN KEY(matricule) REFERENCES personnel(matricule) ON DELETE CASCADE
+);
+*/
+/*
+CREATE TABLE IF NOT EXISTS personnel (
+        matricule TEXT PRIMARY KEY,
+        nom TEXT NOT NULL,
+        prenom TEXT NOT NULL,
+        date_naissance TEXT NOT NULL,
+        age INTEGER NOT NULL,
+        lieu_naissance TEXT NOT NULL,
+        adresse TEXT NOT NULL,
+        telephone TEXT NOT NULL,
+        sexe TEXT CHECK(sexe IN ('M', 'F')) NOT NULL,
+        type_contrat TEXT CHECK(type_contrat IN ('CDD', 'CDI')) NOT NULL,
+        poste TEXT NOT NULL,
+        departement TEXT NOT NULL,
+        date_embauche TEXT NOT NULL,
+        duree_contrat INTEGER ,
+        agence text,
+        salaire DECIMAL(10, 2) NOT NULL DEFAULT 0, -- Assurez-vous que cette colonne existe et est nommée 'salaire'
+        FOREIGN KEY(poste) REFERENCES postes(id)
+);
+*/
+
+async function getAlertesFromDB() {
+    const today = new Date();
+    const todayStr = today.toISOString().slice(0, 10);
+
+    // Dates pour filtres
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowStr = tomorrow.toISOString().slice(0, 10);
+
+    const plus7Jours = new Date(today);
+    plus7Jours.setDate(plus7Jours.getDate() + 7);
+    const plus7JoursStr = plus7Jours.toISOString().slice(0, 10);
+
+    // 1. Anniversaires du jour (mois-jour)
+    const [anniversaires] = await pool.execute(
+        `SELECT matricule, nom, prenom, date_naissance 
+         FROM personnel 
+         WHERE DATE_FORMAT(date_naissance, '%m-%d') = DATE_FORMAT(CURDATE(), '%m-%d')`
+    );
+
+    // 1b. Anniversaires un jour avant (pour notification)
+    const [anniversairesDemain] = await pool.execute(
+        `SELECT matricule, nom, prenom, date_naissance 
+         FROM personnel 
+         WHERE DATE_FORMAT(date_naissance, '%m-%d') = DATE_FORMAT(DATE_ADD(CURDATE(), INTERVAL 1 DAY), '%m-%d')`
+    );
+
+    // 2. Contrats CDD proches d'expiration (dans 30 jours)
+    const [contratsCDD] = await pool.execute(
+        `SELECT matricule, nom, prenom, DATE_ADD(date_embauche, INTERVAL duree_contrat MONTH) AS date_fin
+         FROM personnel
+         WHERE type_contrat = 'CDD'
+         AND DATE_ADD(date_embauche, INTERVAL duree_contrat MONTH) BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY)`
+    );
+
+    // 3. Postes avec places désirées non pourvues
+    const [postes] = await pool.execute(
+        `SELECT p.id, p.intitule, p.places_desirees, 
+         (SELECT COUNT(*) FROM personnel WHERE poste = p.id) AS nb_personnel
+         FROM postes p
+         WHERE places_desirees > (SELECT COUNT(*) FROM personnel WHERE poste = p.id)`
+    );
+    const postesNonPourvus = postes.filter(p => p.places_desirees > p.nb_personnel);
+
+    // 4. Stages finissants dans 7 jours
+    const [stagesFinissants] = await pool.execute(
+        `SELECT id, nom_stagiaire, prenom_stagiaire, date_fin, poste_id, agence
+         FROM stages
+         WHERE date_fin BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY)`
+    );
+
+    return {
+        anniversaires,
+        anniversairesDemain,
+        contratsCDD,
+        postes: postesNonPourvus,
+        stagesFinissants,
+    };
+}
+
+ipcMain.handle('get-alertes', async () => {
+    try {
+        const alertes = await getAlertesFromDB();
+        return alertes;
+    } catch (err) {
+        console.error('Erreur récupération alertes:', err);
+        throw err;
+    }
+});
+
+ipcMain.handle('get-table-data', async (event, tableName) => {
+    try {
+        if (!/^[a-zA-Z0-9_]+$/.test(tableName)) {
+            throw new Error('Nom de table invalide');
+        }
+        const [rows] = await pool.execute(`SELECT * FROM ${tableName}`);
+
+        // Fonction utilitaire pour formater une date en jj/mm/aa
+        function formatDateJJMMAA(date) {
+            if (!(date instanceof Date)) return date;
+            const jour = String(date.getDate()).padStart(2, '0');
+            const mois = String(date.getMonth() + 1).padStart(2, '0');
+            const annee = String(date.getFullYear()).slice(-2);
+            return `${jour}/${mois}/${annee}`;
+        }
+
+        // Parcourir chaque ligne et chaque propriété
+        const formattedRows = rows.map(row => {
+            const newRow = {};
+            for (const key in row) {
+                if (Object.hasOwnProperty.call(row, key)) {
+                    const val = row[key];
+                    // Si la valeur est un objet Date, on formate
+                    if (val instanceof Date) {
+                        newRow[key] = formatDateJJMMAA(val);
+                    } else {
+                        newRow[key] = val;
+                    }
+                }
+            }
+            return newRow;
+        });
+
+        return formattedRows;
+    } catch (error) {
+        console.error(`Erreur récupération données table ${tableName}:`, error);
+        return { error: error.message };
     }
 });
