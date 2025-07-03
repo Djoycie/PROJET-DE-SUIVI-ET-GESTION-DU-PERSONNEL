@@ -311,7 +311,7 @@ function formatDateJJMMAA(dateStr) {
   const mois = String(d.getMonth() + 1).padStart(2, '0');
   const annee = String(d.getFullYear());
   return `${jour}/${mois}/${annee}`;
-}
+}  
 
 window.addEventListener('DOMContentLoaded', () => {
   chargerAlertes();

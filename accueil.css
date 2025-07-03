@@ -49,7 +49,7 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     text-align: left;
-}
+} 
 
 .module-block:hover {
     background-color: #dbe4e6;

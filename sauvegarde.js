@@ -24,7 +24,7 @@ function formatDateJJMMAA(dateStr) {
   const annee = String(d.getFullYear()).slice(-2);
   return `${jour}/${mois}/${annee}`;
 }
-
+ 
 function afficherTableau(data) {
   if (!data || data.length === 0) {
     afficherMessage('Aucune donnée à afficher.');

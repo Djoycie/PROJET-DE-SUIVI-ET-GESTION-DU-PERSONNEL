@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         option.textContent = `${user.fullName} (${user.role})`;
         userFilter.appendChild(option);
     });
-
+ 
     // Charger les logs au chargement
     await loadAuditLogs();
 

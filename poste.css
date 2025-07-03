@@ -527,7 +527,7 @@ button[type="submit"]:disabled {
     transform: translateY(-2px);
     color: black;
 }
-
+ 
 .gauche{
     display: flex;
     margin-left:  -210px;

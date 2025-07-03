@@ -157,7 +157,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: white; 
     margin-bottom: 10px;
     width: 100%;
     text-decoration: none;

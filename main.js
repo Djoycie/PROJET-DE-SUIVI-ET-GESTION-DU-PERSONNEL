@@ -451,7 +451,7 @@ ipcMain.handle('getStages', async (_, filters) => {
     const params = [];
 
     if (filters) {
-      if (filters.departement) {
+      if (filters.departement) { 
         sql += ` AND p.departement = ?`;
         params.push(filters.departement);
       }

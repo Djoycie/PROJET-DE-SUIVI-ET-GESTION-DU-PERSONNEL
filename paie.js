@@ -849,4 +849,4 @@ async function printPayslipWithJsPDF(payslipData) {
     // Initial data load
     populateEmployeeDropdown();
     loadPaieHistory();
-});
+}); 
