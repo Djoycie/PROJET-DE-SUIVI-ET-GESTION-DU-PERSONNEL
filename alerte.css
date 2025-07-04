@@ -196,7 +196,7 @@ h2 {
 /* Styles pour les écrans jusqu'à 1590px (grands ordinateurs portables, moniteurs) */
 @media (max-width: 1590px) {
     body {
-        padding: 15px;
+        padding: 30px;
     }
 
     .header-bar {
@@ -206,13 +206,24 @@ h2 {
     .log {
         width: 120px;
         height: 120px;
-        margin-left: 40px;
     }
+
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: 4rem;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+    }
+
     .gauche {
         width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 20px;
         margin-top: 150px; /* Ajuster la marge supérieure */
         gap: -3px;
-        margin-left: -20px;
+        margin-left: -13.5rem;
     }
 
     .button-nav, .voir, .button-dec {
@@ -255,56 +266,13 @@ h2 {
     form {
         gap: 15px;
     }
-
-    input[type="text"],
-    input[type="file"],
-    textarea {
-        padding: 10px;
-    }
-
-    textarea {
-        min-height: 100px;
-    }
-
-    input[type="file"]::-webkit-file-upload-button {
-        padding: 6px 12px;
-        font-size: 0.9em;
-    }
-
-    button[type="submit"] {
-        padding: 10px 20px;
-        font-size: 1em;
-        min-width: 180px;
-    }
-
-    #analysis-results {
-        padding: 20px;
-    }
-
-    #analysis-chart-container {
-        width: 220px;
-        height: 220px;
-    }
-
-    #analysis-percentage {
-        font-size: 2.2em;
-    }
-
-    #analysis-message {
-        font-size: 1em;
-    }
-
-    #analysis-qualifications-details {
-        gap: 30px;
-    }
-
-    #analysis-qualifications-details ul.found-qualifications-list {
-        padding-right: 15px;
-    }
-
-    .back-button {
-        padding: 8px 15px;
-        font-size: 0.9em;
+           section {
+    max-width: 955px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 }
 
@@ -323,6 +291,12 @@ h2 {
         height: 120px;
     }
 
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: 4rem;
+    }
+
     #welcome-message {
         font-size: 1rem;
     }
@@ -332,7 +306,9 @@ h2 {
         margin-right: 20px;
         margin-top: 150px; /* Ajuster la marge supérieure */
         gap: -3px;
+        margin-left: -13.5rem;
     }
+
 
     .button-nav, .voir, .button-dec {
         padding: 8px 15px;
@@ -364,6 +340,14 @@ h2 {
 
     h2 {
         font-size: 2rem;
+    }
+        section {
+    max-width: 925px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 }
 

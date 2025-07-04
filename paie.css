@@ -426,25 +426,25 @@ h2 {
 
 /* Styles pour les écrans jusqu'à 1590px (grands ordinateurs portables, moniteurs) */
 @media (max-width: 1590px) {
-    body {
+ body {
         padding: 30px;
     }
 
     .header-bar {
         padding: 10px 20px;
     }
- 
+
     .log {
-        width: 120px;
-        height: 120px;
-        margin-left: -47.5rem;
+        width: 110px;
+        height: 110px;
+        margin-left: -48.5rem;
        margin-top: -2rem;
     }
 
     .gauche {
-        width: 180px; /* Légèrement réduire la largeur du menu latéral */
-        margin-right: 20px;
-        margin-top: 120px; /* Ajuster la marge supérieure */
+        width: 160px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
+        margin-top: 90px; /* Ajuster la marge supérieure */
         gap: -3px;
     }
 
@@ -462,19 +462,19 @@ h2 {
    .container {
         width: 1100px; /* Réduire la largeur max du bloc principal */
         padding: 20px;
-        height: 660px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        height: 650px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
         margin-top: -30px;
         margin-right: -1rem;
         margin-left: 1rem;
     }
     main{
-        height: 520px;
+        height: 500px;
     }
 }
 
 /* For screens up to 1390px */
 @media (max-width: 1390px) {
-    body {
+   body {
         padding: 30px;
     }
 
@@ -485,13 +485,13 @@ h2 {
     .log {
         width: 110px;
         height: 110px;
-        margin-right: 15.5rem;
+        margin-left: -48.5rem;
        margin-top: -2rem;
     }
 
     .gauche {
-        width: 180px; /* Légèrement réduire la largeur du menu latéral */
-        margin-right: 2rem;
+        width: 160px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 1rem;
         margin-top: 90px; /* Ajuster la marge supérieure */
         gap: -3px;
     }
