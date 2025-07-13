@@ -631,7 +631,9 @@ body {
         padding-top: 20px;
         border-top: 1px solid var(--border-color);
     }
-
+            .main-content {
+        display: block;
+    }
 }
 
 /* For screens up to 1390px */
@@ -661,7 +663,7 @@ body {
 
     .gauche {
         width: 180px; /* Légèrement réduire la largeur du menu latéral */
-        margin-right: 20px;
+        margin-right: 10px;
         margin-top: 150px; /* Ajuster la marge supérieure */
         gap: -3px;
     }
@@ -685,14 +687,14 @@ body {
     }
 
     .container {
-        width: 1000px; /* Réduire la largeur max du bloc principal */
+        width: 1100px; /* Réduire la largeur max du bloc principal */
         padding: 15px;
         height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
         margin-right: -20rem;
     }
 
     .container_s {
-        margin-right: 20px;
+        margin-right: 30px;
     }
 
     h1 {
@@ -727,9 +729,9 @@ body {
         font-size: 1em;
         min-width: 180px;
     }
-    .back-button {
-        padding: 8px 15px;
-        font-size: 0.9em;
+   
+    .analytics-section{
+        margin-bottom: 20px;
     }
     .table-section{
         margin-top: 10px;
@@ -739,6 +741,10 @@ body {
         justify-content: center;
         margin-bottom: 20px;
         gap: 16px;
+    }
+    
+   .main-content {
+        display: block;
     }
 }
 
@@ -789,6 +795,9 @@ body {
         margin-right: -13rem;
     }
 
+    .main-content {
+        display: block;
+    }
     .container_s {
         margin-right: 20px;
         margin-left: 5px;

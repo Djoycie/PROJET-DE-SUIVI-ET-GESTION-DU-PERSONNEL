@@ -21,7 +21,7 @@ body {
     margin-top: 30px;
     margin-bottom: 30px;
     box-sizing: border-box; /* Inclut le padding dans la largeur */
-} 
+}
 h1 {
     color: #2c3e50;
     text-align: center;
@@ -844,7 +844,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 300px;
         padding: 20px;
     }
 }
@@ -893,7 +893,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 300px;
         padding: 20px;
     }
 }
@@ -940,7 +940,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 300px;
         padding: 20px;
     }
 }
@@ -988,7 +988,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 300px;
         padding: 20px;
     }
 }
@@ -1035,7 +1035,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 290px;
         padding: 20px;
     }
 }
@@ -1082,7 +1082,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 280px;
         padding: 20px;
     }
 }
@@ -1129,7 +1129,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 270px;
         padding: 20px;
     }
 }
@@ -1176,7 +1176,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 260px;
         padding: 20px;
     }
 }
@@ -1223,7 +1223,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 260px;
         padding: 20px;
     }
 }
@@ -1270,7 +1270,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 260px;
         padding: 20px;
     }
 }
@@ -1317,7 +1317,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 260px;
         padding: 20px;
     }
 }
@@ -1364,7 +1364,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 260px;
         padding: 20px;
     }
 }
@@ -1411,7 +1411,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 260px;
         padding: 20px;
     }
 }
@@ -1458,7 +1458,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 260px;
         padding: 20px;
     }
 }
@@ -1505,7 +1505,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 260px;
         padding: 20px;
     }
 }
@@ -1552,7 +1552,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 250px;
         padding: 20px;
     }
 }
@@ -1599,7 +1599,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 250px;
         padding: 20px;
     }
 }
@@ -1646,7 +1646,7 @@ th[data-col] {
         margin-left: 1rem;
     }
     .controls{
-        height: 200px;
+        height: 250px;
         padding: 20px;
     }
 }

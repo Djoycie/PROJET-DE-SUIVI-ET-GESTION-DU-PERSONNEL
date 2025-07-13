@@ -1,41 +1,146 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recrutement - Gestion du Personnel</title>
-    <link rel="stylesheet" href="accueil.css">
-    <style>
-        /* Styles spécifiques pour cette page */
-        .page-content {
-            padding: 20px;
-            text-align: center;
-        }
-        .page-content h1 {
-            color: #28a745;
-            margin-bottom: 20px;
-        }
-        .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        .back-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>Paramètres de l'Application</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="parametre.css">
 </head>
-<body>
-    <div class="container">
-        <div class="page-content">
-            <h1>Module parametres</h1>
-           <a href="accueil.html" class="back-button">Retour au Tableau de Bord</a>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-inter transition-colors duration-300">
+       
+    <div class="header-bar">
+         <div class="logo-container">
+            <img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/HR-etoile2.png" alt="Logo" class="log">
+         </div>
+    </div>
+    <div class="gauche">
+       <b class="button-nav" onclick="location.href='analyse_cv.html'">Analyse de CV</b>
+       <b class="button-nav" onclick="location.href='postes.html'">Postes</b>
+       <b class="button-nav" onclick="location.href='personnel.html'">Personnel</b>
+       <b class="button-nav" onclick="location.href='carriere.html'">Carrière/Affectation</b>
+       <b class="button-nav" onclick="location.href='conges.html'">Congés</b>
+       <b class="button-nav" onclick="location.href='paie.html'">Paie</b>
+       <b class="button-nav" onclick="location.href='stages_formation.html'">Stage/formation</b>
+       <b class="button-nav" onclick="location.href='plan_activite.html'">Statistiques</b>
+       <b class="button-nav" onclick="location.href='utilisateurs.html'">Utilisateurs</b>
+       <b class="button-nav" onclick="location.href='audit.html'">Audit</b>
+       <b class="button-nav" onclick="location.href='archivage_documentation.html'">Sauvegardes</b>
+       <b class="button-la" onclick="location.href='parametres.html'">Paramètres</b>
+        <b class="button-nav" onclick="location.href='alerte.html'">Alertes</b>
+        <a href="accueil.html" class="button-nav"><b>Retour</B></a>
+    </div>
+
+    <div class="container mx-auto p-6 md:p-10">
+        <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center">Paramètres de l'Application</h1>
+
+        <!-- Section Informations Utilisateur -->
+        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">Informations Utilisateur</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nom Complet:</label>
+                    <p id="userFullName" class="mt-1 text-lg font-medium text-blue-600 dark:text-blue-400">Chargement...</p>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Rôle:</label>
+                    <p id="userRole" class="mt-1 text-lg font-medium text-green-600 dark:text-green-400">Chargement...</p>
+                </div>
+            </div>
+            <div class="mt-6">
+                <button id="changePasswordBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    Changer le Mot de Passe
+                </button>
+            </div>
+        </section>
+
+        <!-- Section Thème de l'Application -->
+        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">Thème de l'Application</h2>
+            <div class="flex items-center justify-between">
+                <span class="text-lg">Choisir le thème:</span>
+                <div class="flex space-x-4">
+                    <button id="lightThemeBtn" class="theme-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-350 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Clair
+                    </button>
+                    <button id="darkThemeBtn" class="theme-btn bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-350 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-offset-2">
+                        Sombre
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Langue -->
+        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">Langue</h2>
+            <div class="flex items-center justify-between">
+                <label for="languageSelect" class="text-lg">Sélectionner la langue:</label>
+                <select id="languageSelect" class="mt-1 block w-1/2 md:w-1/3 py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-gray-100 transition-colors duration-300">
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Section Notifications (Exemple) -->
+        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">Notifications</h2>
+            <div class="flex items-center justify-between">
+                <span class="text-lg">Activer les notifications:</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" value="" class="sr-only peer" id="notificationToggle">
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                </label>
+            </div>
+        </section>
+
+        <!-- Section À propos (Exemple) -->
+        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2 border-gray-200 dark:border-gray-700">À Propos</h2>
+            <p class="text-gray-700 dark:text-gray-300 text-lg">
+                Application de Gestion des Ressources Humaines HR MANAGER.
+            </p>
+            <p class="text-gray-700 dark:text-gray-300 text-lg mt-2">
+                Version: <span class="font-medium">1.0.0</span>
+            </p>
+            <p class="text-gray-700 dark:text-gray-300 text-lg mt-2">
+                Développé par: <span class="font-medium">Lind NGUEPI et Sylvestra BILOA</span>
+            </p>
+        </section>
+    
+
+    <!-- Modal pour le changement de mot de passe (caché par défaut) -->
+    <div id="passwordModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-8 w-11/12 md:w-1/2 lg:w-1/3">
+            <h3 class="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">Changer le Mot de Passe</h3>
+            <div class="mb-4">
+                <label for="currentPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Mot de passe actuel:</label>
+                <input type="password" id="currentPassword" class="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-gray-100">
+            </div>
+            <div class="mb-4">
+                <label for="newPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nouveau mot de passe:</label>
+                <input type="password" id="newPassword" class="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-gray-100">
+            </div>
+            <div class="mb-6">
+                <label for="confirmNewPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirmer le nouveau mot de passe:</label>
+                <input type="password" id="confirmNewPassword" class="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-gray-100">
+            </div>
+            <div id="passwordMessage" class="text-sm font-medium text-red-600 dark:text-red-400 mb-4 hidden"></div>
+            <div class="flex justify-end space-x-4">
+                <button id="cancelPasswordChange" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                    Annuler
+                </button>
+                <button id="savePasswordChange" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    Enregistrer
+                </button>
+            </div>
         </div>
     </div>
+    </div>
+    <script src="parametre.js"></script>
 </body>
 </html>

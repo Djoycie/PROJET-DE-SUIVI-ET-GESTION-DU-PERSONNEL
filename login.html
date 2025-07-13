@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - Gestion du Personnel</title>
-    <link rel="stylesheet" href="accueil.css">
+    <link rel="stylesheet" href="style.css">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
     <style>
         body {
@@ -25,7 +25,7 @@
             width: 100%;
             max-width: 400px;
             text-align: center;
-            margin-top: -50px;
+            margin-top: -0px;
         }
         .login-container h1 {
             color: #2c3e50;
@@ -49,7 +49,7 @@
             box-sizing: border-box;
         }
         .login-form button {
-            background-color: #007bff;
+            background-color: #b8aeec;
             color: white;
             padding: 12px 25px;
             border: none;
@@ -70,10 +70,26 @@
         label{
             margin-left: 15px;
         }
+        
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: -20px; /* Réinitialiser les marges négatives */
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: -20px;
+    }
     </style>
 </head>
 <body>
     <div class="login-container">
+        <div class="logo-container">
+            <img src="../PROJET-DE-SUIVI-ET-GESTION-DU-PERSONNEL/images/HR-etoile2.png" alt="Logo" class="log">
+        </div>
         <h1>Connexion</h1>
         <form id="login-form" class="login-form">
             <label for="username">Nom d'utilisateur :</label>

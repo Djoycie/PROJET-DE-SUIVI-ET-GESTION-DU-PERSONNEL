@@ -203,7 +203,7 @@ h3 {
 
 p {
     margin-bottom: 1rem;
-    color: var(--text-color-light); /* Default light text color for paragraphs */
+    color: white;
     text-align: center;
 }
 

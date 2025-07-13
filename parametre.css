@@ -1,0 +1,1037 @@
+/* Import de la police Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Variables CSS pour les thèmes */
+:root {
+    /* Thème Clair par défaut */
+    --bg-color-light: #f3f4f6; /* gray-100 */
+    --text-color-light: #1f2937; /* gray-900 */
+    --card-bg-light: #ffffff; /* white */
+    --border-color-light: #e5e7eb; /* gray-200 */
+    --input-bg-light: #ffffff; /* white */
+    --input-border-light: #d1d5db; /* gray-300 */
+    --placeholder-color-light: #9ca3af; /* gray-400 */
+}
+
+/* Styles pour le thème sombre */
+.dark {
+    --bg-color-dark: #111827; /* gray-900 */
+    --text-color-dark: #f9fafb; /* gray-100 */
+    --card-bg-dark: #1f2937; /* gray-800 */
+    --border-color-dark: #374151; /* gray-700 */
+    --input-bg-dark: #1f2937; /* gray-800 */
+    --input-border-dark: #4b5563; /* gray-600 */
+    --placeholder-color-dark: #6b7280; /* gray-500 */
+}
+
+/* Application des variables CSS */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+    
+}
+
+section {
+    background-color: var(--card-bg-light);
+    transition: background-color 0.3s ease;
+}
+
+.dark section {
+    background-color: var(--card-bg-dark);
+}
+
+h2 {
+    border-color: var(--border-color-light);
+    transition: border-color 0.3s ease;
+}
+
+.dark h2 {
+    border-color: var(--border-color-dark);
+}
+
+label, p, span {
+    color: rgb(8, 8, 8);
+    transition: color 0.3s ease;
+}
+
+.dark label, .dark p, .dark span {
+    color: var(--text-color-dark);
+}
+
+input, select {
+    background-color: var(--input-bg-light);
+    border-color: var(--input-border-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.dark input, .dark select {
+    background-color: var(--input-bg-dark);
+    border-color: var(--input-border-dark);
+    color: var(--text-color-dark);
+}
+
+/* Styles spécifiques aux boutons de thème */
+.theme-btn {
+    opacity: 0.7;
+}
+
+.theme-btn.active {
+    opacity: 1;
+    border: 2px solid; /* Ajoute une bordure pour indiquer l'activation */
+    border-color: #3b82f6; /* Couleur de bordure pour le thème actif */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* Ombre pour le thème actif */
+}
+
+/* Styles pour le toggle de notification */
+#notificationToggle:checked + div {
+    background-color: #2563eb; /* bg-blue-600 */
+}
+
+#notificationToggle:checked + div:after {
+    transform: translateX(100%);
+    border-color: #ffffff;
+}
+
+/* Styles pour le modal de mot de passe */
+#passwordModal {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+:root {
+    --primary-color: #b8aeec; /* Vert pour les actions principales */
+    --primary-hover-color: #e3f3ee; /* Vert plus foncé au survol */
+    --secondary-color: #007bff; /* Bleu pour les accents ou liens */
+    --secondary-hover-color: #0056b3; /* Bleu plus foncé au survol */
+    --background-light: #f8f9fa; /* Arrière-plan général clair */
+    --background-card: #ffffff; /* Arrière-plan des blocs de contenu */
+    --text-color-dark: #343a40; /* Texte foncé pour la lisibilité */
+    --text-color-light: #6c757d; /* Texte plus clair pour les descriptions */
+    --border-color: #dee2e6; /* Couleur des bordures */
+    --success-color: #28a745; /* Couleur de succès */
+    --info-color: #17a2b8; /* Couleur d'information */
+    --warning-color: #ffc107; /* Couleur d'avertissement */
+    --error-color: #dc3545; /* Couleur d'erreur */
+    --shadow-light: rgba(0, 0, 0, 0.08); /* Ombre légère */
+    --shadow-medium: rgba(0, 0, 0, 0.15); /* Ombre moyenne */
+    --primary-dark-color: #9b91d2;
+    --danger-color: var(--error-color);
+    --light-bg-color: #f2f2f2;
+    --border-radius-base: 8px;
+    --spacing-unit: 16px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(to bottom, #e3f3ee, #214137);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #333;
+    display: flex; /* Main layout uses flexbox for side-by-side on large screens */
+    justify-content: center; /* Center the main content area */
+    align-items: flex-start; /* Align items to the start (top) */
+    min-height: 90vh;
+    overflow-x: hidden; /* Prevents horizontal scroll from overflowing elements */
+}
+
+/* Styles du conteneur principal (pour les formulaires, tableaux, etc.) */
+.container {
+    max-width: 1100px; /* Largeur maximale pour le contenu principal */
+    margin: 0 auto; /* Centre le conteneur */
+    background: transparent; /* Fond transparent avec blur */
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    min-height: 50vh; /* Permet au conteneur de grandir, mais a une hauteur minimale */
+    width: 100%; /* S'assure qu'il prend la largeur disponible */
+    box-sizing: border-box; /* Inclut padding et border dans la largeur */
+    text-align: center; /* Centrage général du texte à l'intérieur */
+    height: 630px;
+    overflow-y: auto;
+}
+
+
+/* Styles pour le header et le logo de l'application */
+.header-bar {
+    background-color: transparent;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative; /* Changed from absolute to relative for better flow */
+    top: 0;
+    width: 100%; /* Take full width of its flex parent */
+    z-index: 1000;
+    gap: 8px;
+    margin-left: 0; /* Removing problematic negative margin */
+    margin-right: 0; /* Removing problematic negative margin */
+}
+
+.logo-container {
+    position: relative;
+    border-radius: 50%;
+    margin-left: 0; /* Reset for better control */
+    margin-right: 7px;
+}
+
+.log {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: -0.2rem;
+    margin-left: 0; /* Removing problematic negative margin */
+    width: 120px;
+    height: 120px;
+}
+
+/* Styles pour le menu latéral (.gauche) */
+.gauche {
+    display: flex;
+    flex-direction: column; /* Column layout for vertical menu on large screens */
+    align-items: center;
+    width: 140px; /* Fixed width for the sidebar menu */
+    margin-top: 120px; /* Space for header */
+    margin-right: 50px; /* Space between menu and main content */
+    top: 20px;
+    height: calc(100vh - 50px); /* Adjust height for scrolling if needed */
+    flex-shrink: 0; /* Prevent shrinking on larger screens */
+    margin-left: -81rem; /* Removing problematic negative margin */
+}
+
+/* Styles pour les boutons de navigation */
+.button-nav, .button-la {
+    padding: 6px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center text within button */
+    width: 100%; /* Take full width of .gauche */
+    margin-bottom: 5px; /* Space between buttons */
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    margin-top: -2px; /* Adjust spacing */
+    margin-left: 0; /* Remove problematic margin */
+    margin-right: 0; /* Remove problematic margin */
+}
+
+.button-nav {
+    color: white;
+    background-color: transparent;
+}
+
+.button-la { /* Active button style */
+    color: rgb(7, 0, 0);
+    background-color: var(--primary-hover-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.button-nav:hover {
+    background-color: var(--primary-hover-color);
+    box-shadow: 0 4px 10px var(--shadow-medium);
+    color: black;
+}
+
+
+
+/* Styles pour les écrans jusqu'à 1590px (grands ordinateurs portables, moniteurs) */
+@media (max-width: 1590px) {
+    body {
+        padding: 15px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+    .log {
+        width: 120px;
+        height: 120px;
+        margin-left: 40px;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+    }
+
+    .gauche {
+        width: 180px; /* Légèrement réduire la largeur du menu latéral */
+        margin-top: 150px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -1220px;
+    }
+
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        margin-top: -50px; /* Plus d'espace au-dessus du bouton */
+        margin-left: 43rem;
+    }
+
+    .container {
+        max-width: 1500px; /* Réduire la largeur max du bloc principal */
+        padding: 20px;
+        height: 500px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-bottom: -10px;
+    }
+
+}
+
+/* For screens up to 1390px */
+@media (max-width: 1390px) {
+    body {
+        padding: 10px;
+    }
+
+        .log {
+        width: 110px;
+        height: 110px;
+        margin-left: 1rem;
+    }
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 30px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -69.9rem;
+        
+    }
+
+    .container {
+        max-width: 1150px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+    .button-nav,.button-la{
+        margin-bottom: -1px;
+    }
+}
+@media (max-width: 1320px) {
+    body {
+        padding: 10px;
+    }
+
+        .log {
+        width: 110px;
+        height: 110px;
+        margin-left: 1rem;
+    }
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 30px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -63.9rem;
+    }
+
+    .container {
+        max-width: 1100px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+}
+@media (max-width: 1250px) {
+    body {
+        padding: 10px;
+    }
+
+        .log {
+        width: 110px;
+        height: 110px;
+        margin-left: 1rem;
+    }
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 30px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -63.9rem;
+    }
+
+    .container {
+        max-width: 1050px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+}
+@media (max-width: 1200px) {
+    body {
+        padding: 10px;
+    }
+
+        .log {
+        width: 110px;
+        height: 110px;
+        margin-left: 1rem;
+    }
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 30px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -56.9rem;
+    }
+
+    .container {
+        max-width:1000px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+}
+@media (max-width: 1100px) {
+    body {
+        padding: 10px;
+    }
+
+        .log {
+        width: 110px;
+        height: 110px;
+        margin-left: 1rem;
+    }
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 30px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -54.9rem;
+    }
+
+    .container {
+        max-width: 900px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+}
+@media (max-width: 1079px) {
+    body {
+        padding: 10px;
+    }
+
+        .log {
+        width: 110px;
+        height: 110px;
+        margin-left: 1rem;
+    }
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 30px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -51.9rem;
+    }
+
+    .container {
+        max-width: 870px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+}
+@media (max-width: 1043px) {
+    body {
+        padding: 10px;
+    }
+
+        .log {
+        width: 110px;
+        height: 110px;
+        margin-left: 1rem;
+    }
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 30px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -49.5rem;
+    }
+
+    .container {
+        max-width: 850px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+}
+@media (max-width: 1011px) {
+    body {
+        padding: 10px;
+    }
+
+        .log {
+        width: 110px;
+        height: 110px;
+        margin-left: 0.6rem;
+    }
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 30px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -52.5rem;
+    }
+
+    .container {
+        max-width: 780px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+}
+/* For screens up to 1250px */
+@media (max-width:997px) {
+    body {
+        padding: 10px;
+    }
+
+    .header-bar {
+        padding: 10px 20px;
+    }
+
+    .log {
+        width: 110px;
+        height: 110px;
+        margin-left: 1rem;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+    }
+
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 50px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -52.5rem;
+    }
+
+    .button-nav, .voir, .button-dec {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .button-la {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        text-align: center;
+    }
+
+    .container {
+        max-width: 740px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+    .container_s {
+        margin-right: 20px;
+        margin-left: 5px;
+    }
+}
+@media (max-width: 980px) {
+    body {
+        padding: 10px;
+    }
+
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 30px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -53.5rem;
+    }
+
+    .container {
+        max-width: 730px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+}
+@media (max-width: 960px) {
+    body {
+        padding: 10px;
+    }
+
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 30px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -53.5rem;
+    }
+
+    .container {
+        max-width: 710px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+}
+/* For screens up to 1250px */
+@media (max-width: 921px) {
+    body {
+        padding: 10px;
+    }
+
+    .gauche {
+        width: 140px; /* Légèrement réduire la largeur du menu latéral */
+        margin-right: 30px;
+        margin-top: 120px; /* Ajuster la marge supérieure */
+        gap: -3px;
+        margin-left: -53.5rem;
+    }
+
+    .container {
+        max-width: 680px; /* Réduire la largeur max du bloc principal */
+        padding: 25px;
+        height: 630px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
+        margin-top: 5px;
+        margin-bottom: -12px;
+    }
+
+}
+
+/* For screens up to 900px */
+@media (max-width: 900px) {
+    body {
+        flex-direction: column; /* Empiler l'en-tête, le menu et le contenu */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .header-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        position: relative; /* Moins besoin d'être absolu, car le body est en colonne */
+        top: unset;
+        left: unset;
+        width: 100%;
+    }
+
+    .logo-container {
+        margin: 0;
+    }
+
+    .log {
+        width: 100px;
+        height: 100px;
+        margin-top: 0; /* Réinitialiser les marges négatives */
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #welcome-message {
+        font-size: 1rem;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .gauche {
+        flex-direction: row; /* Passer le menu en ligne */
+        flex-wrap: wrap; /* Permettre aux boutons de passer à la ligne */
+        justify-content: center;
+        width: 100%; /* Prend toute la largeur */
+        margin: 15px 0; /* Marge supérieure et inférieure */
+        padding: 10px;
+        position: relative;
+        top: unset;
+        height: unset;
+        overflow-y: visible;
+        gap: 8px; /* Espacement entre les boutons */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .button-nav, .button-la, .voir {
+        width: calc(50% - 10px); /* Deux boutons par ligne */
+        max-width: 180px;
+        margin-bottom: 0; /* Enlever la marge du bas si déjà gérée par le gap */
+        font-size: 0.85em;
+        padding: 8px 10px;
+        margin-left: 0; /* Réinitialiser */
+        margin-top: 0; /* Réinitialiser */
+    }
+
+    .container {
+        width: 100%;
+        margin: 5px auto;
+        padding: 20px;
+        max-width: unset; /* Pas de max-width pour cette taille */
+        height: auto; /* Supprimer la hauteur fixe pour s'adapter au contenu */
+        box-shadow: none; /* Moins d'ombre pour les petits écrans */
+    }
+
+    .container_s {
+        margin-right: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .cv-analysis-section {
+        padding: 15px;
+        height: auto; /* Auto height for mobile */
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        width: 100%;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        width: 100%; /* Full width for mobile button */
+        margin-bottom: 5px; /* Ajuster l'espacement */
+        align-self: center; /* Centrer le bouton */
+    }
+
+    button[type="submit"], .button-dec {
+        width: 100%;
+        margin: 15px 0 0;
+        align-self: stretch; /* S'étirer pour les petits écrans */
+    }
+
+    #analysis-results {
+        padding: 15px;
+    }
+
+    #analysis-chart-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    #analysis-percentage {
+        font-size: 2em;
+    }
+
+    #analysis-message {
+        font-size: 1em;
+    }
+
+    #analysis-qualifications-details {
+        flex-direction: column; /* Stack for mobile */
+        gap: 15px;
+    }
+
+    #analysis-qualifications-details ul.found-qualifications-list {
+        border-right: none; /* No border for mobile */
+        padding-right: 0;
+        border-bottom: 1px dashed var(--border-color); /* Add bottom border for separation */
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    #analysis-qualifications-details ul li {
+        font-size: 0.9rem;
+    }
+
+    .page-content {
+        margin-top: 0; /* Réinitialiser le margin-top négatif si on passe en colonne */
+    }
+}
+
+/* For screens up to 800px */
+@media (max-width: 800px) {
+    body {
+        padding: 5px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px; /* Encore plus petit */
+        height: 70px;
+    }
+
+    #welcome-message {
+        font-size: 0.85rem;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la, .voir, .button-dec {
+        width: 100%; /* Tous les boutons sur leur propre ligne */
+        font-size: 0.8em;
+        padding: 6px 8px;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .container_s {
+        margin-right: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .cv-analysis-section {
+        padding: 10px;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    label {
+        font-size: 0.85em;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+
+    button[type="submit"] {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        min-width: unset;
+    }
+
+    #analysis-results {
+        padding: 10px;
+    }
+
+    #analysis-chart-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    #analysis-percentage {
+        font-size: 1.8em;
+    }
+
+    #analysis-message {
+        font-size: 0.9em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 10px;
+    }
+
+    #analysis-qualifications-details ul li {
+        font-size: 0.85rem;
+    }
+
+    .back-button {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+
+    /* Votre règle existante pour le tableau, si elle s'applique à cette page */
+    table.table-postes {
+        margin: 10px auto;
+        max-height: 150px;
+        max-width: 100%; /* S'adapter à la largeur disponible */
+        overflow-y: auto;
+    }
+}
+
+/* For screens up to 400px (small smartphones) */
+@media (max-width: 400px) {
+    body {
+        padding: 20px;
+    }
+
+    .header-bar {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .log {
+        width: 70px; /* Encore plus petit */
+        height: 70px;
+    }
+
+    #welcome-message {
+        font-size: 0.85rem;
+    }
+
+    .gauche {
+        margin: 10px auto;
+        padding: 5px;
+        gap: 5px;
+    }
+
+    .button-nav, .button-la {
+        width: 100%; /* Tous les boutons sur leur propre ligne */
+        font-size: 0.8em;
+        padding: 6px 8px;
+        display: flex;
+        align-items: center;
+        text-align: left;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .container_s {
+        margin-right: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .cv-analysis-section {
+        padding: 10px;
+    }
+
+    form {
+        gap: 10px;
+    }
+
+    label {
+        font-size: 0.85em;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    textarea {
+        padding: 6px;
+        font-size: 0.85em;
+    }
+
+    textarea {
+        min-height: 80px;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        padding: 5px 10px;
+        font-size: 0.8em;
+    }
+
+    button[type="submit"] {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        min-width: unset;
+    }
+
+    #analysis-results {
+        padding: 10px;
+    }
+
+    #analysis-chart-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    #analysis-percentage {
+        font-size: 1.8em;
+    }
+
+    #analysis-message {
+        font-size: 0.9em;
+    }
+
+    #analysis-qualifications-details {
+        gap: 10px;
+    }
+
+    #analysis-qualifications-details ul li {
+        font-size: 0.85rem;
+    }
+
+    .back-button {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+
+    /* Votre règle existante pour le tableau, si elle s'applique à cette page */
+    table.table-postes {
+        margin: 10px auto;
+        max-height: 150px;
+        max-width: 100%; /* S'adapter à la largeur disponible */
+        overflow-y: auto;
+    }
+}

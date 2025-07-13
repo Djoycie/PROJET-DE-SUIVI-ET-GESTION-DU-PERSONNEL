@@ -508,7 +508,7 @@ h2 {
     }
 
    .container {
-        width: 1080px; /* Réduire la largeur max du bloc principal */
+        width: 1100px; /* Réduire la largeur max du bloc principal */
         padding: 20px;
         height: 650px; /* Ajuster la hauteur pour les écrans légèrement plus petits */
         margin-top: -30px;
